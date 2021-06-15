@@ -122,22 +122,7 @@ h3.header {
   background-color: black;
   color: white;
 }
-h6.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: fit-content;
-  width: fit-content;
-  flex-wrap: wrap;
-  text-align: center;
-  padding: 0rem;
-  // border-radius: 0.25rem;
-  width: 100%;
-  margin: 0rem;
-  background-color: black;
-  color: white;
-}
+
 div.display {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -150,14 +135,31 @@ div.display {
     align-items: flex-start;
     justify-content: center;
     height: fit-content;
+    width: min-content;
     padding: 0rem 0rem 0.25rem 0rem;
     margin: 0.5rem;
     border-bottom: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    h6.header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: fit-content;
+      width: fit-content;
+      flex-wrap: wrap;
+      text-align: center;
+      padding: 0.125rem 0rem;
+      // border-radius: 0.25rem;
+      width: 100%;
+      margin: 0rem;
+      background-color: black;
+      color: white;
+    }
     div.link {
       padding: 0rem;
-      margin: 0rem 0.125rem;
+      margin: 0.125rem;
       height: auto;
       display: flex;
       align-items: center;
@@ -165,7 +167,7 @@ div.display {
       button {
         height: 0.75rem;
         margin: 0rem;
-        // margin-right: 0.125rem;
+        margin-left: 0.125rem;
       }
       a {
         color: black;
