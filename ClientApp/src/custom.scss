@@ -34,51 +34,81 @@ main.main {
     width: 100vw;
     h2 {
       width: 100vw;
-      background-color: black;
+      background-color: rgb(29, 135, 0);
       color: white;
       padding: 0.5rem;
       margin: 0rem;
-      margin-bottom: 1rem;
+      // margin-bottom: 1rem;
     }
   }
-
-  form.search {
-    background-color: black;
-    width: fit-content;
-    border-bottom-right-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    padding: 0.5rem;
+  div.dashQuery {
+    width: 100%;
+    // border-bottom-right-radius: 0.5rem;
+    // border-top-right-radius: 0.5rem;
+    padding: 0rem;
     position: sticky;
     right: 100%;
-    top: 3rem;
-    input.search {
-      margin: 0rem;
+    top: 0rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(179, 0, 0);
+    button.collapse {
+      width: min-content;
+      line-height: 0.5rem;
+      height: min-content;
+      margin: 0rem 0.5rem;
+      padding: 0.2rem;
+      text-align: center;
+      left: 100%;
+      position: sticky;
+      // background-color: black;
+    }
+    // button:hover {
+    //   input.dashQuery {
+    //     display: none;
+    //   }
+    // }
+    form.dashQuery {
+      background-color: rgb(179, 0, 0);
+      width: fit-content;
+      border-bottom-right-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+      padding: 0.25rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      input.dashQuery {
+        margin: 0rem;
+      }
     }
   }
-
   section.menu {
     position: sticky;
-    top: 5rem;
+    top: 1.875rem;
     right: 100%;
     // padding: 1rem 0.5rem;
     color: white;
-    background-color: black;
+    background-color: rgb(131, 0, 131);
     width: fit-content;
-    padding: 0.125rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+    border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    button {
-      width: min-content;
-      padding: 0.25rem 0.125rem;
-      margin: 0.25rem;
-      background-color: white;
-      border-radius: 0.25rem;
-      border: 0;
-    }
-    .settings {
-      margin: 1.25rem 0.25rem 0.25rem 0.25rem;
-    }
+
+    // .settings {
+    //   margin: 1.25rem 0.25rem 0.25rem 0.25rem;
+    // }
     div.menuContent {
       display: none;
+      button {
+        width: fit-content;
+        padding: 0.125rem;
+        margin: 0rem 0.125rem;
+        background-color: white;
+        border-radius: 0.25rem;
+        border: 0;
+        font-size: 0.7rem;
+      }
       // padding-top: 0.5rem;
       // display: flex;
       // width: fit-content;
@@ -90,26 +120,35 @@ main.main {
     }
   }
   section.menu:hover {
+    // padding: 0%;
+    border-radius: 0rem;
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0.45rem 0rem;
     color: transparent;
+    font-size: 0rem;
     div.menuContent {
+      padding: 0rem;
+      margin: 0%;
       display: flex;
-      width: fit-content;
-      flex-direction: column;
+      width: 100vw;
+      flex-direction: row;
       color: white;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
     }
   }
 }
-div.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem 0rem;
-  padding: 0rem 0.25rem;
-  border: 1px solid black;
-}
+// div.container {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   margin: 1rem 0rem;
+//   padding: 0rem 0.25rem;
+//   border: 1px solid black;
+// }
 h3.header {
   display: flex;
   flex-direction: column;
@@ -124,39 +163,66 @@ h3.header {
 }
 
 div.display {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding: 0rem;
-  margin: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+  margin: 0.125rem 0.6rem 0rem 3.25rem;
   // border: 1px solid black;
-  div.panel {
+  div.panelContainer {
+    resize: both;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     height: fit-content;
     width: min-content;
-    padding: 0rem 0rem 0.25rem 0rem;
-    margin: 0.5rem;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    h6.header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: fit-content;
-      width: fit-content;
-      flex-wrap: wrap;
-      text-align: center;
-      padding: 0.125rem 0rem;
-      // border-radius: 0.25rem;
-      width: 100%;
-      margin: 0rem;
-      background-color: black;
-      color: white;
-    }
+    padding: 0rem 0.25rem 0.25rem 0.25rem;
+    margin: 0.125rem;
+    border: 3px solid black;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    overflow: hidden;
+    background-color: rgb(0, 0, 0);
+    // border: 2px solid blue;
+    // border-left: 1px solid black;
+    // border-right: 1px solid black;
+    // background-color: black;
+    // color: white;
+  }
+  p.header {
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // overflow: scroll;
+    height: fit-content;
+    width: min-content;
+    // flex-wrap: wrap;
+    text-align: center;
+    padding: 0.125rem;
+    // border-radius: 0.25rem;
+    width: max-content;
+    margin: 0rem;
+    background-color: black;
+    color: white;
+  }
+  div.panel {
+    //
+    // resize: both;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    width: 100%;
+    background-color: white;
+    border-radius: 0.25rem;
+    // border: 2px solid blue;
     div.link {
       padding: 0rem;
       margin: 0.125rem;
@@ -168,6 +234,23 @@ div.display {
         height: 0.75rem;
         margin: 0rem;
         margin-left: 0.125rem;
+        font-size: 0.5rem;
+      }
+      button.viewLink {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin: 0.125rem;
+        padding: 0rem;
+      }
+      button.viewDescription {
+        margin: 0.125rem;
+        height: auto;
+        padding: 0rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       a {
         color: black;
@@ -187,9 +270,16 @@ div.display {
 //--------------------------------------//
 
 footer {
-  text-align: center;
-  padding: 0.5rem;
-  margin-top: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.25rem;
+  margin-top: 1rem;
   color: white;
-  background-color: black;
+  background-color: rgb(180, 0, 0);
+  a.footer {
+    margin: 0.5rem;
+    color: black;
+    text-align: center;
+  }
 }
