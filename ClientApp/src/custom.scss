@@ -42,10 +42,10 @@ main.main {
     }
   }
   div.dashQuery {
-    width: 100%;
-    // border-bottom-right-radius: 0.5rem;
-    // border-top-right-radius: 0.5rem;
-    padding: 0rem;
+    width: fit-content;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 0rem 0.25rem 0rem 0rem;
     position: sticky;
     right: 100%;
     top: 0rem;
@@ -53,22 +53,12 @@ main.main {
     justify-content: flex-start;
     align-items: center;
     background-color: rgb(179, 0, 0);
-    button.collapse {
-      width: min-content;
-      line-height: 0.5rem;
-      height: min-content;
-      margin: 0rem 0.5rem;
-      padding: 0.2rem;
-      text-align: center;
-      left: 100%;
-      position: sticky;
-      // background-color: black;
+    button {
+      display: none;
     }
-    // button:hover {
-    //   input.dashQuery {
-    //     display: none;
-    //   }
-    // }
+    input {
+      display: none;
+    }
     form.dashQuery {
       background-color: rgb(179, 0, 0);
       width: fit-content;
@@ -81,6 +71,25 @@ main.main {
       input.dashQuery {
         margin: 0rem;
       }
+    }
+  }
+  div.dashQuery:hover {
+    width: 100%;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 0rem 0.25rem 0rem 0rem;
+    position: sticky;
+    right: 100%;
+    top: 0rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(179, 0, 0);
+    button {
+      display: flex;
+    }
+    input {
+      display: flex;
     }
   }
   section.menu {
@@ -109,6 +118,11 @@ main.main {
         border: 0;
         font-size: 0.7rem;
       }
+      button.collapseMenu {
+        position: sticky;
+        top: 1.875rem;
+        left: 85.5%;
+      }
       // padding-top: 0.5rem;
       // display: flex;
       // width: fit-content;
@@ -129,13 +143,13 @@ main.main {
     color: transparent;
     font-size: 0rem;
     div.menuContent {
-      padding: 0rem;
+      padding: 0rem 0.125rem;
       margin: 0%;
       display: flex;
       width: 100vw;
       flex-direction: row;
       color: white;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
     }
   }

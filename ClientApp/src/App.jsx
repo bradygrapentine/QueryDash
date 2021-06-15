@@ -39,6 +39,7 @@ export function App() {
           <h2>QueryDash</h2>
         </header>
         <div className="dashQuery">
+          Search
           <form className="dashQuery">
             <input className="dashQuery" type="text" placeholder="Query Here" />
           </form>
@@ -55,7 +56,7 @@ export function App() {
             <button>Dash Settings</button>
             <button className="settings">Account</button>
             <button>Home</button>
-            <button>Collapse</button>
+            <button className="collapseMenu">Collapse</button>
           </div>
         </section>
         <div className="display">
