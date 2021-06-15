@@ -38,15 +38,8 @@ export function App() {
           {' '}
           <h2>QueryDash</h2>
         </header>
-        <div className="dashQuery">
-          Search
-          <form className="dashQuery">
-            <input className="dashQuery" type="text" placeholder="Query Here" />
-          </form>
-          <button className="collapse">Collapse</button>
-        </div>
+
         {/* <div className="container"> */}
-        <h3 className="header">Dash Header</h3>
         <section className="menu">
           Menu
           <div className="menuContent">
@@ -59,57 +52,66 @@ export function App() {
             <button className="collapseMenu">Collapse</button>
           </div>
         </section>
-        <div className="display">
-          <div className="panelContainer">
-            <p for="panel" className="header">
-              Endpoint Head
-            </p>
-            <Panel />
-          </div>
-          <div className="panelContainer">
-            <p for="panel" className="header">
-              Endpoint Head
-            </p>
-            <Panel />
-          </div>
-          <div className="panelContainer">
-            <p for="panel" className="header">
-              Endpoint Head
-            </p>
-            <Panel />
-          </div>
-          <div className="panelContainer">
-            <p for="panel" className="header">
-              Endpoint Head
-            </p>
-            <Panel />
-          </div>
-          <div className="panelContainer">
-            <p for="panel" className="header">
-              Endpoint Head
-            </p>
-            <Panel />
-          </div>
-          <div className="panelContainer">
-            <p for="panel" className="header">
-              Endpoint Head
-            </p>
-            <Panel />
-          </div>
-          <div className="panelContainer">
-            <p for="panel" className="header">
-              Endpoint Head
-            </p>
-            <Panel />
-          </div>
-          <div className="panelContainer">
-            <p for="panel" className="header">
-              Endpoint Head
-            </p>
-            <Panel />
+        <div className="dashQuery">
+          Search
+          <form className="dashQuery">
+            <input className="dashQuery" type="text" placeholder="Query Here" />
+          </form>
+          <button className="collapse">Collapse</button>
+        </div>
+        <div className="displayContainer">
+          <h3 className="header">Dash Header</h3>
+          <div className="display">
+            <div className="panelContainer">
+              <p for="panel" className="header">
+                Endpoint Head
+              </p>
+              <Panel />
+            </div>
+            <div className="panelContainer">
+              <p for="panel" className="header">
+                Endpoint Head
+              </p>
+              <Panel />
+            </div>
+            <div className="panelContainer">
+              <p for="panel" className="header">
+                Endpoint Head
+              </p>
+              <Panel />
+            </div>
+            <div className="panelContainer">
+              <p for="panel" className="header">
+                Endpoint Head
+              </p>
+              <Panel />
+            </div>
+            <div className="panelContainer">
+              <p for="panel" className="header">
+                Endpoint Head
+              </p>
+              <Panel />
+            </div>
+            <div className="panelContainer">
+              <p for="panel" className="header">
+                Endpoint Head
+              </p>
+              <Panel />
+            </div>
+            <div className="panelContainer">
+              <p for="panel" className="header">
+                Endpoint Head
+              </p>
+              <Panel />
+            </div>
+            <div className="panelContainer">
+              <p for="panel" className="header">
+                Endpoint Head
+              </p>
+              <Panel />
+            </div>
           </div>
         </div>
-        {/* </div> */}
       </main>
       <footer>
         <a href="https://www.google.com/" className="footer">

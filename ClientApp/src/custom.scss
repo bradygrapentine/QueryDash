@@ -42,31 +42,35 @@ main.main {
     }
   }
   div.dashQuery {
-    width: fit-content;
+    // width: fit-content;
     border-bottom-right-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
-    padding: 0rem 0.25rem 0rem 0rem;
+    padding: 0.4rem 0.25rem;
+    // width: 100vw;
     position: sticky;
     right: 100%;
-    top: 0rem;
+    top: 1.8rem;
     display: flex;
     justify-content: flex-start;
+    width: fit-content;
     align-items: center;
     background-color: rgb(179, 0, 0);
+    color: white;
     button {
       display: none;
     }
     input {
       display: none;
+      // margin: 3rem;
     }
     form.dashQuery {
       background-color: rgb(179, 0, 0);
       width: fit-content;
       border-bottom-right-radius: 0.5rem;
       border-top-right-radius: 0.5rem;
-      padding: 0.25rem;
+      padding: 0rem;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       input.dashQuery {
         margin: 0rem;
@@ -74,36 +78,53 @@ main.main {
     }
   }
   div.dashQuery:hover {
-    width: 100%;
-    border-bottom-right-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    padding: 0rem 0.25rem 0rem 0rem;
+    font-size: 0%;
+    // width: min-content;
+    border-bottom-right-radius: 0rem;
+    border-top-right-radius: 0rem;
+    padding: 0rem;
+    width: 100vw;
     position: sticky;
     right: 100%;
-    top: 0rem;
+    top: 1.8rem;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     background-color: rgb(179, 0, 0);
     button {
       display: flex;
+      position: sticky;
+      top: 2rem;
+      margin-right: 0.25rem;
+      // left: 100%;
+      padding: 0rem;
+      font-size: 0.75rem;
+      border-radius: 0.5rem;
+    }
+    form {
+      padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+      border-radius: 0%;
     }
     input {
       display: flex;
+      padding: 0rem;
+      height: fit-content;
     }
   }
   section.menu {
+    // will probably switch with search again and make menu a column that opens in the margin
+    // could use a grid that has 2 columns, one with menu, the other with dash, will bring dash header in-line with menu
     position: sticky;
-    top: 1.875rem;
+    top: 0rem;
     right: 100%;
     // padding: 1rem 0.5rem;
+    margin-top: 0.25rem;
     color: white;
     background-color: rgb(131, 0, 131);
     width: fit-content;
-    padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.4rem 0.95rem 0.4rem 0.25rem;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-
     // .settings {
     //   margin: 1.25rem 0.25rem 0.25rem 0.25rem;
     // }
@@ -120,8 +141,9 @@ main.main {
       }
       button.collapseMenu {
         position: sticky;
-        top: 1.875rem;
-        left: 85.5%;
+        top: 0rem;
+        margin-right: 1rem;
+        left: 100%;
       }
       // padding-top: 0.5rem;
       // display: flex;
@@ -139,7 +161,7 @@ main.main {
     width: 100%;
     height: fit-content;
     margin: 0%;
-    padding: 0.45rem 0rem;
+    padding: 0.35rem 0rem;
     color: transparent;
     font-size: 0rem;
     div.menuContent {
@@ -163,124 +185,137 @@ main.main {
 //   padding: 0rem 0.25rem;
 //   border: 1px solid black;
 // }
-h3.header {
+div.displayContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: fit-content;
-  width: 100%;
-  margin: 0rem;
-  padding: 0.25rem;
-  background-color: black;
-  color: white;
-}
-
-div.display {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  // flex-wrap: wrap;
   justify-content: center;
   height: fit-content;
   width: fit-content;
-  margin: 0.125rem 0.6rem 0rem 3.25rem;
-  // border: 1px solid black;
-  div.panelContainer {
-    resize: both;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    height: fit-content;
-    width: min-content;
-    padding: 0rem 0.25rem 0.25rem 0.25rem;
-    margin: 0.125rem;
-    border: 3px solid black;
-    border-top-right-radius: 0.5rem;
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    overflow: hidden;
-    background-color: rgb(0, 0, 0);
-    // border: 2px solid blue;
-    // border-left: 1px solid black;
-    // border-right: 1px solid black;
-    // background-color: black;
-    // color: white;
-  }
-  p.header {
-    border-top-right-radius: 0.25rem;
-    border-top-left-radius: 0.25rem;
+  margin-top: 0.5rem;
+  // position: absolute;
+  // top: 3rem;
+  h3.header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    // overflow: scroll;
     height: fit-content;
-    width: min-content;
-    // flex-wrap: wrap;
-    text-align: center;
-    padding: 0.125rem;
-    // border-radius: 0.25rem;
-    width: max-content;
-    margin: 0rem;
+    width: fit-content;
+    margin: 0.125rem 0.6rem 0rem 3.25rem;
+    padding: 0.25rem 1rem;
     background-color: black;
+    border-radius: 0.5rem;
     color: white;
   }
-  div.panel {
-    //
-    // resize: both;
+
+  div.display {
     display: flex;
-    flex-direction: column;
-    overflow: scroll;
-    width: 100%;
-    background-color: white;
-    border-radius: 0.25rem;
-    // border: 2px solid blue;
-    div.link {
-      padding: 0rem;
-      margin: 0.125rem;
-      height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+    margin: 0.125rem 0.6rem 0rem 3.25rem;
+    // border: 1px solid black;
+    div.panelContainer {
+      resize: both;
       display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      height: fit-content;
+      width: min-content;
+      padding: 0rem 0.25rem 0.25rem 0.25rem;
+      margin: 0.125rem;
+      border: 3px solid black;
+      border-top-right-radius: 0.5rem;
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      overflow: hidden;
+      background-color: rgb(0, 0, 0);
+      // border: 2px solid blue;
+      // border-left: 1px solid black;
+      // border-right: 1px solid black;
+      // background-color: black;
+      // color: white;
+    }
+    p.header {
+      border-top-right-radius: 0.25rem;
+      border-top-left-radius: 0.25rem;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      // border: 1px solid black;
-      button {
-        height: 0.75rem;
-        margin: 0rem;
-        margin-left: 0.125rem;
-        font-size: 0.5rem;
-      }
-      button.viewLink {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: auto;
-        margin: 0.125rem;
+      justify-content: center;
+      // overflow: scroll;
+      height: fit-content;
+      width: min-content;
+      // flex-wrap: wrap;
+      text-align: center;
+      padding: 0.125rem;
+      // border-radius: 0.25rem;
+      width: max-content;
+      margin: 0rem;
+      background-color: black;
+      color: white;
+    }
+    div.panel {
+      //
+      // resize: both;
+      display: flex;
+      flex-direction: column;
+      overflow: scroll;
+      width: 100%;
+      background-color: white;
+      border-radius: 0.25rem;
+      // border: 2px solid blue;
+      div.link {
         padding: 0rem;
-      }
-      button.viewDescription {
         margin: 0.125rem;
         height: auto;
-        padding: 0rem;
         display: flex;
-        justify-content: center;
         align-items: center;
-      }
-      a {
-        color: black;
-        margin: 0rem;
-        text-decoration: none;
-        p {
-          margin: 0.2rem;
-          flex-wrap: wrap;
-          text-align: start;
+        // border: 1px solid black;
+        button {
+          height: 0.75rem;
+          margin: 0rem;
+          margin-left: 0.125rem;
           font-size: 0.5rem;
+        }
+        button.viewLink {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: auto;
+          margin: 0.125rem;
+          padding: 0rem;
+        }
+        button.viewDescription {
+          margin: 0.125rem;
+          height: auto;
+          padding: 0rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        a {
+          color: black;
+          margin: 0rem;
+          text-decoration: none;
+          p {
+            margin: 0.2rem;
+            flex-wrap: wrap;
+            text-align: start;
+            font-size: 0.5rem;
+          }
         }
       }
     }
   }
 }
-
 //--------------------------------------//
 
 footer {
