@@ -1,12 +1,193 @@
 :root {
   font: 16px / 1 sans-serif;
+  height: 100%;
+  margin: 0rem;
+  padding: 0rem;
 }
 
 html {
+  margin: 0rem;
+  padding: 0rem;
   height: 100%;
 }
 
 body {
-  margin: 0;
+  margin: 0rem;
+  padding: 0rem;
   min-height: 100%;
+}
+
+//--------------------------------------//
+
+main.main {
+  margin: 0rem;
+  padding: 0rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  header {
+    text-align: center;
+    padding: 0rem;
+    margin: 0rem;
+    width: 100vw;
+    h2 {
+      width: 100vw;
+      background-color: black;
+      color: white;
+      padding: 0.5rem;
+      margin: 0rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  form.search {
+    background-color: black;
+    width: fit-content;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 0.5rem;
+    position: sticky;
+    right: 100%;
+    top: 3rem;
+    input.search {
+      margin: 0rem;
+    }
+  }
+
+  section.menu {
+    position: sticky;
+    top: 5rem;
+    right: 100%;
+    // padding: 1rem 0.5rem;
+    color: white;
+    background-color: black;
+    width: fit-content;
+    padding: 0.125rem 0.5rem 0.5rem 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    button {
+      width: min-content;
+      padding: 0.25rem 0.125rem;
+      margin: 0.25rem;
+      background-color: white;
+      border-radius: 0.25rem;
+      border: 0;
+    }
+    .settings {
+      margin: 1.25rem 0.25rem 0.25rem 0.25rem;
+    }
+    div.menuContent {
+      display: none;
+      // padding-top: 0.5rem;
+      // display: flex;
+      // width: fit-content;
+      // flex-direction: column;
+      // color: white;
+      // justify-content: center;
+      // align-items: flex-start;
+      // gotta make this a dynamic button for touch users
+    }
+  }
+  section.menu:hover {
+    color: transparent;
+    div.menuContent {
+      display: flex;
+      width: fit-content;
+      flex-direction: column;
+      color: white;
+      justify-content: center;
+      align-items: flex-start;
+    }
+  }
+}
+div.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0rem;
+  padding: 0rem 0.25rem;
+  border: 1px solid black;
+}
+h3.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  width: 100%;
+  margin: 0rem;
+  padding: 0.25rem;
+  background-color: black;
+  color: white;
+}
+h6.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 0rem;
+  // border-radius: 0.25rem;
+  width: 100%;
+  margin: 0rem;
+  background-color: black;
+  color: white;
+}
+div.display {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0rem;
+  margin: 0.25rem;
+  // border: 1px solid black;
+  div.panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: fit-content;
+    padding: 0rem 0rem 0.25rem 0rem;
+    margin: 0.5rem;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    div.link {
+      padding: 0rem;
+      margin: 0rem 0.125rem;
+      height: auto;
+      display: flex;
+      align-items: center;
+      // border: 1px solid black;
+      button {
+        height: 0.75rem;
+        margin: 0rem;
+        // margin-right: 0.125rem;
+      }
+      a {
+        color: black;
+        margin: 0rem;
+        text-decoration: none;
+        p {
+          margin: 0.2rem;
+          flex-wrap: wrap;
+          text-align: start;
+          font-size: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+//--------------------------------------//
+
+footer {
+  text-align: center;
+  padding: 0.5rem;
+  margin-top: 2rem;
+  color: white;
+  background-color: black;
 }
