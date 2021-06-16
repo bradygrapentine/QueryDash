@@ -1,129 +1,60 @@
 import React from 'react'
 import './custom.scss'
 
-export function Link() {
-  return (
-    <div className="link">
-      <button></button>
-      <a href="https://www.google.com/">
-        {' '}
-        <p>Wikipedia</p>
-      </a>
-      <button className="viewDescription">description</button>
-      <button className="viewLink">view</button>
-    </div>
-  )
-}
+import { DashPage } from './pages/DashPage.jsx'
+import { Link, Route, Switch } from 'react-router-dom'
+import { LandingPage } from './pages/LandingPage.jsx'
+import { LoginPage } from './pages/LoginPage.jsx'
+import { AboutPage } from './pages/AboutPage.jsx'
+import { CreateAccountPage } from './pages/CreateAccountPage.jsx'
+import { AccountPage } from './pages/AccountPage.jsx'
+import { CreateDashPage } from './pages/CreateDashPage.jsx'
+import { PanelFullScreen } from './pages/PanelFullScreen.jsx'
+import { DashPreferences } from './pages/DashPreferences.jsx'
 
-export function Panel() {
-  return (
-    <div rows="7" cols="1" wrap="off" className="panel">
-      <Link />
-      <Link />
-      <Link />
-      <Link />
-      <Link />
-      <Link />
-      <Link />
-      <Link />
-    </div>
-  )
-}
+// // {
+// // /* <header>
+// //       {' '}
+// //       <h2>QueryDash</h2>
+// //     </header> */
+// // }
 
 export function App() {
   return (
     <>
-      <main className="main">
-        <header>
-          {' '}
-          <h2>QueryDash</h2>
-        </header>
-
-        {/* <div className="container"> */}
-        <section className="menu">
-          Menu
-          <div className="menuContent">
-            <button>Open</button>
-            <button>Archive</button>
-            <button>History</button>
-            <button>Dash Settings</button>
-            <button className="settings">Account</button>
-            <button>Home</button>
-            <button className="collapseMenu">Collapse</button>
-          </div>
-        </section>
-        <div className="dashQuery">
-          Search
-          <form className="dashQuery">
-            <input className="dashQuery" type="text" placeholder="Query Here" />
-          </form>
-          <button className="collapse">Collapse</button>
-        </div>
-        <div className="displayContainer">
-          <h3 className="header">Dash Header</h3>
-          <div className="display">
-            <div className="panelContainer">
-              <p for="panel" className="header">
-                Endpoint Head
-              </p>
-              <Panel />
-            </div>
-            <div className="panelContainer">
-              <p for="panel" className="header">
-                Endpoint Head
-              </p>
-              <Panel />
-            </div>
-            <div className="panelContainer">
-              <p for="panel" className="header">
-                Endpoint Head
-              </p>
-              <Panel />
-            </div>
-            <div className="panelContainer">
-              <p for="panel" className="header">
-                Endpoint Head
-              </p>
-              <Panel />
-            </div>
-            <div className="panelContainer">
-              <p for="panel" className="header">
-                Endpoint Head
-              </p>
-              <Panel />
-            </div>
-            <div className="panelContainer">
-              <p for="panel" className="header">
-                Endpoint Head
-              </p>
-              <Panel />
-            </div>
-            <div className="panelContainer">
-              <p for="panel" className="header">
-                Endpoint Head
-              </p>
-              <Panel />
-            </div>
-            <div className="panelContainer">
-              <p for="panel" className="header">
-                Endpoint Head
-              </p>
-              <Panel />
-            </div>
-          </div>
-        </div>
-      </main>
-      <footer>
-        <a href="https://www.google.com/" className="footer">
-          About
-        </a>
-        <a href="https://www.google.com/" className="footer">
-          Sign Up
-        </a>
-        <a href="https://www.google.com/" className="footer">
-          Contact
-        </a>
-      </footer>
+      <Switch>
+        {/* <Route exact path="/:dashID"> */}
+        <Route exact path="/">
+          <DashPage />
+        </Route>
+        {/* <Route exact path="/">
+          <LandingPage />
+        </Route> */}
+        <Route exact path="/about">
+          <AboutPage />
+        </Route>
+        <Route exact path="/login">
+          <LoginPage />
+        </Route>
+        <Route exact path="/create-account">
+          <CreateAccountPage />
+        </Route>
+        <Route exact path="/:accountId">
+          <AccountPage />
+        </Route>
+        <Route exact path="/create-dash">
+          <CreateDashPage />
+        </Route>{' '}
+        <Route exact path="/preferences/:dashID">
+          <DashPreferences />
+        </Route>
+        <Route exact path="/:panelId">
+          <PanelFullScreen />
+        </Route>
+        <Route path="*">Not Found...</Route>
+      </Switch>
     </>
   )
 }
+
+// ------------------------------------------------------------- //
