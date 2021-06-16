@@ -24,12 +24,12 @@ export function App() {
     <>
       <Switch>
         {/* <Route exact path="/:dashID"> */}
-        <Route exact path="/">
+        <Route exact path="/dash-page">
           <DashPage />
         </Route>
-        {/* <Route exact path="/">
+        <Route exact path="/">
           <LandingPage />
-        </Route> */}
+        </Route>
         <Route exact path="/about">
           <AboutPage />
         </Route>
@@ -39,18 +39,18 @@ export function App() {
         <Route exact path="/create-account">
           <CreateAccountPage />
         </Route>
-        <Route exact path="/:accountId">
+        <Route exact path="/account">
           <AccountPage />
         </Route>
         <Route exact path="/create-dash">
           <CreateDashPage />
         </Route>{' '}
-        <Route exact path="/preferences/:dashID">
+        <Route exact path="/preferences">
           <DashPreferences />
         </Route>
-        <Route exact path="/:panelId">
+        {/* <Route exact path="/:panelId">
           <PanelFullScreen />
-        </Route>
+        </Route> */}
         <Route path="*">Not Found...</Route>
       </Switch>
     </>

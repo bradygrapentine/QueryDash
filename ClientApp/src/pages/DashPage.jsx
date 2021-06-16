@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -72,28 +73,21 @@ export function Menu(params) {
 
 // ------------------------------------------------------------- //
 
-export function Footer(params) {
-  return (
-    <footer>
-      <a href="https://www.google.com/" className="footer">
-        About
-      </a>
-      <a href="https://www.google.com/" className="footer">
-        Sign Up
-      </a>
-      <a href="https://www.google.com/" className="footer">
-        Contact
-      </a>
-    </footer>
-  )
-}
+// export function Footer(params) {
+//   return (
+
+//   )
+// }
 
 // ------------------------------------------------------------- //
 
 export function DashPage() {
   return (
     <>
-      <h2 className="header">Dash Header</h2>
+      {/* <Link to="/"> */}
+      <h1 className="header">QueryDash</h1>
+      {/* </Link>{' '} */}
+      {/* <h2 className="header">Dash Header</h2> */}
       {/* header needs a nav to get around to pages
       Gotta build out static html and css for other pages */}
       <main className="main">
@@ -116,7 +110,26 @@ export function DashPage() {
           </div>
         </div>
       </main>
-      <Footer />
+      <footer className="standardFooter">
+        <Link to="/create-account" className="standardFooter">
+          Sign Up
+        </Link>
+        <Link to="/about" className="standardFooter">
+          About
+        </Link>
+        <Link to="/account" className="standardFooter">
+          Account
+        </Link>
+        <Link to="/" className="standardFooter">
+          Home
+        </Link>
+        <Link to="/create-dash" className="standardFooter">
+          Create Dash{' '}
+        </Link>
+        {/* <a href="https://www.google.com/" className="footer">
+        Contact
+      </a> */}
+      </footer>{' '}
     </>
   )
 }
