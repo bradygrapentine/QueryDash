@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom'
 export function CreateDashPage() {
   return (
     <>
-      <Link to="/">
-        <h2 className="LandingPageHeader">QueryDash</h2>
-      </Link>
+      <Link className="linkForHeader" to="/">
+        <h1 className="header">QueryDash</h1>
+      </Link>{' '}
       <button className="accountInfoSubmit">Create Dash</button>
       {/* <h2 className="LandingPageHeader">Create Dash</h2> */}
       <main className="mainCreateAccount">

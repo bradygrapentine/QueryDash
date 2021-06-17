@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom'
 export function CreateAccountPage() {
   return (
     <>
-      <Link to="/">
-        <h2 className="LandingPageHeader">QueryDash</h2>
+      <Link className="linkForHeader" to="/">
+        <h1 className="header">QueryDash</h1>
       </Link>{' '}
       <main className="mainCreateAccount">
         {/* <p className="tbd"> Under Construction</p> */}

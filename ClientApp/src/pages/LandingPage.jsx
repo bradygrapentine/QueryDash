@@ -9,28 +9,30 @@ export function LandingPage() {
   return (
     // <>
     <>
-      <h2 className="LandingPageHeader">QueryDash</h2>
+      <Link className="linkForHeader" to="/">
+        <h1 className="header">QueryDash</h1>
+      </Link>{' '}
       <main className="landingPageContainer">
         <div className="listOfDashes">
           <h3 className="HeaderDashList">Preset Dashes</h3>
           <ul className="DisplayListDash">
             <li>
-              <Link to="/dash-page" className="">
+              <Link to="/dash" className="">
                 DashPage
               </Link>
             </li>
             <li>
-              <Link to="/dash-page" className="">
+              <Link to="/dash" className="">
                 DashPage
               </Link>
             </li>
             <li>
-              <Link to="/dash-page" className="">
+              <Link to="/dash" className="">
                 DashPage
               </Link>
             </li>
             <li>
-              <Link to="/dash-page" className="">
+              <Link to="/dash" className="">
                 DashPage
               </Link>
             </li>
@@ -40,22 +42,22 @@ export function LandingPage() {
           <h3 className="HeaderDashList">User Dashes</h3>
           <ul className="DisplayListDash">
             <li>
-              <Link to="/dash-page" className="">
+              <Link to="/dash" className="">
                 DashPage
               </Link>
             </li>
             <li>
-              <Link to="/dash-page" className="">
+              <Link to="/dash" className="">
                 DashPage
               </Link>
             </li>
             <li>
-              <Link to="/dash-page" className="">
+              <Link to="/dash" className="">
                 DashPage
               </Link>
             </li>
             <li>
-              <Link to="/dash-page" className="">
+              <Link to="/dash" className="">
                 DashPage
               </Link>
             </li>

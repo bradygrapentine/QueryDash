@@ -85,9 +85,11 @@ export function DashPage() {
   return (
     <>
       {/* <Link to="/"> */}
-      <h1 className="header">QueryDash</h1>
-      {/* </Link>{' '} */}
-      {/* <h2 className="header">Dash Header</h2> */}
+      {/* <h1 className="header">QueryDash</h1> */}
+      {/* </Link> */}
+      <Link className="linkForHeader" to="/">
+        <h1 className="header">DashHeader</h1>
+      </Link>{' '}
       {/* header needs a nav to get around to pages
       Gotta build out static html and css for other pages */}
       <main className="main">

@@ -24,8 +24,8 @@ import { Link } from 'react-router-dom'
 export function AboutPage() {
   return (
     <>
-      <Link to="/">
-        <h2 className="LandingPageHeader">QueryDash</h2>
+      <Link className="linkForHeader" to="/">
+        <h1 className="header">QueryDash</h1>
       </Link>{' '}
       <main className="main aboutPage">
         <article className="aboutPageArticle">
@@ -60,9 +60,6 @@ export function AboutPage() {
         <Link to="/create-dash" className="standardFooter">
           Create Dash{' '}
         </Link>
-        {/* <a href="https://www.google.com/" className="footer">
-        Contact
-      </a> */}
       </footer>
     </>
   )

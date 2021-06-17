@@ -9,24 +9,14 @@ import { AboutPage } from './pages/AboutPage.jsx'
 import { CreateAccountPage } from './pages/CreateAccountPage.jsx'
 import { AccountPage } from './pages/AccountPage.jsx'
 import { CreateDashPage } from './pages/CreateDashPage.jsx'
-import { PanelFullScreen } from './pages/PanelFullScreen.jsx'
+import { ArchivePage } from './pages/ArchivePage.jsx'
 import { DashPreferences } from './pages/DashPreferences.jsx'
-
-// // {
-// // /* <header>
-// //       {' '}
-// //       <h2>QueryDash</h2>
-// //     </header> */
-// // }
 
 export function App() {
   return (
     <>
       <Switch>
         {/* <Route exact path="/:dashID"> */}
-        <Route exact path="/dash-page">
-          <DashPage />
-        </Route>
         <Route exact path="/">
           <LandingPage />
         </Route>
@@ -36,21 +26,28 @@ export function App() {
         <Route exact path="/login">
           <LoginPage />
         </Route>
+        {/* ---------------------------------------------- */}
         <Route exact path="/create-account">
           <CreateAccountPage />
         </Route>
+        <Route exact path="/create-dash">
+          <CreateDashPage />
+        </Route>
+        {/* ---------------------------------------------- */}
         <Route exact path="/account">
           <AccountPage />
         </Route>
-        <Route exact path="/create-dash">
-          <CreateDashPage />
-        </Route>{' '}
+        <Route exact path="/archive">
+          <ArchivePage />
+        </Route>
+        {/* ---------------------------------------------- */}
+        <Route exact path="/dash">
+          <DashPage />
+        </Route>
         <Route exact path="/preferences">
           <DashPreferences />
         </Route>
-        {/* <Route exact path="/:panelId">
-          <PanelFullScreen />
-        </Route> */}
+        {/* ---------------------------------------------- */}
         <Route path="*">Not Found...</Route>
       </Switch>
     </>

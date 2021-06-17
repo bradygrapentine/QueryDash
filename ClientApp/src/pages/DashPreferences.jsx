@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -6,5 +7,9 @@ import React from 'react'
 // probably just a drop down on Dash pages and Account page for more general styling
 
 export function DashPreferences() {
-  return <p className="tbd"> Under Construction</p>
+  return (
+    <Link className="linkForHeader" to="/">
+      <h1 className="header">QueryDash</h1>
+    </Link>
+  )
 }
