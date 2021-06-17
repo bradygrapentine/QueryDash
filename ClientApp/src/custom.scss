@@ -3,12 +3,20 @@
   height: 100%;
   margin: 0rem;
   padding: 0rem;
+  min-width: 100vw;
+  border: 0rem;
+
   // display: flex;
   // flex-direction: column;
   // justify-content: space-evenly;
   // align-items: center;
   // width: fit-content;
 }
+
+// * {
+//   margin: 0rem;
+//   padding: 0rem;
+// }
 
 // #root {
 //   height: 100%;
@@ -19,18 +27,27 @@
 //   justify-content: space-evenly;
 //   align-items: center;
 //   // width: fit-content;
-// }
 
+// }
+#root {
+  margin: 0rem;
+  padding: 0rem;
+  border: 0rem;
+}
 html {
   margin: 0rem;
   padding: 0rem;
   height: 100%;
+  min-width: 100vw;
+  border: 0rem;
 }
 
 body {
   margin: 0rem;
   padding: 0rem;
   min-height: 100%;
+  min-width: 100vw;
+  border: 0rem;
 }
 
 //--------------------------------------//
@@ -54,13 +71,18 @@ a.linkForHeader {
   // justify-content: center;
   margin: 0rem;
   padding: 0rem;
+  min-width: 100vw;
   height: fit-content;
   width: fit-content;
   text-decoration: none;
+  border: 0rem;
+
   h1.header {
-    background-image: url('./images/plaid-77426_1920.jpg');
-    background-size: cover;
+    border: 0rem;
+
     // position:
+    background-image: url('./images/plaid-77426_1920.jpg');
+    background-size: contain;
     font-family: 'Racing Sans One', cursive;
     // background-size: scale(0, 4);
     display: flex;
@@ -88,10 +110,15 @@ a.linkForHeader {
 }
 
 main.main {
+  border: 0rem;
+
   margin: 0rem;
   padding: 0rem;
   min-height: 100vh;
+  min-width: 100vw;
   display: flex;
+  background-image: url('./images/plaid-77426_1920.jpg');
+  background-size: contain;
 
   flex-direction: column;
   align-items: center;
@@ -102,7 +129,7 @@ main.main {
     // width: fit-content;
     // border-bottom-right-radius: 0.5rem;
     // border-top-right-radius: 0.5rem;
-    padding: 0.375rem;
+    padding: 0.375rem 0rem;
     position: sticky;
     // right: 100%;
     top: 0rem;
@@ -129,8 +156,8 @@ main.main {
       display: flex;
       position: sticky;
       top: 0rem;
-      margin: 0rem 1rem;
       left: 100%;
+      margin: 0rem 2rem;
       padding: 0.125rem;
       font-size: 0.75rem;
       border-radius: 0.5rem;
@@ -173,7 +200,7 @@ main.main {
     background-color: rgb(5, 112, 181);
     // background-color: rgb(247, 240, 33);
     width: 100vw;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0rem;
     height: fit-content;
     border-radius: 0rem;
     margin: 0%;
@@ -201,7 +228,7 @@ main.main {
       button.collapseMenu {
         position: sticky;
         top: 1.8rem;
-        // margin: 0rem 1rem;
+        margin: 0rem 1rem;
         left: 100%;
       }
     }
@@ -215,7 +242,7 @@ main.main {
     justify-content: center;
     height: fit-content;
     width: fit-content;
-    margin: 0rem;
+    margin: 1.5rem 0rem;
     // margin-top: 0.5rem;
     // position: absolute;
     // top: 3rem;
@@ -228,6 +255,7 @@ main.main {
       justify-content: center;
       height: fit-content;
       width: fit-content;
+      // min-width: 100vw;
       margin: 0rem;
       // margin: 0.125rem 0.6rem 0rem 3.25rem;
       // border: 1px solid black;
@@ -240,7 +268,8 @@ main.main {
         justify-content: center;
         height: fit-content;
         width: fit-content;
-        max-width: 95vw;
+        max-width: 92vw;
+        min-width: fit-content;
         padding: 0rem 0.25rem 0.25rem 0.25rem;
         margin: 0.125rem;
         border: 3px solid black;
@@ -271,6 +300,7 @@ main.main {
         padding: 0.125rem;
         // border-radius: 0.25rem;
         width: max-content;
+        min-width: fit-content;
         margin: 0rem;
         background-color: black;
         color: white;
@@ -283,6 +313,7 @@ main.main {
         overflow: hidden;
         height: fit-content;
         width: 100%;
+        min-width: fit-content;
         background-color: white;
         border-radius: 0.25rem;
         // width: fit-content;
@@ -343,11 +374,12 @@ main.main {
   justify-content: space-evenly;
   align-items: center;
   padding: 0.25rem;
-  margin-top: 1rem;
+  margin: 0rem;
+  width: 100vw;
   color: white;
   background-color: rgb(180, 0, 0);
   a.standardFooter {
-    margin: 0.5rem;
+    // margin: 0.5rem;
     color: black;
     text-align: center;
   }
@@ -377,6 +409,7 @@ main.landingPageContainer {
   margin: 0rem;
   padding: 0rem;
   min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -491,6 +524,8 @@ h2.aboutPageHeader {
 }
 main.aboutPage {
   padding: 1rem;
+  background-image: url('./images/plaid-77426_1920.jpg');
+  background-size: cover;
 }
 
 article.aboutPageArticle {
@@ -543,6 +578,7 @@ main.mainCreateAccount {
   margin: 2rem 0rem;
   padding: 0rem;
   min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
