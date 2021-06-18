@@ -170,17 +170,17 @@ export function CreateDashPage() {
           </div>
         </div>
       </main>
-      <footer className="createAccountPageFooter">
-        <Link to="/create-account" className="standardFooter">
+      <footer className="standardFooter">
+        <Link to="/create-account" className="navLink">
           Sign Up
         </Link>
-        <Link to="/about" className="standardFooter">
+        <Link to="/about" className="navLink">
           About
         </Link>
-        <Link to="/account" className="standardFooter">
+        <Link to="/account" className="navLink">
           Account
         </Link>
-        <Link to="/" className="standardFooter">
+        <Link to="/" className="navLink">
           Home
         </Link>
         {/* <a href="https://www.google.com/" className="footer">

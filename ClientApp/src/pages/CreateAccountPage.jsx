@@ -10,6 +10,7 @@ export function CreateAccountPage() {
       <Link className="linkForHeader" to="/">
         <h1 className="header">QueryDash</h1>
       </Link>{' '}
+      <button className="accountInfoSubmit">Create Account</button>
       <main className="mainCreateAccount">
         {/* <p className="tbd"> Under Construction</p> */}
         <div className="containerForHeaderAndForm">
@@ -168,15 +169,14 @@ export function CreateAccountPage() {
           </div>
         </div>
       </main>
-      <button className="accountInfoSubmit">Create Account</button>
-      <footer className="createAccountPageFooter">
-        <Link to="/about" className="standardFooter">
+      <footer className="standardFooter">
+        <Link to="/about" className="navLink">
           About
         </Link>
-        <Link to="/" className="standardFooter">
+        <Link to="/" className="navLink">
           Home
         </Link>
-        <Link to="/create-dash" className="standardFooter">
+        <Link to="/create-dash" className="navLink">
           Create Dash{' '}
         </Link>
         {/* <a href="https://www.google.com/" className="footer">
