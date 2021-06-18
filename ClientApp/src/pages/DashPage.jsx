@@ -47,29 +47,38 @@ export function DashQuery(params) {
       <form className="dashQuery">
         <input className="dashQuery" type="text" placeholder="Query Here" />
       </form>
-      <button className="collapse">Collapse</button>
+      <button>Open</button>
+      <button>Archive</button>
+      <button>History</button>
+      <button>Dash Settings</button>
+      <button className="settings">Account</button>
+      <button>Home</button>
+      {/* <button className="collapseMenu">Collapse</button> */}
+      <button className="collapseMenu">X</button>
+      {/* Gotta Fix this in mobile view */}
     </div>
   )
 }
 
 // ------------------------------------------------------------- //
 
-export function Menu(params) {
-  return (
-    <section className="menu">
-      Menu
-      <div className="menuContent">
-        <button>Open</button>
-        <button>Archive</button>
-        <button>History</button>
-        <button>Dash Settings</button>
-        <button className="settings">Account</button>
-        <button>Home</button>
-        <button className="collapseMenu">Collapse</button>
-      </div>
-    </section>
-  )
-}
+// export function Menu(params) {
+//   return (
+//     <section className="menu">
+//       Menu
+//       <div className="menuContent">
+//         <button>Open</button>
+//         <button>Open</button>
+//         <button>Archive</button>
+//         <button>History</button>
+//         <button>Dash Settings</button>
+//         <button className="settings">Account</button>
+//         <button>Home</button>
+//         <button className="collapseMenu">Collapse</button>
+//       </div>
+//     </section>
+//   )
+// }
 
 // ------------------------------------------------------------- //
 
@@ -94,7 +103,7 @@ export function DashPage() {
       Gotta build out static html and css for other pages */}
       <main className="main">
         <DashQuery />
-        <Menu />
+        {/* <Menu /> */}
         <div className="displayContainer">
           <div className="display">
             <Panel />
@@ -113,19 +122,19 @@ export function DashPage() {
         </div>
       </main>
       <footer className="standardFooter">
-        <Link to="/create-account" className="standardFooter">
+        <Link to="/create-account" className="navLink">
           Sign Up
         </Link>
-        <Link to="/about" className="standardFooter">
+        <Link to="/about" className="navLink">
           About
         </Link>
-        <Link to="/account" className="standardFooter">
+        <Link to="/account" className="navLink">
           Account
         </Link>
-        <Link to="/" className="standardFooter">
+        <Link to="/" className="navLink">
           Home
         </Link>
-        <Link to="/create-dash" className="standardFooter">
+        <Link to="/create-dash" className="navLink">
           Create Dash{' '}
         </Link>
         {/* <a href="https://www.google.com/" className="footer">

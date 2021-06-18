@@ -9,5 +9,7 @@ namespace QueryDash.Models
         public int DashId { get; set; }
         public string DashQueryResult { get; set; }
         public DateTime OpenTimeStamp { get; set; }
+        // do I need a temporary model for accepting api input?
+        // where am i in need of intermediate connections?
     }
 }

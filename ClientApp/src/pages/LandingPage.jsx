@@ -65,16 +65,16 @@ export function LandingPage() {
         </div>
       </main>
       <footer className="standardFooter">
-        <Link to="/create-account" className="standardFooter">
+        <Link to="/create-account" className="navLink">
           Sign Up
         </Link>
-        <Link to="/about" className="standardFooter">
+        <Link to="/about" className="navLink">
           About
         </Link>
-        <Link to="/account" className="standardFooter">
+        <Link to="/account" className="navLink">
           Account
         </Link>
-        <Link to="/create-dash" className="standardFooter">
+        <Link to="/create-dash" className="navLink">
           Create Dash{' '}
         </Link>
         {/* <a href="https://www.google.com/" className="footer">

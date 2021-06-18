@@ -1,0 +1,188 @@
+{
+  "statusCode": 0,
+  "statusMsg": "Success",
+
+  "currentTimeUTC": 1404588231,
+
+  "responseTimeMS": 312,
+
+  "numResultsOmitted": 3,
+
+  "numShardsSkipped": 0,
+
+  "totalShards": 159,
+
+  "docsInCollection": 226,
+
+  "hits": 193,
+
+  "moreResultsFollow": 1,
+
+  "queryInfo": {
+    "fullQuery": "test",
+
+    "origQuery": "teest",
+
+    "didQueryExpansion": 1,
+
+    "checkedQuerySpelling": 1,
+    "spellingSuggestion": "test",
+
+    "spellingSuggestionBolded": "test",
+
+    "confidentOfSpellingSuggestion": 1,
+
+    "queryWasRespelled": 1,
+
+    "queryLanguageAbbr": "en",
+
+    "queryLanguage": "English",
+
+    "ignoredWords": "to the",
+
+    "queryNumCandidateTermsTotal": 52,
+    "queryNumTermsUsed": 20,
+    "queryWasTruncated": 1,
+
+    "terms": [
+      {
+        "termNum": 0,
+
+        "termStr": "test",
+
+        "isIgnored": 0,
+
+        "isRequired": 1,
+
+        "isBaseTerm": 1,
+
+        "termFreq": 425239458,
+
+        "termHash48": 67259736306430,
+
+        "termHash64": 9448336835959712000,
+
+        "prefixHash64": 0
+      },
+
+      {
+        "termNum": 1,
+        "termStr": "tested",
+
+        "termLang": "en",
+
+        "synonymOf": "test",
+
+        "synonymType": "form",
+
+        "synonymLang": "en",
+
+        "termFreq": 73338909,
+        "termHash48": 66292713121321,
+        "termHash64": 9448336835959712000,
+        "prefixHash64": 0
+      }
+    ]
+  },
+
+  "gigabits": [
+    {
+      "term": "Membership",
+
+      "score": 240,
+
+      "minPop": 480,
+
+      "instance": {
+        "sentence": "Get a free Tested Premium Membership here!",
+
+        "url": "http://www.tested.com/",
+
+        "domain": "tested.com"
+      }
+    }
+  ],
+
+  "facets": [
+    {
+      "field": "Company",
+
+      "totalDocsWithField": 148553,
+
+      "totalDocsWithFieldAndValue": 44184,
+
+      "value": "Widgets, Inc.",
+
+      "docCount": 44184
+    }
+  ],
+
+  "ad": {
+    "id32": 0,
+
+    "title": "My Ad Title",
+
+    "text": "My Ad Text",
+
+    "link": "http://www.foo.com",
+
+    "registerClickLink": "/adclick?redir=0&adid=0&q=test+query"
+  },
+
+  "results": [
+    {
+      "title": "This is the title.",
+
+      "dmozEntry": {
+        "dmozCatId": 374449,
+
+        "directCatId": 1,
+
+        "dmozCatStr": "HAS DIFFERENT CONTENT BUT WAS THROWING RANDOM ERROR",
+
+        "dmozTitle": "The DMOZ Title",
+
+        "dmozSum": "A great web page.",
+
+        "dmozAnchor": ""
+      },
+
+      "contentType": "html",
+
+      "htmlSum": "<a href=http://www.doi.gov/>Department of the Interior</a> protects America's natural resources.",
+
+      "sum": "Department of the Interior protects America's natural resources.",
+
+      "url": "www.doi.gov",
+
+      "hopCount": 0,
+
+      "size": "  64k",
+
+      "sizeInBytes": 64560,
+
+      "docId": 34111603247,
+
+      "site": "www.doi.gov",
+
+      "spidered": 1404512549,
+
+      "firstIndexedDateUTC": 1404512549,
+
+      "contentHash32": 2680492249,
+
+      "isAdult": 0,
+
+      "language": "English",
+
+      "langAbbr": "en",
+
+      "imageBase64": "/9j/4AAQSkZJR...",
+
+      "imageHeight": 223,
+      "imageWidth": 350,
+      "origImageHeight": 300,
+      "origImageWidth": 470
+    }
+  ]
+}

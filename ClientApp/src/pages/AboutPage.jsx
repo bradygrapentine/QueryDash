@@ -27,7 +27,7 @@ export function AboutPage() {
       <Link className="linkForHeader" to="/">
         <h1 className="header">QueryDash</h1>
       </Link>{' '}
-      <main className="main aboutPage">
+      <main className="aboutPage">
         <article className="aboutPageArticle">
           <h5 className="header">Article 1</h5>
           <p>
