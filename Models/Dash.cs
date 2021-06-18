@@ -5,12 +5,14 @@ namespace QueryDash.Models
     public class Dash
     {
         public int Id { get; set; }
-        public List<string> EndpointOne { get; set; }     // EndpointUrl, EndpointName, EndpointLogo
-        public List<string> EndpointTwo { get; set; }
-        public List<string> EndpointThree { get; set; }
-        public List<string> EndpointFour { get; set; }
-        public List<string> EndpointFive { get; set; }
-        public List<int> Priority { get; set; }           // {1,2,3,4,5}
+        public int UserId { get; set; }                      // Presets could have null UserId
+        public List<string> Endpoints { get; set; }
+        public List<string> EndpointNames { get; set; }
+        public List<string> EndpointLogos { get; set; }
+        public List<int> Priority { get; set; }              // {1,2,3,4,5}
+        public bool InvertColors { get; set; }
+        public bool FixPanelSize { get; set; }
+        public bool FullScreenMode { get; set; }
     }
 }
 
@@ -18,7 +20,11 @@ namespace QueryDash.Models
 
 
 
-
+// public List<string> EndpointOne { get; set; }     // EndpointUrl, EndpointName, EndpointLogo
+// public List<string> EndpointTwo { get; set; }
+// public List<string> EndpointThree { get; set; }
+// public List<string> EndpointFour { get; set; }
+// public List<string> EndpointFive { get; set; }
 
 // public int userId { get; set; }
 // public bool IsPreset { get; set; }
