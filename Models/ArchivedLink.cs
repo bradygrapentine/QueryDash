@@ -6,6 +6,7 @@ namespace QueryDash.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        // isArchived or isOpenedLink
         public int DashId { get; set; }
         public string DashQueryResult { get; set; }
         public DateTime ArchiveTimeStamp { get; set; }

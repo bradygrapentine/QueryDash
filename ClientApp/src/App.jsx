@@ -11,6 +11,7 @@ import { AccountPage } from './pages/AccountPage.jsx'
 import { CreateDashPage } from './pages/CreateDashPage.jsx'
 import { ArchivePage } from './pages/ArchivePage.jsx'
 import { DashPreferences } from './pages/DashPreferences.jsx'
+import { HistoryPage } from './pages/HistoryPage.jsx'
 
 export function App() {
   return (
@@ -46,6 +47,9 @@ export function App() {
         </Route>
         <Route exact path="/preferences">
           <DashPreferences />
+        </Route>
+        <Route exact path="/history">
+          <HistoryPage />
         </Route>
         {/* ---------------------------------------------- */}
         <Route path="*">Not Found...</Route>

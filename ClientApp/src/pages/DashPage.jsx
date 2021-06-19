@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 // import './custom.scss'
 
@@ -14,6 +14,7 @@ export function QLink() {
       </a>
       <button className="viewDescription">description</button>
       <button className="viewLink">view</button>
+      <button className="viewLink">image</button>
     </div>
   )
 }
@@ -39,26 +40,6 @@ export function Panel() {
 }
 
 // ------------------------------------------------------------- //
-
-export function DashQuery(params) {
-  return (
-    <div className="dashQuery">
-      Search
-      <form className="dashQuery">
-        <input className="dashQuery" type="text" placeholder="Query Here" />
-      </form>
-      <button>Open</button>
-      <button>Archive</button>
-      <button>History</button>
-      <button>Dash Settings</button>
-      <button className="settings">Account</button>
-      <button>Home</button>
-      {/* <button className="collapseMenu">Collapse</button> */}
-      <button className="collapseMenu">X</button>
-      {/* Gotta Fix this in mobile view */}
-    </div>
-  )
-}
 
 // ------------------------------------------------------------- //
 
@@ -91,6 +72,64 @@ export function DashQuery(params) {
 // ------------------------------------------------------------- //
 
 export function DashPage() {
+  const [menuOpen, setMenuOpen] = useState(true)
+
+  function DashQuery(params) {
+    return (
+      <div className="containerDashQuery">
+        {menuOpen ? (
+          <>
+            <div className="dashQuery">
+              <form className="dashQuery">
+                <input
+                  className="dashQuery"
+                  type="text"
+                  placeholder="Query Here"
+                />
+              </form>
+              <div className="buttonContainer1">
+                <button>Open</button>
+                <button>Archive</button>
+              </div>
+              <div className="buttonContainer2">
+                <Link to="/history">
+                  <button>History</button>
+                </Link>
+                <Link to="/preferences">
+                  <button>Dash Settings</button>
+                </Link>
+                {/* <Link to="/account">
+                  <button>Account</button>{' '}
+                </Link> */}
+                <Link to="/">
+                  <button>Home</button>
+                </Link>
+                {/* <button>Open</button> // buttons for non-users
+                <Link to="/">
+                  <button>Home</button>
+                </Link> */}
+              </div>{' '}
+              */}
+            </div>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="collapseMenu"
+            >
+              X
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="collapsedMenu"
+          >
+            Open Menu
+          </button>
+        )}
+      </div>
+    )
+  }
+
   return (
     <>
       {/* <Link to="/"> */}

@@ -7,21 +7,25 @@ namespace QueryDash.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public bool IsPreset { get; set; }
-        // could create a starter dash model
-        // same object just drop UserId
-        // and drop IsPreset from this model
-        // Presets could have null UserId
+
         public List<string> Endpoints { get; set; }
         public List<string> EndpointNames { get; set; }
         public List<string> EndpointLogos { get; set; }
-        // public PanelList UserPanelList { get; set; }
         // public List<Panel> PanelList { get; set; }
+        // public PanelList UserPanelList { get; set; }
+
+
         public List<int> Priority { get; set; }              // {1,2,3,4,5}
         public bool InvertColors { get; set; }
         public bool FixPanelSize { get; set; }
         public bool FullScreenMode { get; set; }
     }
 }
+
+// could create a starter dash model
+// same object just drop UserId
+// and drop IsPreset from this model
+// Presets could have null UserId
 
 
 
