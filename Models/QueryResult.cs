@@ -19,6 +19,8 @@ namespace QueryDash.Models
 
         public Dash RootDash { get; set; }
 
+        public bool LatestQuery { get; set; }
+
         // --------------------------------------------- //
 
         public List<string> JsonResultStrings { get; set; } // expand properties to accord with the JSON data input from the search API
