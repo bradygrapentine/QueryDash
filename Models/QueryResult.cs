@@ -23,9 +23,9 @@ namespace QueryDash.Models
 
         // --------------------------------------------- //
 
-        public List<string> JsonResultStrings { get; set; } // expand properties to accord with the JSON data input from the search API
+        public List<string> JsonResultStrings { get; set; } // could expand properties to accord with the JSON data input from the search API in the backend, or just send the JSON for each panel
 
-        // public List<List<List<string>>> JsonResultlist { get; set; } // could just grab link string, site name string, and image url string
+        // public List<List<List<string>>> JsonResultlist { get; set; } // could just grab link string, site name string, and image url string from results
 
         // public string SiteHead { get; set; }
 
