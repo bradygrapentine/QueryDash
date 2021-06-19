@@ -7,6 +7,8 @@ namespace QueryDash.Models
     {
         public int Id { get; set; }
 
+        // ---------------------------------- //
+
         [Required]
         public string Name { get; set; }
 
@@ -15,8 +17,49 @@ namespace QueryDash.Models
 
         [Required]
         public string Password { get; set; }
+
+        // ---------------------------------- //
+
+        public List<Dash> DashList { get; set; }
+
+        // ---------------------------------- //
+
+        public List<Dash> SharedDashList { get; set; }
+
+        // ---------------------------------- //
+
+        public List<SavedLink> ArchivedLinks { get; set; }
+
+        public List<SavedLink> OpenedLinks { get; set; }
+
+        // ---------------------------------- //
+
+        public List<DashQuery> SearchHistory { get; set; }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// public List<string> Location { get; set; } ~ add Location when quick dashes are added
+
+// [Required]
+// public string Language { get; set; }
+
 // This redundancy is the only one currently. 
 // This scales one-one with the number of users in the current implementation.
 
@@ -30,7 +73,6 @@ namespace QueryDash.Models
 
 // only need when allowed to create new dashes
 // public List<Dash> UserDashList { get; set; }
-
 
 
 // {

@@ -2,25 +2,71 @@ using System;
 using System.Collections.Generic;
 namespace QueryDash.Models
 {
-    public class Dash
+    public class Dash // Many-Many with Panels
     {
         public int Id { get; set; }
+
         public int UserId { get; set; }
+
+        public User RootUser { get; set; }
+
+        public DateTime CreationDate { get; set; } // Dates Dashes
+
+        // ------------------------------------------------------ //
+
         public bool IsPreset { get; set; }
 
-        public List<string> Endpoints { get; set; }
-        public List<string> EndpointNames { get; set; }
-        public List<string> EndpointLogos { get; set; }
-        // public List<Panel> PanelList { get; set; }
-        // public PanelList UserPanelList { get; set; }
+        public DateTime PresetPublicationDate { get; set; } // Dates Sharing of Dashes
 
+        public int FirstUserID { get; set; }
 
-        public List<int> Priority { get; set; }              // {1,2,3,4,5}
+        public User RootFirstUser { get; set; } // Bestows Ownership on Creator of Shared Dash
+
+        // ------------------------------------------------------ //
+
+        public List<Panel> Panels { get; set; }
+
+        public List<PanelAssignments> PanelAssignments { get; set; }
+
+        public List<int> Priority { get; set; }                            //  {p1,p2,p3,p4,p5} ~ Panel,  {2,1,3,4,5} ~ Priority -> display: p2,p1,p3,p4,p5
+
+        public QueryResult LatestDashQueryResults { get; set; }  // or would Query results need to have a one-one relationship with panels to feed them to the correct panel?
+                                                                 // I'm thinking if I do it this way I need to send all the results back at once
+
+        // public List<QueryResult> LatestDashQueryResults { get; set; }
+
+        // ------------------------------------------------------ //
+
+        public List<SavedLink> ArchivedLinks { get; set; }
+
+        public List<SavedLink> OpenedLinks { get; set; }
+
+        public List<DashQuery> SearchHistory { get; set; }
+
+        // ------------------------------------------------------ //
+
+        public int LinksPerPanel { get; set; }
+
         public bool InvertColors { get; set; }
-        public bool FixPanelSize { get; set; }
-        public bool FullScreenMode { get; set; }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // could create a starter dash model
 // same object just drop UserId

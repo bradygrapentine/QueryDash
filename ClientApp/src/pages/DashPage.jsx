@@ -109,7 +109,6 @@ export function DashPage() {
                   <button>Home</button>
                 </Link> */}
               </div>{' '}
-              */}
             </div>
             <button
               onClick={() => setMenuOpen(!menuOpen)}

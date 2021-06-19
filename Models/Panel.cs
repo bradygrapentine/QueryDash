@@ -2,13 +2,23 @@ using System;
 using System.Collections.Generic;
 namespace QueryDash.Models
 {
-    public class Panel
+    public class Panel // Many-Many with Dashes
     {
         public int Id { get; set; }
-        // public int DashId { get; set; }
-        public int PanelListId { get; set; }                      // Presets could have null UserId
-        public string Endpoint { get; set; }
-        public string EndpointName { get; set; }
-        public string EndpointLogo { get; set; }
+
+        // ----------------------------------------------------------- //
+
+        public List<Dash> Dashes { get; set; }
+
+        public List<PanelAssignments> DashAssignments { get; set; }
+
+        // ----------------------------------------------------------- //
+
+        public string SiteFilter { get; set; }
+
+        public string FilterSiteName { get; set; }
+
+        public string FilterSiteLogo { get; set; }
     }
 }
+
