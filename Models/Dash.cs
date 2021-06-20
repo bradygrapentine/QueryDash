@@ -30,11 +30,6 @@ namespace QueryDash.Models
 
         public List<int> Priority { get; set; }                            //  {p1,p2,p3,p4,p5} ~ Panel,  {2,1,3,4,5} ~ Priority -> display: p2,p1,p3,p4,p5
 
-        public QueryResult LatestDashQueryResults { get; set; }  // or would Query results need to have a one-one relationship with panels to feed them to the correct panel?
-                                                                 // I'm thinking if I do it this way I need to send all the results back at once
-
-        // public List<QueryResult> LatestDashQueryResults { get; set; }
-
         // ------------------------------------------------------ //
 
         public List<SavedLink> ArchivedLinks { get; set; }
@@ -52,6 +47,23 @@ namespace QueryDash.Models
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// public QueryResult LatestDashQueryResults { get; set; }  // or would Query results need to have a one-one relationship with panels to feed them to the correct panel?
+// I'm thinking if I do it this way I need to send all the results back at once
+
+// public List<QueryResult> LatestDashQueryResults { get; set; }
 
 
 
