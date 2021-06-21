@@ -17,7 +17,6 @@ export function App() {
   return (
     <>
       <Switch>
-        {/* <Route exact path="/:dashID"> */}
         <Route exact path="/">
           <LandingPage />
         </Route>
@@ -42,7 +41,7 @@ export function App() {
           <ArchivePage />
         </Route>
         {/* ---------------------------------------------- */}
-        <Route exact path="/dash">
+        <Route exact path="/dash/:id">
           <DashPage />
         </Route>
         <Route exact path="/preferences">

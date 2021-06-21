@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
+{
+  /* <Route exact path="/:dashID"> */
+}
+
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -73,6 +77,27 @@ export function Panel() {
 
 export function DashPage() {
   const [menuOpen, setMenuOpen] = useState(true)
+
+  const [dash, setDash] = useState()
+
+  const params = useParams()
+
+  const id = params.id
+
+  useEffect(() => {
+    async function getDash() {
+      const response = await fetch(`/api/Dash/${id}`)
+
+      if (response.ok) {
+        const apiData = await response.json()
+
+        setDash(apiData)
+      }
+    }
+
+    getDash()
+    console.log(dash)
+  }, [id])
 
   function DashQuery(params) {
     return (

@@ -1,13 +1,63 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import { Footer } from './DashPage'
+import React, { useEffect, useState } from 'react'
+// import { Footer } from './DashPage'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
 
+// function DashList(params) {
+
+// }
+
 export function LandingPage() {
+  const [dashList, setDashList] = useState([])
+
+  // {
+  //   id: null,
+  //   creationDate: '',
+  //   dashName: '',
+  //   isPreset: null,
+  //   presetPublicationDate: '',
+  //   panels: null,
+  //   panelAssignment: null,
+  //   savedLinks: null,
+  //   searchHistory: null,
+  //   linksPerPanel: 10,
+  // },
+  // function loadDashList() {
+
+  // }
+
+  // function DashListItem() {
+  //   return (
+  //     <li>
+  //       <Link to="/dash:id" className="">
+  //         DashPage
+  //       </Link>
+  //     </li>
+  //   )
+  // }
+
+  async function loadDashList() {
+    const url = '/api/Dash'
+
+    const response = await fetch(url)
+
+    if (response.ok) {
+      const json = await response.json()
+
+      setDashList(json)
+    }
+  }
+
+  useEffect(function () {
+    loadDashList()
+    console.log(dashList)
+  }, [])
+
+  //--------------------------------------//
+
   return (
-    // <>
     <>
       <Link className="linkForHeader" to="/">
         <h1 className="header">QueryDash</h1>
@@ -16,51 +66,13 @@ export function LandingPage() {
         <div className="listOfDashes">
           <h3 className="HeaderDashList">Preset Dashes</h3>
           <ul className="DisplayListDash">
-            <li>
-              <Link to="/dash" className="">
-                DashPage
-              </Link>
-            </li>
-            <li>
-              <Link to="/dash" className="">
-                DashPage
-              </Link>
-            </li>
-            <li>
-              <Link to="/dash" className="">
-                DashPage
-              </Link>
-            </li>
-            <li>
-              <Link to="/dash" className="">
-                DashPage
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="listOfDashes">
-          <h3 className="HeaderDashList">User Dashes</h3>
-          <ul className="DisplayListDash">
-            <li>
-              <Link to="/dash" className="">
-                DashPage
-              </Link>
-            </li>
-            <li>
-              <Link to="/dash" className="">
-                DashPage
-              </Link>
-            </li>
-            <li>
-              <Link to="/dash" className="">
-                DashPage
-              </Link>
-            </li>
-            <li>
-              <Link to="/dash" className="">
-                DashPage
-              </Link>
-            </li>
+            {dashList.map((dash) => {
+              ;<li>
+                <Link to={`/dash/${dash.Id}`} className="">
+                  {dash.DashName}
+                </Link>
+              </li>
+            })}
           </ul>
         </div>
       </main>
@@ -77,9 +89,6 @@ export function LandingPage() {
         <Link to="/create-dash" className="navLink">
           Create Dash{' '}
         </Link>
-        {/* <a href="https://www.google.com/" className="footer">
-        Contact
-      </a> */}
       </footer>
     </>
   )
