@@ -9,36 +9,36 @@ using QueryDash.Models;
 
 namespace QueryDash.Controllers
 {
-    // All of these routes will be at the base URL:     /api/Panel
+    // All of these routes will be at the base URL:     /api/Panels
     // That is what "api/[controller]" means below. It uses the name of the controller
-    // in this case PanelController to determine the URL
+    // in this case PanelsController to determine the URL
     [Route("api/[controller]")]
     [ApiController]
-    public class PanelController : ControllerBase
+    public class PanelsController : ControllerBase
     {
         // This is the variable you use to have access to your database
         private readonly DatabaseContext _context;
 
         // Constructor that recives a reference to your database context
         // and stores it in _context for you to use in your API methods
-        public PanelController(DatabaseContext context)
+        public PanelsController(DatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: api/Panel
+        // GET: api/Panels
         //
-        // Returns a list of all your PanelTable
+        // Returns a list of all your Panels
         //
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Panel>>> GetPanelTable()
+        public async Task<ActionResult<IEnumerable<Panel>>> GetPanels()
         {
-            // Uses the database context in `_context` to request all of the PanelTable, sort
+            // Uses the database context in `_context` to request all of the Panels, sort
             // them by row id and return them as a JSON array.
-            return await _context.PanelTable.OrderBy(row => row.Id).ToListAsync();
+            return await _context.Panels.OrderBy(row => row.Id).ToListAsync();
         }
 
-        // GET: api/Panel/5
+        // GET: api/Panels/5
         //
         // Fetches and returns a specific panel by finding it by id. The id is specified in the
         // URL. In the sample URL above it is the `5`.  The "{id}" in the [HttpGet("{id}")] is what tells dotnet
@@ -48,7 +48,7 @@ namespace QueryDash.Controllers
         public async Task<ActionResult<Panel>> GetPanel(int id)
         {
             // Find the panel in the database using `FindAsync` to look it up by id
-            var panel = await _context.PanelTable.FindAsync(id);
+            var panel = await _context.Panels.FindAsync(id);
 
             // If we didn't find anything, we receive a `null` in return
             if (panel == null)
@@ -61,7 +61,7 @@ namespace QueryDash.Controllers
             return panel;
         }
 
-        // PUT: api/Panel/5
+        // PUT: api/Panels/5
         //
         // Update an individual panel with the requested id. The id is specified in the URL
         // In the sample URL above it is the `5`. The "{id} in the [HttpPut("{id}")] is what tells dotnet
@@ -112,7 +112,7 @@ namespace QueryDash.Controllers
             return Ok(panel);
         }
 
-        // POST: api/Panel
+        // POST: api/Panels
         //
         // Creates a new panel in the database.
         //
@@ -125,7 +125,7 @@ namespace QueryDash.Controllers
         public async Task<ActionResult<Panel>> PostPanel(Panel panel)
         {
             // Indicate to the database context we want to add this new record
-            _context.PanelTable.Add(panel);
+            _context.Panels.Add(panel);
             await _context.SaveChangesAsync();
 
             // Return a response that indicates the object was created (status code `201`) and some additional
@@ -133,7 +133,7 @@ namespace QueryDash.Controllers
             return CreatedAtAction("GetPanel", new { id = panel.Id }, panel);
         }
 
-        // DELETE: api/Panel/5
+        // DELETE: api/Panels/5
         //
         // Deletes an individual panel with the requested id. The id is specified in the URL
         // In the sample URL above it is the `5`. The "{id} in the [HttpDelete("{id}")] is what tells dotnet
@@ -143,7 +143,7 @@ namespace QueryDash.Controllers
         public async Task<IActionResult> DeletePanel(int id)
         {
             // Find this panel by looking for the specific id
-            var panel = await _context.PanelTable.FindAsync(id);
+            var panel = await _context.Panels.FindAsync(id);
             if (panel == null)
             {
                 // There wasn't a panel with that id so return a `404` not found
@@ -151,7 +151,7 @@ namespace QueryDash.Controllers
             }
 
             // Tell the database we want to remove this record
-            _context.PanelTable.Remove(panel);
+            _context.Panels.Remove(panel);
 
             // Tell the database to perform the deletion
             await _context.SaveChangesAsync();
@@ -163,7 +163,7 @@ namespace QueryDash.Controllers
         // Private helper method that looks up an existing panel by the supplied id
         private bool PanelExists(int id)
         {
-            return _context.PanelTable.Any(panel => panel.Id == id);
+            return _context.Panels.Any(panel => panel.Id == id);
         }
     }
 }

@@ -1,170 +1,84 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useHistory, Link } from 'react-router-dom'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
 
 export function CreateAccountPage() {
+  const history = useHistory()
+
+  const [errorMessage, setErrorMessage] = useState()
+
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+  })
+
+  function handleStringFieldChange(event) {
+    const value = event.target.value
+    const fieldName = event.target.name
+
+    const updatedUser = { ...newUser, [fieldName]: value }
+
+    setNewUser(updatedUser)
+  }
+
+  async function handleFormSubmission(event) {
+    event.preventDefault()
+
+    const response = await fetch('/api/Users', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newUser),
+    })
+    const apiResponse = await response.json()
+
+    if (apiResponse.status === 400) {
+      setErrorMessage(Object.values(apiResponse.errors).join(' '))
+    } else {
+      history.push('/')
+    }
+  }
   return (
     <>
       <Link className="linkForHeader" to="/">
         <h1 className="header">QueryDash</h1>
       </Link>{' '}
-      <button className="accountInfoSubmit">Create Account</button>
       <main className="mainCreateAccount">
-        {/* <p className="tbd"> Under Construction</p> */}
         <div className="containerForHeaderAndForm">
           <h5 className="header">Form Header</h5>
           <div className="formContainerCreateAccount">
-            <form action="" className="formCreateAccount">
+            <form onSubmit={handleFormSubmission} className="formCreateAccount">
+              {errorMessage ? <p>{errorMessage}</p> : null}
               <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
+                <label htmlFor="name">Username: </label>
                 <input
-                  name="createAccount"
+                  name="name"
                   type="text"
-                  placeholder="info here"
+                  value={newUser.name}
+                  onChange={handleStringFieldChange}
                 />
               </div>
               <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
+                <label htmlFor="createAccount">Email Address: </label>
                 <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
+                  name="email"
+                  type="email"
+                  value={newUser.email}
+                  onChange={handleStringFieldChange}
                 />
               </div>
               <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
+                <label htmlFor="password">Password: </label>
                 <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
+                  name="password"
+                  type="password"
+                  value={newUser.password}
+                  onChange={handleStringFieldChange}
                 />
               </div>
-            </form>
-          </div>
-        </div>
-        <div className="containerForHeaderAndForm">
-          <h5 className="header">Form Header</h5>
-          <div className="formContainerCreateAccount">
-            <form action="" className="formCreateAccount">
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="containerForHeaderAndForm">
-          <h5 className="header">Form Header</h5>
-          <div className="formContainerCreateAccount">
-            <form action="" className="formCreateAccount">
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="containerForHeaderAndForm">
-          <h5 className="header">Form Header</h5>
-          <div className="formContainerCreateAccount">
-            <form action="" className="formCreateAccount">
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="containerForHeaderAndForm">
-          <h5 className="header">Form Header</h5>
-          <div className="formContainerCreateAccount">
-            <form action="" className="formCreateAccount">
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="createAccount">Info Field:</label>
-                <input
-                  name="createAccount"
-                  type="text"
-                  placeholder="info here"
-                />
-              </div>
+              <input type="submit" value="Submit" />
             </form>
           </div>
         </div>

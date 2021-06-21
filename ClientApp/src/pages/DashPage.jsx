@@ -92,7 +92,7 @@ export function DashPage() {
   const id = params.id
 
   async function getDash() {
-    const response = await fetch(`/api/Dash/${id}`)
+    const response = await fetch(`/api/Dashes/${id}`)
 
     if (response.ok) {
       const apiData = await response.json()

@@ -15,16 +15,24 @@ namespace QueryDash.Models
 
         // Add database tables here
 
-        public DbSet<Dash> DashTable { get; set; }
+        public DbSet<Dash> Dashes { get; set; }
 
-        public DbSet<Panel> PanelTable { get; set; }
+        public DbSet<Panel> Panels { get; set; }
 
-        public DbSet<PanelAssignment> PanelAssignmentTable { get; set; }
+        public DbSet<PanelAssignment> PanelAssignments { get; set; }
 
-        public DbSet<SavedLink> SavedLinkTable { get; set; }
+        public DbSet<SavedLink> SavedLinks { get; set; }
 
-        public DbSet<DashQuery> DashQueryTable { get; set; }
+        public DbSet<DashQuery> DashQueries { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
+        // ---------------------------------------------------------------------------- //
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(user => user.Email).IsUnique();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

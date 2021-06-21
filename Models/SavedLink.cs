@@ -18,7 +18,7 @@ namespace QueryDash.Models
 
         public int DashId { get; set; }
 
-        public Dash RootDash { get; set; }
+        // public Dash RootDash { get; set; }
 
         // ---------------------------------- //
 

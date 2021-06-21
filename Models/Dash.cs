@@ -26,17 +26,17 @@ namespace QueryDash.Models
 
         // ------------------------------------------------------ //
 
-        public List<Panel> Panels { get; set; }
+        // public List<Panel> Panels { get; set; }
 
-        public List<PanelAssignment> PanelAssignment { get; set; }
+        // public List<PanelAssignment> DashPanelAssignments { get; set; } 
 
         // public List<int> Priority { get; set; }                            //  {p1,p2,p3,p4,p5} ~ Panel,  {2,1,3,4,5} ~ Priority -> display: p2,p1,p3,p4,p5 -> but order isn't preserved,
         // public List<Panel.Id> PanelId List { get; set;} // how would this actually be implemented
         // ------------------------------------------------------ //
 
-        public List<SavedLink> SavedLinks { get; set; }
+        // public List<SavedLink> SavedLinks { get; set; }
 
-        public List<DashQuery> SearchHistory { get; set; }
+        // public List<DashQuery> SearchHistory { get; set; }
 
         // ------------------------------------------------------ //
 

@@ -9,81 +9,81 @@ using QueryDash.Models;
 
 namespace QueryDash.Controllers
 {
-    // All of these routes will be at the base URL:     /api/SavedLink
+    // All of these routes will be at the base URL:     /api/DashQueries
     // That is what "api/[controller]" means below. It uses the name of the controller
-    // in this case SavedLinkController to determine the URL
+    // in this case DashQueriesController to determine the URL
     [Route("api/[controller]")]
     [ApiController]
-    public class SavedLinkController : ControllerBase
+    public class DashQueriesController : ControllerBase
     {
         // This is the variable you use to have access to your database
         private readonly DatabaseContext _context;
 
         // Constructor that recives a reference to your database context
         // and stores it in _context for you to use in your API methods
-        public SavedLinkController(DatabaseContext context)
+        public DashQueriesController(DatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: api/SavedLink
+        // GET: api/DashQueries
         //
-        // Returns a list of all your SavedLinkTable
+        // Returns a list of all your DashQueries
         //
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinkTable()
+        public async Task<ActionResult<IEnumerable<DashQuery>>> GetDashQueries()
         {
-            // Uses the database context in `_context` to request all of the SavedLinkTable, sort
+            // Uses the database context in `_context` to request all of the DashQueries, sort
             // them by row id and return them as a JSON array.
-            return await _context.SavedLinkTable.OrderBy(row => row.Id).ToListAsync();
+            return await _context.DashQueries.OrderBy(row => row.Id).ToListAsync();
         }
 
-        // GET: api/SavedLink/5
+        // GET: api/DashQueries/5
         //
-        // Fetches and returns a specific savedLink by finding it by id. The id is specified in the
+        // Fetches and returns a specific dashQuery by finding it by id. The id is specified in the
         // URL. In the sample URL above it is the `5`.  The "{id}" in the [HttpGet("{id}")] is what tells dotnet
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpGet("{id}")]
-        public async Task<ActionResult<SavedLink>> GetSavedLink(int id)
+        public async Task<ActionResult<DashQuery>> GetDashQuery(int id)
         {
-            // Find the savedLink in the database using `FindAsync` to look it up by id
-            var savedLink = await _context.SavedLinkTable.FindAsync(id);
+            // Find the dashQuery in the database using `FindAsync` to look it up by id
+            var dashQuery = await _context.DashQueries.FindAsync(id);
 
             // If we didn't find anything, we receive a `null` in return
-            if (savedLink == null)
+            if (dashQuery == null)
             {
-                // Return a `404` response to the client indicating we could not find a savedLink with this id
+                // Return a `404` response to the client indicating we could not find a dashQuery with this id
                 return NotFound();
             }
 
-            //  Return the savedLink as a JSON object.
-            return savedLink;
+            //  Return the dashQuery as a JSON object.
+            return dashQuery;
         }
 
-        // PUT: api/SavedLink/5
+        // PUT: api/DashQueries/5
         //
-        // Update an individual savedLink with the requested id. The id is specified in the URL
+        // Update an individual dashQuery with the requested id. The id is specified in the URL
         // In the sample URL above it is the `5`. The "{id} in the [HttpPut("{id}")] is what tells dotnet
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
-        // In addition the `body` of the request is parsed and then made available to us as a SavedLink
-        // variable named savedLink. The controller matches the keys of the JSON object the client
-        // supplies to the names of the attributes of our SavedLink POCO class. This represents the
+        // In addition the `body` of the request is parsed and then made available to us as a DashQuery
+        // variable named dashQuery. The controller matches the keys of the JSON object the client
+        // supplies to the names of the attributes of our DashQuery POCO class. This represents the
         // new values for the record.
         //
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSavedLink(int id, SavedLink savedLink)
+        public async Task<IActionResult> PutDashQuery(int id, DashQuery dashQuery)
         {
             // If the ID in the URL does not match the ID in the supplied request body, return a bad request
-            if (id != savedLink.Id)
+            if (id != dashQuery.Id)
             {
                 return BadRequest();
             }
 
-            // Tell the database to consider everything in savedLink to be _updated_ values. When
-            // the save happens the database will _replace_ the values in the database with the ones from savedLink
-            _context.Entry(savedLink).State = EntityState.Modified;
+            // Tell the database to consider everything in dashQuery to be _updated_ values. When
+            // the save happens the database will _replace_ the values in the database with the ones from dashQuery
+            _context.Entry(dashQuery).State = EntityState.Modified;
 
             try
             {
@@ -94,7 +94,7 @@ namespace QueryDash.Controllers
             {
                 // Ooops, looks like there was an error, so check to see if the record we were
                 // updating no longer exists.
-                if (!SavedLinkExists(id))
+                if (!DashQueryExists(id))
                 {
                     // If the record we tried to update was already deleted by someone else,
                     // return a `404` not found
@@ -109,61 +109,61 @@ namespace QueryDash.Controllers
             }
 
             // Return a copy of the updated data
-            return Ok(savedLink);
+            return Ok(dashQuery);
         }
 
-        // POST: api/SavedLink
+        // POST: api/DashQueries
         //
-        // Creates a new savedLink in the database.
+        // Creates a new dashQuery in the database.
         //
-        // The `body` of the request is parsed and then made available to us as a SavedLink
-        // variable named savedLink. The controller matches the keys of the JSON object the client
-        // supplies to the names of the attributes of our SavedLink POCO class. This represents the
+        // The `body` of the request is parsed and then made available to us as a DashQuery
+        // variable named dashQuery. The controller matches the keys of the JSON object the client
+        // supplies to the names of the attributes of our DashQuery POCO class. This represents the
         // new values for the record.
         //
         [HttpPost]
-        public async Task<ActionResult<SavedLink>> PostSavedLink(SavedLink savedLink)
+        public async Task<ActionResult<DashQuery>> PostDashQuery(DashQuery dashQuery)
         {
             // Indicate to the database context we want to add this new record
-            _context.SavedLinkTable.Add(savedLink);
+            _context.DashQueries.Add(dashQuery);
             await _context.SaveChangesAsync();
 
             // Return a response that indicates the object was created (status code `201`) and some additional
             // headers with details of the newly created object.
-            return CreatedAtAction("GetSavedLink", new { id = savedLink.Id }, savedLink);
+            return CreatedAtAction("GetDashQuery", new { id = dashQuery.Id }, dashQuery);
         }
 
-        // DELETE: api/SavedLink/5
+        // DELETE: api/DashQueries/5
         //
-        // Deletes an individual savedLink with the requested id. The id is specified in the URL
+        // Deletes an individual dashQuery with the requested id. The id is specified in the URL
         // In the sample URL above it is the `5`. The "{id} in the [HttpDelete("{id}")] is what tells dotnet
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSavedLink(int id)
+        public async Task<IActionResult> DeleteDashQuery(int id)
         {
-            // Find this savedLink by looking for the specific id
-            var savedLink = await _context.SavedLinkTable.FindAsync(id);
-            if (savedLink == null)
+            // Find this dashQuery by looking for the specific id
+            var dashQuery = await _context.DashQueries.FindAsync(id);
+            if (dashQuery == null)
             {
-                // There wasn't a savedLink with that id so return a `404` not found
+                // There wasn't a dashQuery with that id so return a `404` not found
                 return NotFound();
             }
 
             // Tell the database we want to remove this record
-            _context.SavedLinkTable.Remove(savedLink);
+            _context.DashQueries.Remove(dashQuery);
 
             // Tell the database to perform the deletion
             await _context.SaveChangesAsync();
 
             // Return a copy of the deleted data
-            return Ok(savedLink);
+            return Ok(dashQuery);
         }
 
-        // Private helper method that looks up an existing savedLink by the supplied id
-        private bool SavedLinkExists(int id)
+        // Private helper method that looks up an existing dashQuery by the supplied id
+        private bool DashQueryExists(int id)
         {
-            return _context.SavedLinkTable.Any(savedLink => savedLink.Id == id);
+            return _context.DashQueries.Any(dashQuery => dashQuery.Id == id);
         }
     }
 }

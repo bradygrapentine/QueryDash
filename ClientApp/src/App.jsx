@@ -2,7 +2,7 @@ import React from 'react'
 import './custom.scss'
 
 import { DashPage } from './pages/DashPage.jsx'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { LandingPage } from './pages/LandingPage.jsx'
 import { LoginPage } from './pages/LoginPage.jsx'
 import { AboutPage } from './pages/AboutPage.jsx'

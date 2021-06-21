@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 namespace QueryDash.Models
 {
     public class User
@@ -15,26 +16,40 @@ namespace QueryDash.Models
         [Required]
         public string Email { get; set; }
 
-        [Required]
-        public string Password { get; set; }
+        [JsonIgnore]
+        public string HashedPassword { get; set; }
 
         // ---------------------------------- //
 
-        public List<Dash> DashList { get; set; }
+        public string Password
+        {
+            set
+            {
+                this.HashedPassword = new PasswordHasher<User>().HashPassword(this, value);
+            }
+        }
 
         // ---------------------------------- //
 
-        public List<Dash> SharedDashList { get; set; }
+        public bool IsValidPassword(string password)
+        {
+            var passwordVerification = new PasswordHasher<User>().VerifyHashedPassword(this, this.HashedPassword, password);
+            return passwordVerification == PasswordVerificationResult.Success;
+        }
+
+        // public List<Dash> DashList { get; set; }
 
         // ---------------------------------- //
 
-        public List<SavedLink> ArchivedLinks { get; set; }
-
-        public List<SavedLink> OpenedLinks { get; set; }
+        // public List<Dash> SharedDashList { get; set; }
 
         // ---------------------------------- //
 
-        public List<DashQuery> SearchHistory { get; set; }
+        // public List<SavedLink> SavedLinks { get; set; }
+
+        // ---------------------------------- //
+
+        // public List<DashQuery> SearchHistory { get; set; }
 
     }
 }

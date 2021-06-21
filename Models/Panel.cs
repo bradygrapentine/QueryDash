@@ -10,9 +10,9 @@ namespace QueryDash.Models
 
         // ----------------------------------------------------------- //
 
-        public List<Dash> Dashes { get; set; }
+        // public List<Dash> Dashes { get; set; }
 
-        public List<PanelAssignment> DashAssignments { get; set; }
+        // public List<PanelAssignment> DashPanelAssignments { get; set; } // PanelAssignments
 
         // ----------------------------------------------------------- //
 

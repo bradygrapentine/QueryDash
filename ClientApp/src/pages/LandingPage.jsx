@@ -39,7 +39,7 @@ export function LandingPage() {
   // }
 
   async function loadDashList() {
-    const url = '/api/Dash'
+    const url = '/api/Dashes'
 
     const response = await fetch(url)
 

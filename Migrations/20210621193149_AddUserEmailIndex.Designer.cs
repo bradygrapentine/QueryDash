@@ -10,8 +10,8 @@ using QueryDash.Models;
 namespace QueryDash.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210620233426_AddSavedLinkTable")]
-    partial class AddSavedLinkTable
+    [Migration("20210621193149_AddUserEmailIndex")]
+    partial class AddUserEmailIndex
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,28 @@ namespace QueryDash.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DashTable");
+                    b.ToTable("Dashes");
+                });
+
+            modelBuilder.Entity("QueryDash.Models.DashQuery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("DashId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("QueryContent")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("QueryTimeStamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DashQueries");
                 });
 
             modelBuilder.Entity("QueryDash.Models.Panel", b =>
@@ -66,7 +87,7 @@ namespace QueryDash.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PanelTable");
+                    b.ToTable("Panels");
                 });
 
             modelBuilder.Entity("QueryDash.Models.PanelAssignment", b =>
@@ -84,7 +105,7 @@ namespace QueryDash.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PanelAssignmentTable");
+                    b.ToTable("PanelAssignments");
                 });
 
             modelBuilder.Entity("QueryDash.Models.SavedLink", b =>
@@ -108,7 +129,33 @@ namespace QueryDash.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SavedLinkTable");
+                    b.ToTable("SavedLinks");
+                });
+
+            modelBuilder.Entity("QueryDash.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HashedPassword")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

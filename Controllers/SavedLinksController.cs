@@ -9,81 +9,81 @@ using QueryDash.Models;
 
 namespace QueryDash.Controllers
 {
-    // All of these routes will be at the base URL:     /api/Dash
+    // All of these routes will be at the base URL:     /api/SavedLinks
     // That is what "api/[controller]" means below. It uses the name of the controller
-    // in this case DashController to determine the URL
+    // in this case SavedLinksController to determine the URL
     [Route("api/[controller]")]
     [ApiController]
-    public class DashController : ControllerBase
+    public class SavedLinksController : ControllerBase
     {
         // This is the variable you use to have access to your database
         private readonly DatabaseContext _context;
 
         // Constructor that recives a reference to your database context
         // and stores it in _context for you to use in your API methods
-        public DashController(DatabaseContext context)
+        public SavedLinksController(DatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: api/Dash
+        // GET: api/SavedLinks
         //
-        // Returns a list of all your DashTable
+        // Returns a list of all your SavedLinks
         //
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Dash>>> GetDashTable()
+        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks()
         {
-            // Uses the database context in `_context` to request all of the DashTable, sort
+            // Uses the database context in `_context` to request all of the SavedLinks, sort
             // them by row id and return them as a JSON array.
-            return await _context.DashTable.OrderBy(row => row.Id).ToListAsync();
+            return await _context.SavedLinks.OrderBy(row => row.Id).ToListAsync();
         }
 
-        // GET: api/Dash/5
+        // GET: api/SavedLinks/5
         //
-        // Fetches and returns a specific dash by finding it by id. The id is specified in the
+        // Fetches and returns a specific savedLink by finding it by id. The id is specified in the
         // URL. In the sample URL above it is the `5`.  The "{id}" in the [HttpGet("{id}")] is what tells dotnet
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpGet("{id}")]
-        public async Task<ActionResult<Dash>> GetDash(int id)
+        public async Task<ActionResult<SavedLink>> GetSavedLink(int id)
         {
-            // Find the dash in the database using `FindAsync` to look it up by id
-            var dash = await _context.DashTable.FindAsync(id);
+            // Find the savedLink in the database using `FindAsync` to look it up by id
+            var savedLink = await _context.SavedLinks.FindAsync(id);
 
             // If we didn't find anything, we receive a `null` in return
-            if (dash == null)
+            if (savedLink == null)
             {
-                // Return a `404` response to the client indicating we could not find a dash with this id
+                // Return a `404` response to the client indicating we could not find a savedLink with this id
                 return NotFound();
             }
 
-            //  Return the dash as a JSON object.
-            return dash;
+            //  Return the savedLink as a JSON object.
+            return savedLink;
         }
 
-        // PUT: api/Dash/5
+        // PUT: api/SavedLinks/5
         //
-        // Update an individual dash with the requested id. The id is specified in the URL
+        // Update an individual savedLink with the requested id. The id is specified in the URL
         // In the sample URL above it is the `5`. The "{id} in the [HttpPut("{id}")] is what tells dotnet
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
-        // In addition the `body` of the request is parsed and then made available to us as a Dash
-        // variable named dash. The controller matches the keys of the JSON object the client
-        // supplies to the names of the attributes of our Dash POCO class. This represents the
+        // In addition the `body` of the request is parsed and then made available to us as a SavedLink
+        // variable named savedLink. The controller matches the keys of the JSON object the client
+        // supplies to the names of the attributes of our SavedLink POCO class. This represents the
         // new values for the record.
         //
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDash(int id, Dash dash)
+        public async Task<IActionResult> PutSavedLink(int id, SavedLink savedLink)
         {
             // If the ID in the URL does not match the ID in the supplied request body, return a bad request
-            if (id != dash.Id)
+            if (id != savedLink.Id)
             {
                 return BadRequest();
             }
 
-            // Tell the database to consider everything in dash to be _updated_ values. When
-            // the save happens the database will _replace_ the values in the database with the ones from dash
-            _context.Entry(dash).State = EntityState.Modified;
+            // Tell the database to consider everything in savedLink to be _updated_ values. When
+            // the save happens the database will _replace_ the values in the database with the ones from savedLink
+            _context.Entry(savedLink).State = EntityState.Modified;
 
             try
             {
@@ -94,7 +94,7 @@ namespace QueryDash.Controllers
             {
                 // Ooops, looks like there was an error, so check to see if the record we were
                 // updating no longer exists.
-                if (!DashExists(id))
+                if (!SavedLinkExists(id))
                 {
                     // If the record we tried to update was already deleted by someone else,
                     // return a `404` not found
@@ -109,61 +109,61 @@ namespace QueryDash.Controllers
             }
 
             // Return a copy of the updated data
-            return Ok(dash);
+            return Ok(savedLink);
         }
 
-        // POST: api/Dash
+        // POST: api/SavedLinks
         //
-        // Creates a new dash in the database.
+        // Creates a new savedLink in the database.
         //
-        // The `body` of the request is parsed and then made available to us as a Dash
-        // variable named dash. The controller matches the keys of the JSON object the client
-        // supplies to the names of the attributes of our Dash POCO class. This represents the
+        // The `body` of the request is parsed and then made available to us as a SavedLink
+        // variable named savedLink. The controller matches the keys of the JSON object the client
+        // supplies to the names of the attributes of our SavedLink POCO class. This represents the
         // new values for the record.
         //
         [HttpPost]
-        public async Task<ActionResult<Dash>> PostDash(Dash dash)
+        public async Task<ActionResult<SavedLink>> PostSavedLink(SavedLink savedLink)
         {
             // Indicate to the database context we want to add this new record
-            _context.DashTable.Add(dash);
+            _context.SavedLinks.Add(savedLink);
             await _context.SaveChangesAsync();
 
             // Return a response that indicates the object was created (status code `201`) and some additional
             // headers with details of the newly created object.
-            return CreatedAtAction("GetDash", new { id = dash.Id }, dash);
+            return CreatedAtAction("GetSavedLink", new { id = savedLink.Id }, savedLink);
         }
 
-        // DELETE: api/Dash/5
+        // DELETE: api/SavedLinks/5
         //
-        // Deletes an individual dash with the requested id. The id is specified in the URL
+        // Deletes an individual savedLink with the requested id. The id is specified in the URL
         // In the sample URL above it is the `5`. The "{id} in the [HttpDelete("{id}")] is what tells dotnet
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDash(int id)
+        public async Task<IActionResult> DeleteSavedLink(int id)
         {
-            // Find this dash by looking for the specific id
-            var dash = await _context.DashTable.FindAsync(id);
-            if (dash == null)
+            // Find this savedLink by looking for the specific id
+            var savedLink = await _context.SavedLinks.FindAsync(id);
+            if (savedLink == null)
             {
-                // There wasn't a dash with that id so return a `404` not found
+                // There wasn't a savedLink with that id so return a `404` not found
                 return NotFound();
             }
 
             // Tell the database we want to remove this record
-            _context.DashTable.Remove(dash);
+            _context.SavedLinks.Remove(savedLink);
 
             // Tell the database to perform the deletion
             await _context.SaveChangesAsync();
 
             // Return a copy of the deleted data
-            return Ok(dash);
+            return Ok(savedLink);
         }
 
-        // Private helper method that looks up an existing dash by the supplied id
-        private bool DashExists(int id)
+        // Private helper method that looks up an existing savedLink by the supplied id
+        private bool SavedLinkExists(int id)
         {
-            return _context.DashTable.Any(dash => dash.Id == id);
+            return _context.SavedLinks.Any(savedLink => savedLink.Id == id);
         }
     }
 }
