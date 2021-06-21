@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 namespace QueryDash.Models
 {
-    public class PanelAssignments // Intermediate Object
+    public class PanelAssignment // Intermediate Object
     {
         public int Id { get; set; }
 
@@ -19,3 +19,5 @@ namespace QueryDash.Models
         public Dash RootDash { get; set; }
     }
 }
+
+// could put a current query result here, and in every other panel assignment belonging to dash, would connect results to their panel Id

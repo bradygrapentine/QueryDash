@@ -8,9 +8,9 @@ namespace QueryDash.Models
 
         // --------------------------------------------- //
 
-        public int UserId { get; set; }
+        // public int UserId { get; set; }
 
-        public User RootUser { get; set; }
+        // public User RootUser { get; set; }
 
         // --------------------------------------------- //
 
@@ -22,14 +22,33 @@ namespace QueryDash.Models
 
         public string QueryContent { get; set; }
 
-        public DateTime QueryTimeStamp { get; set; }
+        public DateTime QueryTimeStamp { get; private set; } = DateTime.Now;
 
-        public List<string> JsonResultStrings { get; set; }
+        // public string JsonResultString { get; set; }
     }
 }
 
+// use JSON mapping to create query result's objects
 
+// public class SomeEntity
+// {
+//     public int Id { get; set; }
+//     [Column(TypeName = "jsonb")]
+//     public Customer Customer { get; set; }
+// }
 
+// public class Customer    // Mapped to a JSON column in the table
+// {
+//     public string Name { get; set; }
+//     public int Age { get; set; }
+//     public Order[] Orders { get; set; }
+// }
+
+// public class Order       // Part of the JSON column
+// {
+//     public decimal Price { get; set; }
+//     public string ShippingAddress { get; set; }
+// }
 
 
 

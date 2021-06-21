@@ -6,11 +6,13 @@ namespace QueryDash.Models
     {
         public int Id { get; set; }
 
+        public DateTime CreationDate { get; private set; } = DateTime.Now;
+
         // ----------------------------------------------------------- //
 
         public List<Dash> Dashes { get; set; }
 
-        public List<PanelAssignments> DashAssignments { get; set; }
+        public List<PanelAssignment> DashAssignments { get; set; }
 
         // ----------------------------------------------------------- //
 
@@ -18,7 +20,7 @@ namespace QueryDash.Models
 
         public string FilterSiteName { get; set; }
 
-        public string FilterSiteLogo { get; set; }
+        // public string FilterSiteLogo { get; set; }
     }
 }
 

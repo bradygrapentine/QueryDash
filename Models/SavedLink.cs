@@ -10,9 +10,9 @@ namespace QueryDash.Models
 
         // ---------------------------------- //
 
-        public int UserId { get; set; }
+        // public int UserId { get; set; }
 
-        public User RootUser { get; set; }
+        // public User RootUser { get; set; }
 
         // ---------------------------------- //
 
@@ -24,6 +24,6 @@ namespace QueryDash.Models
 
         public string DashQueryResultLink { get; set; }
 
-        public DateTime LinkTimeStamp { get; set; }
+        public DateTime LinkTimeStamp { get; private set; } = DateTime.Now;
     }
 }
