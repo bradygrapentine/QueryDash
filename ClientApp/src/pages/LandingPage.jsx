@@ -66,13 +66,13 @@ export function LandingPage() {
         <div className="listOfDashes">
           <h3 className="HeaderDashList">Preset Dashes</h3>
           <ul className="DisplayListDash">
-            {dashList.map((dash) => {
-              ;<li>
-                <Link to={`/dash/${dash.Id}`} className="">
-                  {dash.DashName}
+            {dashList.map((dash) => (
+              <li key={dash.id}>
+                <Link to={`/dash/${dash.id}`} className="">
+                  {dash.dashName}
                 </Link>
               </li>
-            })}
+            ))}
           </ul>
         </div>
       </main>

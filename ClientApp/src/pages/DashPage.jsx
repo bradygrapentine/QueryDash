@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-{
-  /* <Route exact path="/:dashID"> */
-}
 
 // import './custom.scss'
 
@@ -78,26 +75,33 @@ export function Panel() {
 export function DashPage() {
   const [menuOpen, setMenuOpen] = useState(true)
 
-  const [dash, setDash] = useState()
+  const [dash, setDash] = useState({
+    creationDate: '',
+    dashName: '',
+    isPreset: null,
+    presetPublicationDate: '',
+    panels: null,
+    panelAssignment: null,
+    savedLinks: null,
+    searchHistory: null,
+    linksPerPanel: 0,
+  })
 
   const params = useParams()
 
   const id = params.id
 
-  useEffect(() => {
-    async function getDash() {
-      const response = await fetch(`/api/Dash/${id}`)
+  async function getDash() {
+    const response = await fetch(`/api/Dash/${id}`)
 
-      if (response.ok) {
-        const apiData = await response.json()
+    if (response.ok) {
+      const apiData = await response.json()
+      // console.log(apiData)
+      // console.log(apiData)
 
-        setDash(apiData)
-      }
+      setDash(apiData)
     }
-
-    getDash()
-    console.log(dash)
-  }, [id])
+  }
 
   function DashQuery(params) {
     return (
@@ -153,6 +157,16 @@ export function DashPage() {
       </div>
     )
   }
+  useEffect(() => {
+    // console.log(dash)
+    getDash()
+    console.log(dash)
+  }, [id])
+
+  // useEffect(() => {
+  //   getDash()
+  //   console.log(dash)
+  // }, [])
 
   return (
     <>
@@ -160,7 +174,7 @@ export function DashPage() {
       {/* <h1 className="header">QueryDash</h1> */}
       {/* </Link> */}
       <Link className="linkForHeader" to="/">
-        <h1 className="header">DashHeader</h1>
+        <h1 className="header">{dash.dashName}</h1>
       </Link>{' '}
       {/* header needs a nav to get around to pages
       Gotta build out static html and css for other pages */}
