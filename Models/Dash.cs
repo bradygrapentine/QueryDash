@@ -47,6 +47,7 @@ namespace QueryDash.Models
         // public bool FullScreenMode { get; set; }
 
         // public bool ColumnMode { get; set; }
+
     }
 }
 
