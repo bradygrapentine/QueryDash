@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { recordAuthentication } from '../auth'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -7,7 +8,6 @@ import { Link, useHistory } from 'react-router-dom'
 // might just make this a dropdown on landing page
 
 export function LoginPage() {
-  const history = useHistory()
   const [errorMessage, setErrorMessage] = useState()
 
   const [user, setUser] = useState({
@@ -22,6 +22,7 @@ export function LoginPage() {
     const updatedUser = { ...user, [fieldName]: value }
 
     setUser(updatedUser)
+    console.log(user)
   }
 
   async function handleFormSubmission(event) {
@@ -38,7 +39,8 @@ export function LoginPage() {
     if (apiResponse.status === 400) {
       setErrorMessage(Object.values(apiResponse.errors).join(' '))
     } else {
-      window.location.assign.push('/')
+      recordAuthentication(apiResponse)
+      window.location.assign('/')
     }
   }
   return (

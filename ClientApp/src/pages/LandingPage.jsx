@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
+import { isLoggedIn, logout, getUser } from '../auth'
 // import { Footer } from './DashPage'
 // import './custom.scss'
 
@@ -12,6 +13,7 @@ import React, { useEffect, useState } from 'react'
 export function LandingPage() {
   const [dashList, setDashList] = useState([])
 
+  const user = getUser()
   // {
   //   id: null,
   //   creationDate: '',
@@ -38,22 +40,28 @@ export function LandingPage() {
   //   )
   // }
 
-  async function loadDashList() {
-    const url = '/api/Dashes'
-
-    const response = await fetch(url)
-
-    if (response.ok) {
-      const json = await response.json()
-
-      setDashList(json)
-    }
+  function handleLogout() {
+    logout()
+    window.location.assign('/')
   }
 
   useEffect(function () {
+    async function loadDashList() {
+      const url = '/api/Dashes'
+
+      const response = await fetch(url)
+
+      if (response.ok) {
+        const json = await response.json()
+        console.log(json)
+        setDashList(json)
+      }
+    }
     loadDashList()
     console.log(dashList)
   }, [])
+
+  console.log(dashList)
 
   //--------------------------------------//
 
@@ -64,12 +72,17 @@ export function LandingPage() {
       </Link>{' '}
       <main className="landingPageContainer">
         <div className="listOfDashes">
-          <h3 className="HeaderDashList">Preset Dashes</h3>
+          {isLoggedIn() ? (
+            <h3 className="HeaderDashList">{user.name}'s Dashboards</h3>
+          ) : (
+            <h3 className="HeaderDashList">Preset Dashes</h3>
+          )}
+
           <ul className="DisplayListDash">
             {dashList.map((dash) => (
               <li key={dash.id}>
                 <Link to={`/dash/${dash.id}`} className="">
-                  {dash.dashName}
+                  {dash.name}
                 </Link>
               </li>
             ))}
@@ -77,18 +90,31 @@ export function LandingPage() {
         </div>
       </main>
       <footer className="standardFooter">
-        <Link to="/create-account" className="navLink">
-          Sign Up
-        </Link>
+        {isLoggedIn() ? (
+          <span className="navLink" onClick={handleLogout}>
+            Log Out
+          </span>
+        ) : (
+          <>
+            <Link to="/create-account" className="navLink">
+              Sign Up
+            </Link>
+            <Link to="/login" className="navLink">
+              Log in
+            </Link>
+          </>
+        )}
         <Link to="/about" className="navLink">
           About
         </Link>
         <Link to="/account" className="navLink">
           Account
         </Link>
-        <Link to="/create-dash" className="navLink">
-          Create Dash{' '}
-        </Link>
+        {isLoggedIn() ? (
+          <Link to="/create-dash" className="navLink">
+            Create Dash{' '}
+          </Link>
+        ) : null}
       </footer>
     </>
   )

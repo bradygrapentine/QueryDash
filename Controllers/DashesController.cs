@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using QueryDash.Models;
 
@@ -122,8 +124,12 @@ namespace QueryDash.Controllers
         // new values for the record.
         //
         [HttpPost]
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<Dash>> PostDash(Dash dash)
         {
+
+            dash.UserId = GetCurrentUserId();
             // Indicate to the database context we want to add this new record
             _context.Dashes.Add(dash);
             await _context.SaveChangesAsync();
@@ -164,6 +170,11 @@ namespace QueryDash.Controllers
         private bool DashExists(int id)
         {
             return _context.Dashes.Any(dash => dash.Id == id);
+        }
+
+        private int GetCurrentUserId()
+        {
+            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "id").Value);
         }
     }
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
+import { authHeader } from '../auth'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -7,12 +8,13 @@ import { useHistory, Link } from 'react-router-dom'
 export function CreateDashPage() {
   const history = useHistory()
 
-  const [errorMessage, setErrorMessage] = useState()
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const [newSharedDash, setNewSharedDash] = useState({
-    dashName: '',
-    isPreset: true,
-    presetPublicationDate: '2021-01-01 00:02:00',
+  const [newDash, setNewDash] = useState({
+    name: '',
+    // // panels: null,
+    // // dashPanelAssignments: null,
+    // // savedLinks: null,
     linksPerPanel: 0,
   })
 
@@ -24,10 +26,7 @@ export function CreateDashPage() {
   function handleStringFieldChange(event) {
     const value = event.target.value
     const fieldName = event.target.name
-
-    const updatedDash = { ...newSharedDash, [fieldName]: value }
-
-    setNewSharedDash(updatedDash)
+    setNewDash({ ...newDash, [fieldName]: value })
   }
 
   async function handleFormSubmission(event) {
@@ -35,16 +34,17 @@ export function CreateDashPage() {
 
     const response = await fetch('/api/Dashes', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(newSharedDash),
+      headers: { 'content-type': 'application/json', ...authHeader() },
+      body: JSON.stringify(newDash),
     })
-    const apiResponse = await response.json()
-    console.log(apiResponse)
-
-    if (apiResponse.status === 400) {
-      setErrorMessage(Object.values(apiResponse.errors).join(' '))
+    if (response.status === 401) {
+      setErrorMessage('Not Authorized')
     } else {
-      // history.push('/')
+      if (response.status === 400) {
+        setErrorMessage(Object.values(response.errors).join(' '))
+      } else {
+        history.push('/')
+      }
     }
   }
   return (
@@ -63,28 +63,19 @@ export function CreateDashPage() {
                 <input
                   name="dashName"
                   type="text"
-                  value={newSharedDash.dashName}
+                  value={newDash.name}
                   onChange={handleStringFieldChange}
                 />
               </div>
               <div className="inputContainer">
-                <label htmlFor="linksPerPanel">Links/Panel: </label>
+                <label htmlFor="linksPerPanel">Results Per Panel: </label>
                 <input
                   name="linksPerPanel"
                   type="text"
-                  value={newSharedDash.linksPerPanel}
+                  value={newDash.linksPerPanel}
                   onChange={handleStringFieldChange}
                 />
               </div>
-              {/* <div className="inputContainer">
-                <label htmlFor="password">Password: </label>
-                <input
-                  name="password"
-                  type="password"
-                  value={newSharedDash.password}
-                  onChange={handleStringFieldChange}
-                />
-              </div> */}
               <input type="submit" value="Submit" />
             </form>
           </div>
@@ -97,9 +88,6 @@ export function CreateDashPage() {
         <Link to="/" className="navLink">
           Home
         </Link>
-        {/* <a href="https://www.google.com/" className="footer">
-        Contact
-      </a> */}
       </footer>
     </>
   )

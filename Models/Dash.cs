@@ -17,7 +17,7 @@ namespace QueryDash.Models
         // ------------------------------------------------------ //
 
         public List<Panel> Panels { get; set; }
-
+        // 
         public List<PanelAssignment> DashPanelAssignments { get; set; }
 
         // ------------------------------------------------------ //

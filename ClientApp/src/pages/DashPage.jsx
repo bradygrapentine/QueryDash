@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-// import './custom.scss'
-
 // ------------------------------------------------------------- //
 
 export function QLink() {
@@ -42,48 +40,15 @@ export function Panel() {
 
 // ------------------------------------------------------------- //
 
-// ------------------------------------------------------------- //
-
-// export function Menu(params) {
-//   return (
-//     <section className="menu">
-//       Menu
-//       <div className="menuContent">
-//         <button>Open</button>
-//         <button>Open</button>
-//         <button>Archive</button>
-//         <button>History</button>
-//         <button>Dash Settings</button>
-//         <button className="settings">Account</button>
-//         <button>Home</button>
-//         <button className="collapseMenu">Collapse</button>
-//       </div>
-//     </section>
-//   )
-// }
-
-// ------------------------------------------------------------- //
-
-// export function Footer(params) {
-//   return (
-
-//   )
-// }
-
-// ------------------------------------------------------------- //
-
 export function DashPage() {
   const [menuOpen, setMenuOpen] = useState(true)
 
   const [dash, setDash] = useState({
     creationDate: '',
-    dashName: '',
-    isPreset: null,
-    presetPublicationDate: '',
+    name: '',
     // panels: null,
-    // panelAssignment: null,
+    // panelAssignments: null,
     // savedLinks: null,
-    // searchHistory: null,
     linksPerPanel: 0,
   })
 
@@ -96,9 +61,6 @@ export function DashPage() {
 
     if (response.ok) {
       const apiData = await response.json()
-      // console.log(apiData)
-      // console.log(apiData)
-
       setDash(apiData)
     }
   }
@@ -127,16 +89,9 @@ export function DashPage() {
                 <Link to="/preferences">
                   <button>Dash Settings</button>
                 </Link>
-                {/* <Link to="/account">
-                  <button>Account</button>{' '}
-                </Link> */}
                 <Link to="/">
                   <button>Home</button>
                 </Link>
-                {/* <button>Open</button> // buttons for non-users
-                <Link to="/">
-                  <button>Home</button>
-                </Link> */}
               </div>{' '}
             </div>
             <button
@@ -157,30 +112,18 @@ export function DashPage() {
       </div>
     )
   }
-  useEffect(() => {
-    // console.log(dash)
-    getDash()
-    console.log(dash)
-  }, [id])
 
-  // useEffect(() => {
-  //   getDash()
-  //   console.log(dash)
-  // }, [])
+  useEffect(() => {
+    getDash()
+  }, [id])
 
   return (
     <>
-      {/* <Link to="/"> */}
-      {/* <h1 className="header">QueryDash</h1> */}
-      {/* </Link> */}
       <Link className="linkForHeader" to="/">
-        <h1 className="header">{dash.dashName}</h1>
+        <h1 className="header">{dash.name}</h1>
       </Link>{' '}
-      {/* header needs a nav to get around to pages
-      Gotta build out static html and css for other pages */}
       <main className="main">
         <DashQuery />
-        {/* <Menu /> */}
         <div className="displayContainer">
           <div className="display">
             <Panel />
@@ -214,12 +157,7 @@ export function DashPage() {
         <Link to="/create-dash" className="navLink">
           Create Dash{' '}
         </Link>
-        {/* <a href="https://www.google.com/" className="footer">
-        Contact
-      </a> */}
       </footer>{' '}
     </>
   )
 }
-
-// ------------------------------------------------------------- //
