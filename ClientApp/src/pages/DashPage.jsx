@@ -80,10 +80,10 @@ export function DashPage() {
     dashName: '',
     isPreset: null,
     presetPublicationDate: '',
-    panels: null,
-    panelAssignment: null,
-    savedLinks: null,
-    searchHistory: null,
+    // panels: null,
+    // panelAssignment: null,
+    // savedLinks: null,
+    // searchHistory: null,
     linksPerPanel: 0,
   })
 

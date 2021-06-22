@@ -44,7 +44,7 @@ export function App() {
         <Route exact path="/dash/:id">
           <DashPage />
         </Route>
-        <Route exact path="/preferences">
+        <Route exact path="/preferences/:id">
           <DashPreferences />
         </Route>
         <Route exact path="/history">
