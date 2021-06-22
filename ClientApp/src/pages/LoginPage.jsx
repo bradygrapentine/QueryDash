@@ -38,7 +38,7 @@ export function LoginPage() {
     if (apiResponse.status === 400) {
       setErrorMessage(Object.values(apiResponse.errors).join(' '))
     } else {
-      history.push('/')
+      window.location.assign.push('/')
     }
   }
   return (
