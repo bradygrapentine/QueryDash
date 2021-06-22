@@ -10,8 +10,8 @@ using QueryDash.Models;
 namespace QueryDash.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210621190810_Initial")]
-    partial class Initial
+    [Migration("20210622192858_InitialDbCreation")]
+    partial class InitialDbCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,42 +31,18 @@ namespace QueryDash.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("DashName")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsPreset")
-                        .HasColumnType("boolean");
-
                     b.Property<int>("LinksPerPanel")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("PresetPublicationDate")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.ToTable("Dashes");
-                });
-
-            modelBuilder.Entity("QueryDash.Models.DashQuery", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("DashId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("QueryContent")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("QueryTimeStamp")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DashQueries");
                 });
 
             modelBuilder.Entity("QueryDash.Models.Panel", b =>
@@ -79,10 +55,10 @@ namespace QueryDash.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("FilterSiteName")
+                    b.Property<string>("FilterSite")
                         .HasColumnType("text");
 
-                    b.Property<string>("SiteFilter")
+                    b.Property<string>("FilterSiteName")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -118,14 +94,17 @@ namespace QueryDash.Migrations
                     b.Property<int>("DashId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("DashQueryResultLink")
-                        .HasColumnType("text");
-
                     b.Property<bool>("IsArchive")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LinkTimeStamp")
+                    b.Property<string>("QueryUrl")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TimeStamp")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -151,6 +130,9 @@ namespace QueryDash.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

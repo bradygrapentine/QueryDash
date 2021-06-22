@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace QueryDash.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialDbCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,30 +14,14 @@ namespace QueryDash.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DashName = table.Column<string>(type: "text", nullable: true),
-                    IsPreset = table.Column<bool>(type: "boolean", nullable: false),
-                    PresetPublicationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
                     LinksPerPanel = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dashes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DashQueries",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DashId = table.Column<int>(type: "integer", nullable: false),
-                    QueryContent = table.Column<string>(type: "text", nullable: true),
-                    QueryTimeStamp = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DashQueries", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,7 +45,7 @@ namespace QueryDash.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CreationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    SiteFilter = table.Column<string>(type: "text", nullable: true),
+                    FilterSite = table.Column<string>(type: "text", nullable: true),
                     FilterSiteName = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -76,9 +60,10 @@ namespace QueryDash.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IsArchive = table.Column<bool>(type: "boolean", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
                     DashId = table.Column<int>(type: "integer", nullable: false),
-                    DashQueryResultLink = table.Column<string>(type: "text", nullable: true),
-                    LinkTimeStamp = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    QueryUrl = table.Column<string>(type: "text", nullable: true),
+                    TimeStamp = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,15 +84,18 @@ namespace QueryDash.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Dashes");
-
-            migrationBuilder.DropTable(
-                name: "DashQueries");
 
             migrationBuilder.DropTable(
                 name: "PanelAssignments");

@@ -1,35 +1,34 @@
--- psql --file=Models/exampledata.sql QueryDashDatabase
+-- psql --file=Models/seeds.sql QueryDashDatabase
 
 TRUNCATE TABLE "Dashes" RESTART IDENTITY;
 TRUNCATE TABLE "Panels" RESTART IDENTITY;
 TRUNCATE TABLE "PanelAssignments" RESTART IDENTITY;
 TRUNCATE TABLE "SavedLinks" RESTART IDENTITY;
-TRUNCATE TABLE "DashQueries" RESTART IDENTITY;
 
 
-INSERT INTO "Dashes" ("CreationDate", "DashName", "IsPreset", "PresetPublicationDate", "LinksPerPanel") VALUES ('2020-01-01 00:02:00', 'FrontEnd', TRUE,'2021-01-01 00:02:00',6);
-INSERT INTO "Dashes" ("CreationDate", "DashName", "IsPreset", "PresetPublicationDate", "LinksPerPanel") VALUES ('2020-01-01 00:03:00', 'BackEnd', FALSE,'2000-01-01 01:00:00', 6);
-INSERT INTO "Dashes" ("CreationDate", "DashName", "IsPreset", "PresetPublicationDate", "LinksPerPanel") VALUES ('2020-01-01 00:04:00', 'Shopping', TRUE,'2021-01-01 00:02:00', 8);
-INSERT INTO "Dashes" ("CreationDate", "DashName", "IsPreset", "PresetPublicationDate", "LinksPerPanel") VALUES ('2020-01-01 00:05:00', 'Programming', FALSE,'2000-01-01 01:00:00', 10);
+INSERT INTO "Dashes" ("UserId", "CreationDate", "Name", "LinksPerPanel") VALUES (1, '2020-01-01 00:02:00', 'FrontEnd', 6);
+INSERT INTO "Dashes" ("UserId", "CreationDate", "Name", "LinksPerPanel") VALUES (2, '2020-01-01 00:03:00', 'BackEnd', 6);
+INSERT INTO "Dashes" ("UserId", "CreationDate", "Name", "LinksPerPanel") VALUES (1, '2020-01-01 00:04:00', 'Shopping', 8);
+INSERT INTO "Dashes" ("UserId", "CreationDate", "Name", "LinksPerPanel") VALUES (2, '2020-01-01 00:05:00', 'Programming', 10);
 
 -------------------------------------------------------------
 
-INSERT INTO "Panels"  ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:03:05','developer.mozilla.org/en-US/', 'MDN Web Docs');
-INSERT INTO "Panels"  ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:03:15','css-tricks.com/', 'CSS-Tricks');
-INSERT INTO "Panels"  ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:03:25','stackoverflow.com/questions/tagged/javascript', 'Questions tagged [javascript] ');
-INSERT INTO "Panels"  ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:03:35', 'stackoverflow.com/questions/tagged/css', 'Questions tagged-css');
-INSERT INTO "Panels"  ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:03:45', 'stackoverflow.com/questions/tagged/html', 'Questions tagged-html');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:05','developer.mozilla.org/en-US/', 'MDN Web Docs');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:15','css-tricks.com/', 'CSS-Tricks');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:25','stackoverflow.com/questions/tagged/javascript', 'Tagged Questions - Javascript');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:35', 'stackoverflow.com/questions/tagged/css', 'Tagged Questions - Css');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:45', 'stackoverflow.com/questions/tagged/html', 'Questions tagged - Html');
 
-INSERT INTO "Panels"  ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:04:05', 'docs.microsoft.com/en-us/dotnet/csharp/', 'C# Documentation');
-INSERT INTO "Panels"  ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:04:15', 'stackoverflow.com/questions/tagged/c%23', 'Questions tagged-c#');
-INSERT INTO "Panels" ( "CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:04:25', 'handbook.suncoast.io/', 'SDG Handbook');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:04:05', 'docs.microsoft.com/en-us/dotnet/csharp/', 'C# Documentation');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:04:15', 'stackoverflow.com/questions/tagged/c%23', 'Tagged Questions-c#');
+INSERT INTO "Panels" ( "CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:04:25', 'handbook.suncoast.io/', 'SDG Handbook');
 
-INSERT INTO "Panels" ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:05:05', 'kohls.com', 'Kohls');
-INSERT INTO "Panels" ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:05:10', 'target.com', 'Target');
-INSERT INTO "Panels" ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:05:15', 'jcpenney.com', 'JCPenney');
-INSERT INTO "Panels" ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:05:25', 'beallsflorida.com', 'Bealls Florida');
-INSERT INTO "Panels" ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:05:30', 'macys.com', 'Macys');
-INSERT INTO "Panels" ("CreationDate", "SiteFilter", "FilterSiteName") VALUES ('2020-01-01 00:05:35', 'www.marshalls.com/us/store/', 'Marshalls');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:05:05', 'kohls.com', 'Kohls');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:05:10', 'target.com', 'Target');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:05:15', 'jcpenney.com', 'JCPenney');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:05:25', 'beallsflorida.com', 'Bealls Florida');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:05:30', 'macys.com', 'Macys');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:05:35', 'www.marshalls.com/us/store/', 'Marshalls');
 
 -------------------------------------------------------------
 
@@ -61,51 +60,57 @@ INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (8, 4);
 
 --------------------------------------------------------------
 
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 1, 'https://en.wikipedia.org/wiki/Dog', '2020-01-02 01:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 1, 'https://en.wikipedia.org/wiki/Cat', '2020-01-02 02:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 1, 'https://en.wikipedia.org/wiki/Hamster', '2020-01-02 03:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 1, 'https://en.wikipedia.org/wiki/Owl', '2020-01-02 04:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 1, 'https://en.wikipedia.org/wiki/Horse', '2020-01-02 05:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 1, 'https://en.wikipedia.org/wiki/Camel', '2020-01-02 06:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 1, 1, 'https://en.wikipedia.org/wiki/Dog', '2020-01-02 01:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 1, 1, 'https://en.wikipedia.org/wiki/Cat', '2020-01-02 02:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 1, 1, 'https://en.wikipedia.org/wiki/Hamster', '2020-01-02 03:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 1, 1, 'https://en.wikipedia.org/wiki/Owl', '2020-01-02 04:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 1, 1, 'https://en.wikipedia.org/wiki/Horse', '2020-01-02 05:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 1, 1, 'https://en.wikipedia.org/wiki/Camel', '2020-01-02 06:01:00');
 
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 2, 'https://en.wikipedia.org/wiki/Dog', '2020-01-03 01:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 2, 'https://en.wikipedia.org/wiki/Cat', '2020-01-03 02:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 2, 'https://en.wikipedia.org/wiki/Hamster', '2020-01-03 03:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 2, 'https://en.wikipedia.org/wiki/Owl', '2020-01-03 04:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 2, 'https://en.wikipedia.org/wiki/Horse', '2020-01-03 05:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 2, 'https://en.wikipedia.org/wiki/Camel', '2020-01-03 06:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 2, 2, 'https://en.wikipedia.org/wiki/Dog', '2020-01-03 01:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 2, 2, 'https://en.wikipedia.org/wiki/Cat', '2020-01-03 02:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 2, 2, 'https://en.wikipedia.org/wiki/Hamster', '2020-01-03 03:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 2, 2, 'https://en.wikipedia.org/wiki/Owl', '2020-01-03 04:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 2, 2, 'https://en.wikipedia.org/wiki/Horse', '2020-01-03 05:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 2, 2, 'https://en.wikipedia.org/wiki/Camel', '2020-01-03 06:01:00');
 
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 3, 'https://en.wikipedia.org/wiki/Dog', '2020-01-04 01:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 3, 'https://en.wikipedia.org/wiki/Cat', '2020-01-04 02:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 3, 'https://en.wikipedia.org/wiki/Hamster', '2020-01-04 03:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 3, 'https://en.wikipedia.org/wiki/Owl', '2020-01-04 04:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 3, 'https://en.wikipedia.org/wiki/Horse', '2020-01-04 05:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 3, 'https://en.wikipedia.org/wiki/Camel', '2020-01-04 06:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 1, 3, 'https://en.wikipedia.org/wiki/Dog', '2020-01-04 01:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 1, 3, 'https://en.wikipedia.org/wiki/Cat', '2020-01-04 02:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 1, 3, 'https://en.wikipedia.org/wiki/Hamster', '2020-01-04 03:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 1, 3, 'https://en.wikipedia.org/wiki/Owl', '2020-01-04 04:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 1, 3, 'https://en.wikipedia.org/wiki/Horse', '2020-01-04 05:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 1, 3, 'https://en.wikipedia.org/wiki/Camel', '2020-01-04 06:01:00');
 
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 4, 'https://en.wikipedia.org/wiki/Dog', '2020-01-05 01:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 4, 'https://en.wikipedia.org/wiki/Cat', '2020-01-05 02:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 4, 'https://en.wikipedia.org/wiki/Hamster', '2020-01-05 03:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 4, 'https://en.wikipedia.org/wiki/Owl', '2020-01-05 04:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (TRUE, 4, 'https://en.wikipedia.org/wiki/Horse', '2020-01-05 05:01:00');
-INSERT INTO "SavedLinks" ("IsArchive", "DashId", "DashQueryResultLink", "LinkTimeStamp") VALUES (FALSE, 4, 'https://en.wikipedia.org/wiki/Camel', '2020-01-05 06:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 2, 4, 'https://en.wikipedia.org/wiki/Dog', '2020-01-05 01:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 2, 4, 'https://en.wikipedia.org/wiki/Cat', '2020-01-05 02:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 2, 4, 'https://en.wikipedia.org/wiki/Hamster', '2020-01-05 03:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 2, 4, 'https://en.wikipedia.org/wiki/Owl', '2020-01-05 04:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (TRUE, 2, 4, 'https://en.wikipedia.org/wiki/Horse', '2020-01-05 05:01:00');
+INSERT INTO "SavedLinks" ("IsArchive", "UserId",  "DashId", "QueryUrl", "TimeStamp") VALUES (FALSE, 2, 4, 'https://en.wikipedia.org/wiki/Camel', '2020-01-05 06:01:00');
 
 -------------------------------------------------------------
 
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (1, 'dogs', '2020-01-01 06:01:00');
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (1, 'coffee', '2020-01-01 06:01:00');
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (1, 'cats', '2020-01-01 06:01:00');
+-- INSERT INTO "Users" ("Name", "Email",  "Password") VALUES ('1', 'test@gmail.com', 'password');
+-- INSERT INTO "Users" ("Name", "Email",  "PassWord") VALUES ('2', 'test2@gmail.com', 'password');
+-- INSERT INTO "Users" ("Name", "Email",  "Password") VALUES ('3', 'test3@gmail.com, 'password');
+-- INSERT INTO "Users" ("Name", "Email",  "Password") VALUES ('4', 'test4@gmail.com', 'password');
 
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (2, 'dogs', '2020-01-01 06:01:00');
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (2, 'coffee', '2020-01-01 06:01:00');
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (2, 'cats', '2020-01-01 06:01:00');
 
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (3, 'dogs', '2020-01-01 06:01:00');
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (3, 'coffee', '2020-01-01 06:01:00');
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (3, 'cats', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (1, 'dogs', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (1, 'coffee', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (1, 'cats', '2020-01-01 06:01:00');
 
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (4, 'dogs', '2020-01-01 06:01:00');
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (4, 'coffee', '2020-01-01 06:01:00');
-INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (4, 'cats', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (2, 'dogs', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (2, 'coffee', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (2, 'cats', '2020-01-01 06:01:00');
+
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (3, 'dogs', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (3, 'coffee', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (3, 'cats', '2020-01-01 06:01:00');
+
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (4, 'dogs', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (4, 'coffee', '2020-01-01 06:01:00');
+-- INSERT INTO "DashQueries" ("DashId", "QueryContent", "QueryTimeStamp") VALUES (4, 'cats', '2020-01-01 06:01:00');
 
 -------------------------------------------------------------
 

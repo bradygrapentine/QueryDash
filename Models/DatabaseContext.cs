@@ -23,9 +23,11 @@ namespace QueryDash.Models
 
         public DbSet<SavedLink> SavedLinks { get; set; }
 
-        public DbSet<DashQuery> DashQueries { get; set; }
-
         public DbSet<User> Users { get; set; }
+
+        // ---------------------------------------------------------------------------- //
+
+        // public DbSet<DashQuery> DashQueries { get; set; }
 
         // ---------------------------------------------------------------------------- //
 

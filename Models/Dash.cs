@@ -6,51 +6,57 @@ namespace QueryDash.Models
     {
         public int Id { get; set; }
 
-        // public int UserId { get; set; }
+        public int UserId { get; set; }
 
-        // public User RootUser { get; set; }
+        public User RootUser { get; set; }
 
         public DateTime CreationDate { get; private set; } = DateTime.Now;
 
-        public string DashName { get; set; }
+        public string Name { get; set; }
 
         // ------------------------------------------------------ //
 
-        public bool IsPreset { get; set; }
+        public List<Panel> Panels { get; set; }
 
-        public DateTime PresetPublicationDate { get; set; } // Dates Sharing of Dashes
-
-        // public int FirstUserID { get; set; }
-
-        // public User RootFirstUser { get; set; } // Bestows Ownership on Creator of Shared Dash
-
-        // ------------------------------------------------------ //
-
-        // public List<Panel> Panels { get; set; }
-
-        // public List<PanelAssignment> DashPanelAssignments { get; set; } 
-
-        // public List<int> Priority { get; set; }                            //  {p1,p2,p3,p4,p5} ~ Panel,  {2,1,3,4,5} ~ Priority -> display: p2,p1,p3,p4,p5 -> but order isn't preserved,
-        // public List<Panel.Id> PanelId List { get; set;} // how would this actually be implemented
-        // ------------------------------------------------------ //
-
-        // public List<SavedLink> SavedLinks { get; set; }
-
-        // public List<DashQuery> SearchHistory { get; set; }
+        public List<PanelAssignment> DashPanelAssignments { get; set; }
 
         // ------------------------------------------------------ //
 
         public int LinksPerPanel { get; set; }
 
-        // public bool InvertColors { get; set; }
+        // ------------------------------------------------------ //
 
-        // public bool FullScreenMode { get; set; }
-
-        // public bool ColumnMode { get; set; }
-
+        public List<SavedLink> SavedLinks { get; set; }
     }
 }
 
+
+
+
+
+
+
+// public List<int> Priority { get; set; }                            //  {p1,p2,p3,p4,p5} ~ Panel,  {2,1,3,4,5} ~ Priority -> display: p2,p1,p3,p4,p5 -> but order isn't preserved,
+// public List<Panel.Id> PanelId List { get; set;} // how would this actually be implemented
+// ------------------------------------------------------ //
+
+// public List<DashQuery> SearchHistory { get; set; }
+
+// public bool InvertColors { get; set; }
+
+// public bool FullScreenMode { get; set; }
+
+// public bool ColumnMode { get; set; }
+
+// public bool IsPreset { get; set; }
+
+// public DateTime PresetPublicationDate { get; set; } // Dates Sharing of Dashes
+
+// public int FirstUserID { get; set; }
+
+// public User RootFirstUser { get; set; } // Bestows Ownership on Creator of Shared Dash
+
+// ------------------------------------------------------ //
 
 
 

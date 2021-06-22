@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
@@ -37,20 +37,12 @@ namespace QueryDash.Models
             return passwordVerification == PasswordVerificationResult.Success;
         }
 
-        // public List<Dash> DashList { get; set; }
+        public List<Dash> DashList { get; set; }
+
 
         // ---------------------------------- //
 
-        // public List<Dash> SharedDashList { get; set; }
-
-        // ---------------------------------- //
-
-        // public List<SavedLink> SavedLinks { get; set; }
-
-        // ---------------------------------- //
-
-        // public List<DashQuery> SearchHistory { get; set; }
-
+        public List<SavedLink> SavedLinks { get; set; }
     }
 }
 

@@ -27,6 +27,19 @@ namespace QueryDash.Controllers
         }
 
 
+
+        // GET: api/Users
+
+        // Returns a list of all your Users
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        {
+            // Uses the database context in `_context` to request all of the Users, sort
+            // them by row id and return them as a JSON array.
+            return await _context.Users.OrderBy(row => row.Id).ToListAsync();
+        }
+
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {

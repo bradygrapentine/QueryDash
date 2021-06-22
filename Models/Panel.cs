@@ -10,17 +10,22 @@ namespace QueryDash.Models
 
         // ----------------------------------------------------------- //
 
-        // public List<Dash> Dashes { get; set; }
-
-        // public List<PanelAssignment> DashPanelAssignments { get; set; } // PanelAssignments
-
-        // ----------------------------------------------------------- //
-
-        public string SiteFilter { get; set; }
+        public string FilterSite { get; set; }
 
         public string FilterSiteName { get; set; }
 
-        // public string FilterSiteLogo { get; set; }
+        public List<Dash> Dashes { get; set; }
+
+        public List<PanelAssignment> DashPanelAssignments { get; set; }
     }
 }
 
+
+
+
+
+
+
+
+
+// public string FilterSiteLogo { get; set; }

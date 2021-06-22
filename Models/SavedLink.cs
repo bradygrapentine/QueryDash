@@ -10,20 +10,20 @@ namespace QueryDash.Models
 
         // ---------------------------------- //
 
-        // public int UserId { get; set; }
+        public int UserId { get; set; }
 
-        // public User RootUser { get; set; }
+        public User RootUser { get; set; }
 
         // ---------------------------------- //
 
         public int DashId { get; set; }
 
-        // public Dash RootDash { get; set; }
+        public Dash RootDash { get; set; }
 
         // ---------------------------------- //
 
-        public string DashQueryResultLink { get; set; }
+        public string QueryUrl { get; set; }
 
-        public DateTime LinkTimeStamp { get; private set; } = DateTime.Now;
+        public DateTime TimeStamp { get; private set; } = DateTime.Now;
     }
 }
