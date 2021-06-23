@@ -44,6 +44,21 @@ namespace QueryDash.Controllers
                                         .ToListAsync();
         }
 
+        [HttpGet("User")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<IEnumerable<Dash>>> GetUserDashes()
+        {
+            // Uses the database context in `_context` to request all of the Dashes, sort
+            // them by row id and return them as a JSON array.
+            return await _context.Dashes.OrderBy(row => row.Id)
+                                        .Where(dash => dash.UserId == GetCurrentUserId())
+                                        .Include(dash => dash.SavedLinks)
+                                        .Include(dash => dash.DashPanelAssignments)
+                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
+                                        .ToListAsync();
+        }
+
+
         // GET: api/Dashes/5
         //
         // Fetches and returns a specific dash by finding it by id. The id is specified in the

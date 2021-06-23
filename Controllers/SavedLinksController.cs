@@ -127,7 +127,7 @@ namespace QueryDash.Controllers
 
         private int GetCurrentUserId()
         {
-            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "id").Value);
+            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "Id").Value);
         }
     }
 }

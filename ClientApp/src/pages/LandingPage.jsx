@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
-import { isLoggedIn, logout, getUser } from '../auth'
+import { isLoggedIn, logout, getUser, authHeader } from '../auth'
+
 // import { Footer } from './DashPage'
 // import './custom.scss'
 
@@ -13,7 +14,10 @@ import { isLoggedIn, logout, getUser } from '../auth'
 export function LandingPage() {
   const [dashList, setDashList] = useState([])
 
+  const [userDashList, setUserDashList] = useState([])
+
   const user = getUser()
+
   // {
   //   id: null,
   //   creationDate: '',
@@ -46,19 +50,28 @@ export function LandingPage() {
   }
 
   useEffect(function () {
-    async function loadDashList() {
-      const url = '/api/Dashes'
+    async function loadDashLists() {
+      const dashesUrl = '/api/Dashes'
+      const userDashesUrl = 'api/Dashes/User'
 
-      const response = await fetch(url)
+      const dashesResponse = await fetch(dashesUrl)
+      const userDashesResponse = await fetch(userDashesUrl, {
+        headers: { 'content-type': 'application/json', ...authHeader() },
+      })
 
-      if (response.ok) {
-        const json = await response.json()
-        console.log(json)
-        setDashList(json)
+      if (dashesResponse.ok) {
+        const dashesJson = await dashesResponse.json()
+        setDashList(dashesJson)
+      }
+
+      if (userDashesResponse.ok) {
+        const userDashesJson = await userDashesResponse.json()
+        setUserDashList(userDashesJson)
+      } else {
+        return
       }
     }
-    loadDashList()
-    console.log(dashList)
+    loadDashLists()
   }, [])
 
   console.log(dashList)
@@ -73,11 +86,22 @@ export function LandingPage() {
       <main className="landingPageContainer">
         <div className="listOfDashes">
           {isLoggedIn() ? (
-            <h3 className="HeaderDashList">{user.name}'s Dashboards</h3>
-          ) : (
-            <h3 className="HeaderDashList">Preset Dashes</h3>
-          )}
-
+            <>
+              <h3 className="HeaderDashList">{user.name}'s Dashboards</h3>
+              <ul className="DisplayListDash">
+                {userDashList.map((dash) => (
+                  <li key={dash.id}>
+                    <Link to={`/dash/${dash.id}`} className="">
+                      {dash.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+        </div>
+        <div className="listOfDashes">
+          <h3 className="HeaderDashList">Preset Dashes</h3>
           <ul className="DisplayListDash">
             {dashList.map((dash) => (
               <li key={dash.id}>
