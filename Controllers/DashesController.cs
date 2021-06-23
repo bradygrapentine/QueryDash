@@ -37,9 +37,11 @@ namespace QueryDash.Controllers
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
-            return await _context.Dashes.OrderBy(row => row.Id).Include(dash => dash.SavedLinks).ToListAsync();
-            // Include(dash => dash.Panels).
-
+            return await _context.Dashes.OrderBy(row => row.Id)
+                                        .Include(dash => dash.SavedLinks)
+                                        .Include(dash => dash.DashPanelAssignments)
+                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
+                                        .ToListAsync();
         }
 
         // GET: api/Dashes/5
@@ -52,9 +54,11 @@ namespace QueryDash.Controllers
         public async Task<ActionResult<Dash>> GetDash(int id)
         {
             // Find the dash in the database using `FindAsync` to look it up by id
-            var dash = await _context.Dashes.Where(dash => dash.Id == id).Include(dash => dash.SavedLinks).FirstOrDefaultAsync();
-            // Include(dash => dash.Panels).
-
+            var dash = await _context.Dashes.Where(dash => dash.Id == id)
+                                            .Include(dash => dash.SavedLinks)
+                                            .Include(dash => dash.DashPanelAssignments)
+                                            .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
+                                            .FirstOrDefaultAsync();
 
             // If we didn't find anything, we receive a `null` in return
             if (dash == null)

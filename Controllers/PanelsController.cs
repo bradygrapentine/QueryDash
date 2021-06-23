@@ -35,7 +35,30 @@ namespace QueryDash.Controllers
         {
             // Uses the database context in `_context` to request all of the Panels, sort
             // them by row id and return them as a JSON array.
-            return await _context.Panels.OrderBy(row => row.Id).ToListAsync();
+            return await _context.Panels.OrderBy(panel => panel.Id)
+                                        .Include(panel => panel.DashPanelAssignments)
+                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootDash)
+                                        .ToListAsync();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Dash>> GetPanel(int id)
+        {
+            // Find the dash in the database using `FindAsync` to look it up by id
+            var panel = await _context.Dashes.Where(panel => panel.Id == id)
+                                            .Include(panel => panel.DashPanelAssignments)
+                                            .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootDash)
+                                            .FirstOrDefaultAsync();
+
+            // If we didn't find anything, we receive a `null` in return
+            if (panel == null)
+            {
+                // Return a `404` response to the client indicating we could not find a dash with this id
+                return NotFound();
+            }
+
+            //  Return the dash as a JSON object.
+            return panel;
         }
 
         // POST: api/Panels

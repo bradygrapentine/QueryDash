@@ -14,9 +14,7 @@ namespace QueryDash.Models
 
         public string FilterSiteName { get; set; }
 
-        // public List<Dash> Dashes { get; set; }
-
-        // public List<PanelAssignment> DashPanelAssignments { get; set; }
+        public List<PanelAssignment> DashPanelAssignments { get; set; }
     }
 }
 
