@@ -38,80 +38,6 @@ namespace QueryDash.Controllers
             return await _context.SavedLinks.OrderBy(row => row.Id).ToListAsync();
         }
 
-        // GET: api/SavedLinks/5
-        //
-        // Fetches and returns a specific savedLink by finding it by id. The id is specified in the
-        // URL. In the sample URL above it is the `5`.  The "{id}" in the [HttpGet("{id}")] is what tells dotnet
-        // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
-        //
-        [HttpGet("{id}")]
-        public async Task<ActionResult<SavedLink>> GetSavedLink(int id)
-        {
-            // Find the savedLink in the database using `FindAsync` to look it up by id
-            var savedLink = await _context.SavedLinks.FindAsync(id);
-
-            // If we didn't find anything, we receive a `null` in return
-            if (savedLink == null)
-            {
-                // Return a `404` response to the client indicating we could not find a savedLink with this id
-                return NotFound();
-            }
-
-            //  Return the savedLink as a JSON object.
-            return savedLink;
-        }
-
-        // PUT: api/SavedLinks/5
-        //
-        // Update an individual savedLink with the requested id. The id is specified in the URL
-        // In the sample URL above it is the `5`. The "{id} in the [HttpPut("{id}")] is what tells dotnet
-        // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
-        //
-        // In addition the `body` of the request is parsed and then made available to us as a SavedLink
-        // variable named savedLink. The controller matches the keys of the JSON object the client
-        // supplies to the names of the attributes of our SavedLink POCO class. This represents the
-        // new values for the record.
-        //
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSavedLink(int id, SavedLink savedLink)
-        {
-            // If the ID in the URL does not match the ID in the supplied request body, return a bad request
-            if (id != savedLink.Id)
-            {
-                return BadRequest();
-            }
-
-            // Tell the database to consider everything in savedLink to be _updated_ values. When
-            // the save happens the database will _replace_ the values in the database with the ones from savedLink
-            _context.Entry(savedLink).State = EntityState.Modified;
-
-            try
-            {
-                // Try to save these changes.
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                // Ooops, looks like there was an error, so check to see if the record we were
-                // updating no longer exists.
-                if (!SavedLinkExists(id))
-                {
-                    // If the record we tried to update was already deleted by someone else,
-                    // return a `404` not found
-                    return NotFound();
-                }
-                else
-                {
-                    // Otherwise throw the error back, which will cause the request to fail
-                    // and generate an error to the client.
-                    throw;
-                }
-            }
-
-            // Return a copy of the updated data
-            return Ok(savedLink);
-        }
-
         // POST: api/SavedLinks
         //
         // Creates a new savedLink in the database.
@@ -167,3 +93,111 @@ namespace QueryDash.Controllers
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// GET: api/SavedLinks/5
+//
+// Fetches and returns a specific savedLink by finding it by id. The id is specified in the
+// URL. In the sample URL above it is the `5`.  The "{id}" in the [HttpGet("{id}")] is what tells dotnet
+// to grab the id from the URL. It is then made available to us as the `id` argument to the method.
+//
+// [HttpGet("{id}")]
+// public async Task<ActionResult<SavedLink>> GetSavedLink(int id)
+// {
+//     // Find the savedLink in the database using `FindAsync` to look it up by id
+//     var savedLink = await _context.SavedLinks.FindAsync(id);
+
+//     // If we didn't find anything, we receive a `null` in return
+//     if (savedLink == null)
+//     {
+//         // Return a `404` response to the client indicating we could not find a savedLink with this id
+//         return NotFound();
+//     }
+
+//     //  Return the savedLink as a JSON object.
+//     return savedLink;
+// }
+
+// PUT: api/SavedLinks/5
+//
+// Update an individual savedLink with the requested id. The id is specified in the URL
+// In the sample URL above it is the `5`. The "{id} in the [HttpPut("{id}")] is what tells dotnet
+// to grab the id from the URL. It is then made available to us as the `id` argument to the method.
+//
+// In addition the `body` of the request is parsed and then made available to us as a SavedLink
+// variable named savedLink. The controller matches the keys of the JSON object the client
+// supplies to the names of the attributes of our SavedLink POCO class. This represents the
+// new values for the record.
+//
+// [HttpPut("{id}")]
+// public async Task<IActionResult> PutSavedLink(int id, SavedLink savedLink)
+// {
+//     // If the ID in the URL does not match the ID in the supplied request body, return a bad request
+//     if (id != savedLink.Id)
+//     {
+//         return BadRequest();
+//     }
+
+//     // Tell the database to consider everything in savedLink to be _updated_ values. When
+//     // the save happens the database will _replace_ the values in the database with the ones from savedLink
+//     _context.Entry(savedLink).State = EntityState.Modified;
+
+//     try
+//     {
+//         // Try to save these changes.
+//         await _context.SaveChangesAsync();
+//     }
+//     catch (DbUpdateConcurrencyException)
+//     {
+//         // Ooops, looks like there was an error, so check to see if the record we were
+//         // updating no longer exists.
+//         if (!SavedLinkExists(id))
+//         {
+//             // If the record we tried to update was already deleted by someone else,
+//             // return a `404` not found
+//             return NotFound();
+//         }
+//         else
+//         {
+//             // Otherwise throw the error back, which will cause the request to fail
+//             // and generate an error to the client.
+//             throw;
+//         }
+//     }
+
+// Return a copy of the updated data
+//     return Ok(savedLink);
+// }
+

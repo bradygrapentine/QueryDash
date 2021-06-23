@@ -10,7 +10,7 @@ namespace QueryDash.Models
 
         // ----------------------------------------------------------- //
 
-        public string FilterSite { get; set; }
+        public string FilterSite { get; set; } // change to URL
 
         public string FilterSiteName { get; set; }
 

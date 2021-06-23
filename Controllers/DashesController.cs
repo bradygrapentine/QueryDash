@@ -124,8 +124,8 @@ namespace QueryDash.Controllers
         // new values for the record.
         //
 
-        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
+        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<Dash>> PostDash(Dash dash)
         {
 
