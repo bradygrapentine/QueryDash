@@ -32,12 +32,26 @@ namespace QueryDash.Controllers
         //
         // Returns a list of all your Dashes
         //
+
+        [HttpGet("NoAccount")]
+        public async Task<ActionResult<IEnumerable<Dash>>> GetDashesNonUser()
+        {
+            // Uses the database context in `_context` to request all of the Dashes, sort
+            // them by row id and return them as a JSON array.
+            return await _context.Dashes.OrderBy(row => row.Id)
+                                        .Include(dash => dash.DashPanelAssignments)
+                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
+                                        .ToListAsync();
+        }
+
         [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<IEnumerable<Dash>>> GetDashes()
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderBy(row => row.Id)
+                                        .Where(dash => dash.UserId != GetCurrentUserId())
                                         .Include(dash => dash.SavedLinks)
                                         .Include(dash => dash.DashPanelAssignments)
                                         .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)

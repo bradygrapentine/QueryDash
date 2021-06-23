@@ -36,7 +36,7 @@ export function CreateDashPage() {
     }
     const panelAssignmentResponse = await fetch('/api/PanelAssignments', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' }, //...authHeader() },
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newPanelAssignment),
     })
     console.log(panelAssignmentResponse.json())
@@ -87,12 +87,9 @@ export function CreateDashPage() {
 
     const panelResponse = await fetch('/api/Panels', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' }, //...authHeader() },
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newPanel),
     })
-    // if (response.status === 401) {
-    //   setErrorMessage('Not Authorized')
-    // } else {
     if (panelResponse.status === 400) {
       setErrorMessage(Object.values(panelResponse.errors).join(' '))
     } else if (panelResponse.ok) {

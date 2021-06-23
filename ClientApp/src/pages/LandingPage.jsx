@@ -16,6 +16,8 @@ export function LandingPage() {
 
   const [userDashList, setUserDashList] = useState([])
 
+  const [nonUserDashList, setNonUserDashList] = useState([])
+
   const user = getUser()
 
   // {
@@ -51,24 +53,40 @@ export function LandingPage() {
 
   useEffect(function () {
     async function loadDashLists() {
-      const dashesUrl = '/api/Dashes'
-      const userDashesUrl = 'api/Dashes/User'
-
-      const dashesResponse = await fetch(dashesUrl)
-      const userDashesResponse = await fetch(userDashesUrl, {
-        headers: { 'content-type': 'application/json', ...authHeader() },
-      })
-
-      if (dashesResponse.ok) {
-        const dashesJson = await dashesResponse.json()
-        setDashList(dashesJson)
-      }
-
-      if (userDashesResponse.ok) {
-        const userDashesJson = await userDashesResponse.json()
-        setUserDashList(userDashesJson)
+      if (!isLoggedIn()) {
+        const nonUserDashesUrl = '/api/Dashes/NoAccount'
+        //--------------------------------------//
+        const nonUserDashesResponse = await fetch(nonUserDashesUrl, {
+          headers: { 'content-type': 'application/json', ...authHeader() },
+        })
+        //--------------------------------------//
+        if (nonUserDashesResponse.ok) {
+          const nonUserDashesResponseJson = await nonUserDashesResponse.json()
+          setNonUserDashList(nonUserDashesResponseJson)
+        }
+        //--------------------------------------//
       } else {
-        return
+        const dashesUrl = '/api/Dashes'
+        const userDashesUrl = 'api/Dashes/User'
+        //--------------------------------------//
+        const dashesResponse = await fetch(dashesUrl, {
+          headers: { 'content-type': 'application/json', ...authHeader() },
+        })
+        const userDashesResponse = await fetch(userDashesUrl, {
+          headers: { 'content-type': 'application/json', ...authHeader() },
+        })
+        //--------------------------------------//
+        if (dashesResponse.ok) {
+          const dashesJson = await dashesResponse.json()
+          setDashList(dashesJson)
+        }
+        //--------------------------------------//
+        if (userDashesResponse.ok) {
+          const userDashesJson = await userDashesResponse.json()
+          setUserDashList(userDashesJson)
+        } else {
+          return
+        }
       }
     }
     loadDashLists()
@@ -84,9 +102,9 @@ export function LandingPage() {
         <h1 className="header">QueryDash</h1>
       </Link>{' '}
       <main className="landingPageContainer">
-        <div className="listOfDashes">
-          {isLoggedIn() ? (
-            <>
+        {isLoggedIn() ? (
+          <>
+            <div className="listOfDashes">
               <h3 className="HeaderDashList">{user.name}'s Dashboards</h3>
               <ul className="DisplayListDash">
                 {userDashList.map((dash) => (
@@ -97,21 +115,34 @@ export function LandingPage() {
                   </li>
                 ))}
               </ul>
-            </>
-          ) : null}
-        </div>
-        <div className="listOfDashes">
-          <h3 className="HeaderDashList">Preset Dashes</h3>
-          <ul className="DisplayListDash">
-            {dashList.map((dash) => (
-              <li key={dash.id}>
-                <Link to={`/dash/${dash.id}`} className="">
-                  {dash.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+            </div>
+            <div className="listOfDashes">
+              <h3 className="HeaderDashList">Other Dashboards</h3>
+              <ul className="DisplayListDash">
+                {dashList.map((dash) => (
+                  <li key={dash.id}>
+                    <Link to={`/dash/${dash.id}`} className="">
+                      {dash.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
+        ) : (
+          <div className="listOfDashes">
+            <h3 className="HeaderDashList">Existing Dashboards</h3>
+            <ul className="DisplayListDash">
+              {nonUserDashList.map((dash) => (
+                <li key={dash.id}>
+                  <Link to={`/dash/${dash.id}`} className="">
+                    {dash.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </main>
       <footer className="standardFooter">
         {isLoggedIn() ? (

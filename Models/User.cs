@@ -37,12 +37,7 @@ namespace QueryDash.Models
             return passwordVerification == PasswordVerificationResult.Success;
         }
 
-        // public List<Dash> DashList { get; set; }
-
-
-        // // ---------------------------------- //
-
-        // public List<SavedLink> SavedLinks { get; set; }
+        // ---------------------------------- //
     }
 }
 
