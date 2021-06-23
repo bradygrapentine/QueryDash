@@ -41,9 +41,10 @@ namespace QueryDash.Controllers
                 List<SavedLink> dashArchive = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && savedLink.IsArchive).ToList();
                 return dashArchive;
             }
-            else if (isArchive && userId != 0)
+            else if (isArchive)
             {
                 List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.UserId == userId && savedLink.IsArchive).ToList();
+                //    List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.UserId == GetCurrentUserId() && savedLink.IsArchive).ToList();
                 return userArchive;
             }
             else if (isArchive == false && dashId != 0)
@@ -51,7 +52,7 @@ namespace QueryDash.Controllers
                 List<SavedLink> dashOpened = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && !savedLink.IsArchive).ToList();
                 return dashOpened;
             }
-            else if (isArchive == false && userId != 0)
+            else if (isArchive == false)
             {
                 List<SavedLink> userOpened = allSavedLinks.Where(savedLink => savedLink.UserId == userId && !savedLink.IsArchive).ToList();
                 return userOpened;
@@ -116,6 +117,11 @@ namespace QueryDash.Controllers
         private bool SavedLinkExists(int id)
         {
             return _context.SavedLinks.Any(savedLink => savedLink.Id == id);
+        }
+
+        private int GetCurrentUserId()
+        {
+            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "id").Value);
         }
     }
 }
