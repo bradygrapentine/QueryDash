@@ -83,10 +83,11 @@ namespace QueryDash.Controllers
         // new values for the record.
         //
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> PutDash(int id, Dash dash)
         {
             // If the ID in the URL does not match the ID in the supplied request body, return a bad request
-            if (id != dash.Id)
+            if (id != dash.Id || GetCurrentUserId() != dash.UserId)
             {
                 return BadRequest();
             }
@@ -133,11 +134,11 @@ namespace QueryDash.Controllers
         //
 
         [HttpPost]
-        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<Dash>> PostDash(Dash dash)
         {
 
-            // dash.UserId = GetCurrentUserId();
+            dash.UserId = GetCurrentUserId();
             // Indicate to the database context we want to add this new record
             _context.Dashes.Add(dash);
             await _context.SaveChangesAsync();
@@ -158,6 +159,12 @@ namespace QueryDash.Controllers
         {
             // Find this dash by looking for the specific id
             var dash = await _context.Dashes.FindAsync(id);
+
+            if (id != dash.Id || GetCurrentUserId() != dash.UserId)
+            {
+                return BadRequest();
+            }
+
             if (dash == null)
             {
                 // There wasn't a dash with that id so return a `404` not found
@@ -182,7 +189,7 @@ namespace QueryDash.Controllers
 
         private int GetCurrentUserId()
         {
-            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "id").Value);
+            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "Id").Value);
         }
     }
 }

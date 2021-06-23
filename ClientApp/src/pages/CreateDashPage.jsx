@@ -1,27 +1,32 @@
 import React, { useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { authHeader } from '../auth'
-import axios from 'axios'
+// import axios from 'axios'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
 
 export function CreateDashPage() {
-  const history = useHistory()
+  // const history = useHistory()
 
   const [errorMessage, setErrorMessage] = useState('')
 
   const [newDashId, setNewDashId] = useState()
 
   const [newDash, setNewDash] = useState({
-    name: '',
     userId: 0,
+    creationDate: '',
+    dashPanelAssignments: [],
+    savedLinks: [],
+    name: '',
     linksPerPanel: 0,
   })
 
   const [newPanel, setNewPanel] = useState({
-    FilterSite: '',
-    FilterSiteName: '',
+    filterSite: '',
+    creationDate: '',
+    filterSiteName: '',
+    dashPanelAssignments: [],
   })
 
   async function postPanel(panelResponseId) {
@@ -51,19 +56,20 @@ export function CreateDashPage() {
 
     const response = await fetch('/api/Dashes', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' }, //...authHeader() },
+      headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(newDash),
     })
-    // if (response.status === 401) {
-    //   setErrorMessage('Not Authorized')
-    // } else {
-    if (response.status === 400) {
-      setErrorMessage(Object.values(response.errors).join(' '))
-    } else if (response.ok) {
-      response.json().then((data) => {
-        setNewDashId(data.id)
-        console.log(newDashId)
-      })
+    if (response.status === 401) {
+      setErrorMessage('Not Authorized')
+    } else {
+      if (response.status === 400) {
+        setErrorMessage(Object.values(response.errors).join(' '))
+      } else if (response.ok) {
+        response.json().then((data) => {
+          setNewDashId(data.id)
+          console.log(data)
+        })
+      }
     }
   }
 
