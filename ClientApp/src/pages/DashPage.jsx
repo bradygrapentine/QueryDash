@@ -113,6 +113,197 @@ export function DashPage() {
     )
   }
 
+  const SearchAPIResponse = {
+    _type: 'SearchResponse', // ErrorResponse if problem with API
+    queryContext: {
+      originalQuery: 'sialing dingy for sale',
+      alteredQuery: 'sailing dinghy for sale',
+      alterationOverrideQuery: '+sialing +dingy for sale',
+    },
+    webPages: {
+      webSearchUrl: 'https://www.bing.com/search?q=mt+rainier',
+      totalEstimatedMatches: 594000,
+      value: [
+        {
+          id: 'https://api.bing.microsoft.com/api/v7/#WebPages.0',
+          name: 'Dinghy sailing',
+          url: 'https://www.bing.com/cr?IG=3A43CA5...',
+          displayUrl: 'https://en.contoso.com/wiki/Dinghy_sailing',
+          snippet: 'Dinghy sailing is the activity of sailing small boats...',
+          dateLastCrawled: '2017-04-05T16:25:00',
+        },
+        {
+          id: 'https://api.bing.microsoft.com/api/v7/#WebPages.0',
+          name: 'Dinghy sailing',
+          url: 'https://www.bing.com/cr?IG=3A43CA5...',
+          displayUrl: 'https://en.contoso.com/wiki/Dinghy_sailing',
+          snippet: 'Dinghy sailing is the activity of sailing small boats...',
+          dateLastCrawled: '2017-04-05T16:25:00',
+        },
+        {
+          id: 'https://api.bing.microsoft.com/api/v7/#WebPages.0',
+          name: 'Dinghy sailing',
+          url: 'https://www.bing.com/cr?IG=3A43CA5...',
+          displayUrl: 'https://en.contoso.com/wiki/Dinghy_sailing',
+          snippet: 'Dinghy sailing is the activity of sailing small boats...',
+          dateLastCrawled: '2017-04-05T16:25:00',
+        },
+        {
+          id: 'https://api.bing.microsoft.com/api/v7/#WebPages.0',
+          name: 'Dinghy sailing',
+          url: 'https://www.bing.com/cr?IG=3A43CA5...',
+          displayUrl: 'https://en.contoso.com/wiki/Dinghy_sailing',
+          snippet: 'Dinghy sailing is the activity of sailing small boats...',
+          dateLastCrawled: '2017-04-05T16:25:00',
+        },
+        {
+          id: 'https://api.bing.microsoft.com/api/v7/#WebPages.0',
+          name: 'Dinghy sailing',
+          url: 'https://www.bing.com/cr?IG=3A43CA5...',
+          displayUrl: 'https://en.contoso.com/wiki/Dinghy_sailing',
+          snippet: 'Dinghy sailing is the activity of sailing small boats...',
+          dateLastCrawled: '2017-04-05T16:25:00',
+        },
+        {
+          id: 'https://api.bing.microsoft.com/api/v7/#WebPages.0',
+          name: 'Dinghy sailing',
+          url: 'https://www.bing.com/cr?IG=3A43CA5...',
+          displayUrl: 'https://en.contoso.com/wiki/Dinghy_sailing',
+          snippet: 'Dinghy sailing is the activity of sailing small boats...',
+          dateLastCrawled: '2017-04-05T16:25:00',
+        },
+        {
+          id: 'https://api.bing.microsoft.com/api/v7/#WebPages.0',
+          name: 'Dinghy sailing',
+          url: 'https://www.bing.com/cr?IG=3A43CA5...',
+          displayUrl: 'https://en.contoso.com/wiki/Dinghy_sailing',
+          snippet: 'Dinghy sailing is the activity of sailing small boats...',
+          dateLastCrawled: '2017-04-05T16:25:00',
+        },
+      ],
+    },
+    images: {
+      id: 'https://api.bing.microsoft.com/api/v7/#Images',
+      readLink:
+        'https://api.bing.microsoft.com/api/v7/images/search?q=dinghy+sailing&qpvt=dinghy+sailing',
+      webSearchUrl:
+        'https://www.bing.com/images/search?q=dinghy+sailing&qpvt=lady+gaga',
+      isFamilyFriendly: true,
+      value: [
+        {
+          name: 'Rich Passage Sailing Dinghy',
+          webSearchUrl: 'https://www.bing.com/cr?IG=3A43CA5CA64...',
+          thumbnailUrl: 'https://tse1.mm.bing.net/th?id=OIP....',
+          datePublished: '2011-10-29T11:26:00',
+          contentUrl: 'http://upload.contoso.com/sailing/...',
+          hostPageUrl: 'http://www.bing.com/cr?IG=3A43CA5CA6464....',
+          contentSize: '79239 B',
+          encodingFormat: 'jpeg',
+          hostPageDisplayUrl: 'http://en.contoso.com/wiki/File...',
+          width: 526,
+          height: 688,
+          thumbnail: {
+            width: 229,
+            height: 300,
+          },
+          insightsSourcesSummary: {
+            shoppingSourcesCount: 0,
+            recipeSourcesCount: 0,
+          },
+        },
+        {
+          name: 'Rich Passage Sailing Dinghy',
+          webSearchUrl: 'https://www.bing.com/cr?IG=3A43CA5CA64...',
+          thumbnailUrl: 'https://tse1.mm.bing.net/th?id=OIP....',
+          datePublished: '2011-10-29T11:26:00',
+          contentUrl: 'http://upload.contoso.com/sailing/...',
+          hostPageUrl: 'http://www.bing.com/cr?IG=3A43CA5CA6464....',
+          contentSize: '79239 B',
+          encodingFormat: 'jpeg',
+          hostPageDisplayUrl: 'http://en.contoso.com/wiki/File...',
+          width: 526,
+          height: 688,
+          thumbnail: {
+            width: 229,
+            height: 300,
+          },
+          insightsSourcesSummary: {
+            shoppingSourcesCount: 0,
+            recipeSourcesCount: 0,
+          },
+        },
+        {
+          name: 'Rich Passage Sailing Dinghy',
+          webSearchUrl: 'https://www.bing.com/cr?IG=3A43CA5CA64...',
+          thumbnailUrl: 'https://tse1.mm.bing.net/th?id=OIP....',
+          datePublished: '2011-10-29T11:26:00',
+          contentUrl: 'http://upload.contoso.com/sailing/...',
+          hostPageUrl: 'http://www.bing.com/cr?IG=3A43CA5CA6464....',
+          contentSize: '79239 B',
+          encodingFormat: 'jpeg',
+          hostPageDisplayUrl: 'http://en.contoso.com/wiki/File...',
+          width: 526,
+          height: 688,
+          thumbnail: {
+            width: 229,
+            height: 300,
+          },
+          insightsSourcesSummary: {
+            shoppingSourcesCount: 0,
+            recipeSourcesCount: 0,
+          },
+        },
+        {
+          name: 'Rich Passage Sailing Dinghy',
+          webSearchUrl: 'https://www.bing.com/cr?IG=3A43CA5CA64...',
+          thumbnailUrl: 'https://tse1.mm.bing.net/th?id=OIP....',
+          datePublished: '2011-10-29T11:26:00',
+          contentUrl: 'http://upload.contoso.com/sailing/...',
+          hostPageUrl: 'http://www.bing.com/cr?IG=3A43CA5CA6464....',
+          contentSize: '79239 B',
+          encodingFormat: 'jpeg',
+          hostPageDisplayUrl: 'http://en.contoso.com/wiki/File...',
+          width: 526,
+          height: 688,
+          thumbnail: {
+            width: 229,
+            height: 300,
+          },
+          insightsSourcesSummary: {
+            shoppingSourcesCount: 0,
+            recipeSourcesCount: 0,
+          },
+        },
+        {
+          name: 'Rich Passage Sailing Dinghy',
+          webSearchUrl: 'https://www.bing.com/cr?IG=3A43CA5CA64...',
+          thumbnailUrl: 'https://tse1.mm.bing.net/th?id=OIP....',
+          datePublished: '2011-10-29T11:26:00',
+          contentUrl: 'http://upload.contoso.com/sailing/...',
+          hostPageUrl: 'http://www.bing.com/cr?IG=3A43CA5CA6464....',
+          contentSize: '79239 B',
+          encodingFormat: 'jpeg',
+          hostPageDisplayUrl: 'http://en.contoso.com/wiki/File...',
+          width: 526,
+          height: 688,
+          thumbnail: {
+            width: 229,
+            height: 300,
+          },
+          insightsSourcesSummary: {
+            shoppingSourcesCount: 0,
+            recipeSourcesCount: 0,
+          },
+        },
+      ],
+    },
+    relatedSearches: {},
+    news: {},
+    entities: {},
+    places: {},
+    translations: {},
+  }
+
   useEffect(() => {
     getDash()
   }, [id])

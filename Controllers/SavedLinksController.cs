@@ -33,9 +33,8 @@ namespace QueryDash.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks(bool isArchive, int dashId, int userId)
         {
-            // Uses the database context in `_context` to request all of the SavedLinks, sort
-            // them by row id and return them as a JSON array.
-            var allSavedLinks = await _context.SavedLinks.OrderBy(row => row.Id).ToListAsync();
+
+            var allSavedLinks = await _context.SavedLinks.OrderBy(row => row.Id).Where(row => row.UserId == userId).ToListAsync();
             if (isArchive && dashId != 0)
             {
                 List<SavedLink> dashArchive = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && savedLink.IsArchive).ToList();
@@ -43,8 +42,7 @@ namespace QueryDash.Controllers
             }
             else if (isArchive)
             {
-                List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.UserId == userId && savedLink.IsArchive).ToList();
-                //    List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.UserId == GetCurrentUserId() && savedLink.IsArchive).ToList();
+                List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.IsArchive).ToList();
                 return userArchive;
             }
             else if (isArchive == false && dashId != 0)
@@ -54,16 +52,16 @@ namespace QueryDash.Controllers
             }
             else if (isArchive == false)
             {
-                List<SavedLink> userOpened = allSavedLinks.Where(savedLink => savedLink.UserId == userId && !savedLink.IsArchive).ToList();
+                List<SavedLink> userOpened = allSavedLinks.Where(savedLink => !savedLink.IsArchive).ToList();
                 return userOpened;
             }
             else
             {
                 return null;
-                // return allSavedLinks;
             }
         }
 
+        //----------------------------------------------------------------------------------------------------------------//
 
         // POST: api/SavedLinks
         //
@@ -86,6 +84,8 @@ namespace QueryDash.Controllers
             return CreatedAtAction("GetSavedLink", new { id = savedLink.Id }, savedLink);
         }
 
+        //----------------------------------------------------------------------------------------------------------------//
+
         // DELETE: api/SavedLinks/5
         //
         // Deletes an individual savedLink with the requested id. The id is specified in the URL
@@ -95,6 +95,9 @@ namespace QueryDash.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSavedLink(int id)
         {
+
+            // DELETE http://localhost:5000/api/SavedLinks/35 => deletes SavedLink with given ID
+
             // Find this savedLink by looking for the specific id
             var savedLink = await _context.SavedLinks.FindAsync(id);
             if (savedLink == null)
@@ -112,6 +115,8 @@ namespace QueryDash.Controllers
             // Return a copy of the deleted data
             return Ok(savedLink);
         }
+
+        //----------------------------------------------------------------------------------------------------------------//
 
         // Private helper method that looks up an existing savedLink by the supplied id
         private bool SavedLinkExists(int id)
@@ -156,6 +161,28 @@ namespace QueryDash.Controllers
 
 
 
+// var allSavedLinks = await _context.SavedLinks.OrderBy(row => row.Id).Where(row => row.UserId == savedLinkUserId).ToListAsync();
+// if (isArchive && dashId != 0)
+// {
+//     List<SavedLink> dashArchive = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && savedLink.IsArchive).ToList();
+//     return dashArchive;
+// }
+// else if (isArchive)
+// {
+//     // List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.UserId == userId && savedLink.IsArchive).ToList();
+//     List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.IsArchive).ToList();
+//     return userArchive;
+// }
+// else if (isArchive == false && dashId != 0)
+// {
+//     List<SavedLink> dashOpened = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && !savedLink.IsArchive).ToList();
+//     return dashOpened;
+// }
+// else if (isArchive == false)
+// {
+//     List<SavedLink> userOpened = allSavedLinks.Where(savedLink => !savedLink.IsArchive).ToList();
+//     return userOpened;
+// }
 
 
 

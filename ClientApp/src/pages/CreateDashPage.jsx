@@ -13,8 +13,6 @@ export function CreateDashPage() {
 
   const [newDashId, setNewDashId] = useState()
 
-  const [newPanelId, setNewPanelId] = useState()
-
   const [newDash, setNewDash] = useState({
     name: '',
     userId: 0,
@@ -93,7 +91,6 @@ export function CreateDashPage() {
       setErrorMessage(Object.values(panelResponse.errors).join(' '))
     } else if (panelResponse.ok) {
       panelResponse.json().then((data) => {
-        setNewPanelId(data.id)
         console.log(data)
         postPanel(data.id)
       })
