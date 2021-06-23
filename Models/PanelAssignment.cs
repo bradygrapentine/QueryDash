@@ -10,13 +10,13 @@ namespace QueryDash.Models
 
         public int PanelId { get; set; }
 
-        public Panel RootPanel { get; set; }
+        // public Panel RootPanel { get; set; }
 
         // ---------------------------------- //
 
         public int DashId { get; set; }
 
-        public Dash RootDash { get; set; }
+        // public Dash RootDash { get; set; }
     }
 }
 

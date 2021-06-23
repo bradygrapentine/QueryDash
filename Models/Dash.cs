@@ -8,7 +8,7 @@ namespace QueryDash.Models
 
         public int UserId { get; set; }
 
-        public User RootUser { get; set; }
+        // public User RootUser { get; set; }
 
         public DateTime CreationDate { get; private set; } = DateTime.Now;
 
@@ -16,9 +16,9 @@ namespace QueryDash.Models
 
         // ------------------------------------------------------ //
 
-        public List<Panel> Panels { get; set; }
+        // public List<Panel> Panels { get; set; }
         // 
-        public List<PanelAssignment> DashPanelAssignments { get; set; }
+        // public List<PanelAssignment> DashPanelAssignments { get; set; }
 
         // ------------------------------------------------------ //
 
@@ -26,7 +26,7 @@ namespace QueryDash.Models
 
         // ------------------------------------------------------ //
 
-        public List<SavedLink> SavedLinks { get; set; }
+        // public List<SavedLink> SavedLinks { get; set; }
     }
 }
 

@@ -123,13 +123,13 @@ namespace QueryDash.Controllers
         // supplies to the names of the attributes of our Dash POCO class. This represents the
         // new values for the record.
         //
-        [HttpPost]
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost]
         public async Task<ActionResult<Dash>> PostDash(Dash dash)
         {
 
-            dash.UserId = GetCurrentUserId();
+            // dash.UserId = GetCurrentUserId();
             // Indicate to the database context we want to add this new record
             _context.Dashes.Add(dash);
             await _context.SaveChangesAsync();

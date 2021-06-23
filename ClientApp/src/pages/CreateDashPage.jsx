@@ -12,9 +12,7 @@ export function CreateDashPage() {
 
   const [newDash, setNewDash] = useState({
     name: '',
-    // // panels: null,
-    // // dashPanelAssignments: null,
-    // // savedLinks: null,
+    userId: 1,
     linksPerPanel: 0,
   })
 
@@ -26,7 +24,10 @@ export function CreateDashPage() {
   function handleStringFieldChange(event) {
     const value = event.target.value
     const fieldName = event.target.name
-    setNewDash({ ...newDash, [fieldName]: value })
+
+    const updatedDash = { ...newDash, [fieldName]: value }
+
+    setNewDash(updatedDash)
   }
 
   async function handleFormSubmission(event) {
@@ -34,18 +35,19 @@ export function CreateDashPage() {
 
     const response = await fetch('/api/Dashes', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', ...authHeader() },
+      headers: { 'content-type': 'application/json' }, //...authHeader() },
       body: JSON.stringify(newDash),
     })
-    if (response.status === 401) {
-      setErrorMessage('Not Authorized')
+    // if (response.status === 401) {
+    //   setErrorMessage('Not Authorized')
+    // } else {
+    if (response.status === 400) {
+      setErrorMessage(Object.values(response.errors).join(' '))
     } else {
-      if (response.status === 400) {
-        setErrorMessage(Object.values(response.errors).join(' '))
-      } else {
-        history.push('/')
-      }
+      console.log(response)
+      history.push('/')
     }
+    // }
   }
   return (
     <>
@@ -59,9 +61,9 @@ export function CreateDashPage() {
             <form onSubmit={handleFormSubmission} className="formCreateAccount">
               {errorMessage ? <p>{errorMessage}</p> : null}
               <div className="inputContainer">
-                <label htmlFor="dashName">DashName: </label>
+                <label htmlFor="name">DashName: </label>
                 <input
-                  name="dashName"
+                  name="name"
                   type="text"
                   value={newDash.name}
                   onChange={handleStringFieldChange}
@@ -71,7 +73,7 @@ export function CreateDashPage() {
                 <label htmlFor="linksPerPanel">Results Per Panel: </label>
                 <input
                   name="linksPerPanel"
-                  type="text"
+                  type="number"
                   value={newDash.linksPerPanel}
                   onChange={handleStringFieldChange}
                 />

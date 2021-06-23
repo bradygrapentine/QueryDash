@@ -19,21 +19,6 @@ namespace QueryDash.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("DashPanel", b =>
-                {
-                    b.Property<int>("DashesId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("PanelsId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("DashesId", "PanelsId");
-
-                    b.HasIndex("PanelsId");
-
-                    b.ToTable("DashPanel");
-                });
-
             modelBuilder.Entity("QueryDash.Models.Dash", b =>
                 {
                     b.Property<int>("Id")
@@ -54,8 +39,6 @@ namespace QueryDash.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Dashes");
                 });
@@ -96,10 +79,6 @@ namespace QueryDash.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DashId");
-
-                    b.HasIndex("PanelId");
-
                     b.ToTable("PanelAssignments");
                 });
 
@@ -126,10 +105,6 @@ namespace QueryDash.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DashId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("SavedLinks");
                 });
@@ -158,89 +133,6 @@ namespace QueryDash.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("DashPanel", b =>
-                {
-                    b.HasOne("QueryDash.Models.Dash", null)
-                        .WithMany()
-                        .HasForeignKey("DashesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QueryDash.Models.Panel", null)
-                        .WithMany()
-                        .HasForeignKey("PanelsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("QueryDash.Models.Dash", b =>
-                {
-                    b.HasOne("QueryDash.Models.User", "RootUser")
-                        .WithMany("DashList")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RootUser");
-                });
-
-            modelBuilder.Entity("QueryDash.Models.PanelAssignment", b =>
-                {
-                    b.HasOne("QueryDash.Models.Dash", "RootDash")
-                        .WithMany("DashPanelAssignments")
-                        .HasForeignKey("DashId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QueryDash.Models.Panel", "RootPanel")
-                        .WithMany("DashPanelAssignments")
-                        .HasForeignKey("PanelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RootDash");
-
-                    b.Navigation("RootPanel");
-                });
-
-            modelBuilder.Entity("QueryDash.Models.SavedLink", b =>
-                {
-                    b.HasOne("QueryDash.Models.Dash", "RootDash")
-                        .WithMany("SavedLinks")
-                        .HasForeignKey("DashId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QueryDash.Models.User", "RootUser")
-                        .WithMany("SavedLinks")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RootDash");
-
-                    b.Navigation("RootUser");
-                });
-
-            modelBuilder.Entity("QueryDash.Models.Dash", b =>
-                {
-                    b.Navigation("DashPanelAssignments");
-
-                    b.Navigation("SavedLinks");
-                });
-
-            modelBuilder.Entity("QueryDash.Models.Panel", b =>
-                {
-                    b.Navigation("DashPanelAssignments");
-                });
-
-            modelBuilder.Entity("QueryDash.Models.User", b =>
-                {
-                    b.Navigation("DashList");
-
-                    b.Navigation("SavedLinks");
                 });
 #pragma warning restore 612, 618
         }
