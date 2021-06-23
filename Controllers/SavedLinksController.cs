@@ -34,7 +34,7 @@ namespace QueryDash.Controllers
         public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks(bool isArchive, int dashId, int userId)
         {
 
-            var allSavedLinks = await _context.SavedLinks.OrderBy(row => row.Id).Where(row => row.UserId == userId).ToListAsync();
+            var allSavedLinks = await _context.SavedLinks.OrderBy(row => row.Id).Where(row => row.UserId == userId).Include(row => row.RootDash).ToListAsync();
             if (isArchive && dashId != 0)
             {
                 List<SavedLink> dashArchive = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && savedLink.IsArchive).ToList();

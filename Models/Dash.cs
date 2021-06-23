@@ -26,7 +26,7 @@ namespace QueryDash.Models
 
         // ------------------------------------------------------ //
 
-        // public List<SavedLink> SavedLinks { get; set; }
+        public List<SavedLink> SavedLinks { get; set; }
     }
 }
 
