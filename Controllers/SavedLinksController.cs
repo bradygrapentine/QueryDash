@@ -31,12 +31,38 @@ namespace QueryDash.Controllers
         // Returns a list of all your SavedLinks
         //
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks()
+        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks(bool isArchive, int dashId, int userId)
         {
             // Uses the database context in `_context` to request all of the SavedLinks, sort
             // them by row id and return them as a JSON array.
-            return await _context.SavedLinks.OrderBy(row => row.Id).ToListAsync();
+            var allSavedLinks = await _context.SavedLinks.OrderBy(row => row.Id).ToListAsync();
+            if (isArchive && dashId != 0)
+            {
+                List<SavedLink> dashArchive = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && savedLink.IsArchive).ToList();
+                return dashArchive;
+            }
+            else if (isArchive && userId != 0)
+            {
+                List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.UserId == userId && savedLink.IsArchive).ToList();
+                return userArchive;
+            }
+            else if (isArchive == false && dashId != 0)
+            {
+                List<SavedLink> dashOpened = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && !savedLink.IsArchive).ToList();
+                return allSavedLinks;
+            }
+            else if (isArchive == false && userId != 0)
+            {
+                List<SavedLink> userOpened = allSavedLinks.Where(savedLink => savedLink.UserId == userId && !savedLink.IsArchive).ToList();
+                return userOpened;
+            }
+            else
+            {
+                return null;
+                // return allSavedLinks;
+            }
         }
+
 
         // POST: api/SavedLinks
         //
