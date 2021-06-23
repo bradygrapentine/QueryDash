@@ -49,7 +49,7 @@ namespace QueryDash.Controllers
             else if (isArchive == false && dashId != 0)
             {
                 List<SavedLink> dashOpened = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && !savedLink.IsArchive).ToList();
-                return allSavedLinks;
+                return dashOpened;
             }
             else if (isArchive == false && userId != 0)
             {
