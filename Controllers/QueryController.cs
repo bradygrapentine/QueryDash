@@ -47,9 +47,10 @@ namespace QueryDash.Controllers
             foreach (var panelAssignments in panelAssignmentsQueryable)
             {
                 List<string> searchResults = new List<string>(panelAssignments.Count() * 2);
+                string filterSite = "";
                 foreach (var panelAssignment in panelAssignments)
                 {
-                    // var filterSite = panelAssignment.RootPanel.FilterSite; //need to grab filter site and interpolate in url, not working for some reason
+                    // filterSite = panelAssignment.RootPanel.FilterSite; //need to grab filter site and interpolate in url, not working for some reason
 
                     var client = new HttpClient();
                     var request = new HttpRequestMessage
@@ -64,7 +65,7 @@ namespace QueryDash.Controllers
                         response.EnsureSuccessStatusCode();
                         var body = await response.Content.ReadAsStringAsync();
                         Console.WriteLine(body);
-                        // searchResults.Add(filterSite);
+                        searchResults.Add(filterSite);
                         searchResults.Add(body);
                     }
                 }
