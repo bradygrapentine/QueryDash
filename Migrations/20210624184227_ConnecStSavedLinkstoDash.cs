@@ -2,7 +2,7 @@
 
 namespace QueryDash.Migrations
 {
-    public partial class ConnectSavedLinksandDashes : Migration
+    public partial class ConnecStSavedLinkstoDash : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

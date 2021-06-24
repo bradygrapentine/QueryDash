@@ -19,21 +19,6 @@ namespace QueryDash.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("DashPanel", b =>
-                {
-                    b.Property<int>("DashesId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("PanelsId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("DashesId", "PanelsId");
-
-                    b.HasIndex("PanelsId");
-
-                    b.ToTable("DashPanel");
-                });
-
             modelBuilder.Entity("QueryDash.Models.Dash", b =>
                 {
                     b.Property<int>("Id")
@@ -154,21 +139,6 @@ namespace QueryDash.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("DashPanel", b =>
-                {
-                    b.HasOne("QueryDash.Models.Dash", null)
-                        .WithMany()
-                        .HasForeignKey("DashesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QueryDash.Models.Panel", null)
-                        .WithMany()
-                        .HasForeignKey("PanelsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("QueryDash.Models.PanelAssignment", b =>

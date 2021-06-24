@@ -10,8 +10,8 @@ using QueryDash.Models;
 namespace QueryDash.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210623012807_InitialDbCreation")]
-    partial class InitialDbCreation
+    [Migration("20210624183534_InitialDB")]
+    partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

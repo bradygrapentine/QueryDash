@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+// import { isWebUri } from 'valid-url'
 
 // ------------------------------------------------------------- //
 
@@ -352,3 +353,28 @@ export function DashPage() {
     </>
   )
 }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// function CheckIfUrL(url) {
+//   if (!isWebUri(url)) {
+//     return false
+//   }
+//   else {
+//     return true
+//   }
+// }

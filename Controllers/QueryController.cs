@@ -21,9 +21,6 @@ using System.IO;
 
 namespace QueryDash.Controllers
 {
-    // All of these routes will be at the base URL:     /api/Sessions
-    // That is what "api/[controller]" means below. It uses the name of the controller
-    // in this case RestaurantsController to determine the URL
 
     [Route("api/[controller]")]
     [ApiController]
@@ -31,18 +28,14 @@ namespace QueryDash.Controllers
     {
         private readonly DatabaseContext _context;
 
-        // This is the variable you use to have access to your database
         public QueryController(DatabaseContext context, IConfiguration config)
         {
             _context = context;
         }
 
-        [HttpGet("/{dashQuery}")]
-        async public Task<ActionResult<List<string>>> Query(string dashQuery, int dashId) //Is this the best structure to return?
+        [HttpGet("{dashQuery}")]
+        async public Task<ActionResult<List<string>>> Query(string dashQuery, int dashId)
         {
-            // List<string> nullResult = new List<string>(0);
-
-            // grab the FilterSites off the Panels and plug into the site parameter, and grab info off the dash, then loop through the filter sites and compose a list of Json response strings
             var dash = await _context.Dashes.
                                         Where(dash => dash.Id == dashId).
                                         Include(dash => dash.DashPanelAssignments).
@@ -56,59 +49,36 @@ namespace QueryDash.Controllers
             List<string> searchResults = new List<string>(dash.DashPanelAssignments.Count() * 2);
             foreach (var panelAssignment in dash.DashPanelAssignments)
             {
-                var panel = panelAssignment.RootPanel;
-
-                // }
-
-                // foreach (var panelAssignments in panelAssignmentsQueryable)
-                // {
-                // string filterSite = "";
-                // foreach (var panelAssignment in panelAssignments)
-                // {
-
-                var filterSite = panelAssignment.RootPanel.FilterSite; //need to grab filter site and interpolate in url, not working for some reason
+                var filterSite = panelAssignment.RootPanel.FilterSite;
 
                 var client = new HttpClient();
                 var request = new HttpRequestMessage
+
                 {
+
                     Method = HttpMethod.Get,
-                    RequestUri = new Uri($"https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?q=site%3Acss-tricks.com%20{dashQuery}&pageNumber=1&pageSize=10&autoCorrect=true"),
-                    // RequestUri = new Uri($"https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?q=site%3Acss-tricks.com%20{dashQuery}&pageNumber=1&pageSize=10&autoCorrect=true"),
-                    Headers = { { "x-rapidapi-key", "9650ee4b51msh94314e454641433p102fd6jsn2039b1ef4622" }, { "x-rapidapi-host", "contextualwebsearch-websearch-v1.p.rapidapi.com" }, },
+                    // Additional parameters
+                    // &n=30 # of results in query
+                    // &searchtype=images searches for images
+                    // &showimages=1 provides thumbnail images with results, default already provides the hq thumbnails
+                    // &relqueries=1 provide related queries in search results
+                    // &fast=1 worse results, but faster
+                    // &ff=1 removes adult content
+
+                    RequestUri = new Uri($"https://gigablast.com/search?&userid=503&code=1393867175&ff=1&n=30&format=json&q={dashQuery}&sites={filterSite}")
                 };
                 using (var response = await client.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     var body = await response.Content.ReadAsStringAsync(); // how to parallelize? parallel queires, supplementary lecture // star wars api
-                    Console.WriteLine(body);
-                    searchResults.Add(filterSite);
                     searchResults.Add(body);
                 }
             }
-            // searchResults.Add(dashQuery);
             return searchResults;
         }
-        // return nullResult; // should return an error message
     }
 }
 
-
-
-//                     try
-// {
-//     // var client = new ApiKeyServiceClientCredentials(subscriptionKey);
-//     // var webData = await client.Web.SearchAsync(query: str);
-//     // Console.WriteLine("Searching for \"Yosemite National Park\"");
-
-//     // Code for handling responses is provided in the next section...
-
-// }
-// catch (Exception ex)
-// {
-//     Console.WriteLine("Encountered exception. " + ex.Message);
-// }
-
-// return string.Concat(str.Select(n => new string(n, int.Parse(n.ToString())))); // some solutions involve going from ASCII value of character to ASCII value needed to select the intAsChar the correct number of times (num - 48, gives ASCII number that corressponds to value of char)
 
 // public class LoginUser
 // {
@@ -125,65 +95,3 @@ namespace QueryDash.Controllers
 // }
 
 
-
-
-// var panels = _context.Dashes.Where(dash => dash.Id == DashId).Include()
-// .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel);
-// var panelFilters = panels.Select((dash, panel) => panel.FilterSite);
-// Select(panel => panel.FilterSite)
-
-// Task WebResults(WebSearchClient client)
-// {
-//     try
-//     {
-//         var webData = client.Web.SearchAsync(query: "Yosemite National Park");
-//         Console.WriteLine("Searching for \"Yosemite National Park\"");
-
-//         // Code for handling responses is provided in the next section...
-
-//     }
-//     catch (Exception error)
-//     {
-//         Console.WriteLine("Encountered exception. " + error.Message);
-//     }
-// } 
-
-//                 // Add your Azure Bing Search V7 subscription key and endpoint to your environment variables
-// static string subscriptionKey = Environment.GetEnvironmentVariable("BING_SEARCH_V7_SUBSCRIPTION_KEY");
-// static string endpoint = Environment.GetEnvironmentVariable("BING_SEARCH_V7_ENDPOINT") + "/bing/v7.0/search";
-
-// const string query = "Microsoft Cognitive Services";
-
-// static void Main()
-// {
-//     // Create a dictionary to store relevant headers
-//     Dictionary<String, String> relevantHeaders = new Dictionary<String, String>();
-
-//     Console.OutputEncoding = Encoding.UTF8;
-
-//     Console.WriteLine("Searching the Web for: " + query);
-
-//     // Construct the URI of the search request
-//     var uriQuery = endpoint + "?q=" + Uri.EscapeDataString(query);
-
-//     // Perform the Web request and get the response
-//     WebRequest request = HttpWebRequest.Create(uriQuery);
-//     request.Headers["Ocp-Apim-Subscription-Key"] = subscriptionKey;
-//     HttpWebResponse response = (HttpWebResponse)request.GetResponseAsync().Result;
-//     string json = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
-//     // Extract Bing HTTP headers
-//     foreach (String header in response.Headers)
-//     {
-//         if (header.StartsWith("BingAPIs-") || header.StartsWith("X-MSEdge-"))
-//             relevantHeaders[header] = response.Headers[header];
-//     }
-
-//     // Show headers
-//     Console.WriteLine("\nRelevant HTTP Headers:\n");
-//     foreach (var header in relevantHeaders)
-//         Console.WriteLine(header.Key + ": " + header.Value);
-
-//     Console.WriteLine("\nJSON Response:\n");
-//     dynamic parsedJson = JsonConvert.DeserializeObject(json);
-//     Console.WriteLine(JsonConvert.SerializeObject(parsedJson, Formatting.Indented));

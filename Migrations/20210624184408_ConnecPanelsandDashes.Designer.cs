@@ -10,8 +10,8 @@ using QueryDash.Models;
 namespace QueryDash.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210623171042_ConnectPanelsAndDashes")]
-    partial class ConnectPanelsAndDashes
+    [Migration("20210624184408_ConnecPanelsandDashes")]
+    partial class ConnecPanelsandDashes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,21 +20,6 @@ namespace QueryDash.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("DashPanel", b =>
-                {
-                    b.Property<int>("DashesId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("PanelsId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("DashesId", "PanelsId");
-
-                    b.HasIndex("PanelsId");
-
-                    b.ToTable("DashPanel");
-                });
 
             modelBuilder.Entity("QueryDash.Models.Dash", b =>
                 {
@@ -156,21 +141,6 @@ namespace QueryDash.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("DashPanel", b =>
-                {
-                    b.HasOne("QueryDash.Models.Dash", null)
-                        .WithMany()
-                        .HasForeignKey("DashesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QueryDash.Models.Panel", null)
-                        .WithMany()
-                        .HasForeignKey("PanelsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("QueryDash.Models.PanelAssignment", b =>

@@ -9,7 +9,10 @@ import { authHeader } from '../auth'
 export function CreateDashPage() {
   // const history = useHistory()
 
-  const [errorMessage, setErrorMessage] = useState('')
+  const [dashFormErrorMessage, setDashFormErrorMessage] = useState('')
+  const [panelFormErrorMessage, setPanelFormErrorMessage] = useState('')
+
+  const [invalidFilterSite, setInvalidFilterSite] = useState(false)
 
   const [newDashId, setNewDashId] = useState()
 
@@ -24,12 +27,25 @@ export function CreateDashPage() {
 
   const [newPanel, setNewPanel] = useState({
     filterSite: '',
-    creationDate: '',
+    // creationDate: '',
     filterSiteName: '',
-    dashPanelAssignments: [],
+    // dashPanelAssignments: [],
   })
 
-  async function postPanel(panelResponseId) {
+  // https://stackoverflow.com/users/1092711/pavlo
+  // https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url?answertab=votes#tab-top
+  function ifURL(string) {
+    let url
+    try {
+      url = new URL(string)
+    } catch (_) {
+      return false
+    }
+    // return url
+    return true
+  }
+
+  async function postPanelAssignment(panelResponseId) {
     const newPanelAssignment = {
       panelId: panelResponseId,
       dashId: newDashId,
@@ -53,17 +69,17 @@ export function CreateDashPage() {
 
   async function handleDashFormSubmission(event) {
     event.preventDefault()
-
+    setDashFormErrorMessage('')
     const response = await fetch('/api/Dashes', {
       method: 'POST',
       headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(newDash),
     })
     if (response.status === 401) {
-      setErrorMessage('Not Authorized')
+      setDashFormErrorMessage('Not Authorized')
     } else {
       if (response.status === 400) {
-        setErrorMessage(Object.values(response.errors).join(' '))
+        setDashFormErrorMessage(Object.values(response.errors).join(' '))
       } else if (response.ok) {
         response.json().then((data) => {
           setNewDashId(data.id)
@@ -84,24 +100,29 @@ export function CreateDashPage() {
 
   async function handlePanelFormSubmission(event) {
     event.preventDefault()
-
-    const panelResponse = await fetch('/api/Panels', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(newPanel),
-    })
-    if (panelResponse.status === 400) {
-      setErrorMessage(Object.values(panelResponse.errors).join(' '))
-    } else if (panelResponse.ok) {
-      panelResponse.json().then((data) => {
-        console.log(data)
-        postPanel(data.id)
+    setPanelFormErrorMessage('')
+    if (ifURL(newPanel.filterSite)) {
+      const panelResponse = await fetch('/api/Panels', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(newPanel),
       })
-      setNewPanel({
-        FilterSite: '',
-        FilterSiteName: '',
-      })
+      if (panelResponse.status === 400) {
+        setPanelFormErrorMessage(Object.values(panelResponse.errors).join(' '))
+      } else if (panelResponse.ok) {
+        panelResponse.json().then((data) => {
+          console.log(data)
+          postPanelAssignment(data.id)
+        })
+        setInvalidFilterSite(false)
+      }
+    } else {
+      setInvalidFilterSite(true)
     }
+    setNewPanel({
+      filterSite: '',
+      filterSiteName: '',
+    })
   }
 
   return (
@@ -117,7 +138,7 @@ export function CreateDashPage() {
               onSubmit={handleDashFormSubmission}
               className="formCreateAccount"
             >
-              {errorMessage ? <p>{errorMessage}</p> : null}
+              {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
               <div className="inputContainer">
                 <label htmlFor="name">DashName: </label>
                 <input
@@ -143,32 +164,61 @@ export function CreateDashPage() {
         {!newDashId ? null : (
           <div className="containerForHeaderAndForm">
             <h5 className="header">Create Panels</h5>
+            {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
             <div className="formContainerCreateAccount">
-              <form
-                onSubmit={handlePanelFormSubmission}
-                className="formCreateAccount"
-              >
-                {errorMessage ? <p>{errorMessage}</p> : null}
-                <div className="inputContainer">
-                  <label htmlFor="filterSiteName">Webpage Name: </label>
-                  <input
-                    name="filterSiteName"
-                    type="text"
-                    value={newPanel.filterSiteName}
-                    onChange={handleStringPanelFieldChange}
-                  />
-                </div>
-                <div className="inputContainer">
-                  <label htmlFor="filterSite">Webpage URL: </label>
-                  <input
-                    name="filterSite"
-                    type="text"
-                    value={newPanel.filterSite}
-                    onChange={handleStringPanelFieldChange}
-                  />
-                </div>
-                <input type="submit" value="Submit" />
-              </form>
+              {!invalidFilterSite ? (
+                <form
+                  onSubmit={handlePanelFormSubmission}
+                  className="formCreateAccount"
+                >
+                  <div className="inputContainer">
+                    <label htmlFor="filterSiteName">Webpage Name: </label>
+                    <input
+                      name="filterSiteName"
+                      type="text"
+                      value={newPanel.filterSiteName}
+                      onChange={handleStringPanelFieldChange}
+                    />
+                  </div>
+                  <div className="inputContainer">
+                    <label htmlFor="filterSite">Webpage URL: </label>
+                    <input
+                      name="filterSite"
+                      type="text"
+                      value={newPanel.filterSite}
+                      onChange={handleStringPanelFieldChange}
+                    />
+                  </div>
+                  <input type="submit" value="Submit" />
+                </form>
+              ) : (
+                <form
+                  onSubmit={handlePanelFormSubmission}
+                  className="formCreateAccount"
+                >
+                  {' '}
+                  <div className="inputContainer">
+                    <p>Invalid Filter Site. Try Again</p>
+                    <label htmlFor="filterSiteName">Webpage Name: </label>
+                    <input
+                      name="filterSiteName"
+                      type="text"
+                      value={newPanel.filterSiteName}
+                      onChange={handleStringPanelFieldChange}
+                    />
+                  </div>
+                  <div className="inputContainer">
+                    <label htmlFor="filterSite">Webpage URL: </label>
+                    <input
+                      name="filterSite"
+                      type="text"
+                      value={newPanel.filterSite}
+                      onChange={handleStringPanelFieldChange}
+                    />
+                  </div>
+                  <input type="submit" value="Submit" />
+                </form>
+              )}
             </div>
           </div>
         )}

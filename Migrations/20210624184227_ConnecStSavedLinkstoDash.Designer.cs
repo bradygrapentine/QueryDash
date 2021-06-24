@@ -10,8 +10,8 @@ using QueryDash.Models;
 namespace QueryDash.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210623161128_ConnectSavedLinksandDashes")]
-    partial class ConnectSavedLinksandDashes
+    [Migration("20210624184227_ConnecStSavedLinkstoDash")]
+    partial class ConnecStSavedLinkstoDash
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -141,11 +141,13 @@ namespace QueryDash.Migrations
 
             modelBuilder.Entity("QueryDash.Models.SavedLink", b =>
                 {
-                    b.HasOne("QueryDash.Models.Dash", null)
+                    b.HasOne("QueryDash.Models.Dash", "RootDash")
                         .WithMany("SavedLinks")
                         .HasForeignKey("DashId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("RootDash");
                 });
 
             modelBuilder.Entity("QueryDash.Models.Dash", b =>
