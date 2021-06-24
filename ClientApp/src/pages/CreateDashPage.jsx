@@ -196,9 +196,8 @@ export function CreateDashPage() {
                   onSubmit={handlePanelFormSubmission}
                   className="formCreateAccount"
                 >
-                  {' '}
+                  <p>Invalid Filter Site. Try Again</p>{' '}
                   <div className="inputContainer">
-                    <p>Invalid Filter Site. Try Again</p>
                     <label htmlFor="filterSiteName">Webpage Name: </label>
                     <input
                       name="filterSiteName"
