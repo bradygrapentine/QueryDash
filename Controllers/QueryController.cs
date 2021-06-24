@@ -29,29 +29,48 @@ namespace QueryDash.Controllers
     [ApiController]
     public class QueryController : ControllerBase
     {
-        public string subscriptionKey = "00844542644f4b1aa8d7e9e8cf995bdf";
-        public string endpoint = "https://querydashendpoints.cognitiveservices.azure.com/bing/v7.0/search";
-        // This is the variable you use to have access to your database
         private readonly DatabaseContext _context;
 
-        [HttpGet("{dashQuery}")]
-        async public Task<string> Query(string dashQuery) //int DashId
+        // This is the variable you use to have access to your database
+        public QueryController(DatabaseContext context, IConfiguration config)
         {
+            _context = context;
+        }
+
+        [HttpGet("{dashQuery}")]
+        async public Task<List<string>> Query(string dashQuery, int dashId) //Is this the best structure to return?
+        {
+            List<string> nullResult = new List<string>(0);
+
             // grab the FilterSites off the Panels and plug into the site parameter, and grab info off the dash, then loop through the filter sites and compose a list of Json response strings
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
+            var panelAssignmentsQueryable = _context.Dashes.Where(dash => dash.Id == dashId).Select(dash => dash.DashPanelAssignments);
+            foreach (var panelAssignments in panelAssignmentsQueryable)
             {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?q=site%3Acss-tricks.com%20{dashQuery}&pageNumber=1&pageSize=10&autoCorrect=true"),
-                Headers = { { "x-rapidapi-key", "9650ee4b51msh94314e454641433p102fd6jsn2039b1ef4622" }, { "x-rapidapi-host", "contextualwebsearch-websearch-v1.p.rapidapi.com" }, },
-            };
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(body);
-                return body;
+                List<string> searchResults = new List<string>(panelAssignments.Count() * 2);
+                foreach (var panelAssignment in panelAssignments)
+                {
+                    // var filterSite = panelAssignment.RootPanel.FilterSite; //need to grab filter site and interpolate in url, not working for some reason
+
+                    var client = new HttpClient();
+                    var request = new HttpRequestMessage
+                    {
+                        Method = HttpMethod.Get,
+                        // RequestUri = new Uri($"https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?q=site%3A{filterSite}%20{dashQuery}&pageNumber=1&pageSize=10&autoCorrect=true"),
+                        RequestUri = new Uri($"https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?q=site%3Acss-tricks.com%20{dashQuery}&pageNumber=1&pageSize=10&autoCorrect=true"),
+                        Headers = { { "x-rapidapi-key", "9650ee4b51msh94314e454641433p102fd6jsn2039b1ef4622" }, { "x-rapidapi-host", "contextualwebsearch-websearch-v1.p.rapidapi.com" }, },
+                    };
+                    using (var response = await client.SendAsync(request))
+                    {
+                        response.EnsureSuccessStatusCode();
+                        var body = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(body);
+                        // searchResults.Add(filterSite);
+                        searchResults.Add(body);
+                    }
+                }
+                return searchResults;
             }
+            return nullResult; // should return an error message
         }
     }
 }
