@@ -23,12 +23,7 @@ namespace QueryDash.Controllers
 {
     // All of these routes will be at the base URL:     /api/Sessions
     // That is what "api/[controller]" means below. It uses the name of the controller
-    //   System.InvalidOperationException: An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.
     // in this case RestaurantsController to determine the URL
-
-    // c05080d55af14da1bbbb494ce68f6a60    }
-    // 00844542644f4b1aa8d7e9e8cf995bdf
-    // https://querydashendpoints.cognitiveservices.azure.com/
 
     [Route("api/[controller]")]
     [ApiController]
