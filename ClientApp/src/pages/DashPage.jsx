@@ -4,49 +4,12 @@ import { Link, useParams } from 'react-router-dom'
 
 // ------------------------------------------------------------- //
 
-export function QLink() {
-  return (
-    <div className="link">
-      <button></button>
-      <a href="https://en.wikipedia.org/wiki/Jack_Black">
-        {' '}
-        <p> Jack Black - Wikipedia</p>
-      </a>
-      <button className="viewDescription">description</button>
-      <button className="viewLink">view</button>
-      <button className="viewLink">image</button>
-    </div>
-  )
-}
-
 // ------------------------------------------------------------- //
-
-export function Panel(props) {
-  // console.log(props.rootPanel)
-
-  return (
-    <div className="panelContainer">
-      <button className="header">{props.rootPanel.filterSiteName}</button>
-      <div rows="7" cols="1" wrap="off" className="panel">
-        <QLink />
-        <QLink />
-        <QLink />
-        <QLink />
-        <QLink />
-        <QLink />
-        <QLink />
-        <QLink />
-      </div>{' '}
-    </div>
-  )
-}
 
 // ------------------------------------------------------------- //
 
 export function DashPage() {
   const [menuOpen, setMenuOpen] = useState(true)
-
-  // let searchTerm = useState('')
 
   const [dash, setDash] = useState({
     creationDate: '',
@@ -56,7 +19,9 @@ export function DashPage() {
     linksPerPanel: 0,
   })
 
-  const [dashQueryResults, setDashQueryResults] = useState([])
+  const [searchResults, setSearchResults] = useState([])
+
+  // const [dashQueryResults, setDashQueryResults] = useState([])
 
   const params = useParams()
   const [searchTerm, setSearchTerm] = useState('')
@@ -69,7 +34,6 @@ export function DashPage() {
     if (response.ok) {
       const apiData = await response.json()
       setDash(apiData)
-      // console.log(apiData)
     }
   }
 
@@ -78,29 +42,49 @@ export function DashPage() {
     const response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
     if (response.ok) {
       const apiData = await response.json()
-      // console.log(apiData)
-      // setDashQueryResults(apiData)
-      for (var i = 0; i < apiData.length; i++) {
+      for (let i = 0; i < apiData.length; i++) {
         let jsonResult = JSON.parse(apiData[i])
-        // setDashQueryResults(...dashQueryResults, jsonResult)
-        console.log(jsonResult.queryInfo)
-        console.log(jsonResult.results)
+        for (let j = 0; j < jsonResult.results.length; j++) {
+          let result = {
+            filterSite: jsonResult.results[j].site,
+            url: jsonResult.results[j].url,
+            summary: jsonResult.results[j].sum,
+            title: jsonResult.results[j].title,
+          }
+          console.log(result)
+          // let updatedSearchResults = searchResults.push(result)
+          // setSearchResults(updatedSearchResults)
+          // console.log(searchResults.length)
+        }
       }
     }
   }
 
-  // function handleSearchFieldChange(event) {
-  //   const value = event.target.value
-  //   const fieldName = event.target.name
-
-  //   const updatedSearchTerm = (searchTerm += value)
-
-  //   setSearchTerm(updatedSearchTerm)
+  // function Panel(props) {
+  //   return (
+  //     <div className="panelContainer">
+  //       <button className="header">{props.rootPanel.filterSiteName}</button>
+  //       <div rows="7" cols="1" wrap="off" className="panel">
+  //         {props.panelSearchResults.map((panelSearchResult) => (
+  //           <QLink resultInfo={panelSearchResult} />
+  //         ))}
+  //       </div>{' '}
+  //     </div>
+  //   )
   // }
 
-  // function DashQuery(params) {
+  // function QLink(props) {
   //   return (
-
+  //     <div className="link">
+  //       <button></button>
+  //       <a href={props.resultInfo.url}>
+  //         {' '}
+  //         <p>{props.resultInfo.title}</p>
+  //       </a>
+  //       <button className="viewDescription">description</button>
+  //       <button className="viewLink">view</button>
+  //       <button className="viewLink">image</button>
+  //     </div>
   //   )
   // }
 
@@ -166,7 +150,18 @@ export function DashPage() {
         <div className="displayContainer">
           <div className="display">
             {dash.dashPanelAssignments.map((dashPanelAssignment) => (
-              <Panel rootPanel={dashPanelAssignment.rootPanel} />
+              <Panel
+                rootPanel={dashPanelAssignment.rootPanel}
+                panelSearchResults={
+                  searchResults.length === 0
+                    ? []
+                    : searchResults.filter(
+                        (searchResult) =>
+                          searchResult.filterSite ===
+                          dashPanelAssignment.rootPanel.filterSite
+                      )
+                }
+              />
             ))}
           </div>
         </div>

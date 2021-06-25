@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using QueryDash.Models;
-using Microsoft.Azure.CognitiveServices.Search.WebSearch;
-using QueryDash.Utils;
 using System.Net.Http;
+using System.Linq;
+
+using QueryDash.Utils;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text;
 using System.Text.Unicode;
 using System.Net.Http.Headers;
-using System.Linq;
 using Newtonsoft.Json;
 using System.Net;
 using System.IO;
