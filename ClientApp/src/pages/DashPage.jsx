@@ -22,7 +22,7 @@ export function QLink() {
 // ------------------------------------------------------------- //
 
 export function Panel(props) {
-  console.log(props.rootPanel)
+  // console.log(props.rootPanel)
 
   return (
     <div className="panelContainer">
@@ -79,11 +79,12 @@ export function DashPage() {
     if (response.ok) {
       const apiData = await response.json()
       // console.log(apiData)
-      setDashQueryResults(apiData)
+      // setDashQueryResults(apiData)
       for (var i = 0; i < apiData.length; i++) {
         let jsonResult = JSON.parse(apiData[i])
-        // let resultDeserialize = jsonResult.Deserialize
-        console.log(jsonResult)
+        // setDashQueryResults(...dashQueryResults, jsonResult)
+        console.log(jsonResult.queryInfo)
+        console.log(jsonResult.results)
       }
     }
   }
