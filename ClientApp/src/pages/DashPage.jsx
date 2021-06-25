@@ -56,7 +56,10 @@ export function DashPage() {
     linksPerPanel: 0,
   })
 
+  const [dashQueryResults, setDashQueryResults] = useState([])
+
   const params = useParams()
+  const [searchTerm, setSearchTerm] = useState('')
 
   const id = params.id
 
@@ -66,7 +69,22 @@ export function DashPage() {
     if (response.ok) {
       const apiData = await response.json()
       setDash(apiData)
-      console.log(apiData)
+      // console.log(apiData)
+    }
+  }
+
+  async function getQueryResults(event) {
+    event.preventDefault()
+    const response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
+    if (response.ok) {
+      const apiData = await response.json()
+      // console.log(apiData)
+      // setDashQueryResults(apiData)
+      for (var i = 0; i < apiData.length; i++) {
+        let jsonResult = JSON.parse(dashQueryResults[i])
+
+        console.log(jsonResult.results)
+      }
     }
   }
 
@@ -79,57 +97,11 @@ export function DashPage() {
   //   setSearchTerm(updatedSearchTerm)
   // }
 
-  function DashQuery(params) {
-    return (
-      <div className="containerDashQuery">
-        {menuOpen ? (
-          <>
-            <div className="dashQuery">
-              <form className="dashQuery">
-                {' '}
-                {/* onSubmit={runDashQuery} */}
-                <input
-                  className="dashQuery"
-                  type="text"
-                  placeholder="Query Here"
-                  // value={searchTerm}
-                  // onChange={(event) => setSearchTerm(event.target.value)}
-                />
-              </form>
-              <div className="buttonContainer1">
-                <button>Open</button>
-                <button>Archive</button>
-              </div>
-              <div className="buttonContainer2">
-                <Link to="/history">
-                  <button>History</button>
-                </Link>
-                <Link to="/preferences">
-                  <button>Dash Settings</button>
-                </Link>
-                <Link to="/">
-                  <button>Home</button>
-                </Link>
-              </div>{' '}
-            </div>
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="collapseMenu"
-            >
-              X
-            </button>
-          </>
-        ) : (
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="collapsedMenu"
-          >
-            Open Menu
-          </button>
-        )}
-      </div>
-    )
-  }
+  // function DashQuery(params) {
+  //   return (
+
+  //   )
+  // }
 
   useEffect(() => {
     getDash()
@@ -141,7 +113,55 @@ export function DashPage() {
         <h1 className="header">{dash.name}</h1>
       </Link>{' '}
       <main className="main">
-        <DashQuery />
+        <div className="containerDashQuery">
+          {menuOpen ? (
+            <>
+              <div className="dashQuery">
+                <form onSubmit={getQueryResults} className="dashQuery">
+                  {' '}
+                  {/* onSubmit={runDashQuery} */}
+                  <input
+                    className="dashQuery"
+                    type="text"
+                    placeholder="Query Here"
+                    value={searchTerm}
+                    onChange={(event) => {
+                      setSearchTerm(event.target.value)
+                    }}
+                  />
+                </form>
+                <div className="buttonContainer1">
+                  <button>Open</button>
+                  <button>Archive</button>
+                </div>
+                <div className="buttonContainer2">
+                  <Link to="/history">
+                    <button>History</button>
+                  </Link>
+                  <Link to="/preferences">
+                    <button>Dash Settings</button>
+                  </Link>
+                  <Link to="/">
+                    <button>Home</button>
+                  </Link>
+                </div>{' '}
+              </div>
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="collapseMenu"
+              >
+                X
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="collapsedMenu"
+            >
+              Open Menu
+            </button>
+          )}
+        </div>
         <div className="displayContainer">
           <div className="display">
             {dash.dashPanelAssignments.map((dashPanelAssignment) => (
