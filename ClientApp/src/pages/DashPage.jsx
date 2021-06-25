@@ -79,11 +79,11 @@ export function DashPage() {
     if (response.ok) {
       const apiData = await response.json()
       // console.log(apiData)
-      // setDashQueryResults(apiData)
+      setDashQueryResults(apiData)
       for (var i = 0; i < apiData.length; i++) {
-        let jsonResult = JSON.parse(dashQueryResults[i])
-
-        console.log(jsonResult.results)
+        let jsonResult = JSON.parse(apiData[i])
+        // let resultDeserialize = jsonResult.Deserialize
+        console.log(jsonResult)
       }
     }
   }
