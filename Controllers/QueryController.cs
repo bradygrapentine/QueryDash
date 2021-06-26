@@ -34,7 +34,7 @@ namespace QueryDash.Controllers
         }
 
         [HttpGet("{dashQuery}")]
-        async public Task<ActionResult<List<string>>> Query(string dashQuery, int dashId)
+        async public Task<ActionResult<List<List<string>>>> Query(string dashQuery, int dashId)
         {
             var dash = await _context.Dashes.
                                         Where(dash => dash.Id == dashId).
@@ -46,14 +46,14 @@ namespace QueryDash.Controllers
                 return BadRequest();
             }
 
-            List<string> searchResults = new List<string>(dash.DashPanelAssignments.Count() * 2);
+            List<List<string>> searchResults = new List<List<string>>(dash.DashPanelAssignments.Count() * 2);
             foreach (var panelAssignment in dash.DashPanelAssignments)
             {
                 var filterSite = panelAssignment.RootPanel.FilterSite;
+                var panelId = panelAssignment.RootPanel.Id;
 
                 var client = new HttpClient();
                 var request = new HttpRequestMessage
-
                 {
 
                     Method = HttpMethod.Get,
@@ -71,7 +71,10 @@ namespace QueryDash.Controllers
                 {
                     response.EnsureSuccessStatusCode();
                     var body = await response.Content.ReadAsStringAsync(); // how to parallelize? parallel queires, supplementary lecture // star wars api
-                    searchResults.Add(body);
+                    List<string> searchResult = new List<string>(2);
+                    searchResult.Add(panelId.ToString());
+                    searchResult.Add(body);
+                    searchResults.Add(searchResult);
                 }
             }
             return searchResults;

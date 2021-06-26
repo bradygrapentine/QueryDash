@@ -4,10 +4,6 @@ import { Link, useParams } from 'react-router-dom'
 
 // ------------------------------------------------------------- //
 
-// ------------------------------------------------------------- //
-
-// ------------------------------------------------------------- //
-
 export function DashPage() {
   const [menuOpen, setMenuOpen] = useState(true)
 
@@ -20,8 +16,6 @@ export function DashPage() {
   })
 
   const [searchResults, setSearchResults] = useState([])
-
-  // const [dashQueryResults, setDashQueryResults] = useState([])
 
   const params = useParams()
   const [searchTerm, setSearchTerm] = useState('')
@@ -37,56 +31,84 @@ export function DashPage() {
     }
   }
 
+  // async function archiveLink() {
+  //   const response = await fetch(`/api/SavedLinks/${id}`)
+
+  //   if (response.ok) {
+  //     const apiData = await response.json()
+  //   }
+  // }
+
+  // async function recordOpenedLink() {
+  //   const response = await fetch(`/api/SavedLinks/${id}`)
+
+  //   if (response.ok) {
+  //     const apiData = await response.json()
+  //   }
+  // }
+
   async function getQueryResults(event) {
     event.preventDefault()
     const response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
     if (response.ok) {
       const apiData = await response.json()
+      let updatedSearchResults = []
       for (let i = 0; i < apiData.length; i++) {
-        let jsonResult = JSON.parse(apiData[i])
-        for (let j = 0; j < jsonResult.results.length; j++) {
-          let result = {
-            filterSite: jsonResult.results[j].site,
-            url: jsonResult.results[j].url,
-            summary: jsonResult.results[j].sum,
-            title: jsonResult.results[j].title,
+        let panelId = Number(JSON.parse(apiData[i][0]))
+        let apiResult = JSON.parse(apiData[i][1])
+        for (let j = 0; j < apiResult.results.length; j++) {
+          let queryResult = {
+            panelIdForResult: panelId,
+            url: apiResult.results[j].url,
+            summary: apiResult.results[j].sum,
+            title: apiResult.results[j].title,
           }
-          console.log(result)
-          // let updatedSearchResults = searchResults.push(result)
-          // setSearchResults(updatedSearchResults)
-          // console.log(searchResults.length)
+          updatedSearchResults.push(queryResult)
         }
       }
+      setSearchResults(updatedSearchResults)
     }
   }
 
-  // function Panel(props) {
-  //   return (
-  //     <div className="panelContainer">
-  //       <button className="header">{props.rootPanel.filterSiteName}</button>
-  //       <div rows="7" cols="1" wrap="off" className="panel">
-  //         {props.panelSearchResults.map((panelSearchResult) => (
-  //           <QLink resultInfo={panelSearchResult} />
-  //         ))}
-  //       </div>{' '}
-  //     </div>
-  //   )
-  // }
+  function filterSearchResults(newSearchResults, panelId) {
+    if (newSearchResults.length === 0) {
+      return []
+    } else {
+      return newSearchResults.filter(
+        (queryResult) => queryResult.panelIdForResult === panelId
+      )
+    }
+  }
 
-  // function QLink(props) {
-  //   return (
-  //     <div className="link">
-  //       <button></button>
-  //       <a href={props.resultInfo.url}>
-  //         {' '}
-  //         <p>{props.resultInfo.title}</p>
-  //       </a>
-  //       <button className="viewDescription">description</button>
-  //       <button className="viewLink">view</button>
-  //       <button className="viewLink">image</button>
-  //     </div>
-  //   )
-  // }
+  function Panel(props) {
+    return (
+      <div className="panelContainer">
+        <button className="header">{props.rootPanel.filterSiteName}</button>
+        <div rows="7" cols="1" wrap="off" className="panel">
+          {!props.panelSearchResults
+            ? []
+            : props.panelSearchResults.map((panelSearchResult) => (
+                <QLink resultInfo={panelSearchResult} />
+              ))}
+        </div>{' '}
+      </div>
+    )
+  }
+
+  function QLink(props) {
+    return (
+      <div className="link">
+        <button></button>
+        <a href={props.resultInfo.url}>
+          {' '}
+          <p>{props.resultInfo.title}</p>
+        </a>
+        <button className="viewDescription">description</button>
+        <button className="viewLink">view</button>
+        <button className="viewLink">image</button>
+      </div>
+    )
+  }
 
   useEffect(() => {
     getDash()
@@ -152,15 +174,10 @@ export function DashPage() {
             {dash.dashPanelAssignments.map((dashPanelAssignment) => (
               <Panel
                 rootPanel={dashPanelAssignment.rootPanel}
-                panelSearchResults={
-                  searchResults.length === 0
-                    ? []
-                    : searchResults.filter(
-                        (searchResult) =>
-                          searchResult.filterSite ===
-                          dashPanelAssignment.rootPanel.filterSite
-                      )
-                }
+                panelSearchResults={filterSearchResults(
+                  searchResults,
+                  dashPanelAssignment.rootPanel.id
+                )}
               />
             ))}
           </div>
