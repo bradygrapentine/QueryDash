@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { authHeader } from '../auth'
 // import axios from 'axios'
@@ -15,6 +15,8 @@ export function CreateDashPage() {
   const [invalidFilterSite, setInvalidFilterSite] = useState(false)
 
   const [newDashId, setNewDashId] = useState()
+
+  const [panels, setPanels] = useState([])
 
   const [newDash, setNewDash] = useState({
     userId: 0,
@@ -45,7 +47,10 @@ export function CreateDashPage() {
     return true
   }
 
+  const [panelAssignmentCounter, setPanelAssignmentCounter] = useState(0)
+
   async function postPanelAssignment(panelResponseId) {
+    setPanelAssignmentCounter(panelAssignmentCounter + 1)
     const newPanelAssignment = {
       panelId: panelResponseId,
       dashId: newDashId,
@@ -125,6 +130,27 @@ export function CreateDashPage() {
     })
   }
 
+  async function handleExistingPanelSelection(existingPanel) {
+    postPanelAssignment(existingPanel.value)
+    existingPanel.className = 'notVisible'
+  }
+
+  async function getPanels() {
+    const panelsResponse = await fetch('/api/Panels')
+    // console.log(panelsResponse.json())
+
+    if (panelsResponse.ok) {
+      const newPanels = await panelsResponse.json()
+      console.log(newPanels)
+      setPanels(newPanels)
+    }
+    console.log(panels)
+  }
+
+  useEffect(() => {
+    getPanels()
+  }, [])
+
   return (
     <>
       <Link className="linkForHeader" to="/">
@@ -161,65 +187,85 @@ export function CreateDashPage() {
             </form>
           </div>
         </div>
-        {!newDashId ? null : (
-          <div className="containerForHeaderAndForm">
-            <h5 className="header">Create Panels</h5>
-            {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
-            <div className="formContainerCreateAccount">
-              {!invalidFilterSite ? (
-                <form
-                  onSubmit={handlePanelFormSubmission}
-                  className="formCreateAccount"
-                >
-                  <div className="inputContainer">
-                    <label htmlFor="filterSiteName">Webpage Name: </label>
-                    <input
-                      name="filterSiteName"
-                      type="text"
-                      value={newPanel.filterSiteName}
-                      onChange={handleStringPanelFieldChange}
-                    />
-                  </div>
-                  <div className="inputContainer">
-                    <label htmlFor="filterSite">Webpage URL: </label>
-                    <input
-                      name="filterSite"
-                      type="text"
-                      value={newPanel.filterSite}
-                      onChange={handleStringPanelFieldChange}
-                    />
-                  </div>
-                  <input type="submit" value="Submit" />
-                </form>
-              ) : (
-                <form
-                  onSubmit={handlePanelFormSubmission}
-                  className="formCreateAccount"
-                >
-                  <p>Invalid Filter Site. Try Again</p>{' '}
-                  <div className="inputContainer">
-                    <label htmlFor="filterSiteName">Webpage Name: </label>
-                    <input
-                      name="filterSiteName"
-                      type="text"
-                      value={newPanel.filterSiteName}
-                      onChange={handleStringPanelFieldChange}
-                    />
-                  </div>
-                  <div className="inputContainer">
-                    <label htmlFor="filterSite">Webpage URL: </label>
-                    <input
-                      name="filterSite"
-                      type="text"
-                      value={newPanel.filterSite}
-                      onChange={handleStringPanelFieldChange}
-                    />
-                  </div>
-                  <input type="submit" value="Submit" />
-                </form>
-              )}
+        {!newDashId || panelAssignmentCounter === 10 ? (
+          <>{!newDashId ? null : <p> Panel Assignment Limit Reached </p>}</>
+        ) : (
+          <>
+            <div className="panelListContainer">
+              <ul>
+                {panels.map((panel) => (
+                  <button
+                    className="visible"
+                    value={panel.id}
+                    onClick={(event) =>
+                      handleExistingPanelSelection(event.target)
+                    }
+                  >
+                    {' '}
+                    {panel.filterSiteName}{' '}
+                  </button>
+                ))}
+              </ul>{' '}
             </div>
-          </div>
+            <div className="containerForHeaderAndForm">
+              <h5 className="header">Create Panels</h5>
+              {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
+              <div className="formContainerCreateAccount">
+                {!invalidFilterSite ? (
+                  <form
+                    onSubmit={handlePanelFormSubmission}
+                    className="formCreateAccount"
+                  >
+                    <div className="inputContainer">
+                      <label htmlFor="filterSiteName">Webpage Name: </label>
+                      <input
+                        name="filterSiteName"
+                        type="text"
+                        value={newPanel.filterSiteName}
+                        onChange={handleStringPanelFieldChange}
+                      />
+                    </div>
+                    <div className="inputContainer">
+                      <label htmlFor="filterSite">Webpage URL: </label>
+                      <input
+                        name="filterSite"
+                        type="text"
+                        value={newPanel.filterSite}
+                        onChange={handleStringPanelFieldChange}
+                      />
+                    </div>
+                    <input type="submit" value="Submit" />
+                  </form>
+                ) : (
+                  <form
+                    onSubmit={handlePanelFormSubmission}
+                    className="formCreateAccount"
+                  >
+                    <p>Invalid Filter Site. Try Again</p>{' '}
+                    <div className="inputContainer">
+                      <label htmlFor="filterSiteName">Webpage Name: </label>
+                      <input
+                        name="filterSiteName"
+                        type="text"
+                        value={newPanel.filterSiteName}
+                        onChange={handleStringPanelFieldChange}
+                      />
+                    </div>
+                    <div className="inputContainer">
+                      <label htmlFor="filterSite">Webpage URL: </label>
+                      <input
+                        name="filterSite"
+                        type="text"
+                        value={newPanel.filterSite}
+                        onChange={handleStringPanelFieldChange}
+                      />
+                    </div>
+                    <input type="submit" value="Submit" />
+                  </form>
+                )}
+              </div>
+            </div>
+          </>
         )}
       </main>
       <footer className="standardFooter">

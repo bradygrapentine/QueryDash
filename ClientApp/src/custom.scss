@@ -427,6 +427,23 @@ main.mainCreateAccount {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  div.panelListContainer {
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem;
+      margin: 0rem;
+
+      button.visible {
+        padding: 0.25rem;
+      }
+      button.notVisible {
+        display: none;
+      }
+    }
+  }
   div.containerForHeaderAndForm {
     margin: 1rem 0rem;
     padding: 0rem;

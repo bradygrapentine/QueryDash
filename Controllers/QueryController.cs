@@ -65,7 +65,7 @@ namespace QueryDash.Controllers
                     // &fast=1 worse results, but faster
                     // &ff=1 removes adult content
 
-                    RequestUri = new Uri($"https://gigablast.com/search?&userid=503&code=1393867175&ff=1&n=30&format=json&q={dashQuery}&sites={filterSite}")
+                    RequestUri = new Uri($"https://gigablast.com/search?&userid=503&code=1393867175&ff=1&n=50&format=json&q={dashQuery}&sites={filterSite}")
                 };
                 using (var response = await client.SendAsync(request))
                 {
