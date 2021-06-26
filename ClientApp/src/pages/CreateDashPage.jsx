@@ -135,19 +135,18 @@ export function CreateDashPage() {
     existingPanel.className = 'notVisible'
   }
 
-  async function getPanels() {
-    const panelsResponse = await fetch('/api/Panels')
-    // console.log(panelsResponse.json())
-
-    if (panelsResponse.ok) {
-      const newPanels = await panelsResponse.json()
-      console.log(newPanels)
-      setPanels(newPanels)
-    }
-    console.log(panels)
-  }
-
   useEffect(() => {
+    async function getPanels() {
+      const panelsResponse = await fetch('/api/Panels')
+      // console.log(panelsResponse.json())
+
+      if (panelsResponse.ok) {
+        const newPanels = await panelsResponse.json()
+        console.log(newPanels)
+        setPanels(newPanels)
+      }
+      // console.log(panels)
+    }
     getPanels()
   }, [])
 
