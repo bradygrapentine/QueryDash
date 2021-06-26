@@ -55,6 +55,7 @@ namespace QueryDash.Controllers
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpDelete("{id}")]
+        // this will be used on the dash preferences page
         public async Task<IActionResult> DeletePanelAssignment(int id)
         {
             // Find this panelAssignment by looking for the specific id

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { getUserId, authHeader } from '../auth'
 // import { isWebUri } from 'valid-url'
 
 // ------------------------------------------------------------- //
@@ -94,21 +95,58 @@ export function DashPage() {
       </div>
     )
   }
+  async function postArchivedLink(event) {
+    event.preventDefault()
+    const newSavedLink = {
+      isArchive: true,
+      dashId: Number(dash.id),
+      queryUrl: event.target.value,
+      userId: getUserId(),
+    }
+    const archivedLinkResponse = await fetch('/api/SavedLinks', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', ...authHeader() },
+      body: JSON.stringify(newSavedLink),
+    })
+  }
 
   function QLink(props) {
     return (
       <div className="link">
-        <button></button>
-        <a href={props.resultInfo.url}>
-          {' '}
-          <p>{props.resultInfo.title}</p>
-        </a>
-        <button className="viewDescription">description</button>
-        <button className="viewLink">view</button>
-        <button className="viewLink">image</button>
+        <button
+          className="viewLink"
+          value={props.resultInfo.url}
+          onClick={(event) => postArchivedLink(event)}
+        >
+          Archive Link
+        </button>
+        <div className="content">
+          <a href={props.resultInfo.url}>
+            {' '}
+            <p className="title">{props.resultInfo.title}</p>
+          </a>
+          <p className="summary">{props.resultInfo.summary}</p>
+          <a href={props.resultInfo.url}>
+            <p className="url">{props.resultInfo.url}</p>
+          </a>
+        </div>
       </div>
     )
   }
+
+  // async function postArchivedLink(link) {
+  //   const newSavedLink = {
+  //     isArchive: true,
+  //     dashId: id,
+  //     queryUrl: link,
+  //   }
+  //   const archivedLinkResponse = await fetch('/api/SavedLinks', {
+  //     method: 'POST',
+  //     headers: { 'content-type': 'application/json' },
+  //     body: JSON.stringify(newSavedLink),
+  //   })
+  //   console.log(archivedLinkResponse.json())
+  // }
 
   useEffect(() => {
     getDash()
@@ -136,11 +174,8 @@ export function DashPage() {
                       setSearchTerm(event.target.value)
                     }}
                   />
+                  <input type="submit" className="search" value="Search" />
                 </form>
-                <div className="buttonContainer1">
-                  <button>Open</button>
-                  <button>Archive</button>
-                </div>
                 <div className="buttonContainer2">
                   <Link to="/history">
                     <button>History</button>

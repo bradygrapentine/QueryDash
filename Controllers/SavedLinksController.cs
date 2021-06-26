@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using QueryDash.Models;
 
@@ -31,25 +33,16 @@ namespace QueryDash.Controllers
         // Returns a list of all your SavedLinks
         //
         [HttpGet]
+        // on history and archive pages
         // add authentication schema s.t. you don't need to send the userId down
-        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks(int dashId, int userId, bool isArchive = true)
+        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks(int userId, bool isArchive = true)
         {
 
             var allSavedLinks = await _context.SavedLinks.OrderByDescending(row => row.Id).Where(row => row.UserId == userId).Include(row => row.RootDash).ToListAsync();
-            if (isArchive && dashId != 0)
-            {
-                List<SavedLink> dashArchive = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && savedLink.IsArchive).ToList();
-                return dashArchive;
-            }
-            else if (isArchive)
+            if (isArchive)
             {
                 List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.IsArchive).ToList();
                 return userArchive;
-            }
-            else if (isArchive == false && dashId != 0)
-            {
-                List<SavedLink> dashOpened = allSavedLinks.Where(savedLink => savedLink.DashId == dashId && !savedLink.IsArchive).ToList();
-                return dashOpened;
             }
             else if (isArchive == false)
             {
@@ -73,10 +66,15 @@ namespace QueryDash.Controllers
         // supplies to the names of the attributes of our SavedLink POCO class. This represents the
         // new values for the record.
         //
+
+
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<SavedLink>> PostSavedLink(SavedLink savedLink)
         {
             // Indicate to the database context we want to add this new record
+            savedLink.UserId = GetCurrentUserId();
+
             _context.SavedLinks.Add(savedLink);
             await _context.SaveChangesAsync();
 
@@ -94,6 +92,7 @@ namespace QueryDash.Controllers
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteSavedLink(int id)
         {
 

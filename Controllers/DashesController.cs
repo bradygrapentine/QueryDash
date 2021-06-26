@@ -39,8 +39,6 @@ namespace QueryDash.Controllers
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderBy(row => row.Id)
-                                        .Include(dash => dash.DashPanelAssignments)
-                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
                                         .ToListAsync();
         }
 
@@ -52,9 +50,6 @@ namespace QueryDash.Controllers
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderBy(row => row.Id)
                                         .Where(dash => dash.UserId != GetCurrentUserId())
-                                        .Include(dash => dash.SavedLinks)
-                                        .Include(dash => dash.DashPanelAssignments)
-                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
                                         .ToListAsync();
         }
 
@@ -66,9 +61,6 @@ namespace QueryDash.Controllers
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderBy(row => row.Id)
                                         .Where(dash => dash.UserId == GetCurrentUserId())
-                                        .Include(dash => dash.SavedLinks)
-                                        .Include(dash => dash.DashPanelAssignments)
-                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
                                         .ToListAsync();
         }
 
@@ -112,6 +104,7 @@ namespace QueryDash.Controllers
         // new values for the record.
         //
         [HttpPut("{id}")]
+        // dash preferences page
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> PutDash(int id, Dash dash)
         {
@@ -163,6 +156,7 @@ namespace QueryDash.Controllers
         //
 
         [HttpPost]
+        // from dash page when user adopts existing dash via button, already on create dash page
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<Dash>> PostDash(Dash dash)
         {
@@ -184,6 +178,7 @@ namespace QueryDash.Controllers
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpDelete("{id}")]
+        // dash preferences page
         public async Task<IActionResult> DeleteDash(int id)
         {
             // Find this dash by looking for the specific id

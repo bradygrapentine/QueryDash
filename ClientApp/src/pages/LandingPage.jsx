@@ -112,6 +112,7 @@ export function LandingPage() {
                     <Link to={`/dash/${dash.id}`} className="">
                       {dash.name}
                     </Link>
+                    <button></button>
                   </li>
                 ))}
               </ul>
@@ -124,6 +125,7 @@ export function LandingPage() {
                     <Link to={`/dash/${dash.id}`} className="">
                       {dash.name}
                     </Link>
+                    <button></button>
                   </li>
                 ))}
               </ul>
