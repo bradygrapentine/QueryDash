@@ -96,7 +96,7 @@ export function DashPreferences() {
       </Link>
       <main className="mainCreateAccount">
         <div className="containerForHeaderAndForm">
-          <h5 className="header">Create Dash</h5>
+          <h5 className="header">Edit Dash</h5>
           <div className="formContainerCreateAccount">
             <form onSubmit={updateDash} className="formCreateAccount">
               {/* {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null} */}

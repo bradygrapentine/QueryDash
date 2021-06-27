@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
-import { isLoggedIn, logout, getUser, authHeader } from '../auth'
+import { isLoggedIn, logout, getUserId, getUser, authHeader } from '../auth'
 
 // import { Footer } from './DashPage'
 // import './custom.scss'
@@ -19,6 +19,61 @@ export function LandingPage() {
   const [nonUserDashList, setNonUserDashList] = useState([])
 
   const user = getUser()
+
+  const history = useHistory()
+
+  // const [newDash, setNewDash] = useState({
+  //   userId: 0,
+  //   creationDate: '',
+  //   dashPanelAssignments: [],
+  //   savedLinks: [],
+  //   : '',
+  //   linksPerPanel: 0,
+  // })
+
+  async function copyDash(dash, event) {
+    event.preventDefault()
+    let newDash = {}
+    newDash.userId = getUserId()
+    newDash.dashPanelAssignments = dash.dashPanelAssignments
+    newDash.savedLinks = dash.savedLinks
+    newDash.name = dash.name
+    newDash.creationDate = dash.creationDate
+    newDash.linksPerPanel = dash.linksPerPanel
+    const response = await fetch('/api/Dashes', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', ...authHeader() },
+      body: JSON.stringify(newDash),
+    })
+    if (response.status === 401) {
+      console.log('Not Authorized')
+    } else {
+      if (response.status === 400) {
+        console.log(Object.values(response.errors).join(' '))
+      } else if (response.ok) {
+        response.json().then((data) => {
+          history.push(`/dash/${data.id}`)
+        })
+      }
+    }
+  }
+
+  // async function handleDashFormSubmission(event) {
+  //   event.preventDefault()
+
+  //   if (response.status === 401) {
+  //     setDashFormErrorMessage('Not Authorized')
+  //   } else {
+  //     if (response.status === 400) {
+  //       setDashFormErrorMessage(Object.values(response.errors).join(' '))
+  //     } else if (response.ok) {
+  //       response.json().then((data) => {
+  //         setNewDashId(data.id)
+  //         console.log(data)
+  //       })
+  //     }
+  //   }
+  // }
 
   // {
   //   id: null,
@@ -112,7 +167,16 @@ export function LandingPage() {
                     <Link to={`/dash/${dash.id}`} className="">
                       {dash.name}
                     </Link>
-                    <button></button>
+                    <div>
+                      <button onClick={() => history.push(`/dash/${dash.id}`)}>
+                        Use Dash
+                      </button>
+                      <button
+                        onClick={() => history.push(`/preferences/${dash.id}`)}
+                      >
+                        Edit Dash
+                      </button>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -122,10 +186,15 @@ export function LandingPage() {
               <ul className="DisplayListDash">
                 {dashList.map((dash) => (
                   <li key={dash.id}>
-                    <Link to={`/dash/${dash.id}`} className="">
-                      {dash.name}
-                    </Link>
-                    <button></button>
+                    {/* <Link to={`/dash/${dash.id}`} className=""> */}
+                    {dash.name}
+                    {/* </Link> */}
+                    <form
+                      onSubmit={(event) => copyDash(dash, event)}
+                      // className="formCreateAccount"
+                    >
+                      <input type="submit" value="Copy Dash" />
+                    </form>
                   </li>
                 ))}
               </ul>
