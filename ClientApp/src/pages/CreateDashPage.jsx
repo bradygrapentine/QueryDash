@@ -104,7 +104,6 @@ export function CreateDashPage() {
   }
 
   async function handlePanelFormSubmission(event) {
-    event.preventDefault()
     setPanelFormErrorMessage('')
     if (ifURL(newPanel.filterSite)) {
       const panelResponse = await fetch('/api/Panels', {

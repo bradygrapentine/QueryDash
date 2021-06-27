@@ -8,57 +8,6 @@ import { isLoggedIn, authHeader } from '../auth'
 // ------------------------------------------------------------- //
 
 export function HistoryAndArchivesPage() {
-  const userHistory = [
-    {
-      id: 1,
-      isArchive: false,
-      userId: 1,
-      dashId: 1,
-      queryUrl: 'https://en.wikipedia.org/wiki/Dog',
-      timeStamp: '2020-01-02T01:01:00',
-    },
-    {
-      id: 5,
-      isArchive: false,
-      userId: 1,
-      dashId: 1,
-      queryUrl: 'https://en.wikipedia.org/wiki/Horse',
-      timeStamp: '2020-01-02T05:01:00',
-    },
-    {
-      id: 6,
-      isArchive: false,
-      userId: 1,
-      dashId: 1,
-      queryUrl: 'https://en.wikipedia.org/wiki/Camel',
-      timeStamp: '2020-01-02T06:01:00',
-    },
-    {
-      id: 13,
-      isArchive: false,
-      userId: 1,
-      dashId: 3,
-      queryUrl: 'https://en.wikipedia.org/wiki/Dog',
-      timeStamp: '2020-01-04T01:01:00',
-    },
-    {
-      id: 14,
-      isArchive: false,
-      userId: 1,
-      dashId: 3,
-      queryUrl: 'https://en.wikipedia.org/wiki/Cat',
-      timeStamp: '2020-01-04T02:01:00',
-    },
-    {
-      id: 17,
-      isArchive: false,
-      userId: 1,
-      dashId: 3,
-      queryUrl: 'https://en.wikipedia.org/wiki/Horse',
-      timeStamp: '2020-01-04T05:01:00',
-    },
-  ]
-
   async function deleteSavedLink(savedLinkId) {
     const response = await fetch(`/api/SavedLinks/${savedLinkId}`, {
       method: 'DELETE',

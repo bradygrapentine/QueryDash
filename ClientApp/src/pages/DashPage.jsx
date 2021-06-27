@@ -218,7 +218,7 @@ export function DashPage() {
                       <Link to="/historyandarchives">
                         <button>History and Archives</button>
                       </Link>
-                      <Link to="/preferences">
+                      <Link to={`/preferences/${dash.id}`}>
                         <button>Dash Settings</button>
                       </Link>
                     </>
