@@ -35,25 +35,14 @@ namespace QueryDash.Controllers
         [HttpGet]
         // on history and archive pages
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks(bool isArchive = true)
+        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks()
         {
-
             var userId = GetCurrentUserId();
-            var allSavedLinks = await _context.SavedLinks.OrderByDescending(row => row.Id).Where(row => row.UserId == userId).ToListAsync();
-            if (isArchive)
-            {
-                List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.IsArchive).ToList();
-                return userArchive;
-            }
-            else if (isArchive == false)
-            {
-                List<SavedLink> userOpened = allSavedLinks.Where(savedLink => !savedLink.IsArchive).ToList();
-                return userOpened;
-            }
-            else
-            {
-                return null;
-            }
+            var allSavedLinks = await _context.SavedLinks.OrderByDescending(row => row.Id).Where(row => row.UserId == userId).Include(row => row.RootDash).ToListAsync();
+
+            List<SavedLink> userSavedLinks = allSavedLinks.ToList();
+            return userSavedLinks;
+
         }
 
         //----------------------------------------------------------------------------------------------------------------//
@@ -96,25 +85,31 @@ namespace QueryDash.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteSavedLink(int id)
         {
-
             // DELETE http://localhost:5000/api/SavedLinks/35 => deletes SavedLink with given ID
 
             // Find this savedLink by looking for the specific id
             var savedLink = await _context.SavedLinks.FindAsync(id);
-            if (savedLink == null)
+            if (savedLink.UserId == GetCurrentUserId())
             {
-                // There wasn't a savedLink with that id so return a `404` not found
-                return NotFound();
+                if (savedLink == null)
+                {
+                    // There wasn't a savedLink with that id so return a `404` not found
+                    return NotFound();
+                }
+
+                // Tell the database we want to remove this record
+                _context.SavedLinks.Remove(savedLink);
+
+                // Tell the database to perform the deletion
+                await _context.SaveChangesAsync();
+
+                // Return a copy of the deleted data
+                return Ok(savedLink);
             }
-
-            // Tell the database we want to remove this record
-            _context.SavedLinks.Remove(savedLink);
-
-            // Tell the database to perform the deletion
-            await _context.SaveChangesAsync();
-
-            // Return a copy of the deleted data
-            return Ok(savedLink);
+            else
+            {
+                return BadRequest();
+            }
         }
 
         //----------------------------------------------------------------------------------------------------------------//

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+// import {  } from 'react-router-dom'
 import { Footer } from './DashPage'
 import { Link } from 'react-router-dom'
+import { isLoggedIn, authHeader } from '../auth'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -57,6 +59,35 @@ export function HistoryAndArchivesPage() {
     },
   ]
 
+  async function deleteSavedLink(savedLinkId) {
+    const response = await fetch(`/api/SavedLinks/${savedLinkId}`, {
+      method: 'DELETE',
+      headers: { 'content-type': 'application/json', ...authHeader() },
+    })
+
+    if (response.ok) {
+      getSavedLinks()
+    }
+  }
+
+  const [savedLinks, setSavedLinks] = useState([])
+
+  async function getSavedLinks() {
+    const response = await fetch(`/api/SavedLinks`, {
+      headers: { 'content-type': 'application/json', ...authHeader() },
+    })
+
+    if (response.ok) {
+      const newSavedLinks = await response.json()
+      setSavedLinks(newSavedLinks)
+      console.log(newSavedLinks)
+    }
+  }
+
+  useEffect(() => {
+    getSavedLinks()
+  }, [])
+
   return (
     <>
       <Link className="linkForHeader" to="/">
@@ -64,22 +95,100 @@ export function HistoryAndArchivesPage() {
       </Link>{' '}
       <main className="aboutPage">
         <article className="aboutPageArticle">
-          <h5 className="header">Article 1</h5>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident
-            excepturi porro accusantium exercitationem unde natus rerum
-            voluptatibus sint saepe aut, molestiae eum consequatur ullam neque
-            quibusdam ex nulla. Accusamus, asperiores!
-          </p>
+          <h5 className="header">Archives</h5>
+          <ul className="savedLinkList">
+            {isLoggedIn() ? (
+              <>
+                {savedLinks.filter((savedLink) => savedLink.isArchive === true)
+                  .length > 0 ? (
+                  <>
+                    {savedLinks
+                      .filter((savedLink) => savedLink.isArchive === true)
+                      .map((savedLink) => (
+                        <>
+                          <li className="savedLinkList">
+                            <p className="savedLinkListLabel">
+                              Archived-Link:{' '}
+                            </p>
+                            <a
+                              className="savedLinkList"
+                              href={savedLink.queryUrl}
+                            >
+                              {savedLink.queryUrl}
+                            </a>
+                            <p className="savedLinkListLabel">Archived At: </p>
+                            <p className="savedLinkList">
+                              {savedLink.timeStamp}{' '}
+                            </p>
+                            <p className="savedLinkListLabel">Archived On: </p>
+                            <p className="savedLinkList">
+                              {savedLink.rootDash.name}{' '}
+                            </p>
+                          </li>
+                          <button
+                            className="savedLinkList"
+                            onClick={() => deleteSavedLink(savedLink.id)}
+                          >
+                            ^ Delete Archive ^
+                          </button>
+                        </>
+                      ))}
+                  </>
+                ) : (
+                  <p className="savedLinkList">No Archived Links</p>
+                )}
+              </>
+            ) : (
+              <p className="savedLinkList">Must Login to View Archives</p>
+            )}
+          </ul>
         </article>
         <article className="aboutPageArticle">
-          <h5 className="header">Article 1</h5>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate
-            cupiditate ipsa recusandae, nemo porro natus ipsum sit expedita eum
-            necessitatibus accusantium laborum voluptatem doloremque voluptates
-            in ex mollitia aperiam numquam?
-          </p>
+          <h5 className="header">Opened Links</h5>
+          <ul className="savedLinkList">
+            {isLoggedIn() ? (
+              <>
+                {savedLinks.filter((savedLink) => savedLink.isArchive === false)
+                  .length > 0 ? (
+                  <>
+                    {savedLinks
+                      .filter((savedLink) => savedLink.isArchive === false)
+                      .map((savedLink) => (
+                        <>
+                          <li className="savedLinkList">
+                            <p className="savedLinkListLabel">Opened-Link: </p>
+                            <a
+                              className="savedLinkList"
+                              href={savedLink.queryUrl}
+                            >
+                              {savedLink.queryUrl}
+                            </a>
+                            <p className="savedLinkListLabel">Opened At: </p>
+                            <p className="savedLinkList">
+                              {savedLink.timeStamp}{' '}
+                            </p>
+                            <p className="savedLinkListLabel">Opened On: </p>
+                            <p className="savedLinkList">
+                              {savedLink.rootDash.name}{' '}
+                            </p>
+                          </li>
+                          <button
+                            className="savedLinkList"
+                            onClick={() => deleteSavedLink(savedLink.id)}
+                          >
+                            ^ Delete Opened Link ^
+                          </button>
+                        </>
+                      ))}
+                  </>
+                ) : (
+                  <p className="savedLinkList">No Archived Links</p>
+                )}
+              </>
+            ) : (
+              <p className="savedLinkList">Must Login to View Archives</p>
+            )}
+          </ul>
         </article>
       </main>
       <footer className="standardFooter">
