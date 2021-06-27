@@ -34,11 +34,12 @@ namespace QueryDash.Controllers
         //
         [HttpGet]
         // on history and archive pages
-        // add authentication schema s.t. you don't need to send the userId down
-        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks(int userId, bool isArchive = true)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks(bool isArchive = true)
         {
 
-            var allSavedLinks = await _context.SavedLinks.OrderByDescending(row => row.Id).Where(row => row.UserId == userId).Include(row => row.RootDash).ToListAsync();
+            var userId = GetCurrentUserId();
+            var allSavedLinks = await _context.SavedLinks.OrderByDescending(row => row.Id).Where(row => row.UserId == userId).ToListAsync();
             if (isArchive)
             {
                 List<SavedLink> userArchive = allSavedLinks.Where(savedLink => savedLink.IsArchive).ToList();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { getUserId, authHeader } from '../auth'
+import { getUserId, authHeader, isLoggedIn } from '../auth'
 // import { isWebUri } from 'valid-url'
 
 // ------------------------------------------------------------- //
@@ -82,56 +82,89 @@ export function DashPage() {
     )
   }
 
-  // async function recordOpenedLink(url) {
-  //   // event.preventDefault.preventDefault()
-  //   const newSavedLink = {
-  //     isArchive: false,
-  //     dashId: Number(dash.id),
-  //     queryUrl: url,
-  //     userId: getUserId(),
-  //   }
-  //   const archivedLinkResponse = await fetch('/api/SavedLinks', {
-  //     method: 'POST',
-  //     headers: { 'content-type': 'application/json', ...authHeader() },
-  //     body: JSON.stringify(newSavedLink),
-  //   })
-  //   console.log('test')
-  // }
+  async function recordOpenedLink(event) {
+    event.preventDefault()
+    if (isLoggedIn()) {
+      const newSavedLink = {
+        isArchive: false,
+        dashId: Number(dash.id),
+        queryUrl: event.target.value,
+        userId: getUserId(),
+      }
+      const savedLinkResponse = await fetch('/api/SavedLinks', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+        body: JSON.stringify(newSavedLink),
+      })
+      if (savedLinkResponse.ok) {
+        console.log('test')
+        console.log(savedLinkResponse.json())
+        window.location.assign(event.target.value)
+      } else {
+        console.log('ERROR')
+      }
+    } else {
+      console.log('AUTH ERROR')
+    }
+  }
 
   async function postArchivedLink(event) {
     event.preventDefault()
-    const newSavedLink = {
-      isArchive: true,
-      dashId: Number(dash.id),
-      queryUrl: event.target.value,
-      userId: getUserId(),
+    if (isLoggedIn()) {
+      const newSavedLink = {
+        isArchive: true,
+        dashId: Number(dash.id),
+        queryUrl: event.target.value,
+        userId: getUserId(),
+      }
+      const archivedLinkResponse = await fetch('/api/SavedLinks', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+        body: JSON.stringify(newSavedLink),
+      })
+      if (archivedLinkResponse.ok) {
+        console.log('test')
+        console.log(archivedLinkResponse.json())
+      } else {
+        console.log('ERROR')
+      }
+    } else {
+      console.log('ERROR')
     }
-    const archivedLinkResponse = await fetch('/api/SavedLinks', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', ...authHeader() },
-      body: JSON.stringify(newSavedLink),
-    })
   }
 
   function QLink(props) {
     return (
       <div className="link">
-        <button
-          className="viewLink"
-          value={props.resultInfo.url}
-          onClick={(event) => postArchivedLink(event)}
-        >
-          Archive Link
-        </button>
+        {isLoggedIn() ? (
+          <button
+            className="viewLink"
+            value={props.resultInfo.url}
+            onClick={(event) => postArchivedLink(event)}
+          >
+            Archive Link
+          </button>
+        ) : null}
         <div className="content">
-          <a href={props.resultInfo.url}>
-            {' '}
-            <p className="title">{props.resultInfo.title}</p>
-          </a>
+          {/* <a href={props.resultInfo.url}> */}{' '}
+          <button
+            className="title"
+            value={props.resultInfo.url}
+            onClick={(event) => recordOpenedLink(event)}
+          >
+            {props.resultInfo.title}
+          </button>
+          {/* </a> */}
           <p className="summary">{props.resultInfo.summary}</p>
-          <a href={props.resultInfo.url}>
-            <p className="url">{props.resultInfo.url}</p>
-          </a>
+          {/* <a href={props.resultInfo.url}> */}
+          <button
+            className="url"
+            value={props.resultInfo.url}
+            onClick={(event) => recordOpenedLink(event)}
+          >
+            {props.resultInfo.url}
+          </button>
+          {/* </a> */}
         </div>
       </div>
     )
@@ -180,15 +213,20 @@ export function DashPage() {
                   <input type="submit" className="search" value="Search" />
                 </form>
                 <div className="buttonContainer2">
-                  <Link to="/archive">
-                    <button>Archives</button>
-                  </Link>
-                  <Link to="/history">
-                    <button>History</button>
-                  </Link>
-                  <Link to="/preferences">
-                    <button>Dash Settings</button>
-                  </Link>
+                  {isLoggedIn() ? (
+                    <>
+                      {' '}
+                      <Link to="/archive">
+                        <button>Archives</button>
+                      </Link>
+                      <Link to="/history">
+                        <button>History</button>
+                      </Link>
+                      <Link to="/preferences">
+                        <button>Dash Settings</button>
+                      </Link>
+                    </>
+                  ) : null}
                   <Link to="/">
                     <button>Home</button>
                   </Link>
@@ -225,12 +263,21 @@ export function DashPage() {
         </div>
       </main>
       <footer className="standardFooter">
-        <Link to="/create-account" className="navLink">
-          Sign Up
-        </Link>
-        <Link to="/create-dash" className="navLink">
-          Create Dash{' '}
-        </Link>
+        {!isLoggedIn() ? (
+          <>
+            <Link to="/create-account" className="navLink">
+              Log In
+            </Link>
+
+            <Link to="/create-account" className="navLink">
+              Sign Up
+            </Link>
+          </>
+        ) : (
+          <Link to="/create-dash" className="navLink">
+            Create Dash{' '}
+          </Link>
+        )}
       </footer>{' '}
     </>
   )
@@ -243,6 +290,7 @@ export function DashPage() {
 //
 //
 //
+
 //
 //
 //
