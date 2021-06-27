@@ -32,22 +32,6 @@ export function DashPage() {
     }
   }
 
-  // async function archiveLink() {
-  //   const response = await fetch(`/api/SavedLinks/${id}`)
-
-  //   if (response.ok) {
-  //     const apiData = await response.json()
-  //   }
-  // }
-
-  // async function recordOpenedLink() {
-  //   const response = await fetch(`/api/SavedLinks/${id}`)
-
-  //   if (response.ok) {
-  //     const apiData = await response.json()
-  //   }
-  // }
-
   async function getQueryResults(event) {
     event.preventDefault()
     const response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
@@ -97,6 +81,23 @@ export function DashPage() {
       </div>
     )
   }
+
+  // async function recordOpenedLink(url) {
+  //   // event.preventDefault.preventDefault()
+  //   const newSavedLink = {
+  //     isArchive: false,
+  //     dashId: Number(dash.id),
+  //     queryUrl: url,
+  //     userId: getUserId(),
+  //   }
+  //   const archivedLinkResponse = await fetch('/api/SavedLinks', {
+  //     method: 'POST',
+  //     headers: { 'content-type': 'application/json', ...authHeader() },
+  //     body: JSON.stringify(newSavedLink),
+  //   })
+  //   console.log('test')
+  // }
+
   async function postArchivedLink(event) {
     event.preventDefault()
     const newSavedLink = {
@@ -226,12 +227,6 @@ export function DashPage() {
       <footer className="standardFooter">
         <Link to="/create-account" className="navLink">
           Sign Up
-        </Link>
-        <Link to="/about" className="navLink">
-          About
-        </Link>
-        <Link to="/" className="navLink">
-          Home
         </Link>
         <Link to="/create-dash" className="navLink">
           Create Dash{' '}
