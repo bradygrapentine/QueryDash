@@ -8,9 +8,8 @@ import { LoginPage } from './pages/LoginPage.jsx'
 import { AboutPage } from './pages/AboutPage.jsx'
 import { CreateAccountPage } from './pages/CreateAccountPage.jsx'
 import { CreateDashPage } from './pages/CreateDashPage.jsx'
-import { ArchivePage } from './pages/ArchivePage.jsx'
 import { DashPreferences } from './pages/DashPreferences.jsx'
-import { HistoryPage } from './pages/HistoryPage.jsx'
+import { HistoryAndArchivesPage } from './pages/HistoryAndArchivesPage.jsx'
 
 export function App() {
   return (
@@ -33,8 +32,8 @@ export function App() {
           <CreateDashPage />
         </Route>
         {/* ---------------------------------------------- */}
-        <Route exact path="/archive">
-          <ArchivePage />
+        <Route exact path="/historyandarchives">
+          <HistoryAndArchivesPage />
         </Route>
         {/* ---------------------------------------------- */}
         <Route exact path="/dash/:id">
@@ -42,9 +41,6 @@ export function App() {
         </Route>
         <Route exact path="/preferences/:id">
           <DashPreferences />
-        </Route>
-        <Route exact path="/history">
-          <HistoryPage />
         </Route>
         {/* ---------------------------------------------- */}
         <Route path="*">Not Found...</Route>

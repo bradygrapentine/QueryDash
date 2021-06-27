@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 // ------------------------------------------------------------- //
 
-export function HistoryPage() {
+export function HistoryAndArchivesPage() {
   const userHistory = [
     {
       id: 1,

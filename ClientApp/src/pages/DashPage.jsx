@@ -31,57 +31,6 @@ export function DashPage() {
       setDash(apiData)
     }
   }
-
-  async function getQueryResults(event) {
-    event.preventDefault()
-    const response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
-    if (response.ok) {
-      const apiData = await response.json()
-      let updatedSearchResults = []
-      for (let i = 0; i < apiData.length; i++) {
-        let panelId = Number(JSON.parse(apiData[i][0]))
-        let apiResult = JSON.parse(apiData[i][1])
-        for (let j = 0; j < apiResult.results.length; j++) {
-          let queryResult = {
-            panelIdForResult: panelId,
-            url: apiResult.results[j].url,
-            summary: apiResult.results[j].sum,
-            title: apiResult.results[j].title,
-          }
-          updatedSearchResults.push(queryResult)
-        }
-      }
-      setSearchResults(updatedSearchResults)
-    }
-  }
-
-  function filterSearchResults(newSearchResults, panelId) {
-    if (newSearchResults.length === 0) {
-      return []
-    } else {
-      return newSearchResults.filter(
-        (queryResult) => queryResult.panelIdForResult === panelId
-      )
-    }
-  }
-
-  function Panel(props) {
-    return (
-      <div className="panelContainer">
-        <button className="header">{props.rootPanel.filterSiteName}</button>
-        <div rows="7" cols="1" wrap="off" className="panel">
-          {!props.panelSearchResults
-            ? []
-            : props.panelSearchResults
-                .slice(0, dash.linksPerPanel)
-                .map((panelSearchResult) => (
-                  <QLink resultInfo={panelSearchResult} />
-                ))}
-        </div>{' '}
-      </div>
-    )
-  }
-
   async function recordOpenedLink(event) {
     event.preventDefault()
     if (isLoggedIn()) {
@@ -131,6 +80,56 @@ export function DashPage() {
     } else {
       console.log('ERROR')
     }
+  }
+
+  async function getQueryResults(event) {
+    event.preventDefault()
+    const response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
+    if (response.ok) {
+      const apiData = await response.json()
+      let updatedSearchResults = []
+      for (let i = 0; i < apiData.length; i++) {
+        let panelId = Number(JSON.parse(apiData[i][0]))
+        let apiResult = JSON.parse(apiData[i][1])
+        for (let j = 0; j < apiResult.results.length; j++) {
+          let queryResult = {
+            panelIdForResult: panelId,
+            url: apiResult.results[j].url,
+            summary: apiResult.results[j].sum,
+            title: apiResult.results[j].title,
+          }
+          updatedSearchResults.push(queryResult)
+        }
+      }
+      setSearchResults(updatedSearchResults)
+    }
+  }
+
+  function filterSearchResults(newSearchResults, panelId) {
+    if (newSearchResults.length === 0) {
+      return []
+    } else {
+      return newSearchResults.filter(
+        (queryResult) => queryResult.panelIdForResult === panelId
+      )
+    }
+  }
+
+  function Panel(props) {
+    return (
+      <div className="panelContainer">
+        <button className="header">{props.rootPanel.filterSiteName}</button>
+        <div rows="7" cols="1" wrap="off" className="panel">
+          {!props.panelSearchResults
+            ? []
+            : props.panelSearchResults
+                .slice(0, dash.linksPerPanel)
+                .map((panelSearchResult) => (
+                  <QLink resultInfo={panelSearchResult} />
+                ))}
+        </div>{' '}
+      </div>
+    )
   }
 
   function QLink(props) {
@@ -216,11 +215,8 @@ export function DashPage() {
                   {isLoggedIn() ? (
                     <>
                       {' '}
-                      <Link to="/archive">
-                        <button>Archives</button>
-                      </Link>
-                      <Link to="/history">
-                        <button>History</button>
+                      <Link to="/historyandarchives">
+                        <button>History and Archives</button>
                       </Link>
                       <Link to="/preferences">
                         <button>Dash Settings</button>
