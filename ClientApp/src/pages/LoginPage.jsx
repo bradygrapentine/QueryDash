@@ -84,9 +84,6 @@ export function LoginPage() {
         <Link to="/" className="navLink">
           Home
         </Link>
-        <Link to="/create-dash" className="navLink">
-          Create Dash{' '}
-        </Link>
       </footer>
     </>
   )

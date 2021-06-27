@@ -54,12 +54,6 @@ export function AboutPage() {
         <Link to="/" className="standardFooter">
           Home
         </Link>
-        <Link to="/account" className="standardFooter">
-          Account
-        </Link>
-        <Link to="/create-dash" className="standardFooter">
-          Create Dash{' '}
-        </Link>
       </footer>
     </>
   )

@@ -41,7 +41,7 @@ a.linkForHeader {
   h1.header {
     border: 0rem;
     background-image: url('./images/plaid-77426_1920.jpg');
-    background-size: cover;
+    background-size: contain;
     font-family: 'Racing Sans One', cursive;
     display: flex;
     font-weight: 100;
@@ -52,6 +52,7 @@ a.linkForHeader {
     height: fit-content;
     margin: 0rem;
     padding: 0.375rem 0rem 1rem 0rem;
+    background-color: black;
     color: white;
   }
 }
@@ -75,6 +76,7 @@ main.main {
     position: sticky;
     border-bottom: 4px solid black;
     border-top: 4px solid black;
+    box-shadow: 0px 4px 5px 5px black;
     top: 0rem;
     display: flex;
     justify-content: space-between;
@@ -163,26 +165,28 @@ main.main {
       flex-direction: row;
       flex-wrap: wrap;
       align-items: flex-start;
-      justify-content: center;
-      height: fit-content;
-      width: 95vw;
-      margin: 1rem;
+      justify-content: flex-start;
+      width: 99vw;
+      // margin: 1rem;
       div.panelContainer {
-        box-shadow: 0px 0px 0.5px 1px black;
+        box-shadow: 0px 0px 3.75px 2.125px rgb(247, 247, 247);
+        // background-image: url('./images/plaid-77426_1920.jpg');
+        // background-size: contain;
         resize: both;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        min-height: fit-content;
-        height: fit-content;
-        max-height: 60vh;
+        justify-content: space-evenly;
+        // min-height: fit-content;
+        // max-height: min-content;
+        height: 60vh;
+        max-height: fit-content;
         width: 30vw;
         // width: 44vw; --> make this dynamic so panels snap into place nicely at different widths
         max-width: 92vw;
         min-width: min-content;
-        padding: 0rem 0.25rem 0.25rem 0.25rem;
-        margin: 0.25rem;
+        padding: 0rem 0.5rem 0.5rem 0.5rem;
+        margin: 0.75rem 0.5rem 0.75rem 0.25rem;
         border: 2px solid white;
         border-top-right-radius: 0.5rem;
         border-top-left-radius: 0.5rem;
@@ -245,16 +249,16 @@ main.main {
             justify-content: center;
             align-items: center;
             width: min-content;
-            height: 90%;
+            height: max-content;
             margin: 0.2rem;
             padding: 0.25rem;
-            background-color: rgb(0, 55, 0);
+            background-color: rgb(2, 0, 63);
             border-radius: 0.5rem;
             border: 0rem;
             color: white;
           }
           button.viewLink:hover {
-            background-color: rgb(0, 75, 0);
+            background-color: rgb(0, 61, 0);
           }
           button.viewDescription {
             margin: 0.125rem;
@@ -299,7 +303,7 @@ main.main {
                 font-size: 0.5rem;
               }
               p.url:hover {
-                color: rgb(29, 29, 29);
+                color: purple;
               }
             }
           }
@@ -321,7 +325,7 @@ footer.standardFooter {
   background-color: white;
   color: black;
   border-top: 4px solid black;
-
+  box-shadow: 0px 0px 5px 5px black;
   a.navLink {
     margin: 0rem;
     padding: 0rem;

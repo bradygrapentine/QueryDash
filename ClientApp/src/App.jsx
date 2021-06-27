@@ -7,7 +7,6 @@ import { LandingPage } from './pages/LandingPage.jsx'
 import { LoginPage } from './pages/LoginPage.jsx'
 import { AboutPage } from './pages/AboutPage.jsx'
 import { CreateAccountPage } from './pages/CreateAccountPage.jsx'
-import { AccountPage } from './pages/AccountPage.jsx'
 import { CreateDashPage } from './pages/CreateDashPage.jsx'
 import { ArchivePage } from './pages/ArchivePage.jsx'
 import { DashPreferences } from './pages/DashPreferences.jsx'
@@ -34,9 +33,6 @@ export function App() {
           <CreateDashPage />
         </Route>
         {/* ---------------------------------------------- */}
-        <Route exact path="/account">
-          <AccountPage />
-        </Route>
         <Route exact path="/archive">
           <ArchivePage />
         </Route>

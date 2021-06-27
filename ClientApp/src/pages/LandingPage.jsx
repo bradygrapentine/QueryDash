@@ -164,9 +164,6 @@ export function LandingPage() {
         <Link to="/about" className="navLink">
           About
         </Link>
-        <Link to="/account" className="navLink">
-          Account
-        </Link>
         {isLoggedIn() ? (
           <Link to="/create-dash" className="navLink">
             Create Dash{' '}

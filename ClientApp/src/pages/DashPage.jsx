@@ -88,9 +88,11 @@ export function DashPage() {
         <div rows="7" cols="1" wrap="off" className="panel">
           {!props.panelSearchResults
             ? []
-            : props.panelSearchResults.map((panelSearchResult) => (
-                <QLink resultInfo={panelSearchResult} />
-              ))}
+            : props.panelSearchResults
+                .slice(0, dash.linksPerPanel)
+                .map((panelSearchResult) => (
+                  <QLink resultInfo={panelSearchResult} />
+                ))}
         </div>{' '}
       </div>
     )
@@ -177,6 +179,9 @@ export function DashPage() {
                   <input type="submit" className="search" value="Search" />
                 </form>
                 <div className="buttonContainer2">
+                  <Link to="/archive">
+                    <button>Archives</button>
+                  </Link>
                   <Link to="/history">
                     <button>History</button>
                   </Link>
@@ -224,9 +229,6 @@ export function DashPage() {
         </Link>
         <Link to="/about" className="navLink">
           About
-        </Link>
-        <Link to="/account" className="navLink">
-          Account
         </Link>
         <Link to="/" className="navLink">
           Home

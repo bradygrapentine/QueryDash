@@ -102,10 +102,7 @@ export function DashPreferences() {
         <Link to="/" className="navLink">
           Home
         </Link>
-        <Link to="/account" className="navLink">
-          Account
-        </Link>
-        <Link to="/dash" className="navLink">
+        <Link to="/dash/:id" className="navLink">
           Back to Dash{' '}
         </Link>
       </footer>
