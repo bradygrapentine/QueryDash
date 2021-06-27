@@ -74,9 +74,9 @@ main.main {
   div.containerDashQuery {
     padding: 0.375rem 0rem;
     position: sticky;
-    border-bottom: 4px solid black;
-    border-top: 4px solid black;
-    box-shadow: 0px 4px 5px 5px black;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    border-top: 2px solid rgb(0, 0, 0);
+    box-shadow: 0px 4px 3px 2px rgb(0, 0, 0, 0.9);
     top: 0rem;
     display: flex;
     justify-content: space-between;
