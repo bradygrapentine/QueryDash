@@ -102,9 +102,64 @@ export function DashPreferences() {
       }
     )
     if (response.ok) {
-      // window.location.assign(`/preferences/${dash.id}`)
-      event.target.className = 'inputContainerClicked'
+      window.location.assign(`/preferences/${dash.id}`)
+      // event.target.className = 'inputContainerClicked'
     }
+  }
+
+  const [panelFormErrorMessage, setPanelFormErrorMessage] = useState('')
+
+  const [invalidFilterSite, setInvalidFilterSite] = useState(false)
+
+  const [newPanel, setNewPanel] = useState({
+    filterSite: '',
+    // creationDate: '',
+    filterSiteName: '',
+    // dashPanelAssignments: [],
+  })
+  function ifURL(string) {
+    let url
+    try {
+      url = new URL(string)
+    } catch (_) {
+      return false
+    }
+    // return url
+    return true
+  }
+
+  async function handlePanelFormSubmission(event) {
+    event.preventDefault()
+    setPanelFormErrorMessage('')
+    setInvalidFilterSite(false)
+
+    if (ifURL(newPanel.filterSite)) {
+      //
+      let newPanelUrl = new URL(newPanel.filterSite)
+      newPanel.filterSite = newPanelUrl.hostname.replace('www.', '')
+      //
+      const panelResponse = await fetch('/api/Panels', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(newPanel),
+      })
+      if (panelResponse.status === 400) {
+        setPanelFormErrorMessage(Object.values(panelResponse.errors).join(' '))
+      } else if (panelResponse.ok) {
+        panelResponse.json().then((data) => {
+          console.log(data)
+          postPanelAssignment(data, event)
+        })
+        setInvalidFilterSite(false)
+        setPanelFormErrorMessage('Panel Created and Assigned')
+      }
+    } else {
+      setInvalidFilterSite(true)
+    }
+    setNewPanel({
+      filterSite: '',
+      filterSiteName: '',
+    })
   }
 
   async function postPanelAssignment(panel, event) {
@@ -124,7 +179,7 @@ export function DashPreferences() {
       window.location.assign(`/preferences/${dash.id}`)
       // event.target.className
     } else {
-      console.log('PanelLimitReached')
+      setPanelFormErrorMessage('Panel Assignment Limit Reached')
     }
   }
 
@@ -137,6 +192,15 @@ export function DashPreferences() {
     if (response.ok) {
       window.location.assign('/')
     }
+  }
+
+  function handleStringPanelFieldChange(event) {
+    const value = event.target.value
+    const fieldName = event.target.name
+
+    const updatedPanel = { ...newPanel, [fieldName]: value }
+
+    setNewPanel(updatedPanel)
   }
 
   useEffect(() => {
@@ -222,6 +286,64 @@ export function DashPreferences() {
             >
               Delete Dash
             </button>
+          </div>
+        </div>
+        <div className="containerForHeaderAndForm">
+          <h5 className="header">Create Panels</h5>
+          {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
+          <div className="formContainerCreateAccount">
+            {!invalidFilterSite ? (
+              <form
+                onSubmit={handlePanelFormSubmission}
+                className="formCreateAccount"
+              >
+                <div className="inputContainer">
+                  <label htmlFor="filterSiteName">Webpage Name: </label>
+                  <input
+                    name="filterSiteName"
+                    type="text"
+                    value={newPanel.filterSiteName}
+                    onChange={handleStringPanelFieldChange}
+                  />
+                </div>
+                <div className="inputContainer">
+                  <label htmlFor="filterSite">Webpage URL: </label>
+                  <input
+                    name="filterSite"
+                    type="text"
+                    value={newPanel.filterSite}
+                    onChange={handleStringPanelFieldChange}
+                  />
+                </div>
+                <input type="submit" value="Submit" />
+              </form>
+            ) : (
+              <form
+                onSubmit={handlePanelFormSubmission}
+                className="formCreateAccount"
+              >
+                <p>Invalid Filter Site. Try Again</p>{' '}
+                <div className="inputContainer">
+                  <label htmlFor="filterSiteName">Webpage Name: </label>
+                  <input
+                    name="filterSiteName"
+                    type="text"
+                    value={newPanel.filterSiteName}
+                    onChange={handleStringPanelFieldChange}
+                  />
+                </div>
+                <div className="inputContainer">
+                  <label htmlFor="filterSite">Webpage URL: </label>
+                  <input
+                    name="filterSite"
+                    type="text"
+                    value={newPanel.filterSite}
+                    onChange={handleStringPanelFieldChange}
+                  />
+                </div>
+                <input type="submit" value="Submit" />
+              </form>
+            )}
           </div>
         </div>
         <div className="containerForHeaderAndForm">

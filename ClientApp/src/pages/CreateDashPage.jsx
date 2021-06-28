@@ -104,7 +104,10 @@ export function CreateDashPage() {
   }
 
   async function handlePanelFormSubmission(event) {
+    event.preventDefault()
     setPanelFormErrorMessage('')
+    setInvalidFilterSite(false)
+
     if (ifURL(newPanel.filterSite)) {
       //
       let newPanelUrl = new URL(newPanel.filterSite)
@@ -123,6 +126,7 @@ export function CreateDashPage() {
           postPanelAssignment(data.id)
         })
         setInvalidFilterSite(false)
+        setPanelFormErrorMessage('Panel Created and Assigned')
       }
     } else {
       setInvalidFilterSite(true)
