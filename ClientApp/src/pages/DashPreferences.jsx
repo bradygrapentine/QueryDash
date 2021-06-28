@@ -169,7 +169,9 @@ export function DashPreferences() {
   }
 
   async function postPanelAssignment(panel, event) {
-    if (dash.dashPanelAssignments.length <= 10) {
+    if (dash.dashPanelAssignments.length > 9) {
+      setPanelFormErrorMessage('Panel Assignment Limit Reached')
+    } else {
       event.preventDefault()
 
       const newPanelAssignment = {
@@ -184,8 +186,6 @@ export function DashPreferences() {
       console.log(panelAssignmentResponse.json())
       window.location.assign(`/preferences/${dash.id}`)
       // event.target.className
-    } else {
-      setPanelFormErrorMessage('Panel Assignment Limit Reached')
     }
   }
 
@@ -357,6 +357,7 @@ export function DashPreferences() {
           <div className="formContainerCreateAccount">
             <form onSubmit={updateDash} className="formCreateAccount">
               <div className="inputContainer">
+                {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
                 <label>Add Panels: </label>
                 <ul className="inputContainer">
                   {panels
