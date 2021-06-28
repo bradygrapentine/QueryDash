@@ -10,6 +10,8 @@ export function DashPreferences() {
 
   const id = params.id
 
+  const [panels, setPanels] = useState([])
+
   const [dash, setDash] = useState({
     id: 0,
     userId: 0,
@@ -90,16 +92,67 @@ export function DashPreferences() {
     console.log(newUpdatedDash)
   }
 
+  async function deletePanelAssignment(dashPanelAssignment, event) {
+    event.preventDefault()
+    const response = await fetch(
+      `/api/PanelAssignments/${dashPanelAssignment.id}`,
+      {
+        method: 'DELETE',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+      }
+    )
+    if (response.ok) {
+      // window.location.assign(`/preferences/${dash.id}`)
+      event.target.className = 'inputContainerClicked'
+    }
+  }
+
+  async function postPanelAssignment(panel, event) {
+    if (dash.dashPanelAssignments.length <= 10) {
+      event.preventDefault()
+
+      const newPanelAssignment = {
+        panelId: panel.id,
+        dashId: dash.id,
+      }
+      const panelAssignmentResponse = await fetch('/api/PanelAssignments', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+        body: JSON.stringify(newPanelAssignment),
+      })
+      console.log(panelAssignmentResponse.json())
+      window.location.assign(`/preferences/${dash.id}`)
+      // event.target.className
+    } else {
+      console.log('PanelLimitReached')
+    }
+  }
+
   async function deleteDash(event) {
     event.preventDefault()
     const response = await fetch(`/api/Dashes/${dash.id}`, {
-      method: 'Delete',
+      method: 'DELETE',
       headers: { 'content-type': 'application/json', ...authHeader() },
     })
     if (response.ok) {
       window.location.assign('/')
     }
   }
+
+  useEffect(() => {
+    async function getPanels() {
+      const panelsResponse = await fetch('/api/Panels')
+      // console.log(panelsResponse.json())
+
+      if (panelsResponse.ok) {
+        const newPanels = await panelsResponse.json()
+        console.log(newPanels)
+        setPanels(newPanels)
+      }
+      // console.log(panels)
+    }
+    getPanels()
+  }, [])
 
   async function getDash() {
     const response = await fetch(`/api/Dashes/${id}`)
@@ -143,7 +196,25 @@ export function DashPreferences() {
                   onChange={handleFieldChange}
                 />
               </div>
-              <input type="submit" value="Submit" />
+              <input type="submit" value="Submit" className="submitButton" />
+            </form>
+
+            <form onSubmit={updateDash} className="formCreateAccount">
+              <div className="inputContainer">
+                <label>Delete Panels: </label>
+                <ul className="inputContainer">
+                  {dash.dashPanelAssignments.map((dashPanelAssignment) => (
+                    <button
+                      className="inputContainer"
+                      onClick={(event) =>
+                        deletePanelAssignment(dashPanelAssignment, event)
+                      }
+                    >
+                      {dashPanelAssignment.rootPanel.filterSiteName}
+                    </button>
+                  ))}
+                </ul>
+              </div>
             </form>
             <button
               className="deleteDash"
@@ -151,6 +222,35 @@ export function DashPreferences() {
             >
               Delete Dash
             </button>
+          </div>
+        </div>
+        <div className="containerForHeaderAndForm">
+          <h5 className="header">Edit Dash</h5>
+          <div className="formContainerCreateAccount">
+            <form onSubmit={updateDash} className="formCreateAccount">
+              <div className="inputContainer">
+                <label>Add Panels: </label>
+                <ul className="inputContainer">
+                  {panels
+                    .filter(
+                      (panel) =>
+                        !dash.dashPanelAssignments
+                          .map(
+                            (dashPanelAssignment) => dashPanelAssignment.panelId
+                          )
+                          .includes(panel.id)
+                    )
+                    .map((panel) => (
+                      <button
+                        className="inputContainer"
+                        onClick={(event) => postPanelAssignment(panel, event)}
+                      >
+                        {panel.filterSiteName}
+                      </button>
+                    ))}
+                </ul>
+              </div>
+            </form>
           </div>
         </div>
         <article className="aboutPageArticle">

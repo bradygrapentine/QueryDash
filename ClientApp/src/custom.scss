@@ -731,7 +731,7 @@ main.mainCreateAccount {
     div.formContainerCreateAccount {
       display: flex;
       resize: vertical;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
       min-width: min-content;
       width: 30vw;
       height: fit-content;
@@ -739,9 +739,14 @@ main.mainCreateAccount {
       min-height: min-content;
       margin: 0rem 0rem 0.5rem 0rem;
       padding: 0rem;
-      align-items: flex-start;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
       cursor: pointer;
+      button.deleteDash {
+        margin: 0.5rem 0rem;
+        padding: 0.25rem;
+      }
 
       form.formCreateAccount {
         display: flex;
@@ -753,6 +758,10 @@ main.mainCreateAccount {
         min-height: min-content;
         align-items: center;
         justify-content: center;
+        input.submitButton {
+          margin: 0.125rem 0rem;
+          padding: 0.25rem;
+        }
         div.inputContainer {
           margin: 0.25rem;
           padding: 0.5rem;
@@ -779,6 +788,24 @@ main.mainCreateAccount {
             min-width: min-content;
             min-height: min-content;
             cursor: pointer;
+          }
+
+          ul.inputContainer {
+            margin: 0.5rem 0rem;
+            padding: 0rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            button.inputContainer {
+              padding: 0.25rem;
+              margin: 0.125rem;
+            }
+            button.inputContainerClicked {
+              display: none;
+              padding: 0.25rem;
+              margin: 0.125rem;
+            }
           }
         }
       }
