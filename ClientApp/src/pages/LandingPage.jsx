@@ -31,14 +31,30 @@ export function LandingPage() {
   //   linksPerPanel: 0,
   // })
 
+  async function postPanelAssignments(dashId, dashPanelAssignments) {
+    for (var i = 0; i < dashPanelAssignments.length; i++) {
+      let newPanelAssignment = {
+        panelId: dashPanelAssignments[i].panelId,
+        dashId: dashId,
+      }
+      let panelAssignmentResponse = await fetch('/api/PanelAssignments', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(newPanelAssignment),
+      })
+      console.log(panelAssignmentResponse.json())
+    }
+    window.location.assign('/')
+  }
+
   async function copyDash(dash, event) {
     event.preventDefault()
     let newDash = {}
     newDash.userId = getUserId()
-    newDash.dashPanelAssignments = dash.dashPanelAssignments
-    newDash.savedLinks = dash.savedLinks
+    newDash.dashPanelAssignments = []
+    newDash.savedLinks = []
     newDash.name = dash.name
-    newDash.creationDate = dash.creationDate
+    newDash.creationDate = ''
     newDash.linksPerPanel = dash.linksPerPanel
     const response = await fetch('/api/Dashes', {
       method: 'POST',
@@ -52,7 +68,7 @@ export function LandingPage() {
         console.log(Object.values(response.errors).join(' '))
       } else if (response.ok) {
         response.json().then((data) => {
-          history.push(`/dash/${data.id}`)
+          postPanelAssignments(data.id, dash.dashPanelAssignments)
         })
       }
     }

@@ -49,6 +49,8 @@ namespace QueryDash.Controllers
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderBy(row => row.Id)
+                                        .Include(dash => dash.DashPanelAssignments)
+                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
                                         .Where(dash => dash.UserId != GetCurrentUserId())
                                         .ToListAsync();
         }
