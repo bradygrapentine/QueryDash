@@ -33,7 +33,7 @@ export function DashPage() {
   }
   async function recordOpenedLink(event) {
     event.preventDefault()
-    if (isLoggedIn()) {
+    if (isLoggedIn() && getUserId() === dash.userId) {
       const newSavedLink = {
         isArchive: false,
         dashId: Number(dash.id),
@@ -59,7 +59,7 @@ export function DashPage() {
 
   async function postArchivedLink(event) {
     event.preventDefault()
-    if (isLoggedIn()) {
+    if (isLoggedIn() && getUserId() === dash.userId) {
       const newSavedLink = {
         isArchive: true,
         dashId: Number(dash.id),

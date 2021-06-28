@@ -44,7 +44,7 @@ export function LandingPage() {
       })
       console.log(panelAssignmentResponse.json())
     }
-    window.location.assign('/')
+    window.location.assign(`/dash/${dashId}`)
   }
 
   async function copyDash(dash, event) {

@@ -181,6 +181,7 @@ namespace QueryDash.Controllers
         //
         [HttpDelete("{id}")]
         // dash preferences page
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteDash(int id)
         {
             // Find this dash by looking for the specific id

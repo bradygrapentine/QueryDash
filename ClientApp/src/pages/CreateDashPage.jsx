@@ -57,7 +57,7 @@ export function CreateDashPage() {
     }
     const panelAssignmentResponse = await fetch('/api/PanelAssignments', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(newPanelAssignment),
     })
     console.log(panelAssignmentResponse.json())

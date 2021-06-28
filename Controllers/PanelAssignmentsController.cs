@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using QueryDash.Models;
+
 
 namespace QueryDash.Controllers
 {
@@ -37,11 +40,20 @@ namespace QueryDash.Controllers
         // new values for the record.
         //
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<PanelAssignment>> PostPanelAssignment(PanelAssignment panelAssignment)
         {
             // Indicate to the database context we want to add this new record
-            _context.PanelAssignments.Add(panelAssignment);
-            await _context.SaveChangesAsync();
+            var dash = _context.Dashes.Where(dash => dash.Id == panelAssignment.DashId);
+            if (GetCurrentUserId() == dash.ElementAt(0).UserId)
+            {
+                _context.PanelAssignments.Add(panelAssignment);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return BadRequest();
+            }
 
             // Return a response that indicates the object was created (status code `201`) and some additional
             // headers with details of the newly created object.
@@ -56,30 +68,42 @@ namespace QueryDash.Controllers
         //
         [HttpDelete("{id}")]
         // this will be used on the dash preferences page
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeletePanelAssignment(int id)
         {
             // Find this panelAssignment by looking for the specific id
             var panelAssignment = await _context.PanelAssignments.FindAsync(id);
+            var panelAssignmentDash = _context.Dashes.Where(dash => dash.Id == panelAssignment.DashId);
             if (panelAssignment == null)
             {
                 // There wasn't a panelAssignment with that id so return a `404` not found
                 return NotFound();
             }
+            if (panelAssignmentDash.ElementAt(0).UserId == GetCurrentUserId())
+            {
+                // Tell the database we want to remove this record
+                _context.PanelAssignments.Remove(panelAssignment);
 
-            // Tell the database we want to remove this record
-            _context.PanelAssignments.Remove(panelAssignment);
+                // Tell the database to perform the deletion
+                await _context.SaveChangesAsync();
 
-            // Tell the database to perform the deletion
-            await _context.SaveChangesAsync();
-
-            // Return a copy of the deleted data
-            return Ok(panelAssignment);
+                // Return a copy of the deleted data
+                return Ok(panelAssignment);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // Private helper method that looks up an existing panelAssignment by the supplied id
         private bool PanelAssignmentExists(int id)
         {
             return _context.PanelAssignments.Any(panelAssignment => panelAssignment.Id == id);
+        }
+        private int GetCurrentUserId()
+        {
+            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "Id").Value);
         }
     }
 }
