@@ -33,6 +33,20 @@ export function HistoryAndArchivesPage() {
     }
   }
 
+  function formatDate(dateAsString) {
+    let date = Date.parse(dateAsString + '+04:00')
+    // let newOptions = {
+    //   weekday: 'long',
+    //   year: 'numeric',
+    //   month: 'long',
+    //   day: 'numeric',
+    // }
+    let formattedDate = Intl.DateTimeFormat('en-US', {
+      dateStyle: 'full',
+    }).format(date)
+    return formattedDate
+  }
+
   useEffect(() => {
     getSavedLinks()
   }, [])
@@ -40,7 +54,7 @@ export function HistoryAndArchivesPage() {
   return (
     <>
       <Link className="linkForHeader" to="/">
-        <h1 className="header">QueryDash</h1>
+        <h1 className="altHeader">QueryDash</h1>
       </Link>{' '}
       <main className="aboutPage">
         <article className="aboutPageArticle">
@@ -65,11 +79,11 @@ export function HistoryAndArchivesPage() {
                             >
                               {savedLink.queryUrl}
                             </a>
-                            <p className="savedLinkListLabel">Archived At: </p>
-                            <p className="savedLinkList">
-                              {savedLink.timeStamp}{' '}
-                            </p>
                             <p className="savedLinkListLabel">Archived On: </p>
+                            <p className="savedLinkList">
+                              {formatDate(savedLink.timeStamp)}{' '}
+                            </p>
+                            <p className="savedLinkListLabel">Archived At: </p>
                             <p className="savedLinkList">
                               {savedLink.rootDash.name}{' '}
                             </p>
@@ -78,7 +92,7 @@ export function HistoryAndArchivesPage() {
                             className="savedLinkList"
                             onClick={() => deleteSavedLink(savedLink.id)}
                           >
-                            ^ Delete Archive ^
+                            Delete
                           </button>
                         </>
                       ))}
@@ -112,11 +126,11 @@ export function HistoryAndArchivesPage() {
                             >
                               {savedLink.queryUrl}
                             </a>
-                            <p className="savedLinkListLabel">Opened At: </p>
-                            <p className="savedLinkList">
-                              {savedLink.timeStamp}{' '}
-                            </p>
                             <p className="savedLinkListLabel">Opened On: </p>
+                            <p className="savedLinkList">
+                              {formatDate(savedLink.timeStamp)}{' '}
+                            </p>
+                            <p className="savedLinkListLabel">Opened At: </p>
                             <p className="savedLinkList">
                               {savedLink.rootDash.name}{' '}
                             </p>
@@ -125,7 +139,7 @@ export function HistoryAndArchivesPage() {
                             className="savedLinkList"
                             onClick={() => deleteSavedLink(savedLink.id)}
                           >
-                            ^ Delete Opened Link ^
+                            Delete
                           </button>
                         </>
                       ))}

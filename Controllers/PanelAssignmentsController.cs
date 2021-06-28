@@ -44,16 +44,16 @@ namespace QueryDash.Controllers
         public async Task<ActionResult<PanelAssignment>> PostPanelAssignment(PanelAssignment panelAssignment)
         {
             // Indicate to the database context we want to add this new record
-            var dash = _context.Dashes.Where(dash => dash.Id == panelAssignment.DashId);
-            if (GetCurrentUserId() == dash.ElementAt(0).UserId)
-            {
-                _context.PanelAssignments.Add(panelAssignment);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                return BadRequest();
-            }
+            // var dash =  _context.Dashes.Where(dash => dash.Id == panelAssignment.DashId);
+            // if (GetCurrentUserId() == dash.ElementAt(0).UserId)
+            // {
+            _context.PanelAssignments.Add(panelAssignment);
+            await _context.SaveChangesAsync();
+            // }
+            // else
+            // {
+            //     return BadRequest();
+            // }
 
             // Return a response that indicates the object was created (status code `201`) and some additional
             // headers with details of the newly created object.
@@ -73,27 +73,27 @@ namespace QueryDash.Controllers
         {
             // Find this panelAssignment by looking for the specific id
             var panelAssignment = await _context.PanelAssignments.FindAsync(id);
-            var panelAssignmentDash = _context.Dashes.Where(dash => dash.Id == panelAssignment.DashId);
+            // var panelAssignmentDash = _context.Dashes.Where(dash => dash.Id == panelAssignment.DashId);
             if (panelAssignment == null)
             {
                 // There wasn't a panelAssignment with that id so return a `404` not found
                 return NotFound();
             }
-            if (panelAssignmentDash.ElementAt(0).UserId == GetCurrentUserId())
-            {
-                // Tell the database we want to remove this record
-                _context.PanelAssignments.Remove(panelAssignment);
+            // if (panelAssignmentDash.ElementAt(0).UserId == GetCurrentUserId())
+            // {
+            // Tell the database we want to remove this record
+            _context.PanelAssignments.Remove(panelAssignment);
 
-                // Tell the database to perform the deletion
-                await _context.SaveChangesAsync();
+            // Tell the database to perform the deletion
+            await _context.SaveChangesAsync();
 
-                // Return a copy of the deleted data
-                return Ok(panelAssignment);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            // Return a copy of the deleted data
+            return Ok(panelAssignment);
+            // }
+            // else
+            // {
+            //     return BadRequest();
+            // }
         }
 
         // Private helper method that looks up an existing panelAssignment by the supplied id

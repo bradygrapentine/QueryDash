@@ -55,6 +55,23 @@ a.linkForHeader {
     background-color: black;
     color: white;
   }
+  h1.altHeader {
+    border: 0rem;
+    background-image: url('./images/plaid-77426_1920.jpg');
+    background-size: cover;
+    font-family: 'Racing Sans One', cursive;
+    display: flex;
+    font-weight: 100;
+    font-size: 3.25rem;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: fit-content;
+    margin: 0rem;
+    padding: 0.375rem 0rem 1rem 0rem;
+    background-color: black;
+    color: white;
+  }
 }
 
 main.main {
@@ -435,6 +452,7 @@ div.listOfDashes {
         margin: 0.125rem;
         button {
           margin: 0rem 0rem 0rem 0.25rem;
+          cursor: pointer;
         }
       }
     }
@@ -585,8 +603,8 @@ main.mainCreateAccount {
   article.aboutPageArticle {
     margin: 0.5rem 0.25rem;
     padding: 0rem;
-    width: min-content;
-    height: 50vh;
+    width: fit-content;
+    height: 75vh;
     overflow-y: scroll;
     // max-width: 50rem;
     // max-height: fit-content;
@@ -626,6 +644,8 @@ main.mainCreateAccount {
         border: 2px solid white;
         border-radius: 0.25rem;
         padding: 0.25rem;
+        margin: 0rem 0rem 0.5rem 0rem;
+        cursor: pointer;
       }
       button.savedLinkList:hover {
         background-color: rgba(6, 0, 85, 0.878);
@@ -634,7 +654,7 @@ main.mainCreateAccount {
         background-color: white;
         // text-decoration: underline;
         list-style: none;
-        width: min-content;
+        width: fit-content;
         // max-width: 90%;
         height: min-content;
         display: flex;
@@ -661,6 +681,8 @@ main.mainCreateAccount {
           // padding: 0.25rem;
         }
         a.savedLinkList {
+          cursor: pointer;
+
           // text-decoration: none;
           margin: 0.25rem 0.5rem 0.75rem 1rem;
         }
@@ -715,10 +737,12 @@ main.mainCreateAccount {
       height: fit-content;
       overflow: scroll;
       min-height: min-content;
-      margin: 0rem;
+      margin: 0rem 0rem 0.5rem 0rem;
       padding: 0rem;
       align-items: flex-start;
       justify-content: center;
+      cursor: pointer;
+
       form.formCreateAccount {
         display: flex;
         flex-wrap: wrap;
@@ -754,8 +778,12 @@ main.mainCreateAccount {
             width: 10vw;
             min-width: min-content;
             min-height: min-content;
+            cursor: pointer;
           }
         }
+      }
+      button {
+        cursor: pointer;
       }
     }
   }

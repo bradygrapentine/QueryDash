@@ -46,7 +46,7 @@ export function LoginPage() {
   return (
     <>
       <Link className="linkForHeader" to="/">
-        <h1 className="header">QueryDash</h1>
+        <h1 className="altHeader">QueryDash</h1>
       </Link>{' '}
       <main className="mainCreateAccount">
         <div className="containerForHeaderAndForm">

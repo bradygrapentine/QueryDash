@@ -39,7 +39,7 @@ export function LandingPage() {
       }
       let panelAssignmentResponse = await fetch('/api/PanelAssignments', {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: { 'content-type': 'application/json', ...authHeader() },
         body: JSON.stringify(newPanelAssignment),
       })
       console.log(panelAssignmentResponse.json())
@@ -170,7 +170,7 @@ export function LandingPage() {
   return (
     <>
       <Link className="linkForHeader" to="/">
-        <h1 className="header">QueryDash</h1>
+        <h1 className="altHeader">QueryDash</h1>
       </Link>{' '}
       <main className="landingPageContainer">
         {isLoggedIn() ? (

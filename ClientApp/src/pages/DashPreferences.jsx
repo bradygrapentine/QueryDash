@@ -67,6 +67,20 @@ export function DashPreferences() {
     }
   }
 
+  function formatDate(dateAsString) {
+    let date = Date.parse(dateAsString + '+04:00')
+    // let newOptions = {
+    //   weekday: 'long',
+    //   year: 'numeric',
+    //   month: 'long',
+    //   day: 'numeric',
+    // }
+    let formattedDate = Intl.DateTimeFormat('en-US', {
+      dateStyle: 'full',
+    }).format(date)
+    return formattedDate
+  }
+
   function handleFieldChange(event) {
     const value = event.target.value
     const fieldName = event.target.name
@@ -74,6 +88,17 @@ export function DashPreferences() {
     const newUpdatedDash = { ...updatedDash, [fieldName]: value }
     setUpdatedDash(newUpdatedDash)
     console.log(newUpdatedDash)
+  }
+
+  async function deleteDash(event) {
+    event.preventDefault()
+    const response = await fetch(`/api/Dashes/${dash.id}`, {
+      method: 'Delete',
+      headers: { 'content-type': 'application/json', ...authHeader() },
+    })
+    if (response.ok) {
+      window.location.assign('/')
+    }
   }
 
   async function getDash() {
@@ -92,7 +117,7 @@ export function DashPreferences() {
   return (
     <>
       <Link className="linkForHeader" to="/">
-        <h1 className="header">{dash.name}</h1>
+        <h1 className="altHeader">{dash.name}</h1>
       </Link>
       <main className="mainCreateAccount">
         <div className="containerForHeaderAndForm">
@@ -120,6 +145,12 @@ export function DashPreferences() {
               </div>
               <input type="submit" value="Submit" />
             </form>
+            <button
+              className="deleteDash"
+              onClick={(event) => deleteDash(event)}
+            >
+              Delete Dash
+            </button>
           </div>
         </div>
         <article className="aboutPageArticle">
@@ -147,7 +178,7 @@ export function DashPreferences() {
                             </a>
                             <p className="savedLinkListLabel">Archived At: </p>
                             <p className="savedLinkList">
-                              {savedLink.timeStamp}{' '}
+                              {formatDate(savedLink.timeStamp)}{' '}
                             </p>
                             <p className="savedLinkListLabel">Archived On: </p>
                             <p className="savedLinkList">{dash.name} </p>
@@ -156,7 +187,7 @@ export function DashPreferences() {
                             className="savedLinkList"
                             onClick={() => deleteSavedLink(savedLink.id)}
                           >
-                            ^ Delete Archive ^
+                            Delete
                           </button>
                         </>
                       ))}
@@ -193,7 +224,7 @@ export function DashPreferences() {
                             </a>
                             <p className="savedLinkListLabel">Opened At: </p>
                             <p className="savedLinkList">
-                              {savedLink.timeStamp}{' '}
+                              {formatDate(savedLink.timeStamp)}{' '}
                             </p>
                             <p className="savedLinkListLabel">Opened On: </p>
                             <p className="savedLinkList">{dash.name} </p>
@@ -202,7 +233,7 @@ export function DashPreferences() {
                             className="savedLinkList"
                             onClick={() => deleteSavedLink(savedLink.id)}
                           >
-                            ^ Delete Opened Link ^
+                            Delete
                           </button>
                         </>
                       ))}
