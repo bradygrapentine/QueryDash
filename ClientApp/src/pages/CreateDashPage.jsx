@@ -106,6 +106,10 @@ export function CreateDashPage() {
   async function handlePanelFormSubmission(event) {
     setPanelFormErrorMessage('')
     if (ifURL(newPanel.filterSite)) {
+      //
+      let newPanelUrl = new URL(newPanel.filterSite)
+      newPanel.filterSite = newPanelUrl.hostname.replace('www.', '')
+      //
       const panelResponse = await fetch('/api/Panels', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
