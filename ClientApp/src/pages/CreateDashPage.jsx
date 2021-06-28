@@ -64,11 +64,14 @@ export function CreateDashPage() {
   }
 
   function handleStringDashFieldChange(event) {
+    setDashFormErrorMessage('')
     const value = event.target.value
     const fieldName = event.target.name
-
     const updatedDash = { ...newDash, [fieldName]: value }
-
+    if (updatedDash.linksPerPanel > 30) {
+      updatedDash.linksPerPanel = 30
+      setDashFormErrorMessage('Results per panel cannot exceed 30')
+    }
     setNewDash(updatedDash)
   }
 
@@ -184,7 +187,7 @@ export function CreateDashPage() {
                 <label htmlFor="linksPerPanel">Results Per Panel: </label>
                 <input
                   name="linksPerPanel"
-                  type="text"
+                  type="number"
                   value={newDash.linksPerPanel}
                   onChange={handleStringDashFieldChange}
                 />

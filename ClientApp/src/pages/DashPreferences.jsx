@@ -12,6 +12,8 @@ export function DashPreferences() {
 
   const [panels, setPanels] = useState([])
 
+  const [dashFormErrorMessage, setDashFormErrorMessage] = useState('')
+
   const [dash, setDash] = useState({
     id: 0,
     userId: 0,
@@ -86,10 +88,14 @@ export function DashPreferences() {
   function handleFieldChange(event) {
     const value = event.target.value
     const fieldName = event.target.name
+    setDashFormErrorMessage('')
 
     const newUpdatedDash = { ...updatedDash, [fieldName]: value }
+    if (newUpdatedDash.linksPerPanel > 30) {
+      newUpdatedDash.linksPerPanel = 30
+      setDashFormErrorMessage('Results per panel cannot exceed 30')
+    }
     setUpdatedDash(newUpdatedDash)
-    console.log(newUpdatedDash)
   }
 
   async function deletePanelAssignment(dashPanelAssignment, event) {
@@ -241,7 +247,7 @@ export function DashPreferences() {
           <h5 className="header">Edit Dash</h5>
           <div className="formContainerCreateAccount">
             <form onSubmit={updateDash} className="formCreateAccount">
-              {/* {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null} */}
+              {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
               <div className="inputContainer">
                 <label htmlFor="name">DashName: </label>
                 <input
@@ -481,55 +487,3 @@ export function DashPreferences() {
     </>
   )
 }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-// function handleStringFieldChange(event) {
-//   const value = event.target.value
-//   const fieldName = event.target.name
-
-//   updatedDash = { ...dash, [fieldName]: value }
-
-//   setDash(updatedDash)
-// }
-
-// async function handleFormSubmission(event) {
-//   event.preventDefault()
-
-//   const response = await fetch('/api/Dashes', {
-//     method: 'PUT',
-//     headers: { 'content-type': 'application/json' },
-//     body: JSON.stringify(updatedDash),
-//   })
-//   const apiResponse = await response.json()
-//   console.log(apiResponse)
-
-//   if (apiResponse.status === 400) {
-//     setErrorMessage(Object.values(apiResponse.errors).join(' '))
-//   } else {
-// window.location.assign.push('/')
-//   }
-// }
