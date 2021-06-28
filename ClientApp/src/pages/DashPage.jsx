@@ -50,7 +50,7 @@ export function DashPage() {
         console.log(savedLinkResponse.json())
         window.location.assign(event.target.value)
       } else {
-        console.log('ERROR')
+        console.log(savedLinkResponse.json())
       }
     } else {
       console.log('AUTH ERROR')

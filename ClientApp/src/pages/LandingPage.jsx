@@ -169,9 +169,34 @@ export function LandingPage() {
 
   return (
     <>
-      <Link className="linkForHeader" to="/">
-        <h1 className="altHeader">QueryDash</h1>
-      </Link>{' '}
+      <header className="altHeader">
+        <Link className="linkForHeader" to="/">
+          <h1 className="altHeader">QueryDash</h1>
+        </Link>
+      </header>
+      <div className="navBar">
+        <ul className="navBar">
+          {isLoggedIn() ? (
+            <>
+              <Link to="/create-dash" className="navLink">
+                Create Dash
+              </Link>
+              <span className="navLink" onClick={handleLogout}>
+                Log Out
+              </span>
+            </>
+          ) : (
+            <>
+              <Link to="/create-account" className="navLink">
+                Sign Up
+              </Link>
+              <Link to="/login" className="navLink">
+                Log in
+              </Link>
+            </>
+          )}
+        </ul>
+      </div>
       <main className="landingPageContainer">
         {isLoggedIn() ? (
           <>
@@ -232,28 +257,9 @@ export function LandingPage() {
         )}
       </main>
       <footer className="standardFooter">
-        {isLoggedIn() ? (
-          <span className="navLink" onClick={handleLogout}>
-            Log Out
-          </span>
-        ) : (
-          <>
-            <Link to="/create-account" className="navLink">
-              Sign Up
-            </Link>
-            <Link to="/login" className="navLink">
-              Log in
-            </Link>
-          </>
-        )}
         <Link to="/about" className="navLink">
           About
         </Link>
-        {isLoggedIn() ? (
-          <Link to="/create-dash" className="navLink">
-            Create Dash{' '}
-          </Link>
-        ) : null}
       </footer>
     </>
   )
