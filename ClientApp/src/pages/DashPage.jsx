@@ -136,7 +136,7 @@ export function DashPage() {
   function QLink(props) {
     return (
       <div className="link">
-        {isLoggedIn() ? (
+        {isLoggedIn() && getUserId() === dash.userId ? (
           <button
             className="viewLink"
             value={props.resultInfo.url}
@@ -146,7 +146,6 @@ export function DashPage() {
           </button>
         ) : null}
         <div className="content">
-          {/* <a href={props.resultInfo.url}> */}{' '}
           <button
             className="title"
             value={props.resultInfo.url}
@@ -154,9 +153,7 @@ export function DashPage() {
           >
             {props.resultInfo.title}
           </button>
-          {/* </a> */}
           <p className="summary">{props.resultInfo.summary}</p>
-          {/* <a href={props.resultInfo.url}> */}
           <button
             className="url"
             value={props.resultInfo.url}
@@ -164,7 +161,6 @@ export function DashPage() {
           >
             {props.resultInfo.url}
           </button>
-          {/* </a> */}
         </div>
       </div>
     )
@@ -216,20 +212,19 @@ export function DashPage() {
                 </form>
                 <div className="buttonContainer2">
                   {isLoggedIn() ? (
-                    <>
-                      {' '}
-                      <Link to="/historyandarchives">
-                        <button>Browse Later</button>
-                      </Link>
-                      <Link to={`/preferences/${dash.id}`}>
-                        <button>Dash Settings</button>
-                      </Link>
-                    </>
+                    <Link to="/historyandarchives">
+                      <button>Browse Later</button>
+                    </Link>
+                  ) : null}
+                  {getUserId() === dash.userId ? (
+                    <Link to={`/preferences/${dash.id}`}>
+                      <button>Dash Settings</button>
+                    </Link>
                   ) : null}
                   <Link to="/">
                     <button>Home</button>
                   </Link>
-                </div>{' '}
+                </div>
               </div>
               <button
                 onClick={() => setMenuOpen(!menuOpen)}

@@ -243,7 +243,9 @@ export function LandingPage() {
               <ul className="DisplayListDash">
                 {dashList.map((dash) => (
                   <li key={dash.id}>
-                    {dash.name}
+                    <Link to={`/dash/${dash.id}`} className="">
+                      {dash.name}
+                    </Link>
                     <form onSubmit={(event) => copyDash(dash, event)}>
                       <input type="submit" value="Copy Dash" />
                     </form>

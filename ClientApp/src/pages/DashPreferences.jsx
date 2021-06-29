@@ -35,39 +35,47 @@ export function DashPreferences() {
   })
 
   async function deleteSavedLink(savedLinkId) {
-    const response = await fetch(`/api/SavedLinks/${savedLinkId}`, {
-      method: 'DELETE',
-      headers: { 'content-type': 'application/json', ...authHeader() },
-    })
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      const response = await fetch(`/api/SavedLinks/${savedLinkId}`, {
+        method: 'DELETE',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+      })
 
-    if (response.ok) {
-      getDash()
+      if (response.ok) {
+        getDash()
+      }
+    } else {
+      setDashFormErrorMessage('AUTH ERROR')
     }
   }
 
   async function updateDash(event) {
     event.preventDefault()
-    updatedDash.id = dash.id
-    updatedDash.dashPanelAssignments = dash.dashPanelAssignments
-    updatedDash.savedLinks = dash.savedLinks
-    updatedDash.creationDate = dash.creationDate
-    updatedDash.userId = dash.userId
-    if (updatedDash.name === '') {
-      updatedDash.name = dash.name
-    }
-    if (updatedDash.linksPerPanel === 0) {
-      updatedDash.linksPerPanel = Number(dash.linksPerPanel)
-    }
-    updatedDash.linksPerPanel = Number(updatedDash.linksPerPanel)
-    const response = await fetch(`/api/Dashes/${dash.id}`, {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json', ...authHeader() },
-      body: JSON.stringify(updatedDash),
-    })
-    console.log(response.json())
-    console.log(updatedDash)
-    if (response.ok) {
-      getDash()
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      updatedDash.id = dash.id
+      updatedDash.dashPanelAssignments = dash.dashPanelAssignments
+      updatedDash.savedLinks = dash.savedLinks
+      updatedDash.creationDate = dash.creationDate
+      updatedDash.userId = dash.userId
+      if (updatedDash.name === '') {
+        updatedDash.name = dash.name
+      }
+      if (updatedDash.linksPerPanel === 0) {
+        updatedDash.linksPerPanel = Number(dash.linksPerPanel)
+      }
+      updatedDash.linksPerPanel = Number(updatedDash.linksPerPanel)
+      const response = await fetch(`/api/Dashes/${dash.id}`, {
+        method: 'PUT',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+        body: JSON.stringify(updatedDash),
+      })
+      console.log(response.json())
+      console.log(updatedDash)
+      if (response.ok) {
+        getDash()
+      }
+    } else {
+      setDashFormErrorMessage('AUTH ERROR')
     }
   }
 
@@ -99,17 +107,21 @@ export function DashPreferences() {
   }
 
   async function deletePanelAssignment(dashPanelAssignment, event) {
-    event.preventDefault()
-    const response = await fetch(
-      `/api/PanelAssignments/${dashPanelAssignment.id}`,
-      {
-        method: 'DELETE',
-        headers: { 'content-type': 'application/json', ...authHeader() },
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      event.preventDefault()
+      const response = await fetch(
+        `/api/PanelAssignments/${dashPanelAssignment.id}`,
+        {
+          method: 'DELETE',
+          headers: { 'content-type': 'application/json', ...authHeader() },
+        }
+      )
+      if (response.ok) {
+        window.location.assign(`/preferences/${dash.id}`)
+        // event.target.className = 'inputContainerClicked'
       }
-    )
-    if (response.ok) {
-      window.location.assign(`/preferences/${dash.id}`)
-      // event.target.className = 'inputContainerClicked'
+    } else {
+      setPanelFormErrorMessage('AUTH ERROR')
     }
   }
 
@@ -138,65 +150,78 @@ export function DashPreferences() {
     event.preventDefault()
     setPanelFormErrorMessage('')
     setInvalidFilterSite(false)
-
-    if (ifURL(newPanel.filterSite)) {
-      //
-      let newPanelUrl = new URL(newPanel.filterSite)
-      newPanel.filterSite = newPanelUrl.hostname.replace('www.', '')
-      //
-      const panelResponse = await fetch('/api/Panels', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(newPanel),
-      })
-      if (panelResponse.status === 400) {
-        setPanelFormErrorMessage(Object.values(panelResponse.errors).join(' '))
-      } else if (panelResponse.ok) {
-        panelResponse.json().then((data) => {
-          console.log(data)
-          postPanelAssignment(data, event)
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      if (ifURL(newPanel.filterSite)) {
+        //
+        let newPanelUrl = new URL(newPanel.filterSite)
+        newPanel.filterSite = newPanelUrl.hostname.replace('www.', '')
+        //
+        const panelResponse = await fetch('/api/Panels', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(newPanel),
         })
-        setInvalidFilterSite(false)
-        setPanelFormErrorMessage('Panel Created and Assigned')
+        if (panelResponse.status === 400) {
+          setPanelFormErrorMessage(
+            Object.values(panelResponse.errors).join(' ')
+          )
+        } else if (panelResponse.ok) {
+          panelResponse.json().then((data) => {
+            console.log(data)
+            postPanelAssignment(data, event)
+          })
+          setInvalidFilterSite(false)
+          setPanelFormErrorMessage('Panel Created and Assigned')
+        }
+      } else {
+        setInvalidFilterSite(true)
       }
+      setNewPanel({
+        filterSite: '',
+        filterSiteName: '',
+      })
     } else {
-      setInvalidFilterSite(true)
+      setPanelFormErrorMessage('AUTH ERROR')
     }
-    setNewPanel({
-      filterSite: '',
-      filterSiteName: '',
-    })
   }
 
   async function postPanelAssignment(panel, event) {
-    if (dash.dashPanelAssignments.length > 9) {
-      setPanelFormErrorMessage('Panel Assignment Limit Reached')
-    } else {
-      event.preventDefault()
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      if (dash.dashPanelAssignments.length > 9) {
+        setPanelFormErrorMessage('Panel Assignment Limit Reached')
+      } else {
+        event.preventDefault()
 
-      const newPanelAssignment = {
-        panelId: panel.id,
-        dashId: dash.id,
+        const newPanelAssignment = {
+          panelId: panel.id,
+          dashId: dash.id,
+        }
+        const panelAssignmentResponse = await fetch('/api/PanelAssignments', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', ...authHeader() },
+          body: JSON.stringify(newPanelAssignment),
+        })
+        console.log(panelAssignmentResponse.json())
+        window.location.assign(`/preferences/${dash.id}`)
+        // event.target.className
       }
-      const panelAssignmentResponse = await fetch('/api/PanelAssignments', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', ...authHeader() },
-        body: JSON.stringify(newPanelAssignment),
-      })
-      console.log(panelAssignmentResponse.json())
-      window.location.assign(`/preferences/${dash.id}`)
-      // event.target.className
+    } else {
+      setPanelFormErrorMessage('AUTH ERROR')
     }
   }
 
   async function deleteDash(event) {
-    event.preventDefault()
-    const response = await fetch(`/api/Dashes/${dash.id}`, {
-      method: 'DELETE',
-      headers: { 'content-type': 'application/json', ...authHeader() },
-    })
-    if (response.ok) {
-      window.location.assign('/')
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      event.preventDefault()
+      const response = await fetch(`/api/Dashes/${dash.id}`, {
+        method: 'DELETE',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+      })
+      if (response.ok) {
+        window.location.assign('/')
+      }
+    } else {
+      setDashFormErrorMessage('AUTH ERROR')
     }
   }
 
@@ -226,11 +251,12 @@ export function DashPreferences() {
 
   async function getDash() {
     const response = await fetch(`/api/Dashes/${id}`)
-
     if (response.ok) {
       const apiData = await response.json()
       setDash(apiData)
       console.log(apiData)
+    } else {
+      setDashFormErrorMessage('ERROR')
     }
   }
   useEffect(() => {
