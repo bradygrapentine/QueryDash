@@ -19,6 +19,8 @@ export function CreateDashPage() {
 
   const [panels, setPanels] = useState([])
 
+  const [addedPanelIds, setAddedPanelIds] = useState([])
+
   const [newDash, setNewDash] = useState({
     userId: 0,
     creationDate: '',
@@ -61,7 +63,13 @@ export function CreateDashPage() {
       headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(newPanelAssignment),
     })
-    console.log(panelAssignmentResponse.json())
+    if (panelAssignmentResponse.ok) {
+      panelAssignmentResponse.json().then((data) => {
+        setAddedPanelIds([...addedPanelIds, data.panelId])
+        console.log(data)
+      })
+      // console.log(panelAssignmentResponse.json())
+    }
   }
 
   function handleStringDashFieldChange(event) {
@@ -112,7 +120,7 @@ export function CreateDashPage() {
     event.preventDefault()
     setPanelFormErrorMessage('')
     setInvalidFilterSite(false)
-
+    setAddPanelFormErrorMessage('')
     if (ifURL(newPanel.filterSite)) {
       //
       let newPanelUrl = new URL(newPanel.filterSite)
@@ -131,7 +139,11 @@ export function CreateDashPage() {
           postPanelAssignment(data.id)
         })
         setInvalidFilterSite(false)
-        setPanelFormErrorMessage('Panel Created and Assigned')
+        setPanelFormErrorMessage(
+          `Panel Created and Added to ${newDash.name}. ${
+            10 - (panelAssignmentCounter + 1)
+          } assignments left.`
+        )
       }
     } else {
       setInvalidFilterSite(true)
@@ -145,7 +157,12 @@ export function CreateDashPage() {
   async function handleExistingPanelSelection(existingPanel) {
     postPanelAssignment(existingPanel.value)
     existingPanel.className = 'notVisible'
-    setAddPanelFormErrorMessage('Panel Added')
+    setAddPanelFormErrorMessage(
+      `Panel Added to ${newDash.name}. ${
+        10 - (panelAssignmentCounter + 1)
+      } assignments left.`
+    )
+    setPanelFormErrorMessage('')
   }
 
   useEffect(() => {
@@ -211,29 +228,31 @@ export function CreateDashPage() {
                 <p>{addPanelFormErrorMessage}</p>
               ) : null}
               <ul>
-                {panels.map((panel) => (
-                  <button
-                    className="visible"
-                    value={panel.id}
-                    onClick={(event) =>
-                      handleExistingPanelSelection(event.target)
-                    }
-                  >
-                    {' '}
-                    {panel.filterSiteName}{' '}
-                  </button>
-                ))}
+                {panels
+                  .filter((panel) => !addedPanelIds.includes(panel.id))
+                  .map((panel) => (
+                    <button
+                      className="visible"
+                      value={panel.id}
+                      onClick={(event) =>
+                        handleExistingPanelSelection(event.target)
+                      }
+                    >
+                      {' '}
+                      {panel.filterSiteName}{' '}
+                    </button>
+                  ))}
               </ul>{' '}
             </div>
             <div className="listOfDashes">
               <h5 className="HeaderDashList2">Create Panel</h5>
               {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
               {invalidFilterSite ? <p>Invalid Filter Site. Try Again</p> : null}
-              <div className="DisplayListDash">
+              <div className="DisplayListDash2">
                 {!invalidFilterSite ? (
                   <form
                     onSubmit={handlePanelFormSubmission}
-                    className="formCreateAccount"
+                    className="formCreateAccount2"
                   >
                     <div className="inputContainer">
                       <label htmlFor="filterSiteName">Webpage Name: </label>
