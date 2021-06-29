@@ -2,7 +2,7 @@
 
 namespace QueryDash.Migrations
 {
-    public partial class ConnecPanelsandDashes : Migration
+    public partial class SavedLinkAndDashOneToOneAndPanelAssignmentAndDashAndPanelOneToOne : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

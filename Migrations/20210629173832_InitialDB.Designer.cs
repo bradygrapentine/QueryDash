@@ -10,7 +10,7 @@ using QueryDash.Models;
 namespace QueryDash.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210624183534_InitialDB")]
+    [Migration("20210629173832_InitialDB")]
     partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,6 +132,9 @@ namespace QueryDash.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Users");

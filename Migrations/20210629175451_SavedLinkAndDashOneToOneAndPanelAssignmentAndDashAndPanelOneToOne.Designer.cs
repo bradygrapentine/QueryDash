@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QueryDash.Models;
@@ -9,9 +10,10 @@ using QueryDash.Models;
 namespace QueryDash.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210629175451_SavedLinkAndDashOneToOneAndPanelAssignmentAndDashAndPanelOneToOne")]
+    partial class SavedLinkAndDashOneToOneAndPanelAssignmentAndDashAndPanelOneToOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,13 +149,13 @@ namespace QueryDash.Migrations
             modelBuilder.Entity("QueryDash.Models.PanelAssignment", b =>
                 {
                     b.HasOne("QueryDash.Models.Dash", "RootDash")
-                        .WithMany("DashPanelAssignments")
+                        .WithMany()
                         .HasForeignKey("DashId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QueryDash.Models.Panel", "RootPanel")
-                        .WithMany("DashPanelAssignments")
+                        .WithMany()
                         .HasForeignKey("PanelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -176,14 +178,7 @@ namespace QueryDash.Migrations
 
             modelBuilder.Entity("QueryDash.Models.Dash", b =>
                 {
-                    b.Navigation("DashPanelAssignments");
-
                     b.Navigation("SavedLinks");
-                });
-
-            modelBuilder.Entity("QueryDash.Models.Panel", b =>
-                {
-                    b.Navigation("DashPanelAssignments");
                 });
 #pragma warning restore 612, 618
         }

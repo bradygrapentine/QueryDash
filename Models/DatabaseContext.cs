@@ -27,13 +27,11 @@ namespace QueryDash.Models
 
         // ---------------------------------------------------------------------------- //
 
-        // public DbSet<DashQuery> DashQueries { get; set; }
-
-        // ---------------------------------------------------------------------------- //
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasIndex(user => user.Email).IsUnique();
+
+            modelBuilder.Entity<User>().HasIndex(user => user.Name).IsUnique();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

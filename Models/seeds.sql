@@ -15,13 +15,13 @@ INSERT INTO "Dashes" ("UserId", "CreationDate", "Name", "LinksPerPanel") VALUES 
 
 INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:05','developer.mozilla.org%2Fen-US%2F', 'MDN Web Docs');
 INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:15','css-tricks.com%2F', 'CSS-Tricks');
-INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:25','stackoverflow.com%2Fquestions%2Ftagged%2Fjavascript', 'Tagged Questions - Javascript');
-INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:35', 'stackoverflow.com%2Fquestions%2Ftagged%2Fcss', 'Tagged Questions - Css');
-INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:45', 'stackoverflow.com%2Fquestions%2Ftagged%2Fhtml', 'Questions tagged - Html');
+INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:25','stackoverflow.com', 'Stack Overflow');
+-- INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:35', 'stackoverflow.com%2Fquestions%2Ftagged%2Fcss', 'Tagged Questions - Css');
+-- INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:03:45', 'stackoverflow.com%2Fquestions%2Ftagged%2Fhtml', 'Questions tagged - Html');
 
 INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:04:05', 'docs.microsoft.com%2Fen-us%2Fdotnet%2Fcsharp%2F', 'C# Documentation');
-INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:04:15', 'stackoverflow.com%2Fquestions%2Ftagged%2Fc%23', 'Tagged Questions-c#');
-INSERT INTO "Panels" ( "CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:04:25', 'handbook.suncoast.io%2F', 'SDG Handbook');
+-- INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:04:15', 'stackoverflow.com%2Fquestions%2Ftagged%2Fc%23', 'Tagged Questions-c#');
+-- INSERT INTO "Panels" ( "CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:04:25', 'handbook.suncoast.io%2F', 'SDG Handbook');
 
 INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:05:05', 'kohls.com', 'Kohls');
 INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2020-01-01 00:05:10', 'target.com', 'Target');
@@ -35,28 +35,24 @@ INSERT INTO "Panels" ("CreationDate", "FilterSite", "FilterSiteName") VALUES ('2
 INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (1, 1);
 INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (2, 1);
 INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (3, 1);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (4, 1);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (5, 1);
+-- INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (4, 1);
+-- INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (5, 1);
 
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (6, 2);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (7, 2);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (8, 2);
+INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (4, 2);
+INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (3, 2);
+-- INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (8, 2);
 
+INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (5, 3);
+INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (6, 3);
+INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (7, 3);
+INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (8, 3);
 INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (9, 3);
 INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (10, 3);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (11, 3);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (12, 3);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (13, 3);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (14, 3);
 
 INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (1, 4);
 INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (2, 4);
 INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (3, 4);
 INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (4, 4);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (5, 4);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (6, 4);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (7, 4);
-INSERT INTO "PanelAssignments" ("PanelId", "DashId") VALUES (8, 4);
 
 --------------------------------------------------------------
 
