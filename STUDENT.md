@@ -47,7 +47,7 @@ If you are using a third party API you can set any configuration as such:
 
 ## To deploy to Heroku
 
-- `git push heroku HEAD:master`
+- `git push heroku HEAD:main` //
 
 ## To open your deployed application
 
