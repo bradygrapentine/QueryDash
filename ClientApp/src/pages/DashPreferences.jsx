@@ -239,9 +239,11 @@ export function DashPreferences() {
 
   return (
     <>
-      <Link className="linkForHeader" to="/">
-        <h1 className="altHeader">{dash.name}</h1>
-      </Link>
+      <header className="altHeader">
+        <Link className="linkForHeader" to="/">
+          <h1 className="altHeader">QueryDash</h1>
+        </Link>{' '}
+      </header>
       <main className="mainCreateAccount">
         <div className="containerForHeaderAndForm">
           <h5 className="header">Edit Dash</h5>

@@ -24,9 +24,11 @@ import { Link } from 'react-router-dom'
 export function AboutPage() {
   return (
     <>
-      <Link className="linkForHeader" to="/">
-        <h1 className="header">QueryDash</h1>
-      </Link>{' '}
+      <header className="altHeader">
+        <Link className="linkForHeader" to="/">
+          <h1 className="altHeader">QueryDash</h1>
+        </Link>{' '}
+      </header>
       <main className="aboutPage">
         <article className="aboutPageArticle">
           <h5 className="header">Article 1</h5>

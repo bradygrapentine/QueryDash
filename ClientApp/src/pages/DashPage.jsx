@@ -84,6 +84,7 @@ export function DashPage() {
 
   async function getQueryResults(event) {
     event.preventDefault()
+    setSearchResults([])
     const response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
     if (response.ok) {
       const apiData = await response.json()
@@ -189,9 +190,11 @@ export function DashPage() {
 
   return (
     <>
-      <Link className="linkForHeader" to="/">
-        <h1 className="header">{dash.name}</h1>
-      </Link>{' '}
+      <header className="altHeader">
+        <Link className="linkForHeader" to="/">
+          <h1 className="altHeader">{dash.name}</h1>
+        </Link>{' '}
+      </header>
       <main className="main">
         <div className="containerDashQuery">
           {menuOpen ? (
@@ -216,7 +219,7 @@ export function DashPage() {
                     <>
                       {' '}
                       <Link to="/historyandarchives">
-                        <button>History and Archives</button>
+                        <button>Browse Later</button>
                       </Link>
                       <Link to={`/preferences/${dash.id}`}>
                         <button>Dash Settings</button>
@@ -269,11 +272,7 @@ export function DashPage() {
               Sign Up
             </Link>
           </>
-        ) : (
-          <Link to="/create-dash" className="navLink">
-            Create Dash{' '}
-          </Link>
-        )}
+        ) : null}
       </footer>{' '}
     </>
   )

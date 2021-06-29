@@ -42,13 +42,15 @@ export function CreateAccountPage() {
   }
   return (
     <>
-      <Link className="linkForHeader" to="/">
-        <h1 className="header">QueryDash</h1>
-      </Link>{' '}
-      <main className="mainCreateAccount">
-        <div className="containerForHeaderAndForm">
-          <h5 className="header">Form Header</h5>
-          <div className="formContainerCreateAccount">
+      <header className="altHeader">
+        <Link className="linkForHeader" to="/">
+          <h1 className="altHeader">QueryDash</h1>
+        </Link>{' '}
+      </header>
+      <main className="landingPageContainer">
+        <div className="listOfDashes">
+          <h5 className="HeaderDashList2">Create Account</h5>
+          <div className="DisplayListDash">
             <form onSubmit={handleFormSubmission} className="formCreateAccount">
               {errorMessage ? <p>{errorMessage}</p> : null}
               <div className="inputContainer">
@@ -78,7 +80,7 @@ export function CreateAccountPage() {
                   onChange={handleStringFieldChange}
                 />
               </div>
-              <input type="submit" value="Submit" />
+              <input type="submit" value="Submit" className="submit" />
             </form>
           </div>
         </div>
@@ -89,9 +91,6 @@ export function CreateAccountPage() {
         </Link>
         <Link to="/" className="navLink">
           Home
-        </Link>
-        <Link to="/create-dash" className="navLink">
-          Create Dash{' '}
         </Link>
         {/* <a href="https://www.google.com/" className="footer">
         Contact

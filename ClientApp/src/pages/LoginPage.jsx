@@ -45,13 +45,15 @@ export function LoginPage() {
   }
   return (
     <>
-      <Link className="linkForHeader" to="/">
-        <h1 className="altHeader">QueryDash</h1>
-      </Link>{' '}
-      <main className="mainCreateAccount">
-        <div className="containerForHeaderAndForm">
-          <h5 className="header">Form Header</h5>
-          <div className="formContainerCreateAccount">
+      <header className="altHeader">
+        <Link className="linkForHeader" to="/">
+          <h1 className="altHeader">QueryDash</h1>
+        </Link>{' '}
+      </header>
+      <main className="landingPageContainer">
+        <div className="listOfDashes">
+          <h5 className="HeaderDashList2">Login</h5>
+          <div className="DisplayListDash">
             <form onSubmit={handleFormSubmission} className="formCreateAccount">
               {errorMessage ? <p>{errorMessage}</p> : null}
               <div className="inputContainer">
@@ -72,7 +74,7 @@ export function LoginPage() {
                   onChange={handleStringFieldChange}
                 />
               </div>
-              <input type="submit" value="Submit" />
+              <input type="submit" value="Submit" className="submit" />
             </form>
           </div>
         </div>

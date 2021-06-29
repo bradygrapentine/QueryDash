@@ -25,6 +25,7 @@ body {
   padding: 0rem;
   min-height: 100%;
   min-width: 100vw;
+
   border: 0rem;
 }
 
@@ -39,64 +40,70 @@ header.altHeader {
   margin: 0rem;
   height: fit-content;
   width: fit-content;
+  // background-image: url('./images/plaid-77426_1920.jpg');
+  // background-size: contain;
+  min-width: 100vw;
+  text-decoration: none;
+  border: 0rem;
   a.linkForHeader {
+    text-decoration: none;
+  }
+  h1.header {
+    border: 0rem;
+    font-family: 'Racing Sans One', cursive;
+    background-image: url('./images/plaid-77426_1920.jpg');
+    background-size: contain;
+    display: flex;
+    font-weight: 100;
+    font-size: 3.25rem;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: fit-content;
+    margin: 0rem;
+    padding: 0.375rem 0rem 1rem 0rem;
+    background-color: black;
+    color: white;
+  }
+  h1.altHeader {
+    font-weight: 100;
+    background-image: url('./images/plaid-77426_1920.jpg');
+    background-size: contain;
+    font-size: 3.25rem;
+    width: 100vw;
+    height: fit-content;
+    text-align: center;
     margin: 0rem;
     padding: 0rem;
-    min-width: 100vw;
-    height: fit-content;
-    width: fit-content;
-    text-decoration: none;
-    border: 0rem;
-    h1.header {
-      border: 0rem;
-      background-image: url('./images/plaid-77426_1920.jpg');
-      background-size: contain;
-      font-family: 'Racing Sans One', cursive;
-      display: flex;
-      font-weight: 100;
-      font-size: 3.25rem;
-      align-items: center;
-      justify-content: center;
-      width: 100vw;
-      height: fit-content;
-      margin: 0rem;
-      padding: 0.375rem 0rem 1rem 0rem;
-      background-color: black;
-      color: white;
-    }
-    h1.altHeader {
-      font-weight: 100;
-      background-image: url('./images/plaid-77426_1920.jpg');
-      background-size: cover;
-      font-size: 3.25rem;
-      width: 100vw;
-      height: fit-content;
-      text-align: center;
-      margin: 0rem;
-      padding: 0rem;
-      padding: 0.375rem 0rem 1rem 0rem;
-      background-color: black;
-      color: white;
-    }
+    padding: 0.375rem 0rem 1rem 0rem;
+    background-color: black;
+    color: white;
   }
 }
 
 div.navBar {
   width: 100vw;
-  height: 2rem;
-  padding: 0rem;
+  height: fit-content;
+  padding: 0.5rem;
   margin: 0rem;
   color: white;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 0px 3px 2px rgb(0, 0, 0, 0.9);
-  background-color: rgb(2, 0, 63);
+  box-shadow: 0px 0px 3px 2px rgb(121, 0, 2);
+  // background-color: rgb(2, 0, 63);
+  background-color: rgb(121, 0, 2);
+  position: sticky;
+  top: 0rem;
+  form.filterDashes {
+    width: 6rem;
+    margin: 0rem 5rem 0rem 0rem;
+  }
 }
 
 ul.navBar {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   list-style: none;
   width: 100%;
@@ -105,24 +112,43 @@ ul.navBar {
 }
 
 a.navLink {
-  margin: 0rem;
-  padding: 0rem;
-  color: white;
+  margin: 0rem 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  color: black;
   text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-decoration: none;
+  border: 2px solid black;
+  background-color: white;
+  cursor: pointer;
+}
+a.navLink:hover {
+  background-color: rgb(220, 220, 220);
+  border: 2px solid rgb(136, 0, 2);
 }
 
 span.navLink {
-  margin: 0rem;
-  padding: 0.25rem;
+  margin: 0rem 2.5rem 0rem 0rem;
+  padding: 0.25rem 0.25rem;
   border-radius: 0.5rem;
-  color: rgb(2, 0, 63);
+  color: black;
   text-align: center;
+  width: fit-content;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 700;
   text-decoration: none;
-  border: 2px solid rgb(52, 50, 126);
+  border: 2px solid black;
   background-color: white;
+  cursor: pointer;
+  // position: sticky;
+  // top: 0rem;
+  // right: 3%;
+}
+span.navLink:hover {
+  background-color: rgb(220, 220, 220);
+  border: 2px solid rgb(136, 0, 2);
 }
 
 main.main {
@@ -142,14 +168,14 @@ main.main {
   div.containerDashQuery {
     padding: 0.375rem 0rem;
     position: sticky;
-    border-bottom: 2px solid rgb(0, 0, 0);
-    border-top: 2px solid rgb(0, 0, 0);
-    box-shadow: 0px 4px 3px 2px rgb(0, 0, 0, 0.9);
+    // border-bottom: 2px solid rgb(0, 0, 0);
+    // border-top: 2px solid rgb(0, 0, 0);
+    box-shadow: 0px 0px 3px 2px rgb(121, 0, 2);
     top: 0rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(219, 10, 13);
+    background-color: rgb(121, 0, 2);
     color: white;
     margin: 0rem;
     width: 100vw;
@@ -158,13 +184,24 @@ main.main {
       color: white;
       margin: 0rem 2rem 0rem 0rem;
       border-radius: 0.375rem;
+      border: 2px solid white;
+      cursor: pointer;
     }
     button.collapsedMenu {
       margin: 0rem 1rem;
       background-color: black;
       color: white;
       border-radius: 0.5rem;
+      border: 2px solid white;
+      cursor: pointer;
     }
+    button.collapsedMenu:hover {
+      transform: scale(1.05, 1.05);
+    }
+    button.collapseMenu:hover {
+      transform: scale(1.05, 1.05);
+    }
+
     div.dashQuery {
       display: flex;
       justify-content: flex-start;
@@ -180,16 +217,22 @@ main.main {
       div.buttonContainer2 {
         padding: 0rem;
         width: fit-content;
-        margin: 0.25rem 0.625rem;
+        margin: 0.25rem 1rem;
 
         button {
           width: fit-content;
           padding: 0.25rem;
           font-size: 0.75rem;
           border-radius: 0.5rem;
-          margin: 0rem 0.125rem 0rem 0rem;
-          background-color: black;
-          color: white;
+          margin: 0rem 0.25rem 0rem 0rem;
+          background-color: white;
+          border: 2px solid black;
+          color: black;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: rgb(220, 220, 220);
+          border: 2px solid rgb(136, 0, 2);
         }
       }
 
@@ -200,19 +243,29 @@ main.main {
         justify-content: center;
         align-items: center;
         input.dashQuery {
-          margin: 0rem 1rem;
+          margin: 0rem 0.125rem 0rem 1rem;
           padding: 0.125rem;
-          border: 2px solid black;
+          border: 2px solid white;
           border-radius: 0.375rem;
+          background-color: black;
+          color: white;
+          font-weight: 600;
+          cursor: pointer;
         }
         input.search {
           width: fit-content;
-          padding: 0.25rem;
+          padding: 0.19rem 0.25rem;
           font-size: 0.75rem;
           border-radius: 0.5rem;
-          margin: 0rem 0.125rem 0rem 0rem;
+          margin: 0rem 0rem 0rem 0.125rem;
           background-color: black;
           color: white;
+          border: 2px solid white;
+          font-weight: 600;
+          cursor: pointer;
+        }
+        input.search:hover {
+          transform: scale(1.05, 1.05);
         }
       }
     }
@@ -237,7 +290,7 @@ main.main {
       width: 99.125vw;
       // margin: 1rem;
       div.panelContainer {
-        box-shadow: 0px 0px 3.75px 2.125px rgb(247, 247, 247);
+        box-shadow: 0px 0px 3.75px 2.125px rgb(255, 255, 255);
         // background-image: url('./images/plaid-77426_1920.jpg');
         // background-size: contain;
         resize: both;
@@ -247,7 +300,7 @@ main.main {
         justify-content: space-evenly;
         // min-height: fit-content;
         // max-height: min-content;
-        height: 60vh;
+        height: 40vh;
         max-height: fit-content;
         width: 30vw;
         // width: 44vw; --> make this dynamic so panels snap into place nicely at different widths
@@ -402,16 +455,27 @@ footer.standardFooter {
   padding: 1rem 0rem;
   margin: 0rem;
   width: 100vw;
-  background-color: white;
-  color: black;
-  border-top: 4px solid black;
-  box-shadow: 0px 0px 5px 5px black;
+  color: white;
+  // border-top: 1px solid rgb(121, 0, 2);
+  box-shadow: 0px 0px 3px 2px rgb(121, 0, 2);
+  // background-color: rgb(2, 0, 63);
+  background-color: rgb(121, 0, 2);
   a.navLink {
-    margin: 0rem;
-    padding: 0rem;
+    margin: 0rem 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
     color: black;
     text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-decoration: none;
+    border: 2px solid black;
+    background-color: white;
+    cursor: pointer;
+  }
+  a.navLink:hover {
+    background-color: rgb(220, 220, 220);
+    border: 2px solid rgb(136, 0, 2);
   }
 }
 
@@ -435,12 +499,13 @@ main.landingPageContainer {
   flex-wrap: wrap;
   flex-direction: row;
   margin: 0rem;
-  padding: 0rem;
+  padding: 1rem 0rem;
   min-height: 100vh;
   min-width: 100vw;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  background-color: rgb(17, 17, 17);
 }
 div.listOfDashes {
   display: flex;
@@ -448,62 +513,239 @@ div.listOfDashes {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: fit-content;
+  width: max-content;
   height: min-content;
   margin: 1rem;
   padding: 0rem;
-  border: 2px solid black;
+  // border: 2px solid white;
+  box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
 
-  border-top-left-radius: 1rem;
+  background-color: rgb(180, 180, 180);
+  background-color: black;
   border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
   h3.HeaderDashList {
     display: flex;
+    // text-decoration: underline;
     align-items: center;
     justify-content: center;
     height: fit-content;
     width: 100%;
+    box-shadow: 0px 0px 5px 3px rgb(121, 0, 2);
     // min-width: max-content;
     // padding: 0.5rem;
-    background-color: rgb(13, 10, 97);
+    // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
+    // background-color: rgb(2, 0, 63);
+    background-color: rgb(121, 0, 2);
     color: white;
-    padding: 0.25rem 0rem;
+    padding: 0.75rem 0rem;
     margin: 0rem;
-    border-bottom: 1px solid black;
+    // border-bottom: 1px solid black;
     border-top-left-radius: 0.85rem;
     border-top-right-radius: 0.85rem;
   }
-  ul.DisplayListDash {
+  h5.HeaderDashList2 {
+    display: flex;
+    // text-decoration: underline;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: 100%;
+    box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+    // min-width: max-content;
+    // padding: 0.5rem;
+    // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
+    // background-color: rgb(2, 0, 63);
+    background-color: rgb(0, 51, 2);
+    color: white;
+    padding: 0.75rem 0rem;
+    margin: 0rem;
+    // border-bottom: 1px solid black;
+    border-top-left-radius: 0.85rem;
+    border-top-right-radius: 0.85rem;
+  }
+  h5.HeaderDashList {
+    display: flex;
+    // text-decoration: underline;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: 100%;
+    // box-shadow: 0px 0px 5px 3px rgb(121, 0, 2);
+    // min-width: max-content;
+    // padding: 0.5rem;
+    box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
+    // background-color: rgb(2, 0, 63);
+    background-color: rgb(121, 0, 2);
+    color: white;
+    padding: 0.75rem 0rem;
+    margin: 0rem;
+    // border-bottom: 1px solid black;
+    border-top-left-radius: 0.85rem;
+    border-top-right-radius: 0.85rem;
+  }
+  div.DisplayListDash {
     list-style: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: fit-content;
-    height: fit-content;
+    width: 50vw;
+    // overflow-y: scroll;
+    // overflow-x: hidden;
+    // height: 60vh;
     padding: 0.25rem;
-    margin: 0rem 0.25rem 0.75rem 0.25rem;
+    margin: 0rem;
+    // background-color: rgb(220, 220, 220);
+    // box-shadow: 0px 0px 5px 3px rgb(220, 220, 220);
+    border: 0rem;
+    form.formCreateAccount {
+      display: flex;
+      flex-direction: column;
+      width: 48vw;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5rem 0rem;
+      align-items: center;
+      flex-wrap: wrap;
+      // border-radius: 0.5rem;
+      // border-bottom: 2px solid black;
+      background-color: rgb(255, 255, 255);
+
+      box-shadow: 0px 0px 2px 3px rgb(220, 220, 220);
+      // margin: 5rem, 5rem;
+      margin: 1rem;
+      text-decoration: none;
+      div.inputContainer {
+        margin: 1rem 0rem;
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      input {
+        margin: 1rem 0rem 0rem 0rem;
+        border-radius: 0.5rem;
+        background-color: black;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        width: 45vw;
+      }
+      input.submit {
+        border: 2px solid black;
+      }
+      input.submit:hover {
+        transform: scale(1.05, 1.05);
+      }
+      // color: white;
+    }
+  }
+  ul.DisplayListDash {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: fit-content;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 60vh;
+    padding: 0.25rem;
+    margin: 0.35rem 0rem 0rem 0rem;
+    // margin: 0rem 0.25rem 0.75rem 0.25rem;
+
+    // a.nonUser {
+    //   display: flex;
+    //   width: 98%;
+    //   justify-content: center;
+    //   text-align: center;
+    //   padding: 0.5rem 0.75rem;
+    //   align-items: center;
+    //   flex-wrap: wrap;
+    //   background-color: rgb(255, 255, 255);
+    //   // border-radius: 0.5rem;
+    //   // border-bottom: 2px solid black;
+    //   box-shadow: 0px 0px 2px 3px rgba(255, 255, 255);
+    //   // margin: 5rem, 5rem;
+    //   margin: 0.375rem 0rem;
+    //   text-decoration: none;
+
+    // li.nonUser {
+    //   color: black;
+    //   text-decoration: none;
+    //   padding: 0rem 0.25rem;
+    //   font-weight: 700;
+    //   margin: 0rem;
+    // }
+    // li.nonUser:hover {
+    //   transform: scale(1.05, 1.05);
+    // }
+    // }
     li {
       display: flex;
-      width: 100%;
+      width: 98%;
       justify-content: space-between;
+      text-align: center;
       padding: 0.5rem 0.75rem;
       align-items: center;
       flex-wrap: wrap;
+      background-color: rgb(255, 255, 255);
+      // border-radius: 0.5rem;
+      // border-bottom: 2px solid black;
+      box-shadow: 0px 0px 2px 3px rgba(255, 255, 255);
       // margin: 5rem, 5rem;
+      margin: 0.375rem 0rem;
+      input {
+        display: flex;
+        font-weight: 500;
+        align-items: center;
+        justify-content: center;
+        margin: 0rem 0rem 0rem 0.25rem;
+        cursor: pointer;
+        background-color: black;
+        color: white;
+        border: 2px solid white;
+        border-radius: 0.5rem;
+        padding: 0.25rem;
+      }
+      input:hover {
+        transform: scale(1.05, 1.05);
+      }
+
       a {
         color: black;
         text-decoration: none;
         padding: 0rem 0.25rem;
+        font-weight: 700;
+        margin: 0rem;
       }
       a:hover {
         // transform: scale(1.5rem, 1.5rem);
-        color: rgb(8, 0, 72);
+        transform: scale(1.05, 1.05);
       }
       div {
-        margin: 0.125rem;
+        margin: 0rem;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
         button {
+          display: flex;
+          font-weight: 500;
+          align-items: center;
+          justify-content: center;
           margin: 0rem 0rem 0rem 0.25rem;
           cursor: pointer;
+          background-color: black;
+          color: white;
+          border: 2px solid white;
+          border-radius: 0.5rem;
+          padding: 0.25rem;
+        }
+        button:hover {
+          transform: scale(1.05, 1.05);
         }
       }
     }
@@ -899,61 +1141,60 @@ button.accountInfoSubmit:hover {
 
 // --------------------------------------------
 
-@media all and (max-width: 562px) {
-  div.containerDashQuery {
-    padding: 0.375rem 0rem;
-    position: sticky;
-    border-bottom: 4px solid black;
-    border-top: 4px solid black;
-    top: 0rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: min-content;
-    align-items: center;
-    color: white;
-    margin: 0rem;
-    width: 100vw;
-    // align-items: space-between;
-    button.collapsedMenu {
-      margin: 0rem 1rem;
-      background-color: black;
-      color: white;
-      border-radius: 0.5rem;
-    }
-    button.collapseMenu {
-      background-color: black;
-      color: white;
-      margin: 0rem;
-      border-radius: 0.375rem;
-      position: sticky;
-      left: 48%;
-    }
-    div.dashQuery {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      margin: 0rem;
-      padding: 0rem;
-      width: 100%;
-      align-items: center;
-      div.buttonContainer2 {
-        border-radius: 0.25rem;
-        border: 2px solid black;
-        background-color: white;
-        padding: 0.5rem;
-        margin: 0rem 0.625rem 0.25rem 0.625rem;
-        button {
-          width: fit-content;
-          padding: 0.125rem;
-          font-size: 0.5rem;
-          border-radius: 0.5rem;
-          margin: 0.25rem;
-          background-color: black;
-          color: white;
-        }
-      }
-    }
-  }
-}
+//   div.containerDashQuery {
+//     padding: 0.375rem 0rem;
+//     position: sticky;
+//     // border-bottom: 4px solid black;
+//     // border-top: 4px solid black;
+//     top: 0rem;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-start;
+//     height: min-content;
+//     align-items: center;
+//     color: white;
+//     margin: 0rem;
+//     width: 100vw;
+//     // align-items: space-between;
+//     button.collapsedMenu {
+//       margin: 0rem 1rem;
+//       background-color: black;
+//       color: white;
+//       border-radius: 0.5rem;
+//     }
+//     button.collapseMenu {
+//       background-color: black;
+//       color: white;
+//       margin: 0rem;
+//       border-radius: 0.375rem;
+//       position: sticky;
+//       // left: 48%;
+//     }
+//     div.dashQuery {
+//       display: flex;
+//       justify-content: center;
+//       flex-direction: column;
+//       align-items: center;
+//       margin: 0rem;
+//       padding: 0rem;
+//       width: 100%;
+//       align-items: center;
+//       div.buttonContainer2 {
+//         border-radius: 0.25rem;
+//         border: 2px solid black;
+//         background-color: white;
+//         padding: 0.5rem;
+//         margin: 0rem 0.625rem 0.25rem 0.625rem;
+//         button {
+//           width: fit-content;
+//           padding: 0.125rem;
+//           font-size: 0.5rem;
+//           border-radius: 0.5rem;
+//           margin: 0.25rem;
+//           background-color: black;
+//           color: white;
+//         }
+//       }
+// }
+// }
+// }

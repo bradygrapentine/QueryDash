@@ -170,32 +170,48 @@ export function LandingPage() {
   return (
     <>
       <header className="altHeader">
-        <Link className="linkForHeader" to="/">
-          <h1 className="altHeader">QueryDash</h1>
-        </Link>
+        <h1 className="altHeader">QueryDash</h1>
       </header>
       <div className="navBar">
-        <ul className="navBar">
-          {isLoggedIn() ? (
-            <>
+        {isLoggedIn() ? (
+          <>
+            <ul className="navBar">
               <Link to="/create-dash" className="navLink">
                 Create Dash
               </Link>
-              <span className="navLink" onClick={handleLogout}>
-                Log Out
-              </span>
-            </>
-          ) : (
-            <>
-              <Link to="/create-account" className="navLink">
-                Sign Up
+              <Link to="/historyandarchives" className="navLink">
+                Browse Later
               </Link>
-              <Link to="/login" className="navLink">
-                Log in
-              </Link>
-            </>
-          )}
-        </ul>
+            </ul>
+            <form className="filterDashes">
+              {' '}
+              {/* onSubmit={runDashQuery} */}
+              <input
+                className="filterDashes"
+                type="text"
+                placeholder="Filter Dashboards"
+                // value={searchTerm}
+                // onChange={(event) => {
+                //   setSearchTerm(event.target.value)
+              />
+            </form>
+            <span className="navLink" onClick={handleLogout}>
+              Log Out
+            </span>
+          </>
+        ) : (
+          <ul className="navBar">
+            <Link to="/create-account" className="navLink">
+              Sign Up
+            </Link>
+            <Link to="/login" className="navLink">
+              Log in
+            </Link>
+            <Link to="/about" className="navLink">
+              About
+            </Link>
+          </ul>
+        )}
       </div>
       <main className="landingPageContainer">
         {isLoggedIn() ? (
@@ -227,13 +243,8 @@ export function LandingPage() {
               <ul className="DisplayListDash">
                 {dashList.map((dash) => (
                   <li key={dash.id}>
-                    {/* <Link to={`/dash/${dash.id}`} className=""> */}
                     {dash.name}
-                    {/* </Link> */}
-                    <form
-                      onSubmit={(event) => copyDash(dash, event)}
-                      // className="formCreateAccount"
-                    >
+                    <form onSubmit={(event) => copyDash(dash, event)}>
                       <input type="submit" value="Copy Dash" />
                     </form>
                   </li>
@@ -243,13 +254,18 @@ export function LandingPage() {
           </>
         ) : (
           <div className="listOfDashes">
-            <h3 className="HeaderDashList">Existing Dashboards</h3>
+            <h3 className="HeaderDashList">User's Dashes</h3>
             <ul className="DisplayListDash">
               {nonUserDashList.map((dash) => (
                 <li key={dash.id}>
-                  <Link to={`/dash/${dash.id}`} className="">
-                    {dash.name}
-                  </Link>
+                  <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
+
+                  <div>
+                    {' '}
+                    <button onClick={() => history.push(`/dash/${dash.id}`)}>
+                      Use Dash
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -257,9 +273,11 @@ export function LandingPage() {
         )}
       </main>
       <footer className="standardFooter">
-        <Link to="/about" className="navLink">
-          About
-        </Link>
+        {isLoggedIn() ? (
+          <Link to="/about" className="navLink">
+            About
+          </Link>
+        ) : null}
       </footer>
     </>
   )
