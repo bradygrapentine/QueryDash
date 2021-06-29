@@ -29,31 +29,29 @@ export function AboutPage() {
           <h1 className="altHeader">QueryDash</h1>
         </Link>{' '}
       </header>
-      <main className="aboutPage">
-        <article className="aboutPageArticle">
-          <h5 className="header">Article 1</h5>
+      <main className="landingPageContainer">
+        <div className="listOfDashes2">
+          <h3 className="HeaderDashList2">About</h3>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident
             excepturi porro accusantium exercitationem unde natus rerum
             voluptatibus sint saepe aut, molestiae eum consequatur ullam neque
-            quibusdam ex nulla. Accusamus, asperiores!
+            quibusdam ex nulla. Accusamus, asperiores! Lorem ipsum dolor, sit
+            amet consectetur adipisicing elit. Voluptate cupiditate ipsa
+            recusandae, nemo porro natus ipsum sit expedita eum necessitatibus
+            accusantium laborum voluptatem doloremque voluptates in ex mollitia
+            aperiam numquam?
           </p>
-        </article>
-        <article className="aboutPageArticle">
-          <h5 className="header">Article 1</h5>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate
-            cupiditate ipsa recusandae, nemo porro natus ipsum sit expedita eum
-            necessitatibus accusantium laborum voluptatem doloremque voluptates
-            in ex mollitia aperiam numquam?
-          </p>
-        </article>
+        </div>
       </main>
       <footer className="standardFooter">
-        <Link to="/create-account" className="standardFooter">
+        <Link to="/create-account" className="navLink">
           Sign Up
         </Link>
-        <Link to="/" className="standardFooter">
+        <Link to="/login" className="navLink">
+          Log In
+        </Link>
+        <Link to="/" className="navLink">
           Home
         </Link>
       </footer>

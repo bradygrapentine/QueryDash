@@ -241,7 +241,7 @@ export function DashPreferences() {
     <>
       <header className="altHeader">
         <Link className="linkForHeader" to="/">
-          <h1 className="altHeader">QueryDash</h1>
+          <h1 className="altHeader">{dash.name}</h1>
         </Link>{' '}
       </header>
       <main className="mainCreateAccount">
@@ -270,7 +270,29 @@ export function DashPreferences() {
               </div>
               <input type="submit" value="Submit" className="submitButton" />
             </form>
-
+            <div className="addPanels">
+              {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
+              <label>Add Panels: </label>
+              <ul className="inputContainer">
+                {panels
+                  .filter(
+                    (panel) =>
+                      !dash.dashPanelAssignments
+                        .map(
+                          (dashPanelAssignment) => dashPanelAssignment.panelId
+                        )
+                        .includes(panel.id)
+                  )
+                  .map((panel) => (
+                    <button
+                      className="inputContainer"
+                      onClick={(event) => postPanelAssignment(panel, event)}
+                    >
+                      {panel.filterSiteName}
+                    </button>
+                  ))}
+              </ul>
+            </div>
             <form onSubmit={updateDash} className="formCreateAccount">
               <div className="inputContainer">
                 <label>Delete Panels: </label>
@@ -294,194 +316,175 @@ export function DashPreferences() {
             >
               Delete Dash
             </button>
-          </div>
-        </div>
-        <div className="containerForHeaderAndForm">
-          <h5 className="header">Create Panels</h5>
-          {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
-          <div className="formContainerCreateAccount">
-            {!invalidFilterSite ? (
-              <form
-                onSubmit={handlePanelFormSubmission}
-                className="formCreateAccount"
-              >
-                <div className="inputContainer">
-                  <label htmlFor="filterSiteName">Webpage Name: </label>
-                  <input
-                    name="filterSiteName"
-                    type="text"
-                    value={newPanel.filterSiteName}
-                    onChange={handleStringPanelFieldChange}
-                  />
-                </div>
-                <div className="inputContainer">
-                  <label htmlFor="filterSite">Webpage URL: </label>
-                  <input
-                    name="filterSite"
-                    type="text"
-                    value={newPanel.filterSite}
-                    onChange={handleStringPanelFieldChange}
-                  />
-                </div>
-                <input type="submit" value="Submit" />
-              </form>
-            ) : (
-              <form
-                onSubmit={handlePanelFormSubmission}
-                className="formCreateAccount"
-              >
-                <p>Invalid Filter Site. Try Again</p>{' '}
-                <div className="inputContainer">
-                  <label htmlFor="filterSiteName">Webpage Name: </label>
-                  <input
-                    name="filterSiteName"
-                    type="text"
-                    value={newPanel.filterSiteName}
-                    onChange={handleStringPanelFieldChange}
-                  />
-                </div>
-                <div className="inputContainer">
-                  <label htmlFor="filterSite">Webpage URL: </label>
-                  <input
-                    name="filterSite"
-                    type="text"
-                    value={newPanel.filterSite}
-                    onChange={handleStringPanelFieldChange}
-                  />
-                </div>
-                <input type="submit" value="Submit" />
-              </form>
-            )}
-          </div>
-        </div>
-        <div className="containerForHeaderAndForm">
-          <h5 className="header">Edit Dash</h5>
-          <div className="formContainerCreateAccount">
-            <form onSubmit={updateDash} className="formCreateAccount">
-              <div className="inputContainer">
-                {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
-                <label>Add Panels: </label>
-                <ul className="inputContainer">
-                  {panels
-                    .filter(
-                      (panel) =>
-                        !dash.dashPanelAssignments
-                          .map(
-                            (dashPanelAssignment) => dashPanelAssignment.panelId
-                          )
-                          .includes(panel.id)
-                    )
-                    .map((panel) => (
-                      <button
-                        className="inputContainer"
-                        onClick={(event) => postPanelAssignment(panel, event)}
-                      >
-                        {panel.filterSiteName}
-                      </button>
-                    ))}
-                </ul>
+            <div className="containerForCreatingPanel">
+              <h5 className="header">Create Panel</h5>
+              {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
+              <div className="formContainerCreateAccount">
+                {!invalidFilterSite ? (
+                  <form
+                    onSubmit={handlePanelFormSubmission}
+                    className="formCreateAccount"
+                  >
+                    <div className="inputContainer">
+                      <label htmlFor="filterSiteName">Webpage Name: </label>
+                      <input
+                        name="filterSiteName"
+                        type="text"
+                        value={newPanel.filterSiteName}
+                        onChange={handleStringPanelFieldChange}
+                      />
+                    </div>
+                    <div className="inputContainer">
+                      <label htmlFor="filterSite">Webpage URL: </label>
+                      <input
+                        name="filterSite"
+                        type="text"
+                        value={newPanel.filterSite}
+                        onChange={handleStringPanelFieldChange}
+                      />
+                    </div>
+                    <input type="submit" value="Submit" />
+                  </form>
+                ) : (
+                  <form
+                    onSubmit={handlePanelFormSubmission}
+                    className="formCreateAccount"
+                  >
+                    <p>Invalid Filter Site. Try Again</p>{' '}
+                    <div className="inputContainer">
+                      <label htmlFor="filterSiteName">Webpage Name: </label>
+                      <input
+                        name="filterSiteName"
+                        type="text"
+                        value={newPanel.filterSiteName}
+                        onChange={handleStringPanelFieldChange}
+                      />
+                    </div>
+                    <div className="inputContainer">
+                      <label htmlFor="filterSite">Webpage URL: </label>
+                      <input
+                        name="filterSite"
+                        type="text"
+                        value={newPanel.filterSite}
+                        onChange={handleStringPanelFieldChange}
+                      />
+                    </div>
+                    <input type="submit" value="Submit" />
+                  </form>
+                )}
               </div>
-            </form>
+            </div>
           </div>
         </div>
-        <article className="aboutPageArticle">
-          <h5 className="header">Dash Archives</h5>
-          <ul className="savedLinkList">
-            {isLoggedIn() ? (
-              <>
-                {dash.savedLinks.filter(
-                  (savedLink) => savedLink.isArchive === true
-                ).length > 0 ? (
-                  <>
-                    {dash.savedLinks
-                      .filter((savedLink) => savedLink.isArchive === true)
-                      .map((savedLink) => (
-                        <>
-                          <li className="savedLinkList">
-                            <p className="savedLinkListLabel">
-                              Archived-Link:{' '}
-                            </p>
-                            <a
+        <div className="containerOpenedAndArchived">
+          <article className="aboutPageArticle">
+            <h5 className="header">Dash Archives</h5>
+            <ul className="savedLinkList">
+              {isLoggedIn() ? (
+                <>
+                  {dash.savedLinks.filter(
+                    (savedLink) => savedLink.isArchive === true
+                  ).length > 0 ? (
+                    <>
+                      {dash.savedLinks
+                        .filter((savedLink) => savedLink.isArchive === true)
+                        .map((savedLink) => (
+                          <>
+                            <li className="savedLinkList">
+                              <p className="savedLinkListLabel">
+                                Archived-Link:{' '}
+                              </p>
+                              <a
+                                className="savedLinkList"
+                                href={savedLink.queryUrl}
+                              >
+                                {savedLink.queryUrl}
+                              </a>
+                              <p className="savedLinkListLabel">
+                                Archived At:{' '}
+                              </p>
+                              <p className="savedLinkList">
+                                {formatDate(savedLink.timeStamp)}{' '}
+                              </p>
+                              <p className="savedLinkListLabel">
+                                Archived On:{' '}
+                              </p>
+                              <p className="savedLinkList">{dash.name} </p>
+                            </li>
+                            <button
                               className="savedLinkList"
-                              href={savedLink.queryUrl}
+                              onClick={() => deleteSavedLink(savedLink.id)}
                             >
-                              {savedLink.queryUrl}
-                            </a>
-                            <p className="savedLinkListLabel">Archived At: </p>
-                            <p className="savedLinkList">
-                              {formatDate(savedLink.timeStamp)}{' '}
-                            </p>
-                            <p className="savedLinkListLabel">Archived On: </p>
-                            <p className="savedLinkList">{dash.name} </p>
-                          </li>
-                          <button
-                            className="savedLinkList"
-                            onClick={() => deleteSavedLink(savedLink.id)}
-                          >
-                            Delete
-                          </button>
-                        </>
-                      ))}
-                  </>
-                ) : (
-                  <p className="savedLinkList">No Archived Links</p>
-                )}
-              </>
-            ) : (
-              <p className="savedLinkList">Must Login to View Archives</p>
-            )}
-          </ul>
-        </article>
-        <article className="aboutPageArticle">
-          <h5 className="header">Dash Opened Links</h5>
-          <ul className="savedLinkList">
-            {isLoggedIn() ? (
-              <>
-                {dash.savedLinks.filter(
-                  (savedLink) => savedLink.isArchive === false
-                ).length > 0 ? (
-                  <>
-                    {dash.savedLinks
-                      .filter((savedLink) => savedLink.isArchive === false)
-                      .map((savedLink) => (
-                        <>
-                          <li className="savedLinkList">
-                            <p className="savedLinkListLabel">Opened-Link: </p>
-                            <a
+                              Delete
+                            </button>
+                          </>
+                        ))}
+                    </>
+                  ) : (
+                    <p className="savedLinkList">No Archived Links</p>
+                  )}
+                </>
+              ) : (
+                <p className="savedLinkList">Must Login to View Archives</p>
+              )}
+            </ul>
+          </article>
+          <article className="aboutPageArticle">
+            <h5 className="header">Dash Opened Links</h5>
+            <ul className="savedLinkList">
+              {isLoggedIn() ? (
+                <>
+                  {dash.savedLinks.filter(
+                    (savedLink) => savedLink.isArchive === false
+                  ).length > 0 ? (
+                    <>
+                      {dash.savedLinks
+                        .filter((savedLink) => savedLink.isArchive === false)
+                        .map((savedLink) => (
+                          <>
+                            <li className="savedLinkList">
+                              <p className="savedLinkListLabel">
+                                Opened-Link:{' '}
+                              </p>
+                              <a
+                                className="savedLinkList"
+                                href={savedLink.queryUrl}
+                              >
+                                {savedLink.queryUrl}
+                              </a>
+                              <p className="savedLinkListLabel">Opened At: </p>
+                              <p className="savedLinkList">
+                                {formatDate(savedLink.timeStamp)}{' '}
+                              </p>
+                              <p className="savedLinkListLabel">Opened On: </p>
+                              <p className="savedLinkList">{dash.name} </p>
+                            </li>
+                            <button
                               className="savedLinkList"
-                              href={savedLink.queryUrl}
+                              onClick={() => deleteSavedLink(savedLink.id)}
                             >
-                              {savedLink.queryUrl}
-                            </a>
-                            <p className="savedLinkListLabel">Opened At: </p>
-                            <p className="savedLinkList">
-                              {formatDate(savedLink.timeStamp)}{' '}
-                            </p>
-                            <p className="savedLinkListLabel">Opened On: </p>
-                            <p className="savedLinkList">{dash.name} </p>
-                          </li>
-                          <button
-                            className="savedLinkList"
-                            onClick={() => deleteSavedLink(savedLink.id)}
-                          >
-                            Delete
-                          </button>
-                        </>
-                      ))}
-                  </>
-                ) : (
-                  <p className="savedLinkList">No Archived Links</p>
-                )}
-              </>
-            ) : (
-              <p className="savedLinkList">Must Login to View Archives</p>
-            )}
-          </ul>
-        </article>
+                              Delete
+                            </button>
+                          </>
+                        ))}
+                    </>
+                  ) : (
+                    <p className="savedLinkList">No Archived Links</p>
+                  )}
+                </>
+              ) : (
+                <p className="savedLinkList">Must Login to View Archives</p>
+              )}
+            </ul>
+          </article>
+        </div>
       </main>
       <footer className="standardFooter">
         <Link to="/" className="navLink">
           Home
+        </Link>
+        <Link to="/create-dash" className="navLink">
+          Create Dash
         </Link>
         <Link to="/dash/:id" className="navLink">
           Back to Dash{' '}
