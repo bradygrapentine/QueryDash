@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // import {  } from 'react-router-dom'
-import { Footer } from './DashPage'
+// import { Footer } from './DashPage'
 import { Link } from 'react-router-dom'
 import { isLoggedIn, authHeader } from '../auth'
 // import './custom.scss'

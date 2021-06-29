@@ -11,6 +11,7 @@ export function CreateDashPage() {
 
   const [dashFormErrorMessage, setDashFormErrorMessage] = useState('')
   const [panelFormErrorMessage, setPanelFormErrorMessage] = useState('')
+  const [addPanelFormErrorMessage, setAddPanelFormErrorMessage] = useState('')
 
   const [invalidFilterSite, setInvalidFilterSite] = useState(false)
 
@@ -98,6 +99,7 @@ export function CreateDashPage() {
   }
 
   function handleStringPanelFieldChange(event) {
+    setPanelFormErrorMessage('')
     const value = event.target.value
     const fieldName = event.target.name
 
@@ -143,6 +145,7 @@ export function CreateDashPage() {
   async function handleExistingPanelSelection(existingPanel) {
     postPanelAssignment(existingPanel.value)
     existingPanel.className = 'notVisible'
+    setAddPanelFormErrorMessage('Panel Added')
   }
 
   useEffect(() => {
@@ -162,13 +165,15 @@ export function CreateDashPage() {
 
   return (
     <>
-      <Link className="linkForHeader" to="/">
-        <h1 className="altHeader">QueryDash</h1>
-      </Link>{' '}
-      <main className="mainCreateAccount">
-        <div className="containerForHeaderAndForm">
-          <h5 className="header">Create Dash</h5>
-          <div className="formContainerCreateAccount">
+      <header className="altHeader">
+        <Link className="linkForHeader" to="/">
+          <h1 className="altHeader">QueryDash</h1>
+        </Link>{' '}
+      </header>
+      <main className="createDashPage">
+        <div className="listOfDashes">
+          <h5 className="HeaderDashList2">Create Dash</h5>
+          <div className="DisplayListDash">
             <form
               onSubmit={handleDashFormSubmission}
               className="formCreateAccount"
@@ -200,7 +205,11 @@ export function CreateDashPage() {
           <>{!newDashId ? null : <p> Panel Assignment Limit Reached </p>}</>
         ) : (
           <>
-            <div className="panelListContainer">
+            <div className="listOfDashes3">
+              <h5 className="HeaderDashList2">Add Panels</h5>
+              {addPanelFormErrorMessage ? (
+                <p>{addPanelFormErrorMessage}</p>
+              ) : null}
               <ul>
                 {panels.map((panel) => (
                   <button
@@ -216,10 +225,11 @@ export function CreateDashPage() {
                 ))}
               </ul>{' '}
             </div>
-            <div className="containerForHeaderAndForm">
-              <h5 className="header">Create Panels</h5>
+            <div className="listOfDashes">
+              <h5 className="HeaderDashList2">Create Panel</h5>
               {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
-              <div className="formContainerCreateAccount">
+              {invalidFilterSite ? <p>Invalid Filter Site. Try Again</p> : null}
+              <div className="DisplayListDash">
                 {!invalidFilterSite ? (
                   <form
                     onSubmit={handlePanelFormSubmission}
@@ -250,7 +260,6 @@ export function CreateDashPage() {
                     onSubmit={handlePanelFormSubmission}
                     className="formCreateAccount"
                   >
-                    <p>Invalid Filter Site. Try Again</p>{' '}
                     <div className="inputContainer">
                       <label htmlFor="filterSiteName">Webpage Name: </label>
                       <input

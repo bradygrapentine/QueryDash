@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams, useHistory } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getUserId, authHeader, isLoggedIn } from '../auth'
 // import './custom.scss'
 
