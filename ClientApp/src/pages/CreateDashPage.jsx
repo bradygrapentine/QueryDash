@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import { authHeader } from '../auth'
+import { authHeader, isLoggedIn, logout } from '../auth'
 // import axios from 'axios'
 // import './custom.scss'
 
@@ -165,6 +165,11 @@ export function CreateDashPage() {
     setPanelFormErrorMessage('')
   }
 
+  function handleLogout() {
+    logout()
+    window.location.assign('/')
+  }
+
   useEffect(() => {
     async function getPanels() {
       const panelsResponse = await fetch('/api/Panels')
@@ -187,6 +192,36 @@ export function CreateDashPage() {
           <h1 className="altHeader">QueryDash</h1>
         </Link>{' '}
       </header>
+
+      <div className="navBar2">
+        {isLoggedIn() ? (
+          <>
+            <ul className="navBar">
+              <Link to="/" className="navLink">
+                Home
+              </Link>
+              <Link to="/historyandarchives" className="navLink">
+                Browse Later
+              </Link>
+            </ul>
+            <span className="navLink" onClick={handleLogout}>
+              Log Out
+            </span>
+          </>
+        ) : (
+          <ul className="navBar">
+            <Link to="/create-account" className="navLink">
+              Sign Up
+            </Link>
+            <Link to="/login" className="navLink">
+              Log in
+            </Link>
+            <Link to="/" className="navLink">
+              Home
+            </Link>
+          </ul>
+        )}
+      </div>
       <main className="createDashPage">
         <div className="listOfDashes">
           <h5 className="HeaderDashList2">Create Dash</h5>
@@ -308,9 +343,6 @@ export function CreateDashPage() {
       <footer className="standardFooter2">
         <Link to="/about" className="navLink">
           About
-        </Link>
-        <Link to="/" className="navLink">
-          Home
         </Link>
       </footer>
     </>

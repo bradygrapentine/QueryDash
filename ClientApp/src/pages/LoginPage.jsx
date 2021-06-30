@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { recordAuthentication } from '../auth'
+import { recordAuthentication, isLoggedIn } from '../auth'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -50,6 +50,39 @@ export function LoginPage() {
           <h1 className="altHeader">QueryDash</h1>
         </Link>{' '}
       </header>
+
+      <div className="navBar2">
+        {isLoggedIn() ? (
+          <>
+            <ul className="navBar">
+              <Link to="/" className="navLink">
+                Home
+              </Link>
+            </ul>
+            <form className="filterLinks">
+              {' '}
+              {/* onSubmit={runDashQuery} */}
+              <input
+                className="filterDashes"
+                type="text"
+                placeholder="Filter Links"
+                // value={searchTerm}
+                // onChange={(event) => {
+                //   setSearchTerm(event.target.value)
+              />
+            </form>
+          </>
+        ) : (
+          <ul className="navBar">
+            <Link to="/" className="navLink">
+              Home
+            </Link>
+            <Link to="/create-account" className="navLink">
+              Sign Up
+            </Link>
+          </ul>
+        )}
+      </div>
       <main className="landingPageContainer">
         <div className="listOfDashes">
           <h5 className="HeaderDashList2">Login</h5>
@@ -82,9 +115,6 @@ export function LoginPage() {
       <footer className="standardFooter2">
         <Link to="/about" className="navLink">
           About
-        </Link>
-        <Link to="/" className="navLink">
-          Home
         </Link>
       </footer>
     </>

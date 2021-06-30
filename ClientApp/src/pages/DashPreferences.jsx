@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { getUserId, authHeader, isLoggedIn } from '../auth'
+import { getUserId, authHeader, isLoggedIn, logout } from '../auth'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -249,6 +249,11 @@ export function DashPreferences() {
     getPanels()
   }, [])
 
+  function handleLogout() {
+    logout()
+    window.location.assign('/')
+  }
+
   async function getDash() {
     const response = await fetch(`/api/Dashes/${id}`)
     if (response.ok) {
@@ -270,6 +275,41 @@ export function DashPreferences() {
           <h1 className="altHeader">{dash.name}</h1>
         </Link>{' '}
       </header>
+      <div className="navBar2">
+        {isLoggedIn() ? (
+          <>
+            <ul className="navBar">
+              <Link to="/" className="navLink">
+                Home
+              </Link>
+              <Link to={`/dash/${dash.id}`} className="navLink">
+                Use Dash{' '}
+              </Link>
+              <Link to="/create-dash" className="navLink">
+                Create Dash
+              </Link>
+              <Link to="/historyandarchives" className="navLink">
+                Browse Later
+              </Link>
+            </ul>
+            <span className="navLink" onClick={handleLogout}>
+              Log Out
+            </span>
+          </>
+        ) : (
+          <ul className="navBar">
+            <Link to="/" className="navLink">
+              Home
+            </Link>
+            <Link to="/create-account" className="navLink">
+              Sign Up
+            </Link>
+            <Link to="/login" className="navLink">
+              Log in
+            </Link>
+          </ul>
+        )}
+      </div>
       <main className="mainCreateAccount">
         <div className="containerForHeaderAndForm">
           <h5 className="header">Edit {dash.name}</h5>
@@ -486,14 +526,8 @@ export function DashPreferences() {
         </div>
       </main>
       <footer className="standardFooter2">
-        <Link to="/" className="navLink">
-          Home
-        </Link>
-        <Link to="/create-dash" className="navLink">
-          Create Dash
-        </Link>
-        <Link to="/dash/:id" className="navLink">
-          Back to Dash{' '}
+        <Link to="/about" className="navLink">
+          About
         </Link>
       </footer>
     </>

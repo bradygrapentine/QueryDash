@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import {  } from 'react-router-dom'
 // import { Footer } from './DashPage'
 import { Link } from 'react-router-dom'
-import { isLoggedIn, authHeader } from '../auth'
+import { isLoggedIn, authHeader, logout } from '../auth'
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -18,6 +18,8 @@ export function HistoryAndArchivesPage() {
       getSavedLinks()
     }
   }
+
+  const [searchTerm, setSearchTerm] = useState('')
 
   const [savedLinks, setSavedLinks] = useState([])
 
@@ -47,6 +49,11 @@ export function HistoryAndArchivesPage() {
     return formattedDate
   }
 
+  function handleLogout() {
+    logout()
+    window.location.assign('/')
+  }
+
   useEffect(() => {
     getSavedLinks()
   }, [])
@@ -58,6 +65,48 @@ export function HistoryAndArchivesPage() {
           <h1 className="altHeader">QueryDash</h1>
         </Link>{' '}
       </header>
+      <div className="navBar2">
+        {isLoggedIn() ? (
+          <>
+            <ul className="navBar">
+              <Link to="/" className="navLink">
+                Home
+              </Link>
+              <Link to="/create-dash" className="navLink">
+                Create Dash
+              </Link>
+            </ul>
+            <form className="filterDashes">
+              {' '}
+              {/* onSubmit={runDashQuery} */}
+              <input
+                className="filterDashes"
+                type="text"
+                placeholder="Filter Links"
+                value={searchTerm}
+                onChange={(event) => {
+                  setSearchTerm(event.target.value)
+                }}
+              />
+            </form>
+            <span className="navLink" onClick={handleLogout}>
+              Log Out
+            </span>
+          </>
+        ) : (
+          <ul className="navBar">
+            <Link to="/create-account" className="navLink">
+              Sign Up
+            </Link>
+            <Link to="/login" className="navLink">
+              Log in
+            </Link>
+            <Link to="/" className="navLink">
+              Home
+            </Link>
+          </ul>
+        )}
+      </div>
       <main className="aboutPage">
         <article className="aboutPageArticle">
           <h5 className="header">Archives</h5>
@@ -68,7 +117,13 @@ export function HistoryAndArchivesPage() {
                   .length > 0 ? (
                   <>
                     {savedLinks
-                      .filter((savedLink) => savedLink.isArchive === true)
+                      .filter(
+                        (savedLink) =>
+                          savedLink.queryUrl
+                            .toLowerCase()
+                            .includes(searchTerm.toLowerCase()) &&
+                          savedLink.isArchive === true
+                      )
                       .map((savedLink) => (
                         <>
                           <li className="savedLinkList">
@@ -117,7 +172,13 @@ export function HistoryAndArchivesPage() {
                   .length > 0 ? (
                   <>
                     {savedLinks
-                      .filter((savedLink) => savedLink.isArchive === false)
+                      .filter(
+                        (savedLink) =>
+                          savedLink.queryUrl
+                            .toLowerCase()
+                            .includes(searchTerm.toLowerCase()) &&
+                          savedLink.isArchive === false
+                      )
                       .map((savedLink) => (
                         <>
                           <li className="savedLinkList">
@@ -156,12 +217,9 @@ export function HistoryAndArchivesPage() {
           </ul>
         </article>
       </main>
-      <footer className="standardFooter">
-        <Link to="/" className="navLink">
-          Home
-        </Link>
-        <Link to="/create-dash" className="navLink">
-          Create Dash{' '}
+      <footer className="standardFooter2">
+        <Link to="/about" className="navLink">
+          About
         </Link>
       </footer>
     </>

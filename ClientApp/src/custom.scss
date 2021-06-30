@@ -91,6 +91,31 @@ header.altHeader {
   }
 }
 
+div.navBar2 {
+  width: 100vw;
+  height: fit-content;
+  padding: 0.5rem;
+  margin: 0rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 0px 3px 2px rgb(0, 51, 2);
+  // background-color: rgb(2, 0, 63);
+  background-color: rgb(0, 51, 2);
+  position: sticky;
+  top: 0rem;
+  form.filterDashes {
+    // width: ;
+    margin: 0rem 1rem 0rem 0rem;
+  }
+
+  form.filterLinks {
+    // width: ;
+    margin: 0rem 3rem 0rem 0rem;
+  }
+}
+
 div.navBar {
   width: 100vw;
   height: fit-content;
@@ -106,8 +131,13 @@ div.navBar {
   position: sticky;
   top: 0rem;
   form.filterDashes {
-    width: 6rem;
-    margin: 0rem 5rem 0rem 0rem;
+    // width: ;
+    margin: 0rem 1rem 0rem 0rem;
+  }
+
+  form.filterLinks {
+    // width: ;
+    margin: 0rem 3rem 0rem 0rem;
   }
 }
 
@@ -116,13 +146,14 @@ ul.navBar {
   justify-content: flex-start;
   align-items: center;
   list-style: none;
+  flex-wrap: wrap;
   width: 100%;
   margin: 0rem;
   padding: 0rem;
 }
 
 a.navLink {
-  margin: 0rem 0.25rem;
+  margin: 0.5rem 0.25rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
   color: black;
@@ -227,28 +258,29 @@ main.main {
       div.buttonContainer2 {
         padding: 0rem;
         width: fit-content;
-        margin: 0.25rem 1rem;
+        margin: 0.25rem 2rem 0.25rem 1rem;
 
         button {
           width: fit-content;
           padding: 0.25rem;
           font-size: 0.75rem;
           border-radius: 0.5rem;
-          margin: 0rem 0.25rem 0rem 0rem;
+          margin: 0.125rem 0.25rem 0rem 0rem;
           background-color: white;
           border: 2px solid black;
           color: black;
           cursor: pointer;
+          font-weight: 600;
         }
         button:hover {
-          background-color: rgb(220, 220, 220);
+          background-color: rgb(233, 233, 233);
           border: 2px solid rgb(136, 0, 2);
         }
       }
 
       form.dashQuery {
         margin: 0rem;
-        padding: 0rem;
+        padding: 0.125rem 0rem 0rem 0rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -710,6 +742,7 @@ div.listOfDashes3 {
     flex-wrap: wrap;
     background-color: white;
     box-shadow: 0px 0px 3px 2px white;
+    width: 100%;
     button {
       display: flex;
       font-weight: 500;
@@ -946,7 +979,7 @@ div.listOfDashes {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: fit-content;
+    min-width: 95%;
     overflow-y: scroll;
     overflow-x: hidden;
     height: 60vh;
@@ -1104,9 +1137,9 @@ main.aboutPage {
     box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
     h5.header {
       text-align: center;
-      box-shadow: 0px 0px 3px 2px rgb(121, 0, 2);
+      box-shadow: 0px 0px 3px 2px rgb(0, 51, 2);
       // background-color: rgb(2, 0, 63);
-      background-color: rgb(121, 0, 2);
+      background-color: rgb(0, 51, 2);
 
       color: white;
       margin: 0rem;
@@ -1123,22 +1156,24 @@ main.aboutPage {
       align-items: center;
       padding: 0rem;
       margin: 0.75rem 0rem;
-      width: min-content;
+      width: fit-content;
+      width: 40vw;
       height: min-content;
       background-color: black;
       button.savedLinkList {
         // justify-self: center;
         color: white;
-        background-color: black;
+        background-color: rgb(27, 27, 27);
         border: 2px solid white;
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
         padding: 0.25rem;
         margin: 0rem 0rem 0.5rem 0rem;
         cursor: pointer;
         font-weight: 600;
+        box-shadow: 0px 0px 2px 1px white;
       }
       button.savedLinkList:hover {
-        background-color: white;
+        background-color: rgb(174, 174, 174);
         color: black;
         transform: scale(1.05, 1.05);
       }
@@ -1163,9 +1198,9 @@ main.aboutPage {
           // text-decoration: underline;
           margin: 0.5rem;
           // border: 1px solid black;
-          box-shadow: 0px 0px 2px 1px rgb(121, 0, 2);
+          box-shadow: 0px 0px 2px 1px rgb(0, 51, 2);
           // background-color: rgb(2, 0, 63);
-          background-color: rgb(121, 0, 2);
+          background-color: rgb(0, 51, 2);
           padding: 0.25rem;
           border-radius: 0.25rem;
           color: white;
@@ -1535,9 +1570,23 @@ main.mainCreateAccount {
           overflow-y: scroll;
           width: 100%;
           button.inputContainer {
+            display: flex;
+            font-weight: 500;
+            align-items: center;
+            justify-content: center;
+            margin: 0.125rem 0.25rem 0rem 0.25rem;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            border: 2px solid rgb(99, 99, 99);
+            border-radius: 0.5rem;
             padding: 0.25rem;
-            margin: 0.125rem;
+            font-weight: 600;
           }
+          button.inputContainer:hover {
+            transform: scale(1.0125, 1.0125);
+          }
+
           button.inputContainerClicked {
             display: none;
             padding: 0.25rem;

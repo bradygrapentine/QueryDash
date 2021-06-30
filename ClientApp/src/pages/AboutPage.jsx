@@ -1,6 +1,8 @@
 import React from 'react'
 import { Footer } from './DashPage'
 import { Link } from 'react-router-dom'
+import { getUserId, authHeader, isLoggedIn, logout } from '../auth'
+
 // import './custom.scss'
 
 // ------------------------------------------------------------- //
@@ -22,6 +24,11 @@ import { Link } from 'react-router-dom'
 // }
 
 export function AboutPage() {
+  function handleLogout() {
+    logout()
+    window.location.assign('/')
+  }
+
   return (
     <>
       <header className="altHeader">
@@ -29,6 +36,38 @@ export function AboutPage() {
           <h1 className="altHeader">QueryDash</h1>
         </Link>{' '}
       </header>
+      <div className="navBar2">
+        {isLoggedIn() ? (
+          <>
+            <ul className="navBar">
+              <Link to="/" className="navLink">
+                Home
+              </Link>
+              <Link to="/create-dash" className="navLink">
+                Create Dash
+              </Link>
+              <Link to="/historyandarchives" className="navLink">
+                Browse Later
+              </Link>
+            </ul>
+            <span className="navLink" onClick={handleLogout}>
+              Log Out
+            </span>
+          </>
+        ) : (
+          <ul className="navBar">
+            <Link to="/" className="navLink">
+              Home
+            </Link>
+            <Link to="/create-account" className="navLink">
+              Sign Up
+            </Link>
+            <Link to="/login" className="navLink">
+              Log in
+            </Link>
+          </ul>
+        )}
+      </div>
       <main className="landingPageContainer">
         <div className="listOfDashes2">
           <h3 className="HeaderDashList2">About</h3>
@@ -44,17 +83,7 @@ export function AboutPage() {
           </p>
         </div>
       </main>
-      <footer className="standardFooter2">
-        <Link to="/create-account" className="navLink">
-          Sign Up
-        </Link>
-        <Link to="/login" className="navLink">
-          Log In
-        </Link>
-        <Link to="/" className="navLink">
-          Home
-        </Link>
-      </footer>
+      <footer className="standardFooter2"></footer>
     </>
   )
 }

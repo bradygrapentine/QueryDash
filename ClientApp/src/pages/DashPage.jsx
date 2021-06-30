@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getUserId, authHeader, isLoggedIn } from '../auth'
+import ls from 'local-storage'
 // import { isWebUri } from 'valid-url'
 
 // ------------------------------------------------------------- //
@@ -16,6 +17,9 @@ export function DashPage() {
     linksPerPanel: 0,
   })
 
+  let [lastSearchResults, setLastSearchResults] = useState(
+    localStorage.getItem(`searchResults${dash.id}`) || []
+  )
   const [searchResults, setSearchResults] = useState([])
 
   const params = useParams()
@@ -103,12 +107,24 @@ export function DashPage() {
         }
       }
       setSearchResults(updatedSearchResults)
+      localStorage.setItem(
+        `searchResults${dash.id}`,
+        JSON.stringify(updatedSearchResults)
+      )
+      console.log(JSON.stringify(updatedSearchResults))
     }
   }
 
   function filterSearchResults(newSearchResults, panelId) {
     if (newSearchResults.length === 0) {
+      // if (lastSearchResults !== '') {
+      //   const parsedLocalStorage = JSON.parse(lastSearchResults)
+      //   return parsedLocalStorage.filter(
+      //     (queryResult) => queryResult.panelIdForResult === panelId
+      //   )
+      // } else {
       return []
+      // }
     } else {
       return newSearchResults.filter(
         (queryResult) => queryResult.panelIdForResult === panelId
@@ -211,16 +227,30 @@ export function DashPage() {
                   <input type="submit" className="search" value="Search" />
                 </form>
                 <div className="buttonContainer2">
-                  {isLoggedIn() ? (
-                    <Link to="/historyandarchives">
-                      <button>Browse Later</button>
-                    </Link>
-                  ) : null}
                   {getUserId() === dash.userId ? (
                     <Link to={`/preferences/${dash.id}`}>
                       <button>Dash Settings</button>
                     </Link>
                   ) : null}
+                  {isLoggedIn() ? (
+                    <>
+                      <Link to="/historyandarchives">
+                        <button>Browse Later</button>
+                      </Link>
+                      <Link to="/create-dash">
+                        <button>Create Dash</button>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/create-account" className="navLink">
+                        Log In
+                      </Link>
+                      <Link to="/create-account" className="navLink">
+                        Sign Up
+                      </Link>
+                    </>
+                  )}
                   <Link to="/">
                     <button>Home</button>
                   </Link>
@@ -257,17 +287,9 @@ export function DashPage() {
         </div>
       </main>
       <footer className="standardFooter">
-        {!isLoggedIn() ? (
-          <>
-            <Link to="/create-account" className="navLink">
-              Log In
-            </Link>
-
-            <Link to="/create-account" className="navLink">
-              Sign Up
-            </Link>
-          </>
-        ) : null}
+        <Link to="/about" className="navLink">
+          About
+        </Link>
       </footer>{' '}
     </>
   )

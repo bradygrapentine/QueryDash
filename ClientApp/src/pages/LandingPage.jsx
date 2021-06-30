@@ -73,6 +73,8 @@ export function LandingPage() {
     window.location.assign('/')
   }
 
+  const [newSearch, setNewSearch] = useState('')
+
   const [userDashes, setUserDashes] = useState([])
 
   const [otherDashes, setOtherDashes] = useState([])
@@ -167,9 +169,10 @@ export function LandingPage() {
                 className="filterDashes"
                 type="text"
                 placeholder="Filter Dashboards"
-                // value={searchTerm}
-                // onChange={(event) => {
-                //   setSearchTerm(event.target.value)
+                value={newSearch}
+                onChange={(event) => {
+                  setNewSearch(event.target.value)
+                }}
               />
             </form>
             <span className="navLink" onClick={handleLogout}>
@@ -196,53 +199,75 @@ export function LandingPage() {
             <div className="listOfDashes">
               <h3 className="HeaderDashList">{user.name}'s Dashboards</h3>
               <ul className="DisplayListDash">
-                {userDashes.map((dash) => (
-                  <li key={dash.id}>
-                    <Link to={`/dash/${dash.id}`} className="">
-                      {dash.name}
-                    </Link>
-                    <div>
-                      <button onClick={() => history.push(`/dash/${dash.id}`)}>
-                        Use Dash
-                      </button>
-                      <button
-                        onClick={() => history.push(`/preferences/${dash.id}`)}
-                      >
-                        Edit Dash
-                      </button>
-                    </div>
-                  </li>
-                ))}
+                {userDashes
+                  .filter((userDash) =>
+                    userDash.name
+                      .toLowerCase()
+                      .includes(newSearch.toLowerCase())
+                  )
+                  .map((dash) => (
+                    <li key={dash.id}>
+                      <Link to={`/dash/${dash.id}`} className="">
+                        {dash.name}
+                      </Link>
+                      <div>
+                        <button
+                          onClick={() => history.push(`/dash/${dash.id}`)}
+                        >
+                          Use Dash
+                        </button>
+                        <button
+                          onClick={() =>
+                            history.push(`/preferences/${dash.id}`)
+                          }
+                        >
+                          Edit Dash
+                        </button>
+                      </div>
+                    </li>
+                  ))}
               </ul>
             </div>
             <div className="listOfDashes">
               <h3 className="HeaderDashList">Preset Dashes</h3>
               <ul className="DisplayListDash">
-                {presetDashes.map((dash) => (
-                  <li key={dash.id}>
-                    <Link to={`/dash/${dash.id}`} className="">
-                      {dash.name}
-                    </Link>
-                    <form onSubmit={(event) => copyDash(dash, event)}>
-                      <input type="submit" value="Copy Dash" />
-                    </form>
-                  </li>
-                ))}
+                {presetDashes
+                  .filter((presetDash) =>
+                    presetDash.name
+                      .toLowerCase()
+                      .includes(newSearch.toLowerCase())
+                  )
+                  .map((dash) => (
+                    <li key={dash.id}>
+                      <Link to={`/dash/${dash.id}`} className="">
+                        {dash.name}
+                      </Link>
+                      <form onSubmit={(event) => copyDash(dash, event)}>
+                        <input type="submit" value="Copy Dash" />
+                      </form>
+                    </li>
+                  ))}
               </ul>
             </div>
             <div className="listOfDashes">
               <h3 className="HeaderDashList">Other User's Dashes</h3>
               <ul className="DisplayListDash">
-                {otherDashes.map((dash) => (
-                  <li key={dash.id}>
-                    <Link to={`/dash/${dash.id}`} className="">
-                      {dash.name}
-                    </Link>
-                    <form onSubmit={(event) => copyDash(dash, event)}>
-                      <input type="submit" value="Copy Dash" />
-                    </form>
-                  </li>
-                ))}
+                {otherDashes
+                  .filter((otherDash) =>
+                    otherDash.name
+                      .toLowerCase()
+                      .includes(newSearch.toLowerCase())
+                  )
+                  .map((dash) => (
+                    <li key={dash.id}>
+                      <Link to={`/dash/${dash.id}`} className="">
+                        {dash.name}
+                      </Link>
+                      <form onSubmit={(event) => copyDash(dash, event)}>
+                        <input type="submit" value="Copy Dash" />
+                      </form>
+                    </li>
+                  ))}
               </ul>
             </div>
           </>
@@ -251,35 +276,51 @@ export function LandingPage() {
             <div className="listOfDashes">
               <h3 className="HeaderDashList">Preset Dashes</h3>
               <ul className="DisplayListDash">
-                {presetDashesNonUser.map((dash) => (
-                  <li key={dash.id}>
-                    <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
+                {presetDashesNonUser
+                  .filter((presetDashNonUser) =>
+                    presetDashNonUser.name
+                      .toLowerCase()
+                      .includes(newSearch.toLowerCase())
+                  )
+                  .map((dash) => (
+                    <li key={dash.id}>
+                      <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
 
-                    <div>
-                      {' '}
-                      <button onClick={() => history.push(`/dash/${dash.id}`)}>
-                        Use Dash
-                      </button>
-                    </div>
-                  </li>
-                ))}
+                      <div>
+                        {' '}
+                        <button
+                          onClick={() => history.push(`/dash/${dash.id}`)}
+                        >
+                          Use Dash
+                        </button>
+                      </div>
+                    </li>
+                  ))}
               </ul>
             </div>
             <div className="listOfDashes">
               <h3 className="HeaderDashList"> Try a User's Dash</h3>
               <ul className="DisplayListDash">
-                {otherDashesNonUser.map((dash) => (
-                  <li key={dash.id}>
-                    <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
+                {otherDashesNonUser
+                  .filter((otherDashNonUser) =>
+                    otherDashNonUser.name
+                      .toLowerCase()
+                      .includes(newSearch.toLowerCase())
+                  )
+                  .map((dash) => (
+                    <li key={dash.id}>
+                      <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
 
-                    <div>
-                      {' '}
-                      <button onClick={() => history.push(`/dash/${dash.id}`)}>
-                        Use Dash
-                      </button>
-                    </div>
-                  </li>
-                ))}
+                      <div>
+                        {' '}
+                        <button
+                          onClick={() => history.push(`/dash/${dash.id}`)}
+                        >
+                          Use Dash
+                        </button>
+                      </div>
+                    </li>
+                  ))}
               </ul>
             </div>
           </>
