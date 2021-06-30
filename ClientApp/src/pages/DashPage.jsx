@@ -17,10 +17,12 @@ export function DashPage() {
     linksPerPanel: 0,
   })
 
-  let [lastSearchResults, setLastSearchResults] = useState(
-    localStorage.getItem(`searchResults${dash.id}`) || []
-  )
+  let lastSearchResults = localStorage.getItem(`searchResults${dash.id}`) || []
+  let lastSearchTerm = localStorage.getItem(`searchTerm${dash.id}`) || ''
+
   const [searchResults, setSearchResults] = useState([])
+
+  const [waitingForSearchResults, setWaitingForSearchResults] = useState(false)
 
   const params = useParams()
   const [searchTerm, setSearchTerm] = useState('')
@@ -89,6 +91,7 @@ export function DashPage() {
   async function getQueryResults(event) {
     event.preventDefault()
     setSearchResults([])
+    // setWaitingForSearchResults(true)
     const response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
     if (response.ok) {
       const apiData = await response.json()
@@ -111,20 +114,21 @@ export function DashPage() {
         `searchResults${dash.id}`,
         JSON.stringify(updatedSearchResults)
       )
-      console.log(JSON.stringify(updatedSearchResults))
+      localStorage.setItem(`searchTerm${dash.id}`, JSON.stringify(searchTerm))
     }
   }
 
   function filterSearchResults(newSearchResults, panelId) {
     if (newSearchResults.length === 0) {
-      // if (lastSearchResults !== '') {
-      //   const parsedLocalStorage = JSON.parse(lastSearchResults)
-      //   return parsedLocalStorage.filter(
-      //     (queryResult) => queryResult.panelIdForResult === panelId
-      //   )
-      // } else {
-      return []
-      // }
+      if (waitingForSearchResults === false) {
+        const parsedLocalStorage = JSON.parse(lastSearchResults)
+
+        return parsedLocalStorage.filter(
+          (queryResult) => queryResult.panelIdForResult === panelId
+        )
+      } else {
+        return []
+      }
     } else {
       return newSearchResults.filter(
         (queryResult) => queryResult.panelIdForResult === panelId
@@ -200,6 +204,11 @@ export function DashPage() {
     getDash()
   }, [id])
 
+  function setUpdatedSearchTerm(newSearchTerm) {
+    setSearchTerm(newSearchTerm)
+    setWaitingForSearchResults(true)
+  }
+
   return (
     <>
       <header className="altHeader">
@@ -213,18 +222,37 @@ export function DashPage() {
             <>
               <div className="dashQuery">
                 <form onSubmit={getQueryResults} className="dashQuery">
-                  {' '}
-                  {/* onSubmit={runDashQuery} */}
-                  <input
-                    className="dashQuery"
-                    type="text"
-                    placeholder="Query Here"
-                    value={searchTerm}
-                    onChange={(event) => {
-                      setSearchTerm(event.target.value)
-                    }}
-                  />
-                  <input type="submit" className="search" value="Search" />
+                  {!waitingForSearchResults ? (
+                    <>
+                      <input
+                        className="dashQuery"
+                        type="text"
+                        placeholder="Query Here"
+                        value={
+                          !waitingForSearchResults
+                            ? lastSearchTerm.slice(1, lastSearchTerm.length - 1)
+                            : searchTerm
+                        }
+                        onChange={(event) => {
+                          setUpdatedSearchTerm(event.target.value)
+                        }}
+                      />
+                      <input type="submit" className="search" value="Search" />
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        className="dashQuery"
+                        type="text"
+                        placeholder="Query Here"
+                        value={searchTerm}
+                        onChange={(event) => {
+                          setSearchTerm(event.target.value)
+                        }}
+                      />
+                      <input type="submit" className="search" value="Search" />
+                    </>
+                  )}
                 </form>
                 <div className="buttonContainer2">
                   {getUserId() === dash.userId ? (

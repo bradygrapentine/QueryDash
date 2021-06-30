@@ -46,13 +46,14 @@ namespace QueryDash.Controllers
                 return BadRequest();
             }
 
+            var client = new HttpClient();
+
             List<List<string>> searchResults = new List<List<string>>(dash.DashPanelAssignments.Count() * 2);
             foreach (var panelAssignment in dash.DashPanelAssignments)
             {
                 var filterSite = panelAssignment.RootPanel.FilterSite;
                 var panelId = panelAssignment.RootPanel.Id;
 
-                var client = new HttpClient();
                 var request = new HttpRequestMessage
                 {
 
@@ -82,6 +83,70 @@ namespace QueryDash.Controllers
     }
 }
 
+
+
+//         [HttpGet("{dashQuery}")]
+//         async public Task<ActionResult<List<List<string>>>> Query(string dashQuery, int dashId)
+//         {
+//             var dash = await _context.Dashes.
+//                                         Where(dash => dash.Id == dashId).
+//                                         Include(dash => dash.DashPanelAssignments).
+//                                         ThenInclude(panelAssignment => panelAssignment.RootPanel).
+//                                         FirstOrDefaultAsync();
+//             if (dash == null)
+//             {
+//                 return BadRequest();
+//             }
+
+//             List<List<string>> searchResults = new List<List<string>>(dash.DashPanelAssignments.Count() * 2);
+
+//             List<Uri> searchEndpoints = new List<Uri>(dash.DashPanelAssignments.Count());
+
+//             List<int> panelIds = new List<int>(dash.DashPanelAssignments.Count());
+
+//             var client = new HttpClient();
+
+//             foreach (var panelAssignment in dash.DashPanelAssignments)
+//             {
+//                 var filterSite = panelAssignment.RootPanel.FilterSite;
+//                 var panelId = panelAssignment.RootPanel.Id;
+//                 var RequestUri = new Uri($"https://gigablast.com/search?&userid=503&code=1393867175&ff=1&n=50&format=json&q={dashQuery}&sites={filterSite}");
+//                 panelIds.Add(panelId;)
+//                 searchEndpoints.Add(RequestUri);
+//             }
+
+// async Task<List<string>> searchTask(Uri searchEndpoint, HttpClient client, int panelId)
+// {
+//                 var request = new HttpRequestMessage
+//                 {
+
+//                     Method = HttpMethod.Get,
+//                     // Additional parameters
+//                     // &n=30 # of results in query
+//                     // &searchtype=images searches for images
+//                     // &showimages=1 provides thumbnail images with results, default already provides the hq thumbnails
+//                     // &relqueries=1 provide related queries in search results
+//                     // &fast=1 worse results, but faster
+//                     // &ff=1 removes adult content
+
+//                     RequestUri = new Uri($"https://gigablast.com/search?&userid=503&code=1393867175&ff=1&n=50&format=json&q={dashQuery}&sites={filterSite}"),
+//                 };
+//                 using (var response = await client.SendAsync(request))
+//                 {
+//                     response.EnsureSuccessStatusCode();
+//                     var body = await response.Content.ReadAsStringAsync(); // how to parallelize? parallel queires, supplementary lecture // star wars api
+//                     List<string> searchResult = new List<string>(2);
+//                     searchResult.Add(panelId.ToString());
+//                     searchResult.Add(body);
+//                     searchResults.Add(searchResult);
+//                 }
+// }
+
+
+//             return searchResults;
+//         }
+//     }
+// }
 
 // public class LoginUser
 // {
