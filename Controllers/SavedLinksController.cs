@@ -38,7 +38,10 @@ namespace QueryDash.Controllers
         public async Task<ActionResult<IEnumerable<SavedLink>>> GetSavedLinks()
         {
             var userId = GetCurrentUserId();
-            var allSavedLinks = await _context.SavedLinks.OrderByDescending(row => row.Id).Where(row => row.UserId == userId).Include(row => row.RootDash).ToListAsync();
+            var allSavedLinks = await _context.SavedLinks.OrderByDescending(savedLink => savedLink.TimeStamp)
+                                                         .Where(savedLink => savedLink.UserId == userId)
+                                                         .Include(savedLink => savedLink.RootDash)
+                                                         .ToListAsync();
 
             List<SavedLink> userSavedLinks = allSavedLinks.ToList();
             return userSavedLinks;

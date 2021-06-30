@@ -35,7 +35,7 @@ namespace QueryDash.Controllers
         {
             // Uses the database context in `_context` to request all of the Panels, sort
             // them by row id and return them as a JSON array.
-            return await _context.Panels.OrderBy(panel => panel.Id)
+            return await _context.Panels.OrderByDescending(panel => panel.DashPanelAssignments.Count())
                                         // .Include(panel => panel.DashPanelAssignments)
                                         // .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootDash)
                                         .ToListAsync();
