@@ -92,7 +92,14 @@ export function DashPage() {
     event.preventDefault()
     setSearchResults([])
     // setWaitingForSearchResults(true)
-    const response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
+    let response
+    if (searchTerm === '') {
+      response = await fetch(`/api/Query/${lastSearchTerm}?dashId=${dash.id}`)
+      localStorage.setItem(`searchTerm${dash.id}`, lastSearchTerm)
+    } else {
+      response = await fetch(`/api/Query/${searchTerm}?dashId=${dash.id}`)
+      localStorage.setItem(`searchTerm${dash.id}`, searchTerm)
+    }
     if (response.ok) {
       const apiData = await response.json()
       let updatedSearchResults = []
@@ -114,18 +121,21 @@ export function DashPage() {
         `searchResults${dash.id}`,
         JSON.stringify(updatedSearchResults)
       )
-      localStorage.setItem(`searchTerm${dash.id}`, JSON.stringify(searchTerm))
     }
   }
 
   function filterSearchResults(newSearchResults, panelId) {
     if (newSearchResults.length === 0) {
       if (waitingForSearchResults === false) {
-        const parsedLocalStorage = JSON.parse(lastSearchResults)
+        try {
+          const parsedLocalStorage = JSON.parse(lastSearchResults)
 
-        return parsedLocalStorage.filter(
-          (queryResult) => queryResult.panelIdForResult === panelId
-        )
+          return parsedLocalStorage.filter(
+            (queryResult) => queryResult.panelIdForResult === panelId
+          )
+        } catch (error) {
+          return []
+        }
       } else {
         return []
       }
@@ -229,9 +239,7 @@ export function DashPage() {
                         type="text"
                         placeholder="Query Here"
                         value={
-                          !waitingForSearchResults
-                            ? lastSearchTerm.slice(1, lastSearchTerm.length - 1)
-                            : searchTerm
+                          !waitingForSearchResults ? lastSearchTerm : searchTerm
                         }
                         onChange={(event) => {
                           setUpdatedSearchTerm(event.target.value)
@@ -247,7 +255,7 @@ export function DashPage() {
                         placeholder="Query Here"
                         value={searchTerm}
                         onChange={(event) => {
-                          setSearchTerm(event.target.value)
+                          setUpdatedSearchTerm(event.target.value)
                         }}
                       />
                       <input type="submit" className="search" value="Search" />
