@@ -38,8 +38,9 @@ namespace QueryDash.Controllers
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
-            return await _context.Dashes.OrderBy(row => row.Id)
-                                        .Where(row => row.UserId != 1)
+            return await _context.Dashes.Where(dash => dash.UserId != 1)
+                                        .OrderBy(dash => dash.CreationDate)
+                                        .Reverse()
                                         .ToListAsync();
         }
 
@@ -48,8 +49,8 @@ namespace QueryDash.Controllers
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
-            return await _context.Dashes.OrderBy(row => row.Id)
-                                        .Where(row => row.UserId == 1)
+            return await _context.Dashes.Where(dash => dash.UserId == 1)
+                                        .OrderBy(dash => dash.CreationDate)
                                         .ToListAsync();
         }
 
@@ -58,8 +59,8 @@ namespace QueryDash.Controllers
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
-            return await _context.Dashes.OrderBy(row => row.Id)
-                                        .Where(row => row.UserId == 1)
+            return await _context.Dashes.Where(dash => dash.UserId == 1)
+                                        .OrderBy(dash => dash.CreationDate)
                                         .Include(dash => dash.DashPanelAssignments)
                                         .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
                                         .ToListAsync();
@@ -72,11 +73,10 @@ namespace QueryDash.Controllers
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
-            return await _context.Dashes.OrderBy(row => row.Id)
-                                        .Where(row => row.UserId != 1)
+            return await _context.Dashes.Where(dash => dash.UserId != GetCurrentUserId() && dash.UserId != 1)
+                                        .OrderBy(dash => dash.CreationDate)
                                         .Include(dash => dash.DashPanelAssignments)
                                         .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
-                                        .Where(dash => dash.UserId != GetCurrentUserId())
                                         .ToListAsync();
         }
 
@@ -86,8 +86,8 @@ namespace QueryDash.Controllers
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
-            return await _context.Dashes.OrderBy(row => row.Id)
-                                        .Where(dash => dash.UserId == GetCurrentUserId())
+            return await _context.Dashes.Where(dash => dash.UserId == GetCurrentUserId())
+                                        .OrderByDescending(dash => dash.SavedLinks.Count())
                                         .ToListAsync();
         }
 
