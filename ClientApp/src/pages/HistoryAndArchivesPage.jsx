@@ -53,9 +53,11 @@ export function HistoryAndArchivesPage() {
 
   return (
     <>
-      <Link className="linkForHeader" to="/">
-        <h1 className="altHeader">QueryDash</h1>
-      </Link>{' '}
+      <header className="altHeader">
+        <Link className="linkForHeader" to="/">
+          <h1 className="altHeader">QueryDash</h1>
+        </Link>{' '}
+      </header>
       <main className="aboutPage">
         <article className="aboutPageArticle">
           <h5 className="header">Archives</h5>
@@ -155,13 +157,10 @@ export function HistoryAndArchivesPage() {
         </article>
       </main>
       <footer className="standardFooter">
-        <Link to="/create-account" className="standardFooter">
-          Sign Up
-        </Link>
-        <Link to="/" className="standardFooter">
+        <Link to="/" className="navLink">
           Home
         </Link>
-        <Link to="/create-dash" className="standardFooter">
+        <Link to="/create-dash" className="navLink">
           Create Dash{' '}
         </Link>
       </footer>
