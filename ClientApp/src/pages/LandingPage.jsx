@@ -12,12 +12,6 @@ import { isLoggedIn, logout, getUserId, getUser, authHeader } from '../auth'
 // }
 
 export function LandingPage() {
-  const [dashList, setDashList] = useState([])
-
-  const [userDashList, setUserDashList] = useState([])
-
-  const [nonUserDashList, setNonUserDashList] = useState([])
-
   const user = getUser()
 
   const history = useHistory()
@@ -74,96 +68,79 @@ export function LandingPage() {
     }
   }
 
-  // async function handleDashFormSubmission(event) {
-  //   event.preventDefault()
-
-  //   if (response.status === 401) {
-  //     setDashFormErrorMessage('Not Authorized')
-  //   } else {
-  //     if (response.status === 400) {
-  //       setDashFormErrorMessage(Object.values(response.errors).join(' '))
-  //     } else if (response.ok) {
-  //       response.json().then((data) => {
-  //         setNewDashId(data.id)
-  //         console.log(data)
-  //       })
-  //     }
-  //   }
-  // }
-
-  // {
-  //   id: null,
-  //   creationDate: '',
-  //   dashName: '',
-  //   isPreset: null,
-  //   presetPublicationDate: '',
-  //   panels: null,
-  //   panelAssignment: null,
-  //   savedLinks: null,
-  //   searchHistory: null,
-  //   linksPerPanel: 10,
-  // },
-  // function loadDashList() {
-
-  // }
-
-  // function DashListItem() {
-  //   return (
-  //     <li>
-  //       <Link to="/dash:id" className="">
-  //         DashPage
-  //       </Link>
-  //     </li>
-  //   )
-  // }
-
   function handleLogout() {
     logout()
     window.location.assign('/')
   }
 
+  const [userDashes, setUserDashes] = useState([])
+
+  const [otherDashes, setOtherDashes] = useState([])
+
+  const [presetDashes, setPresetDashes] = useState([])
+
+  const [otherDashesNonUser, setOtherDashesNonUser] = useState([])
+
+  const [presetDashesNonUser, setPresetDashesNonUser] = useState([])
+
   useEffect(function () {
     async function loadDashLists() {
       if (!isLoggedIn()) {
-        const nonUserDashesUrl = '/api/Dashes/NoAccount'
+        const nonUserDashesUrl = '/api/Dashes/UsersNoAccount'
+        const nonUserPresetsUrl = '/api/Dashes/PresetsNoAccount'
+
         //--------------------------------------//
         const nonUserDashesResponse = await fetch(nonUserDashesUrl, {
+          headers: { 'content-type': 'application/json', ...authHeader() },
+        })
+
+        const nonUserPresetsResponse = await fetch(nonUserPresetsUrl, {
           headers: { 'content-type': 'application/json', ...authHeader() },
         })
         //--------------------------------------//
         if (nonUserDashesResponse.ok) {
           const nonUserDashesResponseJson = await nonUserDashesResponse.json()
-          setNonUserDashList(nonUserDashesResponseJson)
+          setOtherDashesNonUser(nonUserDashesResponseJson)
+        }
+        if (nonUserPresetsResponse.ok) {
+          const nonUserPresetsResponseJson = await nonUserPresetsResponse.json()
+          setPresetDashesNonUser(nonUserPresetsResponseJson)
         }
         //--------------------------------------//
       } else {
-        const dashesUrl = '/api/Dashes'
+        const dashesUrl = '/api/Dashes/OtherDashes'
         const userDashesUrl = 'api/Dashes/User'
+        const presetsUrl = 'api/Dashes/Presets'
+
         //--------------------------------------//
-        const dashesResponse = await fetch(dashesUrl, {
+        const otherDashesResponse = await fetch(dashesUrl, {
           headers: { 'content-type': 'application/json', ...authHeader() },
         })
         const userDashesResponse = await fetch(userDashesUrl, {
           headers: { 'content-type': 'application/json', ...authHeader() },
         })
+        const presetDashesResponse = await fetch(presetsUrl, {
+          headers: { 'content-type': 'application/json', ...authHeader() },
+        })
         //--------------------------------------//
-        if (dashesResponse.ok) {
-          const dashesJson = await dashesResponse.json()
-          setDashList(dashesJson)
+        if (otherDashesResponse.ok) {
+          const otherDashesResponseJson = await otherDashesResponse.json()
+          setOtherDashes(otherDashesResponseJson)
         }
         //--------------------------------------//
         if (userDashesResponse.ok) {
-          const userDashesJson = await userDashesResponse.json()
-          setUserDashList(userDashesJson)
-        } else {
-          return
+          const userDashesResponseJson = await userDashesResponse.json()
+          setUserDashes(userDashesResponseJson)
+        }
+        //--------------------------------------//
+        if (presetDashesResponse.ok) {
+          const presetsResponseJson = await presetDashesResponse.json()
+          setPresetDashes(presetsResponseJson)
         }
       }
     }
     loadDashLists()
   }, [])
-
-  console.log(dashList)
 
   //--------------------------------------//
 
@@ -219,7 +196,7 @@ export function LandingPage() {
             <div className="listOfDashes">
               <h3 className="HeaderDashList">{user.name}'s Dashboards</h3>
               <ul className="DisplayListDash">
-                {userDashList.map((dash) => (
+                {userDashes.map((dash) => (
                   <li key={dash.id}>
                     <Link to={`/dash/${dash.id}`} className="">
                       {dash.name}
@@ -239,9 +216,24 @@ export function LandingPage() {
               </ul>
             </div>
             <div className="listOfDashes">
-              <h3 className="HeaderDashList">Other Dashboards</h3>
+              <h3 className="HeaderDashList">Preset Dashes</h3>
               <ul className="DisplayListDash">
-                {dashList.map((dash) => (
+                {presetDashes.map((dash) => (
+                  <li key={dash.id}>
+                    <Link to={`/dash/${dash.id}`} className="">
+                      {dash.name}
+                    </Link>
+                    <form onSubmit={(event) => copyDash(dash, event)}>
+                      <input type="submit" value="Copy Dash" />
+                    </form>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="listOfDashes">
+              <h3 className="HeaderDashList">Other User's Dashes</h3>
+              <ul className="DisplayListDash">
+                {otherDashes.map((dash) => (
                   <li key={dash.id}>
                     <Link to={`/dash/${dash.id}`} className="">
                       {dash.name}
@@ -255,23 +247,42 @@ export function LandingPage() {
             </div>
           </>
         ) : (
-          <div className="listOfDashes">
-            <h3 className="HeaderDashList">User's Dashes</h3>
-            <ul className="DisplayListDash">
-              {nonUserDashList.map((dash) => (
-                <li key={dash.id}>
-                  <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
+          <>
+            <div className="listOfDashes">
+              <h3 className="HeaderDashList">Preset Dashes</h3>
+              <ul className="DisplayListDash">
+                {presetDashesNonUser.map((dash) => (
+                  <li key={dash.id}>
+                    <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
 
-                  <div>
-                    {' '}
-                    <button onClick={() => history.push(`/dash/${dash.id}`)}>
-                      Use Dash
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    <div>
+                      {' '}
+                      <button onClick={() => history.push(`/dash/${dash.id}`)}>
+                        Use Dash
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="listOfDashes">
+              <h3 className="HeaderDashList"> Try a User's Dash</h3>
+              <ul className="DisplayListDash">
+                {otherDashesNonUser.map((dash) => (
+                  <li key={dash.id}>
+                    <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
+
+                    <div>
+                      {' '}
+                      <button onClick={() => history.push(`/dash/${dash.id}`)}>
+                        Use Dash
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
         )}
       </main>
       <footer className="standardFooter">

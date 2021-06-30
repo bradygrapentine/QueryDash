@@ -305,7 +305,7 @@ export function CreateDashPage() {
           </>
         )}
       </main>
-      <footer className="standardFooter">
+      <footer className="standardFooter2">
         <Link to="/about" className="navLink">
           About
         </Link>

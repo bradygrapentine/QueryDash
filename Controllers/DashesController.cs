@@ -33,33 +33,47 @@ namespace QueryDash.Controllers
         // Returns a list of all your Dashes
         //
 
-        [HttpGet("NoAccount")]
-        public async Task<ActionResult<IEnumerable<Dash>>> GetDashesNonUser()
+        [HttpGet("UsersNoAccount")]
+        public async Task<ActionResult<IEnumerable<Dash>>> GetDashesNoAccount()
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderBy(row => row.Id)
+                                        .Where(row => row.UserId != 1)
+                                        .ToListAsync();
+        }
+
+        [HttpGet("PresetsNoAccount")]
+        public async Task<ActionResult<IEnumerable<Dash>>> GetPresetsNoAccount()
+        {
+            // Uses the database context in `_context` to request all of the Dashes, sort
+            // them by row id and return them as a JSON array.
+            return await _context.Dashes.OrderBy(row => row.Id)
+                                        .Where(row => row.UserId == 1)
                                         .ToListAsync();
         }
 
         [HttpGet("Presets")]
-        public async Task<ActionResult<IEnumerable<Dash>>> GetDashesPresets()
+        public async Task<ActionResult<IEnumerable<Dash>>> GetPresets()
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderBy(row => row.Id)
-                                        .Where(row => row.Id == 1)
+                                        .Where(row => row.UserId == 1)
+                                        .Include(dash => dash.DashPanelAssignments)
+                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
                                         .ToListAsync();
         }
 
 
-        [HttpGet]
+        [HttpGet("OtherDashes")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult<IEnumerable<Dash>>> GetDashes()
+        public async Task<ActionResult<IEnumerable<Dash>>> GetOtherDashes()
         {
             // Uses the database context in `_context` to request all of the Dashes, sort
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderBy(row => row.Id)
+                                        .Where(row => row.UserId != 1)
                                         .Include(dash => dash.DashPanelAssignments)
                                         .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
                                         .Where(dash => dash.UserId != GetCurrentUserId())

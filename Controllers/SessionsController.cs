@@ -56,7 +56,7 @@ namespace QueryDash.Controllers
                 var response = new
                 {
                     status = 400,
-                    errors = new List<string>() { "User or password was incorrect (I won't tell you which...)" }
+                    errors = new List<string>() { "Invalid Email Address or Password" }
                 };
 
                 // Return our error with the custom response

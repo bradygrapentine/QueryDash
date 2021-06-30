@@ -44,7 +44,7 @@ export function AboutPage() {
           </p>
         </div>
       </main>
-      <footer className="standardFooter">
+      <footer className="standardFooter2">
         <Link to="/create-account" className="navLink">
           Sign Up
         </Link>

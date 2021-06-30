@@ -272,12 +272,15 @@ export function DashPreferences() {
       </header>
       <main className="mainCreateAccount">
         <div className="containerForHeaderAndForm">
-          <h5 className="header">Edit Dash</h5>
+          <h5 className="header">Edit {dash.name}</h5>
+          {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
+
           <div className="formContainerCreateAccount">
             <form onSubmit={updateDash} className="formCreateAccount">
-              {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
+              <h5 className="header2">Update {dash.name}</h5>
+
               <div className="inputContainer">
-                <label htmlFor="name">DashName: </label>
+                <label htmlFor="name">New Dash Name: </label>
                 <input
                   name="name"
                   type="text"
@@ -286,7 +289,7 @@ export function DashPreferences() {
                 />
               </div>
               <div className="inputContainer">
-                <label htmlFor="linksPerPanel">Results Per Panel: </label>
+                <label htmlFor="linksPerPanel">New Results Per Panel: </label>
                 <input
                   name="linksPerPanel"
                   type="number"
@@ -298,7 +301,7 @@ export function DashPreferences() {
             </form>
             <div className="addPanels">
               {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
-              <label>Add Panels: </label>
+              <label>Add Panels to {dash.name}: </label>
               <ul className="inputContainer">
                 {panels
                   .filter(
@@ -319,9 +322,9 @@ export function DashPreferences() {
                   ))}
               </ul>
             </div>
-            <form onSubmit={updateDash} className="formCreateAccount">
-              <div className="inputContainer">
-                <label>Delete Panels: </label>
+            <form onSubmit={updateDash} className="deletePanels">
+              <div className="addPanels">
+                <label>Delete Panels from {dash.name}: </label>
                 <ul className="inputContainer">
                   {dash.dashPanelAssignments.map((dashPanelAssignment) => (
                     <button
@@ -336,69 +339,46 @@ export function DashPreferences() {
                 </ul>
               </div>
             </form>
-            <button
-              className="deleteDash"
-              onClick={(event) => deleteDash(event)}
-            >
-              Delete Dash
-            </button>
+
             <div className="containerForCreatingPanel">
-              <h5 className="header">Create Panel</h5>
               {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
-              <div className="formContainerCreateAccount">
-                {!invalidFilterSite ? (
-                  <form
-                    onSubmit={handlePanelFormSubmission}
-                    className="formCreateAccount"
-                  >
-                    <div className="inputContainer">
-                      <label htmlFor="filterSiteName">Webpage Name: </label>
-                      <input
-                        name="filterSiteName"
-                        type="text"
-                        value={newPanel.filterSiteName}
-                        onChange={handleStringPanelFieldChange}
-                      />
-                    </div>
-                    <div className="inputContainer">
-                      <label htmlFor="filterSite">Webpage URL: </label>
-                      <input
-                        name="filterSite"
-                        type="text"
-                        value={newPanel.filterSite}
-                        onChange={handleStringPanelFieldChange}
-                      />
-                    </div>
-                    <input type="submit" value="Submit" />
-                  </form>
-                ) : (
-                  <form
-                    onSubmit={handlePanelFormSubmission}
-                    className="formCreateAccount"
-                  >
-                    <p>Invalid Filter Site. Try Again</p>{' '}
-                    <div className="inputContainer">
-                      <label htmlFor="filterSiteName">Webpage Name: </label>
-                      <input
-                        name="filterSiteName"
-                        type="text"
-                        value={newPanel.filterSiteName}
-                        onChange={handleStringPanelFieldChange}
-                      />
-                    </div>
-                    <div className="inputContainer">
-                      <label htmlFor="filterSite">Webpage URL: </label>
-                      <input
-                        name="filterSite"
-                        type="text"
-                        value={newPanel.filterSite}
-                        onChange={handleStringPanelFieldChange}
-                      />
-                    </div>
-                    <input type="submit" value="Submit" />
-                  </form>
-                )}
-              </div>
+              {!invalidFilterSite ? null : (
+                <p>Invalid Filter Site. Try Again</p>
+              )}
+              <form
+                onSubmit={handlePanelFormSubmission}
+                className="formCreateAccount"
+              >
+                <h5 className="header2">Create New Panel</h5>
+
+                <div className="inputContainer">
+                  <label htmlFor="filterSiteName">Webpage Name: </label>
+                  <input
+                    name="filterSiteName"
+                    type="text"
+                    value={newPanel.filterSiteName}
+                    onChange={handleStringPanelFieldChange}
+                  />
+                </div>
+                <div className="inputContainer">
+                  <label htmlFor="filterSite">Webpage URL: </label>
+                  <input
+                    name="filterSite"
+                    type="text"
+                    value={newPanel.filterSite}
+                    onChange={handleStringPanelFieldChange}
+                  />
+                </div>
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+            <div className="deleteDash">
+              <button
+                className="deleteDash"
+                onClick={(event) => deleteDash(event)}
+              >
+                Delete {dash.name}
+              </button>
             </div>
           </div>
         </div>
@@ -505,7 +485,7 @@ export function DashPreferences() {
           </article>
         </div>
       </main>
-      <footer className="standardFooter">
+      <footer className="standardFooter2">
         <Link to="/" className="navLink">
           Home
         </Link>
