@@ -1185,7 +1185,7 @@ main.aboutPage {
     margin: 3rem 0.75rem 2rem 0rem;
     padding: 0rem;
     min-width: fit-content;
-    width: 30vw;
+    width: 40vw;
     height: 85vh;
     overflow-y: scroll;
     // max-width: 50rem;
@@ -1221,8 +1221,8 @@ main.aboutPage {
       align-items: center;
       padding: 0rem;
       margin: 0.75rem 0rem;
-      width: fit-content;
-      width: 40vw;
+      width: min-content;
+      // width: 40vw;
       height: min-content;
       background-color: black;
       button.savedLinkList {
@@ -1247,7 +1247,7 @@ main.aboutPage {
         background-color: white;
         // text-decoration: underline;
         list-style: none;
-        width: fit-content;
+        width: min-content;
         // max-width: 90%;
         height: min-content;
         display: flex;
@@ -1270,14 +1270,19 @@ main.aboutPage {
           padding: 0.25rem;
           border-radius: 0.25rem;
           color: white;
+          width: fit-content;
+          min-width: min-content;
         }
         p.savedLinkList {
           text-decoration: none;
           margin: 0.25rem 0.5rem 0.75rem 1rem;
           // padding: 0.25rem;
           color: black;
+          width: min-content;
         }
         a.savedLinkList {
+          width: min-content;
+
           cursor: pointer;
           color: black;
           // text-decoration: none;
@@ -1288,14 +1293,6 @@ main.aboutPage {
   }
 }
 // ------------------CREATE ACCOUNT PAGE---------------- //
-
-div.containerOpenedAndArchived {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0rem;
-  padding: 0rem;
-}
 
 main.mainCreateAccount {
   margin: 0rem;
@@ -1325,103 +1322,114 @@ main.mainCreateAccount {
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-evenly;
-
-  article.aboutPageArticle {
-    margin: 1.25rem 0.75rem 1rem 0rem;
-    padding: 0rem;
-    width: fit-content;
-    height: 75vh;
-    overflow-y: scroll;
-    // max-width: 50rem;
-    // max-height: fit-content;
-    // text-align: center;
+  div.containerOpenedAndArchived {
     display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    // border: 2px solid black;
-    border-radius: 0.5rem;
-    background-color: black;
-    box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
-    h5.header {
-      text-align: center;
-      background-color: rgb(0, 51, 2, 0.9);
-      box-shadow: 0px 0px 3px 2px rgb(0, 51, 2, 0.9);
-
-      color: white;
-      margin: 0rem;
-      padding: 1rem 0.5rem;
-      width: 100%;
-      font-weight: 700;
-      font-size: 1.25rem;
-      // border-top-right-radius: 0.355rem;
-      border-top-left-radius: 0.355rem;
-    }
-    ul.savedLinkList {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
+    margin: 0rem;
+    padding: 0rem;
+    flex-wrap: wrap;
+    article.aboutPageArticle {
+      margin: 1.25rem 0.75rem 1rem 0rem;
       padding: 0rem;
-      margin: 0.75rem 0rem;
-      width: min-content;
-      height: min-content;
+      width: fit-content;
+      height: 75vh;
+      overflow-y: scroll;
+      // max-width: 50rem;
+      // max-height: fit-content;
+      // text-align: center;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: center;
+      // border: 2px solid black;
+      border-radius: 0.5rem;
       background-color: black;
-      button.savedLinkList {
-        // justify-self: center;
+      box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
+      h5.header {
+        text-align: center;
+        background-color: rgb(0, 51, 2, 0.9);
+        box-shadow: 0px 0px 3px 2px rgb(0, 51, 2, 0.9);
+
         color: white;
-        background-color: black;
-        border: 2px solid white;
-        border-radius: 0.5rem;
-        padding: 0.25rem;
-        margin: 0rem 0rem 0.5rem 0rem;
-        cursor: pointer;
+        margin: 0rem;
+        padding: 1rem 0.5rem;
+        width: 100%;
         font-weight: 700;
-        box-shadow: 0px 0px 2px 1px white;
+        font-size: 1.25rem;
+        // border-top-right-radius: 0.355rem;
+        border-top-left-radius: 0.355rem;
       }
-      button.savedLinkList:hover {
-        background-color: white;
-        color: black;
-        transform: scale(1.05, 1.05);
-      }
-      li.savedLinkList {
-        background-color: white;
-        // text-decoration: underline;
-        list-style: none;
-        width: fit-content;
-        // max-width: 90%;
-        height: min-content;
+      ul.savedLinkList {
         display: flex;
-        margin: 0.25rem;
-        border-radius: 0.5rem;
-        font-size: 0.75rem;
-        // flex-wrap: wrap;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: flex-start;
-        // border: 2px solid black;
-        box-shadow: 0px 0px 2px 1px rgba(167, 167, 167, 0.7);
-        p.savedLinkListLabel {
-          // text-decoration: underline;
-          margin: 0.5rem;
-          border: 2px solid black;
-          background-color: rgb(0, 51, 2, 0.9);
-          box-shadow: 0px 0px 2px 1px rgba(167, 167, 167, 0.7);
-          padding: 0.25rem;
-          border-radius: 0.25rem;
+        align-items: center;
+        padding: 0rem;
+        margin: 0.75rem 0rem;
+        width: fit-content;
+        height: min-content;
+        background-color: black;
+        button.savedLinkList {
+          // justify-self: center;
           color: white;
-        }
-        p.savedLinkList {
-          text-decoration: none;
-          margin: 0.25rem 0.5rem 0.75rem 1rem;
-          // padding: 0.25rem;
-          color: black;
-        }
-        a.savedLinkList {
+          background-color: black;
+          border: 2px solid white;
+          border-radius: 0.5rem;
+          padding: 0.25rem;
+          margin: 0rem 0rem 0.5rem 0rem;
           cursor: pointer;
+          font-weight: 700;
+          box-shadow: 0px 0px 2px 1px white;
+        }
+        button.savedLinkList:hover {
+          background-color: white;
           color: black;
-          // text-decoration: none;
-          margin: 0.25rem 0.5rem 0.75rem 1rem;
+          transform: scale(1.05, 1.05);
+        }
+        li.savedLinkList {
+          background-color: white;
+          // text-decoration: underline;
+          list-style: none;
+          width: min-content;
+          // max-width: 90%;
+          height: min-content;
+          display: flex;
+          margin: 0.25rem;
+          border-radius: 0.5rem;
+          font-size: 0.75rem;
+          // flex-wrap: wrap;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          // border: 2px solid black;
+          box-shadow: 0px 0px 2px 1px rgba(167, 167, 167, 0.7);
+          p.savedLinkListLabel {
+            // text-decoration: underline;
+            margin: 0.5rem;
+            border: 2px solid black;
+            background-color: rgb(0, 51, 2, 0.9);
+            box-shadow: 0px 0px 2px 1px rgba(167, 167, 167, 0.7);
+            padding: 0.25rem;
+            border-radius: 0.25rem;
+            color: white;
+            width: fit-content;
+            min-width: min-content;
+          }
+          p.savedLinkList {
+            width: min-content;
+            text-decoration: none;
+            margin: 0.25rem 0.5rem 0.75rem 1rem;
+            // padding: 0.25rem;
+            color: black;
+          }
+          a.savedLinkList {
+            width: min-content;
+            cursor: pointer;
+            color: black;
+            // text-decoration: none;
+            margin: 0.25rem 0.5rem 0.75rem 1rem;
+          }
         }
       }
     }
