@@ -28,6 +28,7 @@ body {
   min-width: 100vw;
 
   border: 0rem;
+  background-color: black;
 }
 
 input::-webkit-outer-spin-button,
@@ -101,28 +102,42 @@ div.navBar2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 0px 3px 2px rgb(0, 51, 2);
+  box-shadow: 0px 0px 3px 2px rgba(0, 98, 3, 0.8);
   // background-color: rgb(2, 0, 63);
-  background-color: rgb(0, 51, 2);
+  background-color: rgba(0, 51, 2, 0.9);
   position: sticky;
   top: 0rem;
   form.filterDashes {
     // width: ;
-    margin: 0rem 1rem 0rem 0rem;
+    margin: 0rem 1rem 0rem 1rem;
+    input {
+      color: white;
+      background-color: black;
+      font-size: 1.05rem;
+      border: 2px solid white;
+      border-radius: 0.5rem;
+    }
   }
 
   form.filterLinks {
     // width: ;
     margin: 0rem 3rem 0rem 0rem;
+    input {
+      color: white;
+      background-color: black;
+      font-size: 1.05rem;
+      border: 2px solid white;
+      border-radius: 0.5rem;
+    }
   }
   a.navLink:hover {
     background-color: rgb(220, 220, 220);
 
-    border: 2px solid rgb(0, 51, 2);
+    border: 2px solid rgb(0, 51, 2, 0.9);
   }
   span.navLink:hover {
     background-color: rgb(220, 220, 220);
-    border: 2px solid rgb(0, 51, 2);
+    border: 2px solid rgb(0, 51, 2, 0.9);
   }
 }
 
@@ -135,19 +150,33 @@ div.navBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 0px 3px 2px rgb(121, 0, 2);
+  box-shadow: 0px 0px 3px 2px rgba(193, 0, 3, 0.8);
   // background-color: rgb(2, 0, 63);
-  background-color: rgb(121, 0, 2);
+  background-color: rgb(121, 0, 20, 0.9);
   position: sticky;
   top: 0rem;
   form.filterDashes {
     // width: ;
-    margin: 0rem 1rem 0rem 0rem;
+    margin: 0rem 1rem 0rem 1rem;
+    input {
+      color: white;
+      background-color: black;
+      font-size: 1.05rem;
+      border: 2px solid white;
+      border-radius: 0.5rem;
+    }
   }
 
   form.filterLinks {
     // width: ;
-    margin: 0rem 3rem 0rem 0rem;
+    margin: 0rem 1rem 0rem 1rem;
+    input {
+      color: white;
+      background-color: black;
+      font-size: 1.05rem;
+      border: 2px solid white;
+      border-radius: 0.5rem;
+    }
   }
 }
 
@@ -221,12 +250,12 @@ main.main {
     position: sticky;
     // border-bottom: 2px solid rgb(0, 0, 0);
     // border-top: 2px solid rgb(0, 0, 0);
-    box-shadow: 0px 0px 3px 2px rgb(121, 0, 2);
+    box-shadow: 0px 0px 3px 2px rgb(121, 0, 2, 0.9);
     top: 0rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(121, 0, 2);
+    background-color: rgb(121, 0, 2, 0.9);
     color: white;
     margin: 0rem;
     width: 100vw;
@@ -399,7 +428,7 @@ main.main {
         // background-color: white;
         border-radius: 0.5rem;
         div.link {
-          border: 1px solid black;
+          border: 2px solid black;
           box-shadow: 0px 0px 1px 1px rgb(174, 174, 174);
           border-radius: 0.25rem;
           background-color: rgb(231, 231, 231);
@@ -427,9 +456,9 @@ main.main {
             height: max-content;
             margin: 0.2rem;
             padding: 0.25rem;
-            box-shadow: 0px 0px 2px 1px rgb(0, 51, 2);
+            box-shadow: 0px 0px 2px 1px rgb(0, 51, 2, 0.9);
             // background-color: rgb(2, 0, 63);
-            background-color: rgb(0, 51, 2);
+            background-color: rgb(0, 51, 2, 0.9);
             border-radius: 0.5rem;
             border: 0rem;
             color: white;
@@ -512,7 +541,7 @@ footer.standardFooter2 {
   margin: 0rem;
   width: 100vw;
   color: white;
-  // border-top: 1px solid rgb(121, 0, 2);
+  // border-top: 1px solid rgb(121, 0, 2, 0.9);
   box-shadow: 0px 0px 3px 2px rgb(0, 51, 2);
   // background-color: rgb(2, 0, 63);
   background-color: rgb(0, 51, 2);
@@ -530,7 +559,7 @@ footer.standardFooter2 {
     cursor: pointer;
   }
   a.navLink:hover {
-    border: 2px solid rgb(0, 51, 2);
+    border: 2px solid rgb(0, 51, 2, 0.9);
     background-color: rgb(220, 220, 220);
   }
 }
@@ -543,7 +572,7 @@ footer.standardFooter {
   margin: 0rem;
   width: 100vw;
   color: white;
-  // border-top: 1px solid rgb(121, 0, 2);
+  // border-top: 1px solid rgb(121, 0, 2, 0.9);
   box-shadow: 0px 0px 3px 2px rgb(121, 0, 2);
   // background-color: rgb(2, 0, 63);
   background-color: rgb(121, 0, 2);
@@ -585,6 +614,7 @@ h2.LandingPageHeader {
 main.landingPageContainer {
   flex-wrap: wrap;
   flex-direction: row;
+  // padding: 1rem;
   margin: 0rem;
   min-height: 100vh;
   min-width: 100%;
@@ -651,12 +681,12 @@ div.listOfDashes2 {
     justify-content: center;
     height: fit-content;
     width: 100%;
-    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2, 0.9);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(0, 51, 2);
+    background-color: rgb(0, 51, 2, 0.9);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
@@ -674,12 +704,12 @@ div.listOfDashes2 {
     height: fit-content;
     width: 100%;
     font-size: 1.25rem;
-    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2, 0.9);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(0, 51, 2);
+    background-color: rgb(0, 51, 2, 0.9);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
@@ -735,12 +765,12 @@ div.listOfDashes3 {
     font-size: 1.25rem;
 
     width: 100%;
-    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2, 0.9);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(0, 51, 2);
+    background-color: rgb(0, 51, 2, 0.9);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
@@ -787,7 +817,7 @@ div.listOfDashes {
   align-items: center;
   width: fit-content;
   height: min-content;
-  margin: 3rem 1rem 0rem 0rem;
+  margin: 3rem 0.5rem 2rem 0.5rem;
   padding: 0rem;
   // border: 2px solid white;
   box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
@@ -804,12 +834,12 @@ div.listOfDashes {
     justify-content: center;
     height: fit-content;
     width: 100%;
-    // box-shadow: 0px 0px 5px 3px rgb(121, 0, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(121, 0, 2, 0.9);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(121, 0, 2);
+    background-color: rgb(121, 0, 2, 0.9);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
@@ -827,12 +857,12 @@ div.listOfDashes {
     justify-content: center;
     height: fit-content;
     width: 100%;
-    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2, 0.9);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(0, 51, 2);
+    background-color: rgb(0, 51, 2, 0.9);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
@@ -847,12 +877,12 @@ div.listOfDashes {
     justify-content: center;
     height: fit-content;
     width: 100%;
-    // box-shadow: 0px 0px 5px 3px rgb(121, 0, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(121, 0, 2, 0.9);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(121, 0, 2);
+    background-color: rgb(121, 0, 2, 0.9);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
@@ -1106,7 +1136,7 @@ div.listOfDashes {
         }
         // button.preferences {
         //   border: 2px solid black;
-        //   background-color: rgb(0, 51, 2);
+        //   background-color: rgb(0, 51, 2, 0.9);
         // }
         button:hover {
           transform: scale(1.05, 1.05);
@@ -1171,9 +1201,9 @@ main.aboutPage {
     box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
     h5.header {
       text-align: center;
-      // box-shadow: 0px 0px 3px 2px rgb(0, 51, 2);
+      // box-shadow: 0px 0px 3px 2px rgb(0, 51, 2, 0.9);
       // background-color: rgb(2, 0, 63);
-      background-color: rgb(0, 51, 2);
+      background-color: rgb(0, 51, 2, 0.9);
 
       color: white;
       margin: 0rem;
@@ -1233,10 +1263,10 @@ main.aboutPage {
         p.savedLinkListLabel {
           // text-decoration: underline;
           margin: 0.5rem;
-          // border: 1px solid black;
-          box-shadow: 0px 0px 2px 1px rgb(0, 51, 2);
+          // border: 2px solid black;
+          box-shadow: 0px 0px 2px 1px rgb(0, 51, 2, 0.9);
           // background-color: rgb(2, 0, 63);
-          background-color: rgb(0, 51, 2);
+          background-color: rgb(0, 51, 2, 0.9);
           padding: 0.25rem;
           border-radius: 0.25rem;
           color: white;
@@ -1315,8 +1345,8 @@ main.mainCreateAccount {
     box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
     h5.header {
       text-align: center;
-      background-color: rgb(0, 51, 2);
-      box-shadow: 0px 0px 3px 2px rgb(0, 51, 2);
+      background-color: rgb(0, 51, 2, 0.9);
+      box-shadow: 0px 0px 3px 2px rgb(0, 51, 2, 0.9);
 
       color: white;
       margin: 0rem;
@@ -1374,8 +1404,8 @@ main.mainCreateAccount {
         p.savedLinkListLabel {
           // text-decoration: underline;
           margin: 0.5rem;
-          border: 1px solid black;
-          background-color: rgb(0, 51, 2);
+          border: 2px solid black;
+          background-color: rgb(0, 51, 2, 0.9);
           box-shadow: 0px 0px 2px 1px rgba(167, 167, 167, 0.7);
           padding: 0.25rem;
           border-radius: 0.25rem;
@@ -1443,12 +1473,12 @@ main.mainCreateAccount {
       justify-content: center;
       height: fit-content;
       width: 100%;
-      // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+      // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2, 0.9);
       // min-width: max-content;
       // padding: 0.5rem;
       // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
       // background-color: rgb(2, 0, 63);
-      background-color: rgb(0, 51, 2);
+      background-color: rgb(0, 51, 2, 0.9);
       color: white;
       padding: 0.75rem 0rem;
       margin: 0rem;
@@ -1464,12 +1494,12 @@ main.mainCreateAccount {
       justify-content: center;
       height: fit-content;
       width: 100%;
-      // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+      // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2, 0.9);
       // min-width: max-content;
       // padding: 0.5rem;
       // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
       // background-color: rgb(2, 0, 63);
-      background-color: rgb(0, 51, 2);
+      background-color: rgb(0, 51, 2, 0.9);
       color: white;
       padding: 0.75rem 0rem;
       margin: 0rem;
@@ -1518,12 +1548,12 @@ main.mainCreateAccount {
           justify-self: center;
           height: fit-content;
           width: 100%;
-          // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+          // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2, 0.9);
           // min-width: max-content;
           // padding: 0.5rem;
           // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
           // background-color: rgb(2, 0, 63);
-          background-color: rgb(0, 51, 2);
+          background-color: rgb(0, 51, 2, 0.9);
           color: white;
           padding: 0.75rem 0rem;
           margin: 0rem;
@@ -1534,9 +1564,9 @@ main.mainCreateAccount {
         }
       }
       div.deleteDash {
-        box-shadow: 0px 0px 5px 5px rgb(0, 51, 2);
+        box-shadow: 0px 0px 5px 5px rgb(0, 51, 2, 0.9);
         // background-color: rgb(2, 0, 63);
-        background-color: rgb(0, 51, 2);
+        background-color: rgb(0, 51, 2, 0.9);
         width: 100%;
         display: flex;
         justify-content: center;
@@ -1596,12 +1626,12 @@ main.mainCreateAccount {
           height: fit-content;
           width: 100%;
           text-align: center;
-          box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+          box-shadow: 0px 0px 5px 3px rgb(0, 51, 2, 0.9);
           // min-width: max-content;
           // padding: 0.5rem;
           // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
           // background-color: rgb(2, 0, 63);
-          background-color: rgb(0, 51, 2);
+          background-color: rgb(0, 51, 2, 0.9);
           color: white;
           padding: 0.75rem 0rem;
           margin: 0rem;
