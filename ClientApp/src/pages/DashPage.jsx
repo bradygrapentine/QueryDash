@@ -54,13 +54,13 @@ export function DashPage() {
       if (savedLinkResponse.ok) {
         console.log('test')
         console.log(savedLinkResponse.json())
-        window.location.assign(event.target.value)
       } else {
         console.log(savedLinkResponse.json())
       }
     } else {
       console.log('AUTH ERROR')
     }
+    window.location.assign(event.target.value)
   }
 
   async function postArchivedLink(event) {
