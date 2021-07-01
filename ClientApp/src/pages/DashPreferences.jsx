@@ -333,7 +333,10 @@ export function DashPreferences() {
                 />
               </div>
               <div className="inputContainer">
-                <label htmlFor="linksPerPanel">New Results Per Panel: </label>
+                <label htmlFor="linksPerPanel">
+                  New Results Per Panel (Current: {dash.linksPerPanel}, Max:
+                  30):{' '}
+                </label>
                 <input
                   name="linksPerPanel"
                   type="number"
@@ -361,7 +364,7 @@ export function DashPreferences() {
                       className="inputContainer"
                       onClick={(event) => postPanelAssignment(panel, event)}
                     >
-                      {panel.filterSiteName}
+                      {panel.filterSiteName} - {panel.filterSite}
                     </button>
                   ))}
               </ul>
@@ -381,7 +384,8 @@ export function DashPreferences() {
                         deletePanelAssignment(dashPanelAssignment, event)
                       }
                     >
-                      {dashPanelAssignment.rootPanel.filterSiteName}
+                      <>{dashPanelAssignment.rootPanel.filterSiteName} - </>
+                      {dashPanelAssignment.rootPanel.filterSite}
                     </button>
                   ))}
                 </ul>

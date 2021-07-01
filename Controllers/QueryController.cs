@@ -57,6 +57,8 @@ namespace QueryDash.Controllers
 
             // var responsesFromSelect = dash.DashPanelAssignments.Select(panelAssignment =>
 
+            var linksPerPanel = dash.LinksPerPanel;
+
             foreach (var panelAssignment in dash.DashPanelAssignments)
             {
                 var filterSite = panelAssignment.RootPanel.FilterSite;
@@ -66,17 +68,20 @@ namespace QueryDash.Controllers
 
                     Method = HttpMethod.Get,
                     // Additional parameters
-                    // &n=30 # of results in query
-                    // &searchtype=images searches for images
 
                     // User ID	504	
                     // Feed Code 1924762219	
+
+                    // &n=30 # of results in query
+                    // &searchtype=images searches for images
                     // &showimages=1 provides thumbnail images with results, default already provides the hq thumbnails
                     // &relqueries=1 provide related queries in search results
                     // &fast=1 worse results, but faster
                     // &ff=1 removes adult content
+                    // &ns=1 returns at most one summary with result
+                    // &autospell=1 autocorrects spelling when gigablast is confident
 
-                    RequestUri = new Uri($"https://gigablast.com/search?&userid=504&code=1924762219&ff=1&n=30&format=json&q={dashQuery}&sites={filterSite}")
+                    RequestUri = new Uri($"https://gigablast.com/search?&userid=504&code=1924762219&ff=1&n={linksPerPanel}&format=json&q={dashQuery}&sites={filterSite}")
                 };
                 var response = client.SendAsync(request);
                 requests.Add(response);

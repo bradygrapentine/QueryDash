@@ -279,8 +279,8 @@ export function CreateDashPage() {
                         handleExistingPanelSelection(event.target)
                       }
                     >
-                      {' '}
-                      {panel.filterSiteName}{' '}
+                      <>{panel.filterSiteName} - </>
+                      {panel.filterSite}
                     </button>
                   ))}
               </ul>{' '}

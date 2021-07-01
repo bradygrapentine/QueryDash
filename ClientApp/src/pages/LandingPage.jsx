@@ -288,7 +288,7 @@ export function LandingPage() {
                   )
                   .map((dash) => (
                     <li key={dash.id}>
-                      <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
+                      <Link to={`/dash/${dash.id}`}> {dash.name}</Link>
 
                       <div>
                         {' '}
@@ -313,7 +313,7 @@ export function LandingPage() {
                   )
                   .map((dash) => (
                     <li key={dash.id}>
-                      <Link to={`/dash/${dash.id}`}>{dash.name}</Link>
+                      <Link to={`/dash/${dash.id}`}> {dash.name}</Link>
 
                       <div>
                         {' '}

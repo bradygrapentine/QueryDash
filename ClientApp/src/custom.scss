@@ -754,7 +754,7 @@ div.listOfDashes3 {
     overflow-y: scroll;
     height: 25vh;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
     background-color: white;
@@ -772,6 +772,7 @@ div.listOfDashes3 {
       border-radius: 0.5rem;
       padding: 0.25rem;
       font-weight: 700;
+      width: min-content;
     }
     button:hover {
       transform: scale(1.05, 1.05);
@@ -1613,19 +1614,21 @@ main.mainCreateAccount {
           margin: 0.5rem 0rem;
           padding: 0rem;
           display: flex;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: flex-start;
           flex-wrap: wrap;
           min-height: 10vh;
           height: fit-content;
-          max-height: 25vh;
-          overflow-y: scroll;
+          max-height: 35vh;
+          overflow: scroll;
           width: 100%;
           button.inputContainer {
             display: flex;
-            font-weight: 700;
+            font-weight: 600;
+            font-size: 0.85rem;
             align-items: center;
             justify-content: center;
+            width: min-content;
             margin: 0.125rem 0.25rem 0rem 0.25rem;
             cursor: pointer;
             background-color: black;
