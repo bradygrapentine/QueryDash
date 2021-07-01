@@ -85,6 +85,26 @@ export function LandingPage() {
 
   const [presetDashesNonUser, setPresetDashesNonUser] = useState([])
 
+  // const [reverseActive, setReverseActive] = useState(false)
+
+  // function reverseOrder(event) {
+  //   event.preventDefault()
+  //   if (isLoggedIn()) {
+  //     const reversedUserDashes = [...userDashes].reverse()
+  //     setUserDashes(reversedUserDashes)
+  //     const reversedOtherDashes = [...otherDashes].reverse()
+  //     setOtherDashes(reversedOtherDashes)
+  //     const reversedPresetDashes = [...presetDashes].reverse()
+  //     setUserDashes(reversedPresetDashes)
+  //   } else {
+  //     const reversedOtherDashesNonUser = [...otherDashesNonUser].reverse()
+  //     setOtherDashesNonUser(reversedOtherDashesNonUser)
+  //     const reversedPresetDashesNonUser = [...presetDashesNonUser].reverse()
+  //     setPresetDashesNonUser(reversedPresetDashesNonUser)
+  //   }
+  //   setReverseActive(!reverseActive)
+  // }
+
   useEffect(function () {
     async function loadDashLists() {
       if (!isLoggedIn()) {
@@ -174,6 +194,12 @@ export function LandingPage() {
                   setNewSearch(event.target.value)
                 }}
               />
+              {/* <button
+                className={reverseActive ? 'sortButton active' : 'sortButton'}
+                onClick={(event) => reverseOrder(event)}
+              >
+                Reverse Dashes
+              </button> */}
             </form>
             <span className="navLink" onClick={handleLogout}>
               Log Out
