@@ -1,5 +1,6 @@
 :root {
-  font: 16px / 1 sans-serif;
+  font: 17px / 1 sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   height: 100%;
   margin: 0rem;
   padding: 0rem;
@@ -114,6 +115,15 @@ div.navBar2 {
     // width: ;
     margin: 0rem 3rem 0rem 0rem;
   }
+  a.navLink:hover {
+    background-color: rgb(220, 220, 220);
+
+    border: 2px solid rgb(0, 51, 2);
+  }
+  span.navLink:hover {
+    background-color: rgb(220, 220, 220);
+    border: 2px solid rgb(0, 51, 2);
+  }
 }
 
 div.navBar {
@@ -198,7 +208,7 @@ main.main {
   margin: 0rem;
   padding: 0rem;
   min-height: 100vh;
-  width: 100vw;
+  min-width: 100%;
   display: flex;
   background-image: url('./images/plaid-77426_1920.jpg');
   background-size: contain;
@@ -258,22 +268,23 @@ main.main {
       div.buttonContainer2 {
         padding: 0rem;
         width: fit-content;
-        margin: 0.25rem 2rem 0.25rem 1rem;
+        margin: 0.25rem 2rem 0.125rem 1rem;
 
         button {
-          width: fit-content;
-          padding: 0.25rem;
-          font-size: 0.75rem;
+          margin: 0.5rem 0.25rem;
+          padding: 0.25rem 0.5rem;
           border-radius: 0.5rem;
-          margin: 0.125rem 0.25rem 0rem 0rem;
-          background-color: white;
-          border: 2px solid black;
           color: black;
+          text-align: center;
+          font-size: 0.75rem;
+          font-weight: 700;
+          text-decoration: none;
+          border: 2px solid black;
+          background-color: white;
           cursor: pointer;
-          font-weight: 600;
         }
         button:hover {
-          background-color: rgb(233, 233, 233);
+          background-color: rgb(220, 220, 220);
           border: 2px solid rgb(136, 0, 2);
         }
       }
@@ -291,7 +302,7 @@ main.main {
           border-radius: 0.375rem;
           background-color: black;
           color: white;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
         }
         input.search {
@@ -300,10 +311,10 @@ main.main {
           font-size: 0.75rem;
           border-radius: 0.5rem;
           margin: 0rem 0rem 0rem 0.125rem;
-          background-color: black;
-          color: white;
-          border: 2px solid white;
-          font-weight: 600;
+          background-color: white;
+          color: black;
+          border: 2px solid black;
+          font-weight: 700;
           cursor: pointer;
         }
         input.search:hover {
@@ -416,14 +427,16 @@ main.main {
             height: max-content;
             margin: 0.2rem;
             padding: 0.25rem;
-            background-color: rgb(2, 0, 63);
+            box-shadow: 0px 0px 2px 1px rgb(0, 51, 2);
+            // background-color: rgb(2, 0, 63);
+            background-color: rgb(0, 51, 2);
             border-radius: 0.5rem;
             border: 0rem;
             color: white;
+            cursor: pointer;
           }
           button.viewLink:hover {
             background-color: rgb(0, 61, 0);
-            cursor: pointer;
           }
           button.viewDescription {
             margin: 0.125rem;
@@ -436,7 +449,7 @@ main.main {
           button.title {
             margin: 0.2rem 0.125rem 0.5rem 0.125rem;
             min-width: min-content;
-            font-weight: 600;
+            font-weight: 700;
             text-align: start;
             font-size: 0.625rem;
             text-decoration: underline;
@@ -517,8 +530,8 @@ footer.standardFooter2 {
     cursor: pointer;
   }
   a.navLink:hover {
+    border: 2px solid rgb(0, 51, 2);
     background-color: rgb(220, 220, 220);
-    border: 2px solid rgb(136, 0, 2);
   }
 }
 
@@ -573,9 +586,8 @@ main.landingPageContainer {
   flex-wrap: wrap;
   flex-direction: row;
   margin: 0rem;
-  padding: 2.5% 0%;
   min-height: 100vh;
-  min-width: 95%;
+  min-width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -584,9 +596,9 @@ main.landingPageContainer {
 
 main.createDashPage {
   margin: 0rem;
-  padding: 3rem 0rem;
+  padding: 0rem;
   min-height: 100vh;
-  min-width: 100vw;
+  min-width: 100%;
   display: flex;
   flex-wrap: wrap;
   // flex-direction: column;
@@ -598,9 +610,9 @@ main.createDashPage {
   // min-height: 100vh;
   // min-width: 100vw;
   // display: flex;
-  padding: 2.5%;
+  // padding: 2.5%;
   min-height: 100vh;
-  min-width: 95%;
+  // min-width: 95%;
   display: flex;
   background-color: rgb(17, 17, 17);
 
@@ -611,7 +623,7 @@ main.createDashPage {
 }
 p {
   color: white;
-  font-weight: 600;
+  font-weight: 700;
 }
 div.listOfDashes2 {
   display: flex;
@@ -621,7 +633,7 @@ div.listOfDashes2 {
   align-items: center;
   // width: max-content;
   height: fit-content;
-  margin: 2rem;
+  margin: 3rem 2rem;
   width: 55vw;
   // min-width: fit-content;
   padding: 0rem;
@@ -639,7 +651,7 @@ div.listOfDashes2 {
     justify-content: center;
     height: fit-content;
     width: 100%;
-    box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
@@ -648,6 +660,8 @@ div.listOfDashes2 {
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
+    font-size: 1.25rem;
+
     // border-bottom: 1px solid black;
     border-top-left-radius: 0.85rem;
     border-top-right-radius: 0.85rem;
@@ -659,7 +673,8 @@ div.listOfDashes2 {
     justify-content: center;
     height: fit-content;
     width: 100%;
-    box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+    font-size: 1.25rem;
+    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
@@ -702,7 +717,7 @@ div.listOfDashes3 {
   border-top-left-radius: 1rem;
   p {
     color: white;
-    font-weight: 600;
+    font-weight: 700;
     padding: 0.125rem;
     width: 30vw;
     margin: 1rem;
@@ -717,8 +732,10 @@ div.listOfDashes3 {
     align-items: center;
     justify-content: center;
     height: fit-content;
+    font-size: 1.25rem;
+
     width: 100%;
-    box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
@@ -732,7 +749,7 @@ div.listOfDashes3 {
     border-top-right-radius: 0.85rem;
   }
   ul {
-    margin: 0.5rem 0rem 0rem 0rem;
+    margin: 0rem 0rem 0rem 0rem;
     padding: 0rem;
     overflow-y: scroll;
     height: 25vh;
@@ -745,7 +762,6 @@ div.listOfDashes3 {
     width: 100%;
     button {
       display: flex;
-      font-weight: 500;
       align-items: center;
       justify-content: center;
       margin: 0.125rem 0rem 0rem 0.25rem;
@@ -755,7 +771,7 @@ div.listOfDashes3 {
       border: 2px solid rgb(99, 99, 99);
       border-radius: 0.5rem;
       padding: 0.25rem;
-      font-weight: 600;
+      font-weight: 700;
     }
     button:hover {
       transform: scale(1.05, 1.05);
@@ -770,7 +786,7 @@ div.listOfDashes {
   align-items: center;
   width: fit-content;
   height: min-content;
-  margin: 1rem;
+  margin: 3rem 1rem 0rem 0rem;
   padding: 0rem;
   // border: 2px solid white;
   box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
@@ -780,17 +796,6 @@ div.listOfDashes {
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
 
-  p {
-    color: white;
-    font-weight: 600;
-    padding: 0.125rem;
-    width: 30vw;
-    margin: 1rem 1rem 0rem 1rem;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 0.5rem;
-  }
-
   h3.HeaderDashList {
     display: flex;
     // text-decoration: underline;
@@ -798,7 +803,7 @@ div.listOfDashes {
     justify-content: center;
     height: fit-content;
     width: 100%;
-    box-shadow: 0px 0px 5px 3px rgb(121, 0, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(121, 0, 2);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
@@ -807,6 +812,7 @@ div.listOfDashes {
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
+    font-size: 1.125rem;
     // border-bottom: 1px solid black;
     border-top-left-radius: 0.85rem;
     border-top-right-radius: 0.85rem;
@@ -815,10 +821,12 @@ div.listOfDashes {
     display: flex;
     // text-decoration: underline;
     align-items: center;
+    font-size: 1.25rem;
+
     justify-content: center;
     height: fit-content;
     width: 100%;
-    box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+    // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
     // min-width: max-content;
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
@@ -841,7 +849,7 @@ div.listOfDashes {
     // box-shadow: 0px 0px 5px 3px rgb(121, 0, 2);
     // min-width: max-content;
     // padding: 0.5rem;
-    box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
+    // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
     background-color: rgb(121, 0, 2);
     color: white;
@@ -850,6 +858,7 @@ div.listOfDashes {
     // border-bottom: 1px solid black;
     border-top-left-radius: 0.85rem;
     border-top-right-radius: 0.85rem;
+    font-size: 1.25rem;
   }
   div.DisplayListDash2 {
     list-style: none;
@@ -878,14 +887,14 @@ div.listOfDashes {
       // border-radius: 0.5rem;
       // border-bottom: 2px solid black;
       background-color: rgb(255, 255, 255);
-      margin: 1rem 0rem 0rem 0rem;
+      margin: 0rem;
       box-shadow: 0px 0px 2px 3px rgb(255, 255, 255);
       // margin: 5rem, 5rem;
       // margin: 1rem;
       text-decoration: none;
       div.inputContainer {
         margin: 1rem 0rem;
-        font-weight: 600;
+        font-weight: 700;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -896,7 +905,7 @@ div.listOfDashes {
         border-radius: 0.5rem;
         background-color: black;
         color: white;
-        font-weight: 600;
+        font-weight: 700;
         cursor: pointer;
         width: 45vw;
       }
@@ -905,6 +914,17 @@ div.listOfDashes {
       }
       input.submit:hover {
         transform: scale(1.05, 1.05);
+      }
+
+      p {
+        color: black;
+        font-weight: 700;
+        padding: 0.125rem;
+        width: 30vw;
+        margin: 1rem 1rem 0rem 1rem;
+        text-align: center;
+        border: 2px solid white;
+        border-radius: 0.5rem;
       }
       // color: white;
     }
@@ -919,7 +939,7 @@ div.listOfDashes {
     // overflow-y: scroll;
     // overflow-x: hidden;
     // height: 60vh;
-    padding: 0.25rem;
+    padding: 0rem;
     margin: 0rem;
     // background-color: rgb(220, 220, 220);
     // box-shadow: 0px 0px 5px 3px rgb(220, 220, 220);
@@ -928,7 +948,7 @@ div.listOfDashes {
     form.formCreateAccount {
       display: flex;
       flex-direction: column;
-      width: 48vw;
+      width: 50vw;
       justify-content: center;
       text-align: center;
       padding: 0.5rem 0rem;
@@ -938,13 +958,13 @@ div.listOfDashes {
       // border-bottom: 2px solid black;
       background-color: rgb(255, 255, 255);
 
-      box-shadow: 0px 0px 2px 3px rgb(220, 220, 220);
+      // box-shadow: 0px 0px 2px 3px rgb(220, 220, 220);
       // margin: 5rem, 5rem;
-      margin: 1rem;
+      margin: 0rem;
       text-decoration: none;
       div.inputContainer {
         margin: 1rem 0rem;
-        font-weight: 600;
+        font-weight: 700;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -960,7 +980,7 @@ div.listOfDashes {
         border-radius: 0.5rem;
         background-color: black;
         color: white;
-        font-weight: 600;
+        font-weight: 700;
         cursor: pointer;
         width: 45vw;
       }
@@ -984,7 +1004,7 @@ div.listOfDashes {
     overflow-x: hidden;
     height: 60vh;
     padding: 0.25rem;
-    margin: 0.35rem 0rem 0rem 0rem;
+    margin: 0rem 0rem 0rem 0rem;
     // margin: 0rem 0.25rem 0.75rem 0.25rem;
 
     // a.nonUser {
@@ -1028,53 +1048,65 @@ div.listOfDashes {
       box-shadow: 0px 0px 2px 3px rgba(255, 255, 255);
       // margin: 5rem, 5rem;
       margin: 0.375rem 0rem;
-      input {
-        display: flex;
-        font-weight: 500;
-        align-items: center;
-        justify-content: center;
-        margin: 0rem 0rem 0rem 0.25rem;
-        cursor: pointer;
-        background-color: black;
-        color: white;
-        border: 2px solid white;
-        border-radius: 0.5rem;
-        padding: 0.25rem;
+      form {
+        margin: 0.5rem 0rem 0.25rem 0rem;
+        padding: 0rem;
+        input {
+          display: flex;
+          font-weight: 700;
+          align-items: center;
+          justify-content: center;
+          margin: 0rem 0rem 0rem 0.25rem;
+          cursor: pointer;
+          background-color: rgb(121, 0, 2);
+          border: 3px solid black;
+          color: white;
+          border-radius: 0.5rem;
+          padding: 0.25rem;
+        }
+        input:hover {
+          transform: scale(1.05, 1.05);
+        }
       }
-      input:hover {
-        transform: scale(1.05, 1.05);
-      }
-
       a {
         color: black;
         text-decoration: none;
         padding: 0rem 0.25rem;
         font-weight: 700;
         margin: 0rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
       }
       a:hover {
         // transform: scale(1.5rem, 1.5rem);
         transform: scale(1.05, 1.05);
       }
       div {
-        margin: 0rem;
+        margin: 0.5rem 0rem 0.25rem 0rem;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
         align-items: center;
         button {
           display: flex;
-          font-weight: 500;
+          font-weight: 700;
           align-items: center;
           justify-content: center;
           margin: 0rem 0rem 0rem 0.25rem;
           cursor: pointer;
-          background-color: black;
+          background-color: rgb(121, 0, 2);
           color: white;
           border: 2px solid white;
           border-radius: 0.5rem;
           padding: 0.25rem;
+          border: 3px solid black;
         }
+        // button.preferences {
+        //   border: 2px solid black;
+        //   background-color: rgb(0, 51, 2);
+        // }
         button:hover {
           transform: scale(1.05, 1.05);
         }
@@ -1110,7 +1142,7 @@ main.aboutPage {
   margin: 0rem;
   padding: 0rem;
   min-height: 100vh;
-  min-width: 100vw;
+  min-width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -1118,7 +1150,8 @@ main.aboutPage {
   justify-content: space-evenly;
   background-color: rgb(17, 17, 17);
   article.aboutPageArticle {
-    margin: 2rem 0.75rem;
+    // margin: 2rem 0.75rem;
+    margin: 3rem 0.75rem 2rem 0rem;
     padding: 0rem;
     min-width: fit-content;
     width: 30vw;
@@ -1137,7 +1170,7 @@ main.aboutPage {
     box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
     h5.header {
       text-align: center;
-      box-shadow: 0px 0px 3px 2px rgb(0, 51, 2);
+      // box-shadow: 0px 0px 3px 2px rgb(0, 51, 2);
       // background-color: rgb(2, 0, 63);
       background-color: rgb(0, 51, 2);
 
@@ -1145,9 +1178,10 @@ main.aboutPage {
       margin: 0rem;
       padding: 1rem 0rem;
       width: 100%;
-      font-weight: 600;
+      font-weight: 700;
       // border-top-right-radius: 0.355rem;
       border-top-left-radius: 0.355rem;
+      font-size: 1.25rem;
     }
     ul.savedLinkList {
       display: flex;
@@ -1163,17 +1197,18 @@ main.aboutPage {
       button.savedLinkList {
         // justify-self: center;
         color: white;
-        background-color: rgb(27, 27, 27);
+        background-color: rgb(3, 3, 3);
         border: 2px solid white;
         border-radius: 0.5rem;
         padding: 0.25rem;
         margin: 0rem 0rem 0.5rem 0rem;
         cursor: pointer;
-        font-weight: 600;
+        font-weight: 700;
         box-shadow: 0px 0px 2px 1px white;
       }
       button.savedLinkList:hover {
-        background-color: rgb(174, 174, 174);
+        // background-color: rgb(174, 174, 174);
+        background-color: white;
         color: black;
         transform: scale(1.05, 1.05);
       }
@@ -1235,7 +1270,7 @@ main.mainCreateAccount {
   margin: 0rem;
   padding: 3rem 0rem;
   min-height: 100vh;
-  min-width: 100vw;
+  min-width: 100%;
   display: flex;
   flex-wrap: wrap;
   // flex-direction: column;
@@ -1261,7 +1296,7 @@ main.mainCreateAccount {
   justify-content: space-evenly;
 
   article.aboutPageArticle {
-    margin: 1rem 0.75rem 1rem 0.75rem;
+    margin: 1.25rem 0.75rem 1rem 0rem;
     padding: 0rem;
     width: fit-content;
     height: 75vh;
@@ -1284,9 +1319,10 @@ main.mainCreateAccount {
 
       color: white;
       margin: 0rem;
-      padding: 1rem 0rem;
+      padding: 1rem 0.5rem;
       width: 100%;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 1.25rem;
       // border-top-right-radius: 0.355rem;
       border-top-left-radius: 0.355rem;
     }
@@ -1305,11 +1341,12 @@ main.mainCreateAccount {
         color: white;
         background-color: black;
         border: 2px solid white;
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
         padding: 0.25rem;
         margin: 0rem 0rem 0.5rem 0rem;
         cursor: pointer;
-        font-weight: 600;
+        font-weight: 700;
+        box-shadow: 0px 0px 2px 1px white;
       }
       button.savedLinkList:hover {
         background-color: white;
@@ -1389,7 +1426,7 @@ main.mainCreateAccount {
     align-items: center;
     width: fit-content;
     height: min-content;
-    margin: 1rem;
+    margin: 1.25rem 1rem;
     padding: 0rem;
     // border: 2px solid white;
     box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
@@ -1405,7 +1442,7 @@ main.mainCreateAccount {
       justify-content: center;
       height: fit-content;
       width: 100%;
-      box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+      // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
       // min-width: max-content;
       // padding: 0.5rem;
       // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
@@ -1417,6 +1454,7 @@ main.mainCreateAccount {
       // border-bottom: 1px solid black;
       border-top-left-radius: 0.85rem;
       border-top-right-radius: 0.85rem;
+      font-size: 1.25rem;
     }
     h5.header2 {
       display: flex;
@@ -1425,7 +1463,7 @@ main.mainCreateAccount {
       justify-content: center;
       height: fit-content;
       width: 100%;
-      box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
+      // box-shadow: 0px 0px 5px 3px rgb(0, 51, 2);
       // min-width: max-content;
       // padding: 0.5rem;
       // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
@@ -1434,6 +1472,7 @@ main.mainCreateAccount {
       color: white;
       padding: 0.75rem 0rem;
       margin: 0rem;
+      font-size: 1.25rem;
       // // border-bottom: 1px solid black;
       // border-top-left-radius: 0.85rem;
       // border-top-right-radius: 0.85rem;
@@ -1467,8 +1506,9 @@ main.mainCreateAccount {
           margin: 0rem;
           color: white;
           text-align: center;
-          font-weight: 600;
+          font-weight: 700;
         }
+
         h5.header2 {
           display: flex;
           // text-decoration: underline;
@@ -1486,6 +1526,7 @@ main.mainCreateAccount {
           color: white;
           padding: 0.75rem 0rem;
           margin: 0rem;
+          font-size: 1.25rem;
           // // border-bottom: 1px solid black;
           // border-top-left-radius: 0.85rem;
           // border-top-right-radius: 0.85rem;
@@ -1504,13 +1545,17 @@ main.mainCreateAccount {
           margin: 0.5rem 0rem;
           padding: 0.25rem;
           border: 2px solid black;
+          box-shadow: 0px 0px 3px 2px black;
+
           background-color: white;
           color: black;
           border-radius: 0.5rem;
-          font-weight: 600;
+          font-weight: 700;
         }
         button.deleteDash:hover {
           border: 2px solid white;
+          box-shadow: 0px 0px 2px 1px white;
+
           transform: scale(1.1, 1.1);
           background-color: black;
           color: white;
@@ -1535,6 +1580,13 @@ main.mainCreateAccount {
         background-color: white;
         border-top-right-radius: 1rem;
         border-top-left-radius: 1rem;
+        p {
+          padding: 0rem;
+          margin: 1rem 0rem;
+          color: black;
+          text-align: center;
+          font-weight: 700;
+        }
         label {
           display: flex;
           // text-decoration: underline;
@@ -1552,7 +1604,7 @@ main.mainCreateAccount {
           color: white;
           padding: 0.75rem 0rem;
           margin: 0rem;
-          font-weight: 600;
+          font-weight: 700;
           // border-bottom: 1px solid black;
           border-top-left-radius: 0.85rem;
           border-top-right-radius: 0.85rem;
@@ -1571,7 +1623,7 @@ main.mainCreateAccount {
           width: 100%;
           button.inputContainer {
             display: flex;
-            font-weight: 500;
+            font-weight: 700;
             align-items: center;
             justify-content: center;
             margin: 0.125rem 0.25rem 0rem 0.25rem;
@@ -1581,7 +1633,6 @@ main.mainCreateAccount {
             border: 2px solid rgb(99, 99, 99);
             border-radius: 0.5rem;
             padding: 0.25rem;
-            font-weight: 600;
           }
           button.inputContainer:hover {
             transform: scale(1.0125, 1.0125);
@@ -1620,12 +1671,19 @@ main.mainCreateAccount {
         // margin: 5rem, 5rem;
         margin: 1rem;
         text-decoration: none;
+        p {
+          padding: 0rem;
+          margin: 0.8rem 0rem 0.5rem 0rem;
+          color: black;
+          text-align: center;
+          font-weight: 700;
+        }
         input {
           margin: 1rem 0rem 0rem 0rem;
           border-radius: 0.5rem;
           background-color: black;
           color: white;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
           width: 45vw;
         }
@@ -1637,7 +1695,7 @@ main.mainCreateAccount {
         }
         div.inputContainer {
           margin: 1rem 0rem;
-          font-weight: 600;
+          font-weight: 700;
           display: flex;
           flex-direction: column;
           align-items: center;

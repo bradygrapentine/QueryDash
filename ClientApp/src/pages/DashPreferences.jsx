@@ -73,6 +73,7 @@ export function DashPreferences() {
       console.log(updatedDash)
       if (response.ok) {
         getDash()
+        setDashFormErrorMessage('Dash Renamed')
       }
     } else {
       setDashFormErrorMessage('AUTH ERROR')
@@ -150,7 +151,11 @@ export function DashPreferences() {
     event.preventDefault()
     setPanelFormErrorMessage('')
     setInvalidFilterSite(false)
-    if (isLoggedIn() && getUserId() === dash.userId) {
+    if (
+      isLoggedIn() &&
+      getUserId() === dash.userId &&
+      dash.dashPanelAssignments.length < 10
+    ) {
       if (ifURL(newPanel.filterSite)) {
         //
         let newPanelUrl = new URL(newPanel.filterSite)
@@ -181,7 +186,7 @@ export function DashPreferences() {
         filterSiteName: '',
       })
     } else {
-      setPanelFormErrorMessage('AUTH ERROR')
+      setPanelFormErrorMessage('Panel Assignment Limit Reached')
     }
   }
 
@@ -313,11 +318,10 @@ export function DashPreferences() {
       <main className="mainCreateAccount">
         <div className="containerForHeaderAndForm">
           <h5 className="header">Edit {dash.name}</h5>
-          {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
 
           <div className="formContainerCreateAccount">
             <form onSubmit={updateDash} className="formCreateAccount">
-              <h5 className="header2">Update {dash.name}</h5>
+              {/* <h5 className="header2">Update {dash.name}</h5> */}
 
               <div className="inputContainer">
                 <label htmlFor="name">New Dash Name: </label>
@@ -338,9 +342,9 @@ export function DashPreferences() {
                 />
               </div>
               <input type="submit" value="Submit" className="submitButton" />
+              {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
             </form>
             <div className="addPanels">
-              {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
               <label>Add Panels to {dash.name}: </label>
               <ul className="inputContainer">
                 {panels
@@ -361,8 +365,12 @@ export function DashPreferences() {
                     </button>
                   ))}
               </ul>
+              {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
             </div>
-            <form onSubmit={updateDash} className="deletePanels">
+            <form
+              onSubmit={(event) => event.preventDefault()}
+              className="deletePanels"
+            >
               <div className="addPanels">
                 <label>Delete Panels from {dash.name}: </label>
                 <ul className="inputContainer">
@@ -381,7 +389,6 @@ export function DashPreferences() {
             </form>
 
             <div className="containerForCreatingPanel">
-              {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
               {!invalidFilterSite ? null : (
                 <p>Invalid Filter Site. Try Again</p>
               )}
@@ -410,6 +417,7 @@ export function DashPreferences() {
                   />
                 </div>
                 <input type="submit" value="Submit" />
+                {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
               </form>
             </div>
             <div className="deleteDash">
@@ -467,11 +475,13 @@ export function DashPreferences() {
                         ))}
                     </>
                   ) : (
-                    <p className="savedLinkList">No Archived Links</p>
+                    <p className="savedLinkListLabel">No Archived Links</p>
                   )}
                 </>
               ) : (
-                <p className="savedLinkList">Must Login to View Archives</p>
+                <p className="savedLinkListLabel">
+                  Must Login to View Archives
+                </p>
               )}
             </ul>
           </article>

@@ -52,6 +52,8 @@ export function CreateDashPage() {
 
   const [panelAssignmentCounter, setPanelAssignmentCounter] = useState(0)
 
+  const [createDashVisible, setCreateDashVisible] = useState(true)
+
   async function postPanelAssignment(panelResponseId) {
     setPanelAssignmentCounter(panelAssignmentCounter + 1)
     const newPanelAssignment = {
@@ -102,6 +104,8 @@ export function CreateDashPage() {
           setNewDashId(data.id)
           console.log(data)
         })
+        setDashFormErrorMessage('Dash Created')
+        setCreateDashVisible(false)
       }
     }
   }
@@ -223,36 +227,38 @@ export function CreateDashPage() {
         )}
       </div>
       <main className="createDashPage">
-        <div className="listOfDashes">
-          <h5 className="HeaderDashList2">Create Dash</h5>
-          <div className="DisplayListDash">
-            <form
-              onSubmit={handleDashFormSubmission}
-              className="formCreateAccount"
-            >
+        {createDashVisible ? (
+          <div className="listOfDashes">
+            <h5 className="HeaderDashList2">Create Dash</h5>
+            <div className="DisplayListDash2">
+              <form
+                onSubmit={handleDashFormSubmission}
+                className="formCreateAccount2"
+              >
+                <div className="inputContainer">
+                  <label htmlFor="name">Dash Name: </label>
+                  <input
+                    name="name"
+                    type="text"
+                    value={newDash.name}
+                    onChange={handleStringDashFieldChange}
+                  />
+                </div>
+                <div className="inputContainer">
+                  <label htmlFor="linksPerPanel">Results Per Panel: </label>
+                  <input
+                    name="linksPerPanel"
+                    type="number"
+                    value={newDash.linksPerPanel}
+                    onChange={handleStringDashFieldChange}
+                  />
+                </div>
+                <input type="submit" value="Submit" />
+              </form>
               {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
-              <div className="inputContainer">
-                <label htmlFor="name">DashName: </label>
-                <input
-                  name="name"
-                  type="text"
-                  value={newDash.name}
-                  onChange={handleStringDashFieldChange}
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="linksPerPanel">Results Per Panel: </label>
-                <input
-                  name="linksPerPanel"
-                  type="number"
-                  value={newDash.linksPerPanel}
-                  onChange={handleStringDashFieldChange}
-                />
-              </div>
-              <input type="submit" value="Submit" />
-            </form>
+            </div>
           </div>
-        </div>
+        ) : null}
         {!newDashId || panelAssignmentCounter === 10 ? (
           <>{!newDashId ? null : <p> Panel Assignment Limit Reached </p>}</>
         ) : (
@@ -281,60 +287,37 @@ export function CreateDashPage() {
             </div>
             <div className="listOfDashes">
               <h5 className="HeaderDashList2">Create Panel</h5>
-              {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
-              {invalidFilterSite ? <p>Invalid Filter Site. Try Again</p> : null}
               <div className="DisplayListDash2">
-                {!invalidFilterSite ? (
-                  <form
-                    onSubmit={handlePanelFormSubmission}
-                    className="formCreateAccount2"
-                  >
-                    <div className="inputContainer">
-                      <label htmlFor="filterSiteName">Webpage Name: </label>
-                      <input
-                        name="filterSiteName"
-                        type="text"
-                        value={newPanel.filterSiteName}
-                        onChange={handleStringPanelFieldChange}
-                      />
-                    </div>
-                    <div className="inputContainer">
-                      <label htmlFor="filterSite">Webpage URL: </label>
-                      <input
-                        name="filterSite"
-                        type="text"
-                        value={newPanel.filterSite}
-                        onChange={handleStringPanelFieldChange}
-                      />
-                    </div>
-                    <input type="submit" value="Submit" />
-                  </form>
-                ) : (
-                  <form
-                    onSubmit={handlePanelFormSubmission}
-                    className="formCreateAccount"
-                  >
-                    <div className="inputContainer">
-                      <label htmlFor="filterSiteName">Webpage Name: </label>
-                      <input
-                        name="filterSiteName"
-                        type="text"
-                        value={newPanel.filterSiteName}
-                        onChange={handleStringPanelFieldChange}
-                      />
-                    </div>
-                    <div className="inputContainer">
-                      <label htmlFor="filterSite">Webpage URL: </label>
-                      <input
-                        name="filterSite"
-                        type="text"
-                        value={newPanel.filterSite}
-                        onChange={handleStringPanelFieldChange}
-                      />
-                    </div>
-                    <input type="submit" value="Submit" />
-                  </form>
-                )}
+                <form
+                  onSubmit={handlePanelFormSubmission}
+                  className="formCreateAccount2"
+                >
+                  <div className="inputContainer">
+                    <label htmlFor="filterSiteName">Webpage Name: </label>
+                    <input
+                      name="filterSiteName"
+                      type="text"
+                      value={newPanel.filterSiteName}
+                      onChange={handleStringPanelFieldChange}
+                    />
+                  </div>
+                  <div className="inputContainer">
+                    <label htmlFor="filterSite">Webpage URL: </label>
+                    <input
+                      name="filterSite"
+                      type="text"
+                      value={newPanel.filterSite}
+                      onChange={handleStringPanelFieldChange}
+                    />
+                  </div>
+                  <input type="submit" value="Submit" />
+                  {invalidFilterSite ? (
+                    <p>Invalid Filter Site. Try Again</p>
+                  ) : null}
+                  {panelFormErrorMessage ? (
+                    <p>{panelFormErrorMessage}</p>
+                  ) : null}
+                </form>
               </div>
             </div>
           </>

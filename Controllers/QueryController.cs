@@ -68,12 +68,15 @@ namespace QueryDash.Controllers
                     // Additional parameters
                     // &n=30 # of results in query
                     // &searchtype=images searches for images
+
+                    // User ID	504	
+                    // Feed Code 1924762219	
                     // &showimages=1 provides thumbnail images with results, default already provides the hq thumbnails
                     // &relqueries=1 provide related queries in search results
                     // &fast=1 worse results, but faster
                     // &ff=1 removes adult content
 
-                    RequestUri = new Uri($"https://gigablast.com/search?&userid=503&code=1393867175&ff=1&n=50&format=json&q={dashQuery}&sites={filterSite}")
+                    RequestUri = new Uri($"https://gigablast.com/search?&userid=504&code=1924762219&ff=1&n=30&format=json&q={dashQuery}&sites={filterSite}")
                 };
                 var response = client.SendAsync(request);
                 requests.Add(response);

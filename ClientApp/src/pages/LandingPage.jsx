@@ -47,7 +47,7 @@ export function LandingPage() {
     newDash.userId = getUserId()
     newDash.dashPanelAssignments = []
     newDash.savedLinks = []
-    newDash.name = dash.name
+    newDash.name = dash.name + ' (' + getUser().name + "'s Copy)"
     newDash.creationDate = ''
     newDash.linksPerPanel = dash.linksPerPanel
     const response = await fetch('/api/Dashes', {
@@ -217,6 +217,7 @@ export function LandingPage() {
                           Use Dash
                         </button>
                         <button
+                          className="preferences"
                           onClick={() =>
                             history.push(`/preferences/${dash.id}`)
                           }
@@ -263,7 +264,10 @@ export function LandingPage() {
                       <Link to={`/dash/${dash.id}`} className="">
                         {dash.name}
                       </Link>
-                      <form onSubmit={(event) => copyDash(dash, event)}>
+                      <form
+                        className="copyDash"
+                        onSubmit={(event) => copyDash(dash, event)}
+                      >
                         <input type="submit" value="Copy Dash" />
                       </form>
                     </li>
