@@ -616,6 +616,7 @@ main.landingPageContainer {
   flex-direction: row;
   // padding: 1rem;
   margin: 0rem;
+  padding: 0rem 1rem 0rem 0rem;
   min-height: 100vh;
   min-width: 100%;
   display: flex;
@@ -1067,10 +1068,10 @@ div.listOfDashes {
     // }
     li {
       display: flex;
-      width: 98%;
+      width: 90%;
       justify-content: space-between;
       text-align: center;
-      padding: 0.5rem 0.75rem;
+      padding: 0.5rem 3rem;
       align-items: center;
       flex-wrap: wrap;
       background-color: rgb(255, 255, 255);
@@ -1185,10 +1186,10 @@ main.aboutPage {
     margin: 3rem 0.75rem 3rem 0rem;
     padding: 0rem;
     min-width: fit-content;
-    width: 25vw;
+    width: 40vw;
     height: 85vh;
     overflow-y: scroll;
-    overflow-x: hidden;
+    // overflow-x;
 
     // max-width: 50rem;
     // max-height: fit-content;
@@ -1223,7 +1224,7 @@ main.aboutPage {
       align-items: center;
       padding: 0rem;
       margin: 0.75rem 0rem;
-      width: 95%;
+      width: 100%;
       // width: 40vw;
       height: min-content;
       background-color: black;
@@ -1250,13 +1251,14 @@ main.aboutPage {
         // text-decoration: underline;
         list-style: none;
         width: 100%;
-        min-width: min-content;
-        // max-width: 90%;
+        // min-width: min-content;
+        max-width: 35vw;
         height: min-content;
         display: flex;
-        margin: 0.25rem;
+        margin: 0.25rem 0rem;
         border-radius: 0.5rem;
         font-size: 0.75rem;
+        overflow-x: scroll;
         // flex-wrap: wrap;
         flex-direction: column;
         justify-content: flex-start;
@@ -1300,7 +1302,7 @@ main.aboutPage {
 
 main.mainCreateAccount {
   margin: 0rem;
-  padding: 3rem 0rem;
+  padding: 3rem 1rem 3rem 1rem;
   min-height: 100vh;
   min-width: 100%;
   display: flex;
@@ -1314,7 +1316,7 @@ main.mainCreateAccount {
   // min-height: 100vh;
   // min-width: 100vw;
   // display: flex;
-  padding: 2.5%;
+  // padding: 2.5%;
   min-height: 100vh;
   min-width: 95%;
   display: flex;
@@ -1471,7 +1473,7 @@ main.mainCreateAccount {
     align-items: center;
     width: fit-content;
     height: min-content;
-    margin: 0rem 1rem;
+    margin: 0rem 1rem 0rem 0rem;
     padding: 0rem;
     // border: 2px solid white;
     // box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
