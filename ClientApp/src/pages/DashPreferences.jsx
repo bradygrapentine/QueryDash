@@ -277,7 +277,7 @@ export function DashPreferences() {
     <>
       <header className="altHeader">
         <Link className="linkForHeader" to="/">
-          <h1 className="altHeader">{dash.name}</h1>
+          <h1 className="altHeader">Edit {dash.name}</h1>
         </Link>{' '}
       </header>
       <div className="navBar2">
@@ -317,7 +317,7 @@ export function DashPreferences() {
       </div>
       <main className="mainCreateAccount">
         <div className="containerForHeaderAndForm">
-          <h5 className="header">Edit {dash.name}</h5>
+          {/* <h5 className="header">Edit {dash.name}</h5> */}
 
           <div className="formContainerCreateAccount">
             <form onSubmit={updateDash} className="formCreateAccount">

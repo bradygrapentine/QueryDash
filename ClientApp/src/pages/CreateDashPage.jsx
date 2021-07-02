@@ -193,7 +193,7 @@ export function CreateDashPage() {
     <>
       <header className="altHeader">
         <Link className="linkForHeader" to="/">
-          <h1 className="altHeader">QueryDash</h1>
+          <h1 className="altHeader">Create Dash</h1>
         </Link>{' '}
       </header>
 
@@ -229,7 +229,6 @@ export function CreateDashPage() {
       <main className="createDashPage">
         {createDashVisible ? (
           <div className="listOfDashes">
-            <h5 className="HeaderDashList2">Create Dash</h5>
             <div className="DisplayListDash2">
               <form
                 onSubmit={handleDashFormSubmission}

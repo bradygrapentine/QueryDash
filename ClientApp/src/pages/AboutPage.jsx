@@ -33,7 +33,7 @@ export function AboutPage() {
     <>
       <header className="altHeader">
         <Link className="linkForHeader" to="/">
-          <h1 className="altHeader">QueryDash</h1>
+          <h1 className="altHeader">About QueryDash</h1>
         </Link>{' '}
       </header>
       <div className="navBar2">
@@ -70,7 +70,6 @@ export function AboutPage() {
       </div>
       <main className="landingPageContainer">
         <div className="listOfDashes2">
-          <h3 className="HeaderDashList2">About</h3>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident
             excepturi porro accusantium exercitationem unde natus rerum

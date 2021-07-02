@@ -62,7 +62,7 @@ export function HistoryAndArchivesPage() {
     <>
       <header className="altHeader">
         <Link className="linkForHeader" to="/">
-          <h1 className="altHeader">QueryDash</h1>
+          <h1 className="altHeader">Browse Later</h1>
         </Link>{' '}
       </header>
       <div className="navBar2">
