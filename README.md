@@ -1,3 +1,3 @@
-# QueryDash (https://querydash.herokuapp.com/)
+# [QueryDash] (https://querydash.herokuapp.com/)
 
 ![](./ClientApp/src/images/Capture.PNG)
