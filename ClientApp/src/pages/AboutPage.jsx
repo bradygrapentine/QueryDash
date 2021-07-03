@@ -78,17 +78,25 @@ export function AboutPage() {
           <p>
             It's as simple as navigating to a dash, entering what you'd like to
             search for in the navigation bar, and clicking search (or, pressing
-            Enter).
+            Enter). Query dash executes your search at every panel on your
+            dashboard. Take the Shopping dashboard for example; if you search
+            for shoes, it'll return results that relate to shoes from Target,
+            Kohl's, Macy's, and every other store at that dash (and any more
+            that you care to add). Or, if you have a question about a bug or
+            concept you're confused about when you're, programming, just
+            navigate to the programming dashboard and search; QueryDash will
+            return results from several sites that host relevant documentation.
           </p>
           <p>
             {' '}
-            Then, it gets complicated. QueryDash takes your search and executes
-            refined search queries (via the 'site:' query parameter) on its
-            backend with the websites that are associated with the panels at
-            that dashboard via a parallelized request sent to a web search API.
+            But, its a bit more complicated than that. QueryDash executes the
+            searches on its backend with the websites that are associated with
+            the panels at that dashboard via a parallelized request sent to a
+            web search API, as opposed to simply executing the searches on the
+            frontend.
           </p>
           <p>
-            So, your original query is executed remotely at every website that
+            So, your original search is executed remotely at every website that
             belongs to a panel on your dashboard and returned as if you sent one
             (approximately). You can keep coding or browsing other webpages
             while QueryDash does the work for you...at Ludicrous Speed.{' '}
