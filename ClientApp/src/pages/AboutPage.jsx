@@ -115,7 +115,7 @@ export function AboutPage() {
           <p>
             {' '}
             This is a work in progress, so please forgive me for asking you not
-            to spam the search feature. You're welcome to try QueryDash and
+            to abuse the search feature. You're welcome to try QueryDash and
             create an account, dashes, and panels, but the API requests really
             start to pile up when the search feature is used excessively. I'm
             planning a transition to an unmetered service sometime soon. Please
