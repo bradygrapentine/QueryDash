@@ -14,7 +14,7 @@ Dashboards can be created and copied and panels can be added, created, and remov
 
 Ultimately, QueryDash's purpose is outsourcing the work associated with navigating to different websites and searching for the same information from the user and their computer onto QueryDash's back-end, and returning results as if the web search requests were executed on the front-end in one place. But, QueryDash also provides two methods of storing relevant results for the user, and two places where users can see or delete those results (by dashboard and by user).
 
-So, the user can research essentially any topic they want at whatever site they want; the use cases are only limited by the family filter and the fact that I cut the URLs, but I'd like to add an advanced settings option to the create panel option to address that issue.
+So, the user can research essentially any topic they want at whatever site they want (for example, there's a shopping dashboard, a front-end dashboard, and a back-end dashboard, among others); the use cases are only limited by the family filter and the fact that I cut the URLs, but I'd like to add an advanced settings option to the create panel option to address that issue.
 
 This is a work in progress, so please don't abuse the search feature. You're welcome to try QueryDash and create an account, dashes, and panels, but the API requests really start to pile up when the search feature is used excessively. I'm planning a transition to an un-metered service sometime soon. Please reach out to me at brady.grapentine@gmail.com with QA comments, questions, or suggestions.
 
