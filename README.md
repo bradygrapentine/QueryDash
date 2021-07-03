@@ -1,3 +1,3 @@
 # QueryDash
 
-![](./src/images/Capture.png)
+![](./ClientApp/src/images/Capture.png)
