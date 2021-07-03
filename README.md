@@ -4,7 +4,7 @@
 
 I created this application for my capstone project at Suncoast Developers Guild using Javascript, React Hooks, C#/.NET, Entity Framework Core, and [Gigablast's Web Search API](http://www.gigablast.com/api.html).
 
-I had a great time learning and working through the challenges associated with building this project. I built this application to address the research process that is common to all software engineers, but I realized that the use cases were more numerous as I developed the idea.
+I had a great time working through the challenges associated with building this project. I built this application to address the research process that is common to all software engineers, but I realized that the use cases were more numerous as I developed the idea.
 
 QueryDash is a search aggregation application. The dashboards are the main feature. They contain panels that are associated with a particular website. The FrontEnd dashboard, for example, includes the MDN Web Docs, W3 Schools, and Stack Overflow, among others. The user enters their desired search in the navigation bar and presses Enter (or clicks search), and - boom - in a few seconds, the panels populate with search results from separate refined search requests executed in parallel on QueryDash's back-end via Gigablast's Web Search API. The search queries are refined by the "site:" parameter.
 
