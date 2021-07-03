@@ -10,9 +10,7 @@ QueryDash is my attempt to create a lightweight, search aggregation application.
 
 Each search result includes a live link to the result, the head of the result, and a summary of the result. If you navigate away from the page, QueryDash sticks your last results by dashboard in local storage, so you can return to any dash after navigating away from QueryDash to a result and see the results from your last search. If you create an account, you can archive results, and QueryDash will save your opened results as well.
 
-Dashboards can be created and copied and panels can be added, created, and removed from dashboards (panels and dashboards have a many-to-many relationship).
-
-So, the user can research virtually any topic they want at almost any website they want (for example, there's a shopping dashboard, a front-end dashboard, and a back-end dashboard, among others).
+Dashboards can be created and copied and panels can be added, created, and removed from dashboards (panels and dashboards have a many-to-many relationship). So, the user can research virtually any topic they want at almost any website they want (for example, there's a shopping dashboard, a front-end dashboard, and a back-end dashboard, among others).
 
 This is a work in progress, so please don't abuse the search feature. You're welcome to try QueryDash and create an account, dashes, and panels, but the API requests really start to pile up when the search feature is used excessively. I'm planning a transition to an un-metered service sometime soon. Please reach out to me at brady.grapentine@gmail.com with QA comments, questions, or suggestions.
 
