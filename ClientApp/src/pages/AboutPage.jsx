@@ -89,10 +89,10 @@ export function AboutPage() {
           </p>
           <p>
             {' '}
-            But, its a bit more complicated than that. QueryDash executes the
+            But, it's a bit more complicated than that. QueryDash executes the
             searches on its backend with the websites that are associated with
             the panels at that dashboard via a parallelized request sent to a
-            web search API, as opposed to simply executing the searches on the
+            web search API, as opposed to simply executing each search on the
             frontend.
           </p>
           <p>
