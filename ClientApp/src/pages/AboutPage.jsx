@@ -70,15 +70,14 @@ export function AboutPage() {
       </div>
       <main className="landingPageContainer">
         <div className="listOfDashes2">
+          <p>Welcome to QueryDash</p>
           <p>
-            I built this application to address my desire to avoid the RAM and
-            UI limitations on my own computer that often crop up when
-            researching online.{' '}
+            To use QueryDash, navigate to a dash from the home page, type what
+            you'd like to search for in the navigation bar, and click search
+            (or, press Enter).{' '}
           </p>
           <p>
-            It's as simple as navigating to a dash, entering what you'd like to
-            search for in the navigation bar, and clicking search (or, pressing
-            Enter). Query dash executes your search at every panel on your
+            Query dash will execute your search at every panel on your
             dashboard. Take the Shopping dashboard for example; if you search
             for shoes, it'll return results that relate to shoes from Target,
             Kohl's, Macy's, and every other store at that dash (and any more
@@ -89,11 +88,11 @@ export function AboutPage() {
           </p>
           <p>
             {' '}
-            But, it's a bit more complicated than that. QueryDash executes the
-            searches on its backend with the websites that are associated with
-            the panels at that dashboard via a parallelized request sent to a
-            web search API, as opposed to simply executing each search on the
-            frontend.
+            But, it's a bit more complicated than that. When you click search,
+            QueryDash takes you search query and executes refined searches on
+            its back-end using the websites that are associated with the panels
+            at that dashboard via parallel requests sent to a web search API, as
+            opposed to simply executing each search on the front-end.
           </p>
           <p>
             So, your original search is executed remotely at every website that
@@ -107,10 +106,10 @@ export function AboutPage() {
             existing preset or user dashboard, create your own panels if the
             existing offerings don't meet your needs, and use your dash to
             search for whatever you'd like at whatever websites you desire.
-            QueryDash will save your opened and archived search results, which
-            you can view at the dashboard's preferences page or your browse
-            later page, so you can keep searching and come back to what you
-            found later.
+            QueryDash saves users opened search results and lets them archive
+            search results (which you can be viewed at the dashboard's
+            preferences page or your browse later page) so you can keep
+            searching and come back to what you found later.
           </p>
           <p>
             {' '}
