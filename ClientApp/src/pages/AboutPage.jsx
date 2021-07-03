@@ -71,10 +71,9 @@ export function AboutPage() {
       <main className="landingPageContainer">
         <div className="listOfDashes2">
           <p>
-            This application is an MVP that I built for my capstone project at
-            Suncoast Developers Guild. It was an idea that was spurred by my
-            desire to avoid the RAM and UI limitations on my own machine that
-            often crop up when researching online.{' '}
+            I built this application to address my desire to avoid the RAM and
+            UI limitations on my own computer that often crop up when
+            researching online.{' '}
           </p>
           <p>
             It's as simple as navigating to a dash, entering what you'd like to
@@ -84,15 +83,14 @@ export function AboutPage() {
           <p>
             {' '}
             Then, it gets complicated. QueryDash takes your search and executes
-            refined (via the 'site:' query parameter) search queries on its
+            refined search queries (via the 'site:' query parameter) on its
             backend with the websites that are associated with the panels at
-            that dashboard via a parallelized request sent to Gigablast's Web
-            Search API. (http://www.gigablast.com/api.html){' '}
+            that dashboard via a parallelized request sent to a web search API.
           </p>
           <p>
             So, your original query is executed remotely at every website that
-            belongs to the panels on your dashboard and returned as if you sent
-            one (approximately). You can keep coding or browsing other webpages
+            belongs to a panel on your dashboard and returned as if you sent one
+            (approximately). You can keep coding or browsing other webpages
             while QueryDash does the work for you...at Ludicrous Speed.{' '}
           </p>
           <p>
@@ -108,15 +106,15 @@ export function AboutPage() {
           </p>
           <p>
             {' '}
-            This is a work in progress, so please forgive me for not indexing
-            the web myself and asking you not to spam the search feature. You're
-            welcome to try QueryDash and create an account, dashes, and panels,
-            but the API requests really start to pile up when the search feature
-            is used excessively. I may run out. I'm planning a transition to an
-            unmetered service sometime soon. Please reach out to me at with QA
-            comments, questions, or suggestions. You can see my code at:
+            This is a work in progress, so please forgive me for asking you not
+            to spam the search feature. You're welcome to try QueryDash and
+            create an account, dashes, and panels, but the API requests really
+            start to pile up when the search feature is used excessively. I'm
+            planning a transition to an unmetered service sometime soon. Please
+            reach out to me at brady.grapentine@gmail.com with QA comments,
+            questions, or suggestions.
           </p>
-          <a href="https://github.com/bradygrapentine/QueryDash">
+          {/*<a href="https://github.com/bradygrapentine/QueryDash">
             <p>https://github.com/bradygrapentine/QueryDash</p>
           </a>
           <p>
@@ -128,7 +126,7 @@ export function AboutPage() {
           </a>
           <a href="brady.grapentine@gmail.com">
             <p>Email: brady.grapentine@gmail.com</p>
-          </a>
+          </a> */}
         </div>
       </main>
       <footer className="standardFooter2"></footer>
