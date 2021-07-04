@@ -82,7 +82,7 @@ export function HistoryAndArchivesPage() {
               <input
                 className="filterDashes"
                 type="text"
-                placeholder="Filter Links"
+                placeholder="Filter by URL"
                 value={searchTerm}
                 onChange={(event) => {
                   setSearchTerm(event.target.value)
