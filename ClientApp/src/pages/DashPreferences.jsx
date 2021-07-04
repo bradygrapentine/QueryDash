@@ -59,9 +59,11 @@ export function DashPreferences() {
       updatedDash.userId = dash.userId
       if (updatedDash.name === '') {
         updatedDash.name = dash.name
+        setDashFormErrorMessage('Links Per Panel Updated')
       }
       if (updatedDash.linksPerPanel === 0) {
         updatedDash.linksPerPanel = Number(dash.linksPerPanel)
+        setDashFormErrorMessage('Dash Renamed')
       }
       updatedDash.linksPerPanel = Number(updatedDash.linksPerPanel)
       const response = await fetch(`/api/Dashes/${dash.id}`, {
@@ -73,7 +75,6 @@ export function DashPreferences() {
       console.log(updatedDash)
       if (response.ok) {
         getDash()
-        setDashFormErrorMessage('Dash Renamed')
       }
     } else {
       setDashFormErrorMessage('AUTH ERROR')
