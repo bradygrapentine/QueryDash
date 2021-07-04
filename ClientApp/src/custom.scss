@@ -1278,7 +1278,7 @@ main.aboutPage {
   background-color: rgb(175, 219, 255);
   article.aboutPageArticle {
     // margin: 2rem 0.75rem;
-    margin: 3rem 0.75rem 3rem 0rem;
+    margin: 3rem 0.75rem;
     padding: 0rem;
     min-width: fit-content;
     width: 40vw;
@@ -1435,7 +1435,7 @@ main.mainCreateAccount {
     flex-wrap: wrap;
     article.aboutPageArticle {
       // margin: 2rem 0.75rem;
-      margin: 3rem 0.75rem 3rem 0rem;
+      margin: 3rem 0.75rem;
       padding: 0rem;
       min-width: fit-content;
       width: 35vw;
@@ -1465,7 +1465,7 @@ main.mainCreateAccount {
         margin: 0rem;
         padding: 1rem 0rem;
         width: 100%;
-        min-width: fit-content;
+        min-width: min-content;
         display: flex;
         justify-content: center;
         align-items: center;
