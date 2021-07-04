@@ -276,20 +276,21 @@ export function DashPage() {
                       <Link to="/create-dash">
                         <button>Create Dash</button>
                       </Link>
+                      <Link to="/"></Link>
                     </>
                   ) : (
                     <>
-                      <Link to="/login" className="navLink">
-                        Log In
+                      <Link to="/login">
+                        <button>Log In</button>
                       </Link>
-                      <Link to="/create-account" className="navLink">
-                        Sign Up
+                      <Link to="/create-account">
+                        <button>Sign Up</button>
+                      </Link>
+                      <Link to="/">
+                        <button>Home</button>
                       </Link>
                     </>
                   )}
-                  <Link to="/">
-                    <button>Home</button>
-                  </Link>
                 </div>
               </div>
               <button

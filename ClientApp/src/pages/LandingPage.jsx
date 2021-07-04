@@ -256,7 +256,7 @@ export function LandingPage() {
               </ul>
             </div>
             <div className="listOfDashes">
-              <h3 className="HeaderDashList">Preset Dashes</h3>
+              <h3 className="HeaderDashList">Try a Preset Dash</h3>
               <ul className="DisplayListDash">
                 {presetDashes
                   .filter((presetDash) =>
@@ -304,7 +304,7 @@ export function LandingPage() {
         ) : (
           <>
             <div className="listOfDashes">
-              <h3 className="HeaderDashList">Preset Dashes</h3>
+              <h3 className="HeaderDashList">Try a Preset Dash</h3>
               <ul className="DisplayListDash">
                 {presetDashesNonUser
                   .filter((presetDashNonUser) =>

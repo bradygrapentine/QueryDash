@@ -72,6 +72,16 @@ export function AboutPage() {
         <div className="listOfDashes2">
           <p>Welcome to QueryDash</p>
           <p>
+            {' '}
+            This is a work in progress, so please don't abuse the search
+            feature. You're welcome to try QueryDash and create an account,
+            dashes, and panels, but the API requests really start to pile up
+            when the search feature is used excessively. I'm planning a
+            transition to an unmetered service sometime soon. Please reach out
+            to me at brady.grapentine@gmail.com with QA comments, questions, or
+            suggestions.
+          </p>
+          <p>
             To use QueryDash, navigate to a dash from the home page, type what
             you'd like to search for in the navigation bar, and click search
             (or, press Enter).{' '}
@@ -107,20 +117,11 @@ export function AboutPage() {
             existing offerings don't meet your needs, and use your dash to
             search for whatever you'd like at whatever websites you desire.
             QueryDash saves users opened search results and lets them archive
-            search results (which you can be viewed at the dashboard's
-            preferences page or your browse later page) so you can keep
-            searching and come back to what you found later.
+            search results (which can be viewed at the dashboard's preferences
+            page or your browse later page) so you can keep searching and come
+            back to what you found later.
           </p>
-          <p>
-            {' '}
-            This is a work in progress, so please don't abuse the search
-            feature. You're welcome to try QueryDash and create an account,
-            dashes, and panels, but the API requests really start to pile up
-            when the search feature is used excessively. I'm planning a
-            transition to an un-metered service sometime soon. Please reach out
-            to me at brady.grapentine@gmail.com with QA comments, questions, or
-            suggestions.
-          </p>
+
           {/*<a href="https://github.com/bradygrapentine/QueryDash">
             <p>https://github.com/bradygrapentine/QueryDash</p>
           </a>

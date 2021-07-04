@@ -384,7 +384,7 @@ main.main {
         // max-height: min-content;
         height: 40vh;
         max-height: fit-content;
-        width: 30vw;
+        width: 40vw;
         // width: 44vw; --> make this dynamic so panels snap into place nicely at different widths
         max-width: 92vw;
         // min-width: min-content;
@@ -440,7 +440,7 @@ main.main {
           justify-content: center;
           width: auto;
           min-width: min-content;
-
+          min-height: min-content;
           max-width: fit-content;
           button {
             // height: 0.75rem;
@@ -1108,9 +1108,12 @@ div.listOfDashes {
         }
       }
       a {
-        color: black;
+        color: white;
+        background-color: rgb(17, 17, 17);
+        box-shadow: 0px 0px 2px 2px black;
         text-decoration: none;
-        padding: 0rem 0.25rem;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
         font-weight: 700;
         margin: 0rem;
         display: flex;
