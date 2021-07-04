@@ -1434,12 +1434,14 @@ main.mainCreateAccount {
     padding: 0rem;
     flex-wrap: wrap;
     article.aboutPageArticle {
-      margin: 1.25rem 0.75rem 1rem 0rem;
+      // margin: 2rem 0.75rem;
+      margin: 3rem 0.75rem 3rem 0rem;
       padding: 0rem;
-      width: max-content;
-      height: 75vh;
+      min-width: fit-content;
+      width: 40vw;
+      height: 85vh;
       overflow-y: scroll;
-      overflow-x: hidden;
+      // overflow-x;
 
       // max-width: 50rem;
       // max-height: fit-content;
@@ -1450,21 +1452,23 @@ main.mainCreateAccount {
       align-items: center;
       // border: 2px solid black;
       border-radius: 0.5rem;
+      cursor: pointer;
       background-color: rgb(228, 67, 57);
       box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
       h5.header {
         text-align: center;
+        // box-shadow: 0px 0px 3px 2px rgb(0, 51, 2, 0.9);
+        // background-color: rgb(2, 0, 63);
         background-color: rgb(228, 67, 57);
-        box-shadow: 0px 0px 3px 2px rgb(228, 67, 57);
         text-decoration: underline;
         color: white;
         margin: 0rem;
-        padding: 1rem 0.5rem;
+        padding: 1rem 0rem;
         width: 100%;
         font-weight: 700;
-        font-size: 1.25rem;
         // border-top-right-radius: 0.355rem;
         border-top-left-radius: 0.355rem;
+        font-size: 1.25rem;
       }
       ul.savedLinkList {
         display: flex;
@@ -1473,13 +1477,15 @@ main.mainCreateAccount {
         align-items: center;
         padding: 0rem;
         margin: 0.75rem 0rem;
-        width: fit-content;
+        width: 100%;
+        // width: 40vw;
         height: min-content;
+        cursor: pointer;
         background-color: rgb(228, 67, 57);
         button.savedLinkList {
           // justify-self: center;
-          background-color: black;
           color: white;
+          background-color: rgb(3, 3, 3);
           border: 2px solid white;
           border-radius: 0.5rem;
           padding: 0.25rem;
@@ -1489,6 +1495,7 @@ main.mainCreateAccount {
           box-shadow: 0px 0px 2px 1px white;
         }
         button.savedLinkList:hover {
+          // background-color: rgb(174, 174, 174);
           background-color: white;
           color: black;
           transform: scale(1.05, 1.05);
@@ -1497,13 +1504,15 @@ main.mainCreateAccount {
           background-color: white;
           // text-decoration: underline;
           list-style: none;
-          width: min-content;
-          // max-width: 90%;
+          width: 100%;
+          // min-width: min-content;
+          max-width: 35vw;
           height: min-content;
           display: flex;
-          margin: 0.25rem;
+          margin: 0.25rem 0rem;
           border-radius: 0.5rem;
           font-size: 0.75rem;
+          overflow-x: scroll;
           // flex-wrap: wrap;
           flex-direction: column;
           justify-content: flex-start;
@@ -1513,9 +1522,11 @@ main.mainCreateAccount {
           p.savedLinkListLabel {
             // text-decoration: underline;
             margin: 0.5rem;
-            border: 0px solid black;
+            // border: 2px solid black;
             box-shadow: 0px 0px 2px 1px rgb(63, 37, 64, 0.9);
             background-color: rgb(63, 37, 64);
+            // background-color: rgb(2, 0, 63);
+            // background-color: rgb(0, 51, 2, 0.9);
             padding: 0.25rem;
             border-radius: 0.25rem;
             color: white;
@@ -1523,14 +1534,16 @@ main.mainCreateAccount {
             min-width: min-content;
           }
           p.savedLinkList {
-            width: min-content;
             text-decoration: none;
             margin: 0.25rem 0.5rem 0.75rem 1rem;
             // padding: 0.25rem;
             color: black;
+            width: min-content;
+            min-width: min-content;
           }
           a.savedLinkList {
             width: min-content;
+            min-width: min-content;
             cursor: pointer;
             color: black;
             // text-decoration: none;
