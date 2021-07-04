@@ -83,6 +83,10 @@ export function CreateDashPage() {
       updatedDash.linksPerPanel = 30
       setDashFormErrorMessage('Results per panel cannot exceed 30')
     }
+    if (updatedDash.name.length > 20) {
+      updatedDash.name = updatedDash.name.slice(0, 20)
+      setDashFormErrorMessage('Characters per name cannot exceed 20')
+    }
     setNewDash(updatedDash)
   }
 
@@ -235,7 +239,7 @@ export function CreateDashPage() {
                 className="formCreateAccount2"
               >
                 <div className="inputContainer">
-                  <label htmlFor="name">Dash Name: </label>
+                  <label htmlFor="name">Dash Name (0-20 Characters): </label>
                   <input
                     name="name"
                     type="text"
@@ -244,7 +248,9 @@ export function CreateDashPage() {
                   />
                 </div>
                 <div className="inputContainer">
-                  <label htmlFor="linksPerPanel">Results Per Panel: </label>
+                  <label htmlFor="linksPerPanel">
+                    Results Per Panel (0-30 Results):{' '}
+                  </label>
                   <input
                     name="linksPerPanel"
                     type="number"
@@ -253,8 +259,8 @@ export function CreateDashPage() {
                   />
                 </div>
                 <input type="submit" value="Submit" />
+                {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
               </form>
-              {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
             </div>
           </div>
         ) : null}

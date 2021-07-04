@@ -104,6 +104,10 @@ export function DashPreferences() {
       newUpdatedDash.linksPerPanel = 30
       setDashFormErrorMessage('Results per panel cannot exceed 30')
     }
+    if (newUpdatedDash.name.length > 20) {
+      newUpdatedDash.name = updatedDash.name.slice(0, 20)
+      setDashFormErrorMessage('Characters per name cannot exceed 20')
+    }
     setUpdatedDash(newUpdatedDash)
   }
 
@@ -324,7 +328,7 @@ export function DashPreferences() {
               {/* <h5 className="header2">Update {dash.name}</h5> */}
 
               <div className="inputContainer">
-                <label htmlFor="name">New Dash Name: </label>
+                <label htmlFor="name">New Dash Name (0-20 Characters): </label>
                 <input
                   name="name"
                   type="text"
@@ -334,8 +338,7 @@ export function DashPreferences() {
               </div>
               <div className="inputContainer">
                 <label htmlFor="linksPerPanel">
-                  New Results Per Panel (Current: {dash.linksPerPanel}, Max:
-                  30):{' '}
+                  New Results Per Panel (Current: {dash.linksPerPanel}):{' '}
                 </label>
                 <input
                   name="linksPerPanel"

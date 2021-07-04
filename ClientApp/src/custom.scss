@@ -421,9 +421,10 @@ main.main {
         display: flex;
         flex-direction: column;
         overflow: scroll;
-        height: fit-content;
-        width: 97%;
+        height: 100%;
+        width: 100%;
         background-color: black;
+        padding: 0rem;
         // min-width: fit-content;
         // background-color: white;
         border-radius: 0.5rem;

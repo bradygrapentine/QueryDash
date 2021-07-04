@@ -47,7 +47,7 @@ export function LandingPage() {
     newDash.userId = getUserId()
     newDash.dashPanelAssignments = []
     newDash.savedLinks = []
-    newDash.name = dash.name + ' (' + getUser().name + "'s Copy)"
+    newDash.name = dash.name + ' (Copy)'
     newDash.creationDate = ''
     newDash.linksPerPanel = dash.linksPerPanel
     const response = await fetch('/api/Dashes', {
