@@ -1837,10 +1837,13 @@ main.mainCreateAccount {
           box-shadow: none;
         }
         p {
-          padding: 0rem;
+          padding: 0.5rem;
+          border-radius: 0.25rem;
           margin: 0.8rem 0rem 0.5rem 0rem;
           color: black;
           background-color: rgb(175, 219, 255);
+          border: 2px solid black;
+          box-shadow: 0px 0px 2px 1px black;
           text-align: center;
           font-weight: 700;
         }
