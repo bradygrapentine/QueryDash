@@ -396,15 +396,14 @@ export function DashPreferences() {
             </form>
 
             <div className="containerForCreatingPanel">
-              {!invalidFilterSite ? null : (
-                <p>Invalid Filter Site. Try Again</p>
-              )}
               <form
                 onSubmit={handlePanelFormSubmission}
                 className="formCreateAccount"
               >
                 <h5 className="header2">Create New Panel</h5>
-
+                {!invalidFilterSite ? null : (
+                  <p>Invalid Filter Site. Try Again</p>
+                )}
                 <div className="inputContainer">
                   <label htmlFor="filterSiteName">Webpage Name: </label>
                   <input
@@ -423,7 +422,7 @@ export function DashPreferences() {
                     onChange={handleStringPanelFieldChange}
                   />
                 </div>
-                <input type="submit" value="Submit" />
+                <input className="submitButton" type="submit" value="Submit" />
                 {panelFormErrorMessage ? <p>{panelFormErrorMessage}</p> : null}
               </form>
             </div>

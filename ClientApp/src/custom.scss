@@ -28,7 +28,7 @@ body {
   min-width: 100vw;
 
   border: 0rem;
-  background-color: black;
+  background-color: rgb(228, 67, 57);
 }
 
 input::-webkit-outer-spin-button,
@@ -80,8 +80,8 @@ header.altHeader {
     height: fit-content;
     margin: 0rem;
     padding: 0.375rem 0rem 1rem 0rem;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
   }
   h1.altHeader {
     font-weight: 100;
@@ -98,6 +98,26 @@ header.altHeader {
     color: rgb(228, 67, 57);
     // color: rgb(228,67,57); salmon
     background-color: rgb(175, 219, 255);
+    // color: rgb(255, 232, 173);
+    // color: rgb(63, 37, 64);
+  }
+  h1.altHeader2 {
+    font-weight: 100;
+    // background-image: url('./images/plaid-77426_1920.jpg');
+    // background-image: url('./images/digital-paper-5262606_1920.jpg');
+    // background-size: contain;
+    font-size: 3.25rem;
+    width: 100vw;
+    height: fit-content;
+    text-align: center;
+    margin: 0rem;
+    padding: 0rem;
+    padding: 0.375rem 0rem 1rem 0rem;
+    color: rgb(63, 37, 64);
+    // color: rgb(228,67,57); salmon
+    background-color: rgb(175, 219, 255);
+    // background-image: url('./images/digital-paper-5262606_1920.jpg');
+    // background-size: cover;
     // color: rgb(255, 232, 173);
     // color: rgb(63, 37, 64);
   }
@@ -123,8 +143,8 @@ div.navBar2 {
     // width: ;
     margin: 0rem 1rem 0rem 1rem;
     input {
-      color: white;
-      background-color: black;
+      color: black;
+      background-color: white;
       font-size: 1.05rem;
       border: 2px solid white;
       border-radius: 0.5rem;
@@ -135,21 +155,18 @@ div.navBar2 {
     // width: ;
     margin: 0rem 3rem 0rem 0rem;
     input {
-      color: white;
-      background-color: black;
+      background-color: white;
+      color: black;
       font-size: 1.05rem;
       border: 2px solid white;
       border-radius: 0.5rem;
     }
   }
   a.navLink:hover {
-    background-color: rgb(220, 220, 220);
-
-    border: 2px solid rgb(0, 51, 2, 0.9);
+    border: 2px solid rgb(228, 67, 57, 0.9);
   }
   span.navLink:hover {
-    background-color: rgb(220, 220, 220);
-    border: 2px solid rgb(0, 51, 2, 0.9);
+    border: 2px solid rgb(228, 67, 57, 0.9);
   }
 }
 
@@ -180,9 +197,9 @@ div.navBar {
     margin: 0rem 1rem 0rem 1rem;
     input {
       color: white;
-      background-color: black;
+      background-color: white;
       font-size: 1.05rem;
-      border: 2px solid white;
+      border: 2px solid black;
       border-radius: 0.5rem;
     }
   }
@@ -191,8 +208,8 @@ div.navBar {
     // width: ;
     margin: 0rem 1rem 0rem 1rem;
     input {
-      color: white;
-      background-color: black;
+      color: black;
+      background-color: white;
       font-size: 1.05rem;
       border: 2px solid white;
       border-radius: 0.5rem;
@@ -225,8 +242,7 @@ a.navLink {
   cursor: pointer;
 }
 a.navLink:hover {
-  background-color: rgb(220, 220, 220);
-  border: 2px solid rgb(136, 0, 2);
+  border: 2px solid rgb(228, 67, 57, 0.9);
 }
 
 span.navLink {
@@ -247,8 +263,7 @@ span.navLink {
   // right: 3%;
 }
 span.navLink:hover {
-  background-color: rgb(220, 220, 220);
-  border: 2px solid rgb(136, 0, 2);
+  border: 2px solid rgb(228, 67, 57, 0.9);
 }
 
 main.main {
@@ -290,19 +305,19 @@ main.main {
     margin: 0rem;
     width: 100vw;
     button.collapseMenu {
-      background-color: black;
-      color: white;
+      background-color: white;
+      color: black;
       margin: 0rem 2rem 0rem 0rem;
       border-radius: 0.375rem;
-      border: 2px solid white;
+      border: 2px solid black;
       cursor: pointer;
     }
     button.collapsedMenu {
       margin: 0rem 1rem;
-      background-color: black;
-      color: white;
+      background-color: white;
+      color: black;
       border-radius: 0.5rem;
-      border: 2px solid white;
+      border: 2px solid black;
       cursor: pointer;
     }
     button.collapsedMenu:hover {
@@ -343,8 +358,7 @@ main.main {
           cursor: pointer;
         }
         button:hover {
-          background-color: rgb(220, 220, 220);
-          border: 2px solid rgb(136, 0, 2);
+          border: 2px solid rgb(228, 67, 57, 0.9);
         }
       }
 
@@ -359,8 +373,9 @@ main.main {
           padding: 0.125rem;
           border: 2px solid white;
           border-radius: 0.375rem;
-          background-color: black;
-          color: white;
+          color: black;
+          background-color: white;
+          border: 2px solid black;
           font-weight: 700;
           cursor: pointer;
         }
@@ -425,7 +440,7 @@ main.main {
         border-top-left-radius: 0.5rem;
         border-bottom-left-radius: 0.5rem;
         overflow: hidden;
-        background-color: rgb(0, 0, 0);
+        background-color: rgb(63, 37, 64);
       }
       button.header {
         border: 0px;
@@ -442,9 +457,10 @@ main.main {
         padding: 0.25rem 0.5rem;
         // flex-wrap: wrap;
         // width: max-content;
+        font-weight: 700;
         min-width: min-content;
         margin: 0rem;
-        background-color: black;
+        background-color: rgb(63, 37, 64);
         color: white;
       }
       div.panel {
@@ -453,7 +469,7 @@ main.main {
         overflow: scroll;
         height: 100%;
         width: 100%;
-        background-color: black;
+        background-color: rgb(175, 219, 255);
         padding: 0rem;
         // min-width: fit-content;
         // background-color: white;
@@ -488,16 +504,16 @@ main.main {
             height: max-content;
             margin: 0.2rem;
             padding: 0.25rem;
-            box-shadow: 0px 0px 2px 1px rgb(0, 51, 2, 0.9);
+            box-shadow: 0px 0px 2px 1px rgb(228, 67, 57, 0.9);
             // background-color: rgb(2, 0, 63);
-            background-color: rgb(0, 51, 2, 0.9);
+            background-color: rgb(228, 67, 57);
             border-radius: 0.5rem;
             border: 0rem;
             color: white;
             cursor: pointer;
           }
           button.viewLink:hover {
-            background-color: rgb(0, 61, 0);
+            background-color: rgb(63, 37, 64);
           }
           button.viewDescription {
             margin: 0.125rem;
@@ -575,7 +591,7 @@ footer.standardFooter2 {
   color: white;
   // border-top: 1px solid rgb(121, 0, 2, 0.9);
   box-shadow: 0px 0px 3px 2px rgb(228, 67, 57, 0.9);
-  background-color: rgb(228, 67, 57, 0.9);
+  background-color: rgb(228, 67, 57);
   a.navLink {
     margin: 0rem 0.25rem;
     padding: 0.25rem 0.5rem;
@@ -590,8 +606,7 @@ footer.standardFooter2 {
     cursor: pointer;
   }
   a.navLink:hover {
-    border: 2px solid rgb(0, 51, 2, 0.9);
-    background-color: rgb(220, 220, 220);
+    border: 2px solid rgb(228, 67, 57, 0.9);
   }
 }
 
@@ -620,8 +635,7 @@ footer.standardFooter {
     cursor: pointer;
   }
   a.navLink:hover {
-    background-color: rgb(220, 220, 220);
-    border: 2px solid rgb(136, 0, 2);
+    border: 2px solid rgb(228, 67, 57, 0.9);
   }
 }
 
@@ -637,7 +651,7 @@ h2.LandingPageHeader {
   width: 100vw;
   margin: 0rem;
   padding: 0.5rem 0rem;
-  background-color: black;
+  background-color: rgb(228, 67, 57);
   color: white;
 }
 
@@ -705,7 +719,7 @@ div.listOfDashes2 {
   box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
 
   background-color: rgb(180, 180, 180);
-  background-color: black;
+  background-color: rgb(228, 67, 57);
   border-radius: 1rem;
   // border-top-left-radius: 1rem;
   h5.HeaderDashList2 {
@@ -720,7 +734,7 @@ div.listOfDashes2 {
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(0, 51, 2, 0.9);
+    background-color: rgb(228, 67, 57);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
@@ -743,7 +757,7 @@ div.listOfDashes2 {
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(0, 51, 2, 0.9);
+    background-color: rgb(228, 67, 57);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
@@ -807,7 +821,7 @@ div.listOfDashes3 {
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(0, 51, 2, 0.9);
+    background-color: rgb(228, 67, 57);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
@@ -831,11 +845,13 @@ div.listOfDashes3 {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0.125rem 0rem 0rem 0.25rem;
+      margin: 0.25rem 0.25rem 0rem 0.25rem;
       cursor: pointer;
-      background-color: black;
+      box-shadow: 0px 0px 2px 1px rgb(63, 37, 64, 0.9);
+      background-color: rgb(63, 37, 64);
       color: white;
-      border: 2px solid rgb(99, 99, 99);
+      // border: 2px solid rgb(99, 99, 99);
+      border: 0rem;
       border-radius: 0.5rem;
       padding: 0.25rem;
       font-weight: 700;
@@ -857,12 +873,15 @@ div.listOfDashes {
   margin: 3rem 0.5rem 2rem 0.5rem;
   padding: 0rem;
   // border: 2px solid white;
-  box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
+  // box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
 
-  background-color: rgb(180, 180, 180);
-  background-color: black;
-  // border-top-right-radius: 1rem;
-  // border-top-left-radius: 1rem;
+  // background-color: rgb(180, 180, 180);
+  // background-color: black;
+  box-shadow: 0px 0px 3px 2px rgb(228, 67, 57, 0.9);
+  // background-color: rgb(2, 0, 63);
+  background-color: rgb(175, 219, 255);
+  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
 
   h3.HeaderDashList {
     display: flex;
@@ -876,10 +895,12 @@ div.listOfDashes {
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(121, 0, 2, 0.9);
+    background-color: rgb(228, 67, 57);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
     font-size: 1.125rem;
     // border-bottom: 1px solid black;
     // border-top-left-radius: 0.85rem;
@@ -899,8 +920,11 @@ div.listOfDashes {
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(0, 51, 2, 0.9);
+    background-color: rgb(228, 67, 57);
     color: white;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+
     padding: 0.75rem 0rem;
     margin: 0rem;
     // border-bottom: 1px solid black;
@@ -919,10 +943,13 @@ div.listOfDashes {
     // padding: 0.5rem;
     // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
     // background-color: rgb(2, 0, 63);
-    background-color: rgb(121, 0, 2, 0.9);
+    background-color: rgb(228, 67, 57);
     color: white;
     padding: 0.75rem 0rem;
     margin: 0rem;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+
     // border-bottom: 1px solid black;
     // border-top-left-radius: 0.85rem;
     // border-top-right-radius: 0.85rem;
@@ -943,6 +970,21 @@ div.listOfDashes {
     // background-color: rgb(220, 220, 220);
     // box-shadow: 0px 0px 5px 3px rgb(220, 22f0, 220);
     border: 0rem;
+    input {
+      margin: 1rem 0rem 0rem 0rem;
+      border-radius: 0.5rem;
+      background-color: white;
+      color: black;
+      font-weight: 700;
+      cursor: pointer;
+      width: 45vw;
+    }
+    input.submitButton {
+      border: 2px solid black;
+    }
+    input.submitButton:hover {
+      transform: scale(1.05, 1.05);
+    }
     form.formCreateAccount2 {
       display: flex;
       flex-direction: column;
@@ -954,12 +996,18 @@ div.listOfDashes {
       flex-wrap: wrap;
       // border-radius: 0.5rem;
       // border-bottom: 2px solid black;
-      background-color: rgb(255, 255, 255);
+      background-color: rgb(228, 67, 57);
       margin: 0rem;
       box-shadow: 0px 0px 2px 3px rgb(255, 255, 255);
       // margin: 5rem, 5rem;
+      border-top-right-radius: 0.25rem;
+      border-top-left-radius: 0.25rem;
+
       // margin: 1rem;
       text-decoration: none;
+      label {
+        color: white;
+      }
       div.inputContainer {
         margin: 1rem 0rem;
         font-weight: 700;
@@ -971,8 +1019,8 @@ div.listOfDashes {
       input {
         margin: 1rem 0rem 0rem 0rem;
         border-radius: 0.5rem;
-        background-color: black;
-        color: white;
+        background-color: white;
+        color: black;
         font-weight: 700;
         cursor: pointer;
         width: 45vw;
@@ -985,7 +1033,7 @@ div.listOfDashes {
       }
 
       p {
-        color: black;
+        color: white;
         font-weight: 700;
         padding: 0.125rem;
         width: 30vw;
@@ -1012,6 +1060,8 @@ div.listOfDashes {
     // background-color: rgb(220, 220, 220);
     // box-shadow: 0px 0px 5px 3px rgb(220, 220, 220);
     border: 0rem;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
 
     form.formCreateAccount {
       display: flex;
@@ -1025,6 +1075,8 @@ div.listOfDashes {
       // border-radius: 0.5rem;
       // border-bottom: 2px solid black;
       background-color: rgb(255, 255, 255);
+      border-top-right-radius: 0.25rem;
+      border-top-left-radius: 0.25rem;
 
       // box-shadow: 0px 0px 2px 3px rgb(220, 220, 220);
       // margin: 5rem, 5rem;
@@ -1040,14 +1092,14 @@ div.listOfDashes {
       }
       p {
         color: white;
-        background-color: rgb(97, 0, 0);
+        background-color: rgb(228, 67, 57);
         padding: 0.25rem;
       }
       input {
         margin: 1rem 0rem 0rem 0rem;
         border-radius: 0.5rem;
-        background-color: black;
-        color: white;
+        background-color: white;
+        color: black;
         font-weight: 700;
         cursor: pointer;
         width: 45vw;
@@ -1126,11 +1178,12 @@ div.listOfDashes {
           justify-content: center;
           margin: 0rem 0rem 0rem 0.25rem;
           cursor: pointer;
-          background-color: rgb(121, 0, 2);
-          border: 3px solid black;
           color: white;
+          background-color: rgb(228, 67, 57);
+          box-shadow: 0px 0px 2px 2px black;
           border-radius: 0.5rem;
           padding: 0.25rem;
+          border: none;
         }
         input:hover {
           transform: scale(1.05, 1.05);
@@ -1138,7 +1191,7 @@ div.listOfDashes {
       }
       a {
         color: white;
-        background-color: rgb(17, 17, 17);
+        background-color: rgb(63, 37, 64);
         box-shadow: 0px 0px 2px 2px black;
         text-decoration: none;
         padding: 0.5rem;
@@ -1167,12 +1220,12 @@ div.listOfDashes {
           justify-content: center;
           margin: 0rem 0rem 0rem 0.25rem;
           cursor: pointer;
-          background-color: rgb(121, 0, 2);
+          background-color: rgb(228, 67, 57);
           color: white;
-          border: 2px solid white;
+          border: 0px solid white;
           border-radius: 0.5rem;
           padding: 0.25rem;
-          border: 3px solid black;
+          box-shadow: 0px 0px 2px 2px black;
         }
         // button.preferences {
         //   border: 2px solid black;
@@ -1239,13 +1292,14 @@ main.aboutPage {
     align-items: center;
     // border: 2px solid black;
     border-radius: 0.5rem;
-    background-color: black;
+    cursor: pointer;
+    background-color: rgb(228, 67, 57);
     box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
     h5.header {
       text-align: center;
       // box-shadow: 0px 0px 3px 2px rgb(0, 51, 2, 0.9);
       // background-color: rgb(2, 0, 63);
-      background-color: rgb(0, 51, 2, 0.9);
+      background-color: rgb(228, 67, 57);
 
       color: white;
       margin: 0rem;
@@ -1266,7 +1320,8 @@ main.aboutPage {
       width: 100%;
       // width: 40vw;
       height: min-content;
-      background-color: black;
+      cursor: pointer;
+      background-color: rgb(228, 67, 57);
       button.savedLinkList {
         // justify-self: center;
         color: white;
@@ -1308,9 +1363,10 @@ main.aboutPage {
           // text-decoration: underline;
           margin: 0.5rem;
           // border: 2px solid black;
-          box-shadow: 0px 0px 2px 1px rgb(0, 51, 2, 0.9);
+          box-shadow: 0px 0px 2px 1px rgb(63, 37, 64, 0.9);
+          background-color: rgb(63, 37, 64);
           // background-color: rgb(2, 0, 63);
-          background-color: rgb(0, 51, 2, 0.9);
+          // background-color: rgb(0, 51, 2, 0.9);
           padding: 0.25rem;
           border-radius: 0.25rem;
           color: white;
@@ -1391,12 +1447,12 @@ main.mainCreateAccount {
       align-items: center;
       // border: 2px solid black;
       border-radius: 0.5rem;
-      background-color: black;
+      background-color: rgb(228, 67, 57);
       box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
       h5.header {
         text-align: center;
-        background-color: rgb(0, 51, 2, 0.9);
-        box-shadow: 0px 0px 3px 2px rgb(0, 51, 2, 0.9);
+        background-color: rgb(228, 67, 57);
+        box-shadow: 0px 0px 3px 2px rgb(228, 67, 57);
 
         color: white;
         margin: 0rem;
@@ -1416,11 +1472,11 @@ main.mainCreateAccount {
         margin: 0.75rem 0rem;
         width: fit-content;
         height: min-content;
-        background-color: black;
+        background-color: rgb(228, 67, 57);
         button.savedLinkList {
           // justify-self: center;
-          color: white;
           background-color: black;
+          color: white;
           border: 2px solid white;
           border-radius: 0.5rem;
           padding: 0.25rem;
@@ -1454,9 +1510,9 @@ main.mainCreateAccount {
           p.savedLinkListLabel {
             // text-decoration: underline;
             margin: 0.5rem;
-            border: 2px solid black;
-            background-color: rgb(0, 51, 2, 0.9);
-            box-shadow: 0px 0px 2px 1px rgba(167, 167, 167, 0.7);
+            border: 0px solid black;
+            box-shadow: 0px 0px 2px 1px rgb(63, 37, 64, 0.9);
+            background-color: rgb(63, 37, 64);
             padding: 0.25rem;
             border-radius: 0.25rem;
             color: white;
@@ -1554,7 +1610,8 @@ main.mainCreateAccount {
       // padding: 0.5rem;
       // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
       // background-color: rgb(2, 0, 63);
-      background-color: rgb(0, 51, 2, 0.9);
+      box-shadow: 0px 0px 3px 2px rgb(228, 67, 57, 0.9);
+      background-color: rgb(228, 67, 57);
       color: white;
       padding: 0.75rem 0rem;
       margin: 0rem;
@@ -1578,6 +1635,8 @@ main.mainCreateAccount {
       // background-color: rgb(220, 220, 220);
       // box-shadow: 0px 0px 5px 3px rgb(220, 220, 220);
       border: 0rem;
+      // box-shadow: 0px 0px 3px 2px rgb(228, 67, 57, 0.9);
+      // background-color: rgb(228, 67, 57);
       div.containerForCreatingPanel {
         margin: 1rem 0rem;
         overflow: hidden;
@@ -1587,6 +1646,8 @@ main.mainCreateAccount {
         flex-direction: column;
         width: fit-content;
         padding: 0rem 0.5rem;
+        // box-shadow: 0px 0px 3px 2px rgb(228, 67, 57, 0.9);
+        // background-color: rgb(228, 67, 57);
         p {
           padding: 0rem;
           margin: 0rem;
@@ -1608,20 +1669,21 @@ main.mainCreateAccount {
           // padding: 0.5rem;
           // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
           // background-color: rgb(2, 0, 63);
-          background-color: rgb(0, 51, 2);
+          box-shadow: 0px 0px 3px 2px rgb(228, 67, 57, 0.9);
+          background-color: rgb(228, 67, 57);
           color: white;
           padding: 0.75rem 0rem;
           margin: 0rem;
           font-size: 1.25rem;
           // // border-bottom: 1px solid black;
-          // border-top-left-radius: 0.85rem;
-          // border-top-right-radius: 0.85rem;
+          border-top-left-radius: 0.25rem;
+          border-top-right-radius: 0.25rem;
         }
       }
       div.deleteDash {
-        box-shadow: 0px 0px 5px 5px rgb(0, 51, 2, 0.9);
+        box-shadow: 0px 0px 5px 5px rgb(228, 67, 57, 0.9);
         // background-color: rgb(2, 0, 63);
-        background-color: rgb(0, 51, 2);
+        background-color: rgb(228, 67, 57);
 
         width: fit-content;
         display: flex;
@@ -1663,7 +1725,7 @@ main.mainCreateAccount {
         // min-width: fit-content;
         padding: 0rem;
         // border: 2px solid white;
-        box-shadow: 0px 0px 3px 2px rgb(255, 255, 255);
+        box-shadow: 0px 0px 3px 3px rgb(255, 255, 255);
 
         background-color: rgb(180, 180, 180);
         background-color: white;
@@ -1684,12 +1746,12 @@ main.mainCreateAccount {
           height: fit-content;
           width: 100%;
           text-align: center;
-          box-shadow: 0px 0px 5px 3px rgb(0, 51, 2, 0.9);
+          // box-shadow: 0px 0px 5px 3px rgb(228, 67, 57);
           // min-width: max-content;
           // padding: 0.5rem;
           // box-shadow: 0px 0px 3px 2px rgba(75, 0, 1, 0.9);
           // background-color: rgb(2, 0, 63);
-          background-color: rgb(0, 51, 2);
+          background-color: rgb(228, 67, 57);
           color: white;
           padding: 0.75rem 0rem;
           margin: 0rem;
@@ -1717,11 +1779,13 @@ main.mainCreateAccount {
             align-items: center;
             justify-content: center;
             width: min-content;
-            margin: 0.125rem 0.25rem 0rem 0.25rem;
+            margin: 0.25rem 0.25rem 0rem 0.25rem;
             cursor: pointer;
-            background-color: black;
+            box-shadow: 0px 0px 2px 1px rgb(63, 37, 64, 0.9);
+            background-color: rgb(63, 37, 64);
             color: white;
-            border: 2px solid rgb(99, 99, 99);
+            // border: 2px solid rgb(99, 99, 99);
+            border: 0rem;
             border-radius: 0.5rem;
             padding: 0.25rem;
           }
@@ -1756,24 +1820,31 @@ main.mainCreateAccount {
         flex-wrap: wrap;
         // border-radius: 0.5rem;
         // border-bottom: 2px solid black;
-        background-color: rgb(255, 255, 255);
-
-        box-shadow: 0px 0px 2px 3px rgb(220, 220, 220);
+        background-color: rgb(228, 67, 57);
+        box-shadow: 0px 0px 2px 3px white;
+        color: white;
         // margin: 5rem, 5rem;
+        padding: 0.25rem;
         margin: 1rem;
         text-decoration: none;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+
+        h5.header2 {
+          box-shadow: none;
+        }
         p {
           padding: 0rem;
           margin: 0.8rem 0rem 0.5rem 0rem;
-          color: black;
+          color: white;
           text-align: center;
           font-weight: 700;
         }
         input {
           margin: 1rem 0rem 0rem 0rem;
           border-radius: 0.5rem;
-          background-color: black;
-          color: white;
+          background-color: white;
+          color: black;
           font-weight: 700;
           cursor: pointer;
           width: 45vw;
@@ -1791,6 +1862,7 @@ main.mainCreateAccount {
           flex-direction: column;
           align-items: center;
           justify-content: center;
+
           label.createAccount {
             padding: 5rem;
             margin: 0.25rem;
@@ -1815,6 +1887,7 @@ main.mainCreateAccount {
             button.inputContainer {
               padding: 0.25rem;
               margin: 0.125rem;
+              background-color: rgb(175, 219, 255);
             }
             button.inputContainerClicked {
               display: none;

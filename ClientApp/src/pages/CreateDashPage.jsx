@@ -258,7 +258,7 @@ export function CreateDashPage() {
                     onChange={handleStringDashFieldChange}
                   />
                 </div>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" className="submitButton" />
                 {dashFormErrorMessage ? <p>{dashFormErrorMessage}</p> : null}
               </form>
             </div>
@@ -291,12 +291,13 @@ export function CreateDashPage() {
               </ul>{' '}
             </div>
             <div className="listOfDashes">
-              <h5 className="HeaderDashList2">Create Panel</h5>
               <div className="DisplayListDash2">
                 <form
                   onSubmit={handlePanelFormSubmission}
                   className="formCreateAccount2"
                 >
+                  <h5 className="HeaderDashList2">Create Panel</h5>
+
                   <div className="inputContainer">
                     <label htmlFor="filterSiteName">Webpage Name: </label>
                     <input
@@ -315,7 +316,11 @@ export function CreateDashPage() {
                       onChange={handleStringPanelFieldChange}
                     />
                   </div>
-                  <input type="submit" value="Submit" />
+                  <input
+                    type="submit"
+                    value="Submit"
+                    className="submitButton"
+                  />
                   {invalidFilterSite ? (
                     <p>Invalid Filter Site. Try Again</p>
                   ) : null}

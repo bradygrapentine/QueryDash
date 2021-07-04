@@ -223,7 +223,7 @@ export function DashPage() {
     <>
       <header className="altHeader">
         <Link className="linkForHeader" to="/">
-          <h1 className="altHeader">{dash.name}</h1>
+          <h1 className="altHeader2">{dash.name}</h1>
         </Link>{' '}
       </header>
       <main className="main">
