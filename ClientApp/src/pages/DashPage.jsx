@@ -279,7 +279,7 @@ export function DashPage() {
                     </>
                   ) : (
                     <>
-                      <Link to="/create-account" className="navLink">
+                      <Link to="/login" className="navLink">
                         Log In
                       </Link>
                       <Link to="/create-account" className="navLink">
