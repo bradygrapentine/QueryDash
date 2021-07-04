@@ -1463,8 +1463,9 @@ main.mainCreateAccount {
         text-decoration: underline;
         color: white;
         margin: 0rem;
-        padding: 1rem;
+        padding: 1rem 0rem;
         width: 100%;
+        min-width: fit-content;
         font-weight: 700;
         // border-top-right-radius: 0.355rem;
         border-top-left-radius: 0.355rem;
