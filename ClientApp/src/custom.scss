@@ -51,10 +51,10 @@ header.altHeader {
   padding: 0rem;
   margin: 0rem;
   height: fit-content;
-  width: fit-content;
+  // width: fit-content;
   // background-image: url('./images/digital-paper-5262606_1920.jpg');
   // background-size: contain;
-  min-width: 100vw;
+  width: 100vw;
   text-decoration: none;
   border: 0rem;
   a.linkForHeader {
@@ -76,9 +76,9 @@ header.altHeader {
     font-size: 3.25rem;
     align-items: center;
     justify-content: center;
-    width: 100vw;
     height: fit-content;
     margin: 0rem;
+    width: 95vw;
     padding: 0.375rem 0rem 1rem 0rem;
     background-color: white;
     color: black;
@@ -89,12 +89,15 @@ header.altHeader {
     // background-image: url('./images/digital-paper-5262606_1920.jpg');
     // background-size: contain;
     font-size: 3.25rem;
-    width: 100vw;
+    // width: 100vw;
     height: fit-content;
     text-align: center;
     margin: 0rem;
     padding: 0rem;
+
+    width: 95vw;
     padding: 0.375rem 0rem 1rem 0rem;
+
     color: rgb(228, 67, 57);
     // color: rgb(228,67,57); salmon
     background-color: rgb(175, 219, 255);
@@ -107,11 +110,13 @@ header.altHeader {
     // background-image: url('./images/digital-paper-5262606_1920.jpg');
     // background-size: contain;
     font-size: 3.25rem;
-    width: 100vw;
+    // width: 100vw;
     height: fit-content;
     text-align: center;
     margin: 0rem;
     padding: 0rem;
+
+    width: 95vw;
     padding: 0.375rem 0rem 1rem 0rem;
     color: rgb(63, 37, 64);
     // color: rgb(228,67,57); salmon
@@ -124,9 +129,9 @@ header.altHeader {
 }
 
 div.navBar2 {
-  width: 100vw;
+  width: 95vw;
   height: fit-content;
-  padding: 0.5rem;
+  padding: 0.5rem 2.5%;
   margin: 0rem;
   color: white;
   display: flex;
@@ -166,14 +171,16 @@ div.navBar2 {
     border: 2px solid rgb(228, 67, 57, 0.9);
   }
   span.navLink:hover {
+    margin: 0rem 1.25rem 0rem 0rem;
+
     border: 2px solid rgb(228, 67, 57, 0.9);
   }
 }
 
 div.navBar {
-  width: 100vw;
+  width: 95vw;
   height: fit-content;
-  padding: 0.5rem;
+  padding: 0.5rem 2.5%;
   margin: 0rem;
   color: white;
   display: flex;
@@ -246,7 +253,7 @@ a.navLink:hover {
 }
 
 span.navLink {
-  margin: 0rem 2.5rem 0rem 0rem;
+  margin: 0rem 1.25rem 0rem 0rem;
   padding: 0.25rem 0.25rem;
   border-radius: 0.5rem;
   color: black;
@@ -272,7 +279,7 @@ main.main {
   margin: 0rem;
   padding: 0rem;
   min-height: 100vh;
-  min-width: 100%;
+  min-width: 100vw;
   display: flex;
   // background-image: url('./images/plaid-77426_1920.jpg');
   background-image: url('./images/digital-paper-5262606_1920.jpg');
@@ -661,8 +668,8 @@ main.landingPageContainer {
   // padding: 1rem;
   margin: 0rem;
   padding: 2.5%;
-  min-height: 95%;
-  min-width: 95%;
+  min-height: 100vh;
+  min-width: 95vw;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -672,8 +679,8 @@ main.landingPageContainer {
 main.createDashPage {
   margin: 0rem;
   padding: 2.5%;
-  min-height: 95%;
-  min-width: 95%;
+  min-height: 95vh;
+  min-width: 95vw;
   display: flex;
   flex-wrap: wrap;
   // flex-direction: column;
@@ -1270,8 +1277,8 @@ main.aboutPage {
   // padding: 1rem;
   margin: 0rem;
   padding: 2.5%;
-  min-height: 95%;
-  min-width: 95%;
+  min-height: 95vh;
+  min-width: 95vw;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -1403,8 +1410,8 @@ main.aboutPage {
 main.mainCreateAccount {
   margin: 0rem;
   padding: 5%;
-  min-height: 90%;
-  min-width: 95%;
+  min-height: 90vh;
+  min-width: 95vw;
   display: flex;
   flex-wrap: wrap;
   // flex-direction: column;
@@ -1511,8 +1518,8 @@ main.mainCreateAccount {
           background-color: white;
           // text-decoration: underline;
           list-style: none;
-          max-width: 35vw;
-          min-width: min-content;
+          width: 33vw;
+          // min-width: min-content;
           // max-width: 32vw;
           height: min-content;
           display: flex;

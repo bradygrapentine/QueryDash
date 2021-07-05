@@ -2,6 +2,8 @@
 
 ![](./ClientApp/src/images/Capture.PNG)
 
+## [Demo Video](https://www.youtube.com/watch v=sBbMs6GVfeQ)
+
 I created this application for my capstone project at Suncoast Developers Guild using Javascript, React Hooks, C#/.NET, Entity Framework Core, and [Gigablast's Web Search API](http://www.gigablast.com/api.html).
 
 I had a great time working through the challenges associated with building this project. I built this application to address the research process that is common to all software engineers, but I realized that the use cases were more numerous as I developed the idea.
@@ -13,5 +15,3 @@ Each search result includes a live link to the result, the head of the result, a
 Dashboards can be created, copied, and deleted and panels can be added, created, and removed from dashboards (panels and dashboards have a many-to-many relationship). So, the user can research virtually any topic they want at almost any website they want (for example, there's a shopping dashboard, a front-end dashboard, and a back-end dashboard, among others), and they can change the websites they search at as they discover new resources.
 
 This is a work in progress, so please don't abuse the search feature. You're welcome to try QueryDash and create an account, dashes, and panels, but the API requests really start to pile up when the search feature is used excessively. I'm planning a transition to an un-metered service sometime soon. Please reach out to me at brady.grapentine@gmail.com with QA comments, questions, or suggestions.
-
-I'm working on a Demo Video! Stay tuned.
