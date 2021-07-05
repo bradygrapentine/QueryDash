@@ -660,9 +660,9 @@ main.landingPageContainer {
   flex-direction: row;
   // padding: 1rem;
   margin: 0rem;
-  padding: 0rem 1rem 3rem 0rem;
-  min-height: 100vh;
-  min-width: 100%;
+  padding: 2.5%;
+  min-height: 95%;
+  min-width: 95%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -671,9 +671,9 @@ main.landingPageContainer {
 
 main.createDashPage {
   margin: 0rem;
-  padding: 1rem 0rem 3rem 0rem;
-  min-height: 100vh;
-  min-width: 100%;
+  padding: 2.5%;
+  min-height: 95%;
+  min-width: 95%;
   display: flex;
   flex-wrap: wrap;
   // flex-direction: column;
@@ -797,15 +797,15 @@ div.listOfDashes3 {
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
   p {
-    color: white;
-    font-weight: 700;
-    padding: 0.125rem;
-    width: 30vw;
-    margin: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    margin: 0.8rem 0rem 0.5rem 0rem;
+    color: black;
+    background-color: rgb(175, 219, 255);
+    border: 2px solid black;
+    box-shadow: 0px 0px 2px 1px black;
     text-align: center;
-    border: 2px solid white;
-    border-radius: 0.5rem;
-    // box-shadow: 0px 4px 3px 2px black;
+    font-weight: 700;
   }
   h5.HeaderDashList2 {
     display: flex;
@@ -1033,14 +1033,15 @@ div.listOfDashes {
       }
 
       p {
-        color: white;
-        font-weight: 700;
-        padding: 0.125rem;
-        width: 30vw;
-        margin: 1rem 1rem 0rem 1rem;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        margin: 0.8rem 0rem 0.5rem 0rem;
+        color: black;
+        background-color: rgb(175, 219, 255);
+        border: 2px solid black;
+        box-shadow: 0px 0px 2px 1px black;
         text-align: center;
-        border: 2px solid white;
-        border-radius: 0.5rem;
+        font-weight: 700;
       }
       // color: white;
     }
@@ -1267,9 +1268,9 @@ main.aboutPage {
   // padding: 1rem;
   // padding: 1rem;
   margin: 0rem;
-  padding: 0rem;
-  min-height: 100vh;
-  min-width: 100%;
+  padding: 2.5%;
+  min-height: 95%;
+  min-width: 95%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -1278,10 +1279,10 @@ main.aboutPage {
   background-color: rgb(175, 219, 255);
   article.aboutPageArticle {
     // margin: 2rem 0.75rem;
-    margin: 3rem 0.75rem 3rem 0rem;
+    margin: 2rem 0.5rem;
     padding: 0rem;
     min-width: fit-content;
-    width: 40vw;
+    width: 45vw;
     height: 85vh;
     overflow-y: scroll;
     // overflow-x;
@@ -1400,9 +1401,9 @@ main.aboutPage {
 
 main.mainCreateAccount {
   margin: 0rem;
-  padding: 3rem 1rem 3rem 1rem;
-  min-height: 100vh;
-  min-width: 100%;
+  padding: 5%;
+  min-height: 90%;
+  min-width: 95%;
   display: flex;
   flex-wrap: wrap;
   // flex-direction: column;
@@ -1464,8 +1465,8 @@ main.mainCreateAccount {
         color: white;
         margin: 0rem;
         padding: 1.5rem 1.25% 1rem 1.25%;
-        width: 97.5%;
-        min-width: fit-content;
+        width: 92.5%;
+        min-width: min-content;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1509,9 +1510,9 @@ main.mainCreateAccount {
           background-color: white;
           // text-decoration: underline;
           list-style: none;
-          width: 97.5%;
+          max-width: 97.5%;
           // min-width: min-content;
-          max-width: 32vw;
+          // max-width: 32vw;
           height: min-content;
           display: flex;
           margin: 0.25rem 0rem;

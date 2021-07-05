@@ -439,7 +439,7 @@ export function DashPreferences() {
         </div>
         <div className="containerOpenedAndArchived">
           <article className="aboutPageArticle">
-            <h5 className="header">Dash Archives</h5>
+            <h5 className="header">{dash.name} Archives</h5>
             <ul className="savedLinkList">
               {isLoggedIn() ? (
                 <>
@@ -493,7 +493,7 @@ export function DashPreferences() {
             </ul>
           </article>
           <article className="aboutPageArticle">
-            <h5 className="header">Dash Opened Links</h5>
+            <h5 className="header">{dash.name} Opened Links</h5>
             <ul className="savedLinkList">
               {isLoggedIn() ? (
                 <>
