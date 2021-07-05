@@ -2,7 +2,7 @@
 
 ![](./ClientApp/src/images/Capture.PNG)
 
-Here's a [Demo Video](https://www.youtube.com/watch?v=sBbMs6GVfeQ) of me using QueryDash!
+## [Demo Video](https://www.youtube.com/watch?v=sBbMs6GVfeQ)
 
 I created this application for my capstone project at Suncoast Developers Guild using Javascript, React Hooks, C#/.NET, Entity Framework Core, and [Gigablast's Web Search API](http://www.gigablast.com/api.html).
 
