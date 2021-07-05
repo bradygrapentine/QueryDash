@@ -116,6 +116,7 @@ export function CreateDashPage() {
 
   function handleStringPanelFieldChange(event) {
     setPanelFormErrorMessage('')
+
     const value = event.target.value
     const fieldName = event.target.name
 
