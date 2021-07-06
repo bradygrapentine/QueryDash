@@ -287,7 +287,7 @@ export function LandingPage() {
             <div className="listOfDashes">
               <h3 className="HeaderDashList">Other User's Dashes</h3>
               <ul className="DisplayListDash">
-                {otherDashes.Length !== 0 ? (
+                {otherDashes.length !== 0 ? (
                   otherDashes
                     .filter((otherDash) =>
                       otherDash.name
@@ -318,51 +318,59 @@ export function LandingPage() {
             <div className="listOfDashes">
               <h3 className="HeaderDashList">Try a Preset Dash</h3>
               <ul className="DisplayListDash">
-                {presetDashesNonUser
-                  .filter((presetDashNonUser) =>
-                    presetDashNonUser.name
-                      .toLowerCase()
-                      .includes(newSearch.toLowerCase())
-                  )
-                  .map((dash) => (
-                    <li key={dash.id}>
-                      <Link to={`/dash/${dash.id}`}> {dash.name}</Link>
+                {presetDashesNonUser.length !== 0 ? (
+                  presetDashesNonUser
+                    .filter((presetDashNonUser) =>
+                      presetDashNonUser.name
+                        .toLowerCase()
+                        .includes(newSearch.toLowerCase())
+                    )
+                    .map((dash) => (
+                      <li key={dash.id}>
+                        <Link to={`/dash/${dash.id}`}> {dash.name}</Link>
 
-                      <div>
-                        {' '}
-                        <button
-                          onClick={() => history.push(`/dash/${dash.id}`)}
-                        >
-                          Use Dash
-                        </button>
-                      </div>
-                    </li>
-                  ))}
+                        <div>
+                          {' '}
+                          <button
+                            onClick={() => history.push(`/dash/${dash.id}`)}
+                          >
+                            Use Dash
+                          </button>
+                        </div>
+                      </li>
+                    ))
+                ) : (
+                  <p>Loading...</p>
+                )}
               </ul>
             </div>
             <div className="listOfDashes">
               <h3 className="HeaderDashList"> Try a User's Dash</h3>
               <ul className="DisplayListDash">
-                {otherDashesNonUser
-                  .filter((otherDashNonUser) =>
-                    otherDashNonUser.name
-                      .toLowerCase()
-                      .includes(newSearch.toLowerCase())
-                  )
-                  .map((dash) => (
-                    <li key={dash.id}>
-                      <Link to={`/dash/${dash.id}`}> {dash.name}</Link>
+                {otherDashesNonUser.length !== 0 ? (
+                  otherDashesNonUser
+                    .filter((otherDashNonUser) =>
+                      otherDashNonUser.name
+                        .toLowerCase()
+                        .includes(newSearch.toLowerCase())
+                    )
+                    .map((dash) => (
+                      <li key={dash.id}>
+                        <Link to={`/dash/${dash.id}`}> {dash.name}</Link>
 
-                      <div>
-                        {' '}
-                        <button
-                          onClick={() => history.push(`/dash/${dash.id}`)}
-                        >
-                          Use Dash
-                        </button>
-                      </div>
-                    </li>
-                  ))}
+                        <div>
+                          {' '}
+                          <button
+                            onClick={() => history.push(`/dash/${dash.id}`)}
+                          >
+                            Use Dash
+                          </button>
+                        </div>
+                      </li>
+                    ))
+                ) : (
+                  <p>Loading...</p>
+                )}
               </ul>
             </div>
           </>
