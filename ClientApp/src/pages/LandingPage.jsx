@@ -225,79 +225,91 @@ export function LandingPage() {
             <div className="listOfDashes">
               <h3 className="HeaderDashList">{user.name}'s Dashboards</h3>
               <ul className="DisplayListDash">
-                {userDashes
-                  .filter((userDash) =>
-                    userDash.name
-                      .toLowerCase()
-                      .includes(newSearch.toLowerCase())
-                  )
-                  .map((dash) => (
-                    <li key={dash.id}>
-                      <Link to={`/dash/${dash.id}`} className="">
-                        {dash.name}
-                      </Link>
-                      <div>
-                        <button
-                          onClick={() => history.push(`/dash/${dash.id}`)}
-                        >
-                          Use Dash
-                        </button>
-                        <button
-                          className="preferences"
-                          onClick={() =>
-                            history.push(`/preferences/${dash.id}`)
-                          }
-                        >
-                          Edit Dash
-                        </button>
-                      </div>
-                    </li>
-                  ))}
+                {userDashes.length !== 0 ? (
+                  userDashes
+                    .filter((userDash) =>
+                      userDash.name
+                        .toLowerCase()
+                        .includes(newSearch.toLowerCase())
+                    )
+                    .map((dash) => (
+                      <li key={dash.id}>
+                        <Link to={`/dash/${dash.id}`} className="">
+                          {dash.name}
+                        </Link>
+                        <div>
+                          <button
+                            onClick={() => history.push(`/dash/${dash.id}`)}
+                          >
+                            Use Dash
+                          </button>
+                          <button
+                            className="preferences"
+                            onClick={() =>
+                              history.push(`/preferences/${dash.id}`)
+                            }
+                          >
+                            Edit Dash
+                          </button>
+                        </div>
+                      </li>
+                    ))
+                ) : (
+                  <p>Loading...</p>
+                )}
               </ul>
             </div>
             <div className="listOfDashes">
               <h3 className="HeaderDashList">Try a Preset Dash</h3>
               <ul className="DisplayListDash">
-                {presetDashes
-                  .filter((presetDash) =>
-                    presetDash.name
-                      .toLowerCase()
-                      .includes(newSearch.toLowerCase())
-                  )
-                  .map((dash) => (
-                    <li key={dash.id}>
-                      <Link to={`/dash/${dash.id}`} className="">
-                        {dash.name}
-                      </Link>
-                      <form onSubmit={(event) => copyDash(dash, event)}>
-                        <input type="submit" value="Copy Dash" />
-                      </form>
-                    </li>
-                  ))}
+                {presetDashes.length !== 0 ? (
+                  presetDashes
+                    .filter((presetDash) =>
+                      presetDash.name
+                        .toLowerCase()
+                        .includes(newSearch.toLowerCase())
+                    )
+                    .map((dash) => (
+                      <li key={dash.id}>
+                        <Link to={`/dash/${dash.id}`} className="">
+                          {dash.name}
+                        </Link>
+                        <form onSubmit={(event) => copyDash(dash, event)}>
+                          <input type="submit" value="Copy Dash" />
+                        </form>
+                      </li>
+                    ))
+                ) : (
+                  <p>Loading...</p>
+                )}
               </ul>
             </div>
             <div className="listOfDashes">
               <h3 className="HeaderDashList">Other User's Dashes</h3>
               <ul className="DisplayListDash">
-                {otherDashes
-                  .filter((otherDash) =>
-                    otherDash.name
-                      .toLowerCase()
-                      .includes(newSearch.toLowerCase())
-                  )
-                  .map((dash) => (
-                    <li key={dash.id}>
-                      <Link to={`/dash/${dash.id}`} className="">
-                        {dash.name}
-                      </Link>
-                      <form
-                        className="copyDash"
-                        onSubmit={(event) => copyDash(dash, event)}
-                      >
-                        <input type="submit" value="Copy Dash" />
-                      </form>
-                    </li>
-                  ))}
+                {otherDashes.Length !== 0 ? (
+                  otherDashes
+                    .filter((otherDash) =>
+                      otherDash.name
+                        .toLowerCase()
+                        .includes(newSearch.toLowerCase())
+                    )
+                    .map((dash) => (
+                      <li key={dash.id}>
+                        <Link to={`/dash/${dash.id}`} className="">
+                          {dash.name}
+                        </Link>
+                        <form
+                          className="copyDash"
+                          onSubmit={(event) => copyDash(dash, event)}
+                        >
+                          <input type="submit" value="Copy Dash" />
+                        </form>
+                      </li>
+                    ))
+                ) : (
+                  <p>Loading...</p>
+                )}
               </ul>
             </div>
           </>

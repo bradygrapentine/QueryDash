@@ -1166,6 +1166,11 @@ div.listOfDashes {
     //   transform: scale(1.05, 1.05);
     // }
     // }
+    p {
+      color: black;
+      width: fit-content;
+      padding: 1rem;
+    }
     li {
       display: flex;
       width: 90%;
