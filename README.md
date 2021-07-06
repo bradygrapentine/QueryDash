@@ -1,12 +1,8 @@
 # [QueryDash](https://querydash.herokuapp.com/)
 
-## [https://querydash.herokuapp.com/](https://querydash.herokuapp.com/)
-
 ![](./ClientApp/src/images/Capture.PNG)
 
 ## [Demo Video](https://www.youtube.com/watch?v=uHTRdhCrMEY)
-
-[https://youtu.be/uHTRdhCrMEY](https://youtu.be/uHTRdhCrMEY)
 
 I created this application for my capstone project at Suncoast Developers Guild using Javascript, React Hooks, C#/.NET, Entity Framework Core, and [Gigablast's Web Search API](http://www.gigablast.com/api.html).
 
