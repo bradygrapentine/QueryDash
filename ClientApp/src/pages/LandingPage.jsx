@@ -25,48 +25,48 @@ export function LandingPage() {
   //   linksPerPanel: 0,
   // })
 
-  async function postPanelAssignments(dashId, dashPanelAssignments) {
-    for (var i = 0; i < dashPanelAssignments.length; i++) {
-      let newPanelAssignment = {
-        panelId: dashPanelAssignments[i].panelId,
-        dashId: dashId,
-      }
-      let panelAssignmentResponse = await fetch('/api/PanelAssignments', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', ...authHeader() },
-        body: JSON.stringify(newPanelAssignment),
-      })
-      console.log(panelAssignmentResponse.json())
-    }
-    window.location.assign(`/dash/${dashId}`)
-  }
+  // async function postPanelAssignments(dashId, dashPanelAssignments) {
+  //   for (var i = 0; i < dashPanelAssignments.length; i++) {
+  //     let newPanelAssignment = {
+  //       panelId: dashPanelAssignments[i].panelId,
+  //       dashId: dashId,
+  //     }
+  //     let panelAssignmentResponse = await fetch('/api/PanelAssignments', {
+  //       method: 'POST',
+  //       headers: { 'content-type': 'application/json', ...authHeader() },
+  //       body: JSON.stringify(newPanelAssignment),
+  //     })
+  //     console.log(panelAssignmentResponse.json())
+  //   }
+  //   window.location.assign(`/dash/${dashId}`)
+  // }
 
-  async function copyDash(dash, event) {
-    event.preventDefault()
-    let newDash = {}
-    newDash.userId = getUserId()
-    newDash.dashPanelAssignments = []
-    newDash.savedLinks = []
-    newDash.name = dash.name + ' (Copy)'
-    newDash.creationDate = ''
-    newDash.linksPerPanel = dash.linksPerPanel
-    const response = await fetch('/api/Dashes', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', ...authHeader() },
-      body: JSON.stringify(newDash),
-    })
-    if (response.status === 401) {
-      console.log('Not Authorized')
-    } else {
-      if (response.status === 400) {
-        console.log(Object.values(response.errors).join(' '))
-      } else if (response.ok) {
-        response.json().then((data) => {
-          postPanelAssignments(data.id, dash.dashPanelAssignments)
-        })
-      }
-    }
-  }
+  // async function copyDash(dash, event) {
+  //   event.preventDefault()
+  //   let newDash = {}
+  //   newDash.userId = getUserId()
+  //   newDash.dashPanelAssignments = []
+  //   newDash.savedLinks = []
+  //   newDash.name = dash.name + ' (Copy)'
+  //   newDash.creationDate = ''
+  //   newDash.linksPerPanel = dash.linksPerPanel
+  //   const response = await fetch('/api/Dashes', {
+  //     method: 'POST',
+  //     headers: { 'content-type': 'application/json', ...authHeader() },
+  //     body: JSON.stringify(newDash),
+  //   })
+  //   if (response.status === 401) {
+  //     console.log('Not Authorized')
+  //   } else {
+  //     if (response.status === 400) {
+  //       console.log(Object.values(response.errors).join(' '))
+  //     } else if (response.ok) {
+  //       response.json().then((data) => {
+  //         postPanelAssignments(data.id, dash.dashPanelAssignments)
+  //       })
+  //     }
+  //   }
+  // }
 
   function handleLogout() {
     logout()
@@ -274,9 +274,13 @@ export function LandingPage() {
                         <Link to={`/dash/${dash.id}`} className="">
                           {dash.name}
                         </Link>
-                        <form onSubmit={(event) => copyDash(dash, event)}>
-                          <input type="submit" value="Copy Dash" />
-                        </form>
+                        <div>
+                          <button
+                            onClick={() => history.push(`/dash/${dash.id}`)}
+                          >
+                            Use Dash
+                          </button>
+                        </div>
                       </li>
                     ))
                 ) : (
@@ -299,12 +303,13 @@ export function LandingPage() {
                         <Link to={`/dash/${dash.id}`} className="">
                           {dash.name}
                         </Link>
-                        <form
-                          className="copyDash"
-                          onSubmit={(event) => copyDash(dash, event)}
-                        >
-                          <input type="submit" value="Copy Dash" />
-                        </form>
+                        <div>
+                          <button
+                            onClick={() => history.push(`/dash/${dash.id}`)}
+                          >
+                            Use Dash
+                          </button>
+                        </div>
                       </li>
                     ))
                 ) : (

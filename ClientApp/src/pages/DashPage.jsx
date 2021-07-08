@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { getUserId, authHeader, isLoggedIn } from '../auth'
+import { getUserId, authHeader, isLoggedIn, getUser } from '../auth'
 import ls from 'local-storage'
 // import { isWebUri } from 'valid-url'
 
@@ -196,6 +196,49 @@ export function DashPage() {
     )
   }
 
+  async function postPanelAssignments(newDashId, oldDashPanelAssignments) {
+    for (var i = 0; i < oldDashPanelAssignments.length; i++) {
+      let newPanelAssignment = {
+        panelId: oldDashPanelAssignments[i].panelId,
+        dashId: newDashId,
+      }
+      let panelAssignmentResponse = await fetch('/api/PanelAssignments', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+        body: JSON.stringify(newPanelAssignment),
+      })
+      console.log(panelAssignmentResponse.json())
+    }
+    window.location.assign(`/dash/${newDashId}`)
+  }
+
+  async function copyDash(dash, event) {
+    event.preventDefault()
+    let newDash = {}
+    newDash.userId = getUserId()
+    newDash.dashPanelAssignments = []
+    newDash.savedLinks = []
+    newDash.name = dash.name + ' (Copy)'
+    newDash.creationDate = ''
+    newDash.linksPerPanel = dash.linksPerPanel
+    const response = await fetch('/api/Dashes', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', ...authHeader() },
+      body: JSON.stringify(newDash),
+    })
+    if (response.status === 401) {
+      console.log('Not Authorized')
+    } else {
+      if (response.status === 400) {
+        console.log(Object.values(response.errors).join(' '))
+      } else if (response.ok) {
+        response.json().then((data) => {
+          postPanelAssignments(data.id, dash.dashPanelAssignments)
+        })
+      }
+    }
+  }
+
   // async function postArchivedLink(link) {
   //   const newSavedLink = {
   //     isArchive: true,
@@ -264,21 +307,38 @@ export function DashPage() {
                 </form>
                 <div className="buttonContainer2">
                   {getUserId() === dash.userId ? (
-                    <Link to={`/preferences/${dash.id}`}>
-                      <button>Dash Settings</button>
-                    </Link>
-                  ) : null}
-                  {isLoggedIn() ? (
                     <>
+                      <Link to={`/preferences/${dash.id}`}>
+                        <button>Dash Settings</button>
+                      </Link>
                       <Link to="/historyandarchives">
                         <button>Browse Later</button>
                       </Link>
                       <Link to="/create-dash">
                         <button>Create Dash</button>
                       </Link>
-                      <Link to="/"></Link>
+                      <Link to="/">
+                        <button>Home</button>
+                      </Link>
                     </>
-                  ) : (
+                  ) : null}
+                  {isLoggedIn() && getUserId() !== dash.userId ? (
+                    <>
+                      <Link to="/historyandarchives">
+                        <button>Browse Later</button>
+                      </Link>
+                      <button onClick={(event) => copyDash(dash, event)}>
+                        Copy Dash
+                      </button>
+                      <Link to="/create-dash">
+                        <button>Create Dash</button>
+                      </Link>
+                      <Link to="/">
+                        <button>Home</button>
+                      </Link>
+                    </>
+                  ) : null}
+                  {!isLoggedIn() ? (
                     <>
                       <Link to="/login">
                         <button>Log In</button>
@@ -290,7 +350,7 @@ export function DashPage() {
                         <button>Home</button>
                       </Link>
                     </>
-                  )}
+                  ) : null}
                 </div>
               </div>
               <button

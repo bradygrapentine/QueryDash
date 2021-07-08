@@ -61,8 +61,8 @@ namespace QueryDash.Controllers
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderByDescending(dash => dash.Id)
                                         .Where(dash => dash.UserId == 1)
-                                        .Include(dash => dash.DashPanelAssignments)
-                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
+                                        // .Include(dash => dash.DashPanelAssignments)
+                                        // .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
                                         .ToListAsync();
         }
 
@@ -75,8 +75,8 @@ namespace QueryDash.Controllers
             // them by row id and return them as a JSON array.
             return await _context.Dashes.OrderByDescending(dash => dash.Id)
                                         .Where(dash => dash.UserId != GetCurrentUserId() && dash.UserId != 1)
-                                        .Include(dash => dash.DashPanelAssignments)
-                                        .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
+                                        // .Include(dash => dash.DashPanelAssignments)
+                                        // .ThenInclude(dashPanelAssignment => dashPanelAssignment.RootPanel)
                                         .ToListAsync();
         }
 
