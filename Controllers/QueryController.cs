@@ -71,6 +71,11 @@ namespace QueryDash.Controllers
 
                     // User ID	504	
                     // Feed Code 1924762219	
+                    // pretty sure the transition to BingWebSearch will only require updating the URI
+                    // -> check capstone content for endpoints and required headers
+                    // -> parallel requests up to 52
+                    // -> need to figure out what to do with the site parameter
+                    // -> test backend alone, then alter JS to grab relevant results
 
                     // &n=30 # of results in query
                     // &searchtype=images searches for images
