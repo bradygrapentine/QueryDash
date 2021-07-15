@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { recordAuthentication, isLoggedIn } from '../auth'
-// import './custom.scss'
 
 // ------------------------------------------------------------- //
-
-// might just make this a dropdown on landing page
 
 export function LoginPage() {
   const [errorMessage, setErrorMessage] = useState()
@@ -61,14 +58,10 @@ export function LoginPage() {
             </ul>
             <form className="filterLinks">
               {' '}
-              {/* onSubmit={runDashQuery} */}
               <input
                 className="filterDashes"
                 type="text"
                 placeholder="Filter Links"
-                // value={searchTerm}
-                // onChange={(event) => {
-                //   setSearchTerm(event.target.value)
               />
             </form>
           </>

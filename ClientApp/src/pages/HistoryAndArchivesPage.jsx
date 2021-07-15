@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-// import {  } from 'react-router-dom'
-// import { Footer } from './DashPage'
 import { Link } from 'react-router-dom'
 import { isLoggedIn, authHeader, logout } from '../auth'
-// import './custom.scss'
 
 // ------------------------------------------------------------- //
 
 export function HistoryAndArchivesPage() {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const [savedLinks, setSavedLinks] = useState([])
+
   async function deleteSavedLink(savedLinkId) {
     const response = await fetch(`/api/SavedLinks/${savedLinkId}`, {
       method: 'DELETE',
@@ -19,10 +20,6 @@ export function HistoryAndArchivesPage() {
     }
   }
 
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const [savedLinks, setSavedLinks] = useState([])
-
   async function getSavedLinks() {
     const response = await fetch(`/api/SavedLinks`, {
       headers: { 'content-type': 'application/json', ...authHeader() },
@@ -31,18 +28,11 @@ export function HistoryAndArchivesPage() {
     if (response.ok) {
       const newSavedLinks = await response.json()
       setSavedLinks(newSavedLinks)
-      console.log(newSavedLinks)
     }
   }
 
   function formatDate(dateAsString) {
     let date = Date.parse(dateAsString + '+04:00')
-    // let newOptions = {
-    //   weekday: 'long',
-    //   year: 'numeric',
-    //   month: 'long',
-    //   day: 'numeric',
-    // }
     let formattedDate = Intl.DateTimeFormat('en-US', {
       dateStyle: 'full',
     }).format(date)
@@ -78,7 +68,6 @@ export function HistoryAndArchivesPage() {
             </ul>
             <form className="filterDashes">
               {' '}
-              {/* onSubmit={runDashQuery} */}
               <input
                 className="filterDashes"
                 type="text"

@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { authHeader, isLoggedIn, logout } from '../auth'
-// import axios from 'axios'
-// import './custom.scss'
 
 // ------------------------------------------------------------- //
 
 export function CreateDashPage() {
-  // const history = useHistory()
-
   const [dashFormErrorMessage, setDashFormErrorMessage] = useState('')
+
   const [panelFormErrorMessage, setPanelFormErrorMessage] = useState('')
+
   const [addPanelFormErrorMessage, setAddPanelFormErrorMessage] = useState('')
 
   const [invalidFilterSite, setInvalidFilterSite] = useState(false)
@@ -20,6 +18,10 @@ export function CreateDashPage() {
   const [panels, setPanels] = useState([])
 
   const [addedPanelIds, setAddedPanelIds] = useState([])
+
+  const [panelAssignmentCounter, setPanelAssignmentCounter] = useState(0)
+
+  const [createDashVisible, setCreateDashVisible] = useState(true)
 
   const [newDash, setNewDash] = useState({
     userId: 0,
@@ -32,13 +34,9 @@ export function CreateDashPage() {
 
   const [newPanel, setNewPanel] = useState({
     filterSite: '',
-    // creationDate: '',
     filterSiteName: '',
-    // dashPanelAssignments: [],
   })
 
-  // https://stackoverflow.com/users/1092711/pavlo
-  // https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url?answertab=votes#tab-top
   function ifURL(string) {
     let url
     try {
@@ -46,32 +44,7 @@ export function CreateDashPage() {
     } catch (_) {
       return false
     }
-    // return url
     return true
-  }
-
-  const [panelAssignmentCounter, setPanelAssignmentCounter] = useState(0)
-
-  const [createDashVisible, setCreateDashVisible] = useState(true)
-
-  async function postPanelAssignment(panelResponseId) {
-    setPanelAssignmentCounter(panelAssignmentCounter + 1)
-    const newPanelAssignment = {
-      panelId: panelResponseId,
-      dashId: newDashId,
-    }
-    const panelAssignmentResponse = await fetch('/api/PanelAssignments', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', ...authHeader() },
-      body: JSON.stringify(newPanelAssignment),
-    })
-    if (panelAssignmentResponse.ok) {
-      panelAssignmentResponse.json().then((data) => {
-        setAddedPanelIds([...addedPanelIds, data.panelId])
-        console.log(data)
-      })
-      // console.log(panelAssignmentResponse.json())
-    }
   }
 
   function handleStringDashFieldChange(event) {
@@ -90,6 +63,17 @@ export function CreateDashPage() {
     setNewDash(updatedDash)
   }
 
+  function handleStringPanelFieldChange(event) {
+    setPanelFormErrorMessage('')
+
+    const value = event.target.value
+    const fieldName = event.target.name
+
+    const updatedPanel = { ...newPanel, [fieldName]: value }
+
+    setNewPanel(updatedPanel)
+  }
+
   async function handleDashFormSubmission(event) {
     event.preventDefault()
     setDashFormErrorMessage('')
@@ -106,7 +90,6 @@ export function CreateDashPage() {
       } else if (response.ok) {
         response.json().then((data) => {
           setNewDashId(data.id)
-          console.log(data)
         })
         setDashFormErrorMessage('Dash Created')
         setCreateDashVisible(false)
@@ -114,15 +97,22 @@ export function CreateDashPage() {
     }
   }
 
-  function handleStringPanelFieldChange(event) {
-    setPanelFormErrorMessage('')
-
-    const value = event.target.value
-    const fieldName = event.target.name
-
-    const updatedPanel = { ...newPanel, [fieldName]: value }
-
-    setNewPanel(updatedPanel)
+  async function postPanelAssignment(panelResponseId) {
+    setPanelAssignmentCounter(panelAssignmentCounter + 1)
+    const newPanelAssignment = {
+      panelId: panelResponseId,
+      dashId: newDashId,
+    }
+    const panelAssignmentResponse = await fetch('/api/PanelAssignments', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', ...authHeader() },
+      body: JSON.stringify(newPanelAssignment),
+    })
+    if (panelAssignmentResponse.ok) {
+      panelAssignmentResponse.json().then((data) => {
+        setAddedPanelIds([...addedPanelIds, data.panelId])
+      })
+    }
   }
 
   async function handlePanelFormSubmission(event) {
@@ -144,7 +134,6 @@ export function CreateDashPage() {
         setPanelFormErrorMessage(Object.values(panelResponse.errors).join(' '))
       } else if (panelResponse.ok) {
         panelResponse.json().then((data) => {
-          console.log(data)
           postPanelAssignment(data.id)
         })
         setInvalidFilterSite(false)
@@ -182,14 +171,11 @@ export function CreateDashPage() {
   useEffect(() => {
     async function getPanels() {
       const panelsResponse = await fetch('/api/Panels')
-      // console.log(panelsResponse.json())
 
       if (panelsResponse.ok) {
         const newPanels = await panelsResponse.json()
-        console.log(newPanels)
         setPanels(newPanels)
       }
-      // console.log(panels)
     }
     getPanels()
   }, [])

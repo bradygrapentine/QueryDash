@@ -2,12 +2,21 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getUserId, authHeader, isLoggedIn, getUser } from '../auth'
 import ls from 'local-storage'
-// import { isWebUri } from 'valid-url'
 
 // ------------------------------------------------------------- //
 
 export function DashPage() {
   const [menuOpen, setMenuOpen] = useState(true)
+
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const [searchResults, setSearchResults] = useState([])
+
+  const [waitingForSearchResults, setWaitingForSearchResults] = useState(false)
+
+  const params = useParams()
+
+  const id = params.id
 
   const [dash, setDash] = useState({
     creationDate: '',
@@ -18,16 +27,8 @@ export function DashPage() {
   })
 
   let lastSearchResults = localStorage.getItem(`searchResults${dash.id}`) || []
+
   let lastSearchTerm = localStorage.getItem(`searchTerm${dash.id}`) || ''
-
-  const [searchResults, setSearchResults] = useState([])
-
-  const [waitingForSearchResults, setWaitingForSearchResults] = useState(false)
-
-  const params = useParams()
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const id = params.id
 
   async function getDash() {
     const response = await fetch(`/api/Dashes/${id}`)
@@ -37,61 +38,10 @@ export function DashPage() {
       setDash(apiData)
     }
   }
-  async function recordOpenedLink(event) {
-    event.preventDefault()
-    if (isLoggedIn() && getUserId() === dash.userId) {
-      const newSavedLink = {
-        isArchive: false,
-        dashId: Number(dash.id),
-        queryUrl: event.target.value,
-        userId: getUserId(),
-      }
-      const savedLinkResponse = await fetch('/api/SavedLinks', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', ...authHeader() },
-        body: JSON.stringify(newSavedLink),
-      })
-      if (savedLinkResponse.ok) {
-        console.log('test')
-        console.log(savedLinkResponse.json())
-      } else {
-        console.log(savedLinkResponse.json())
-      }
-    } else {
-      console.log('AUTH ERROR')
-    }
-    window.location.assign(event.target.value)
-  }
-
-  async function postArchivedLink(event) {
-    event.preventDefault()
-    if (isLoggedIn() && getUserId() === dash.userId) {
-      const newSavedLink = {
-        isArchive: true,
-        dashId: Number(dash.id),
-        queryUrl: event.target.value,
-        userId: getUserId(),
-      }
-      const archivedLinkResponse = await fetch('/api/SavedLinks', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', ...authHeader() },
-        body: JSON.stringify(newSavedLink),
-      })
-      if (archivedLinkResponse.ok) {
-        console.log('test')
-        console.log(archivedLinkResponse.json())
-      } else {
-        console.log('ERROR')
-      }
-    } else {
-      console.log('ERROR')
-    }
-  }
 
   async function getQueryResults(event) {
     event.preventDefault()
     setSearchResults([])
-    // setWaitingForSearchResults(true)
     let response
     if (searchTerm === '') {
       response = await fetch(`/api/Query/${lastSearchTerm}?dashId=${dash.id}`)
@@ -146,6 +96,100 @@ export function DashPage() {
     }
   }
 
+  async function recordOpenedLink(event) {
+    event.preventDefault()
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      const newSavedLink = {
+        isArchive: false,
+        dashId: Number(dash.id),
+        queryUrl: event.target.value,
+        userId: getUserId(),
+      }
+      const savedLinkResponse = await fetch('/api/SavedLinks', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+        body: JSON.stringify(newSavedLink),
+      })
+      if (savedLinkResponse.ok) {
+        console.log('test')
+        console.log(savedLinkResponse.json())
+      } else {
+        console.log(savedLinkResponse.json())
+      }
+    } else {
+      console.log('AUTH ERROR')
+    }
+    window.location.assign(event.target.value)
+  }
+
+  async function postArchivedLink(event) {
+    event.preventDefault()
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      const newSavedLink = {
+        isArchive: true,
+        dashId: Number(dash.id),
+        queryUrl: event.target.value,
+        userId: getUserId(),
+      }
+      const archivedLinkResponse = await fetch('/api/SavedLinks', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+        body: JSON.stringify(newSavedLink),
+      })
+      if (archivedLinkResponse.ok) {
+        console.log('test')
+        console.log(archivedLinkResponse.json())
+      } else {
+        console.log('ERROR')
+      }
+    } else {
+      console.log('ERROR')
+    }
+  }
+
+  async function copyDash(dash, event) {
+    event.preventDefault()
+    let newDash = {}
+    newDash.userId = getUserId()
+    newDash.dashPanelAssignments = []
+    newDash.savedLinks = []
+    newDash.name = dash.name + ' (Copy)'
+    newDash.creationDate = ''
+    newDash.linksPerPanel = dash.linksPerPanel
+    const response = await fetch('/api/Dashes', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', ...authHeader() },
+      body: JSON.stringify(newDash),
+    })
+    if (response.status === 401) {
+      console.log('Not Authorized')
+    } else {
+      if (response.status === 400) {
+        console.log(Object.values(response.errors).join(' '))
+      } else if (response.ok) {
+        response.json().then((data) => {
+          postPanelAssignments(data.id, dash.dashPanelAssignments)
+        })
+      }
+    }
+  }
+
+  async function postPanelAssignments(newDashId, oldDashPanelAssignments) {
+    for (var i = 0; i < oldDashPanelAssignments.length; i++) {
+      let newPanelAssignment = {
+        panelId: oldDashPanelAssignments[i].panelId,
+        dashId: newDashId,
+      }
+      let panelAssignmentResponse = await fetch('/api/PanelAssignments', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+        body: JSON.stringify(newPanelAssignment),
+      })
+      console.log(panelAssignmentResponse.json())
+    }
+    window.location.assign(`/dash/${newDashId}`)
+  }
+
   function Panel(props) {
     return (
       <div className="panelContainer">
@@ -195,63 +239,6 @@ export function DashPage() {
       </div>
     )
   }
-
-  async function postPanelAssignments(newDashId, oldDashPanelAssignments) {
-    for (var i = 0; i < oldDashPanelAssignments.length; i++) {
-      let newPanelAssignment = {
-        panelId: oldDashPanelAssignments[i].panelId,
-        dashId: newDashId,
-      }
-      let panelAssignmentResponse = await fetch('/api/PanelAssignments', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', ...authHeader() },
-        body: JSON.stringify(newPanelAssignment),
-      })
-      console.log(panelAssignmentResponse.json())
-    }
-    window.location.assign(`/dash/${newDashId}`)
-  }
-
-  async function copyDash(dash, event) {
-    event.preventDefault()
-    let newDash = {}
-    newDash.userId = getUserId()
-    newDash.dashPanelAssignments = []
-    newDash.savedLinks = []
-    newDash.name = dash.name + ' (Copy)'
-    newDash.creationDate = ''
-    newDash.linksPerPanel = dash.linksPerPanel
-    const response = await fetch('/api/Dashes', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', ...authHeader() },
-      body: JSON.stringify(newDash),
-    })
-    if (response.status === 401) {
-      console.log('Not Authorized')
-    } else {
-      if (response.status === 400) {
-        console.log(Object.values(response.errors).join(' '))
-      } else if (response.ok) {
-        response.json().then((data) => {
-          postPanelAssignments(data.id, dash.dashPanelAssignments)
-        })
-      }
-    }
-  }
-
-  // async function postArchivedLink(link) {
-  //   const newSavedLink = {
-  //     isArchive: true,
-  //     dashId: id,
-  //     queryUrl: link,
-  //   }
-  //   const archivedLinkResponse = await fetch('/api/SavedLinks', {
-  //     method: 'POST',
-  //     headers: { 'content-type': 'application/json' },
-  //     body: JSON.stringify(newSavedLink),
-  //   })
-  //   console.log(archivedLinkResponse.json())
-  // }
 
   useEffect(() => {
     getDash()
@@ -391,29 +378,3 @@ export function DashPage() {
     </>
   )
 }
-//
-//
-//
-//
-//
-//
-//
-//
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// function CheckIfUrL(url) {
-//   if (!isWebUri(url)) {
-//     return false
-//   }
-//   else {
-//     return true
-//   }
-// }

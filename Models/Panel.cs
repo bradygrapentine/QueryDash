@@ -18,12 +18,3 @@ namespace QueryDash.Models
     }
 }
 
-
-
-
-
-
-
-
-
-// public string FilterSiteLogo { get; set; }

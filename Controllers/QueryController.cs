@@ -55,8 +55,6 @@ namespace QueryDash.Controllers
 
             List<List<string>> searchResults = new List<List<string>>(dash.DashPanelAssignments.Count() * 2);
 
-            // var responsesFromSelect = dash.DashPanelAssignments.Select(panelAssignment =>
-
             var linksPerPanel = dash.LinksPerPanel;
 
             foreach (var panelAssignment in dash.DashPanelAssignments)
@@ -71,11 +69,6 @@ namespace QueryDash.Controllers
 
                     // User ID	504	
                     // Feed Code 1924762219	
-                    // pretty sure the transition to BingWebSearch will only require updating the URI
-                    // -> check capstone content for endpoints and required headers
-                    // -> parallel requests up to 52
-                    // -> need to figure out what to do with the site parameter
-                    // -> test backend alone, then alter JS to grab relevant results
 
                     // &n=30 # of results in query
                     // &searchtype=images searches for images
@@ -109,52 +102,3 @@ namespace QueryDash.Controllers
         }
     }
 }
-
-
-
-
-
-// {
-
-// Method = HttpMethod.Get,
-// Additional parameters
-// &n=30 # of results in query
-// &searchtype=images searches for images
-// &showimages=1 provides thumbnail images with results, default already provides the hq thumbnails
-// &relqueries=1 provide related queries in search results
-// &fast=1 worse results, but faster
-// &ff=1 removes adult content
-
-// RequestUri = new Uri($"https://gigablast.com/search?&userid=503&code=1393867175&ff=1&n=50&format=json&q={dashQuery}&sites={searchEndpoints[i]}")
-// };
-// // var requests = searchEndpoints.Select(endpoint => client.SendAsync)           
-// for (var i = 0; i < searchEndpoints.Count(); i++)
-// {
-
-//     using (var response = client.SendAsync(request))
-//     {
-//         // response.EnsureSuccessStatusCode();
-//         // var body = response.Content.ReadAsStringAsync(); // how to parallelize? parallel queires, supplementary lecture // star wars api
-//         // List<string> searchResult = new List<string>(2);
-//         // searchResult.Add(panelIds[i].ToString());
-//         // searchResult.Add(body);
-//         // searchResults.Add(searchResult);
-//     }
-// }
-
-
-// public class LoginUser
-// {
-// [JsonPropertyName("id")]
-// public int Id { get; set; } // if property names differ from JSON key names
-// [JsonPropertyName("text")]
-// public string Text { get; set; }
-// [JsonPropertyName("complete")]
-// public bool Complete { get; set; }
-// [JsonPropertyName("created_at")]
-// public DateTime CreatedAt { get; set; } // Converts to DateTime automatically because JSON date formatting aligns with C# date formatting
-// [JsonPropertyName("updated_at")]
-// public DateTime UpdatedAt { get; set; }
-// }
-
-

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getUserId, authHeader, isLoggedIn, logout } from '../auth'
-// import './custom.scss'
 
 // ------------------------------------------------------------- //
 
@@ -13,6 +12,10 @@ export function DashPreferences() {
   const [panels, setPanels] = useState([])
 
   const [dashFormErrorMessage, setDashFormErrorMessage] = useState('')
+
+  const [panelFormErrorMessage, setPanelFormErrorMessage] = useState('')
+
+  const [invalidFilterSite, setInvalidFilterSite] = useState(false)
 
   const [dash, setDash] = useState({
     id: 0,
@@ -34,18 +37,66 @@ export function DashPreferences() {
     savedLinks: [],
   })
 
-  async function deleteSavedLink(savedLinkId) {
-    if (isLoggedIn() && getUserId() === dash.userId) {
-      const response = await fetch(`/api/SavedLinks/${savedLinkId}`, {
-        method: 'DELETE',
-        headers: { 'content-type': 'application/json', ...authHeader() },
-      })
+  const [newPanel, setNewPanel] = useState({
+    filterSite: '',
+    filterSiteName: '',
+  })
+  function ifURL(string) {
+    let url
+    try {
+      url = new URL(string)
+    } catch (_) {
+      return false
+    }
+    return true
+  }
 
-      if (response.ok) {
-        getDash()
-      }
+  function handleStringPanelFieldChange(event) {
+    const value = event.target.value
+    const fieldName = event.target.name
+
+    const updatedPanel = { ...newPanel, [fieldName]: value }
+
+    setNewPanel(updatedPanel)
+  }
+
+  function handleLogout() {
+    logout()
+    window.location.assign('/')
+  }
+
+  function formatDate(dateAsString) {
+    let date = Date.parse(dateAsString + '+04:00')
+    let formattedDate = Intl.DateTimeFormat('en-US', {
+      dateStyle: 'full',
+    }).format(date)
+    return formattedDate
+  }
+
+  function handleFieldChange(event) {
+    const value = event.target.value
+    const fieldName = event.target.name
+    setDashFormErrorMessage('')
+
+    const newUpdatedDash = { ...updatedDash, [fieldName]: value }
+    if (newUpdatedDash.linksPerPanel > 30) {
+      newUpdatedDash.linksPerPanel = 30
+      setDashFormErrorMessage('Results per panel cannot exceed 30')
+    }
+    if (newUpdatedDash.name.length > 20) {
+      newUpdatedDash.name = updatedDash.name.slice(0, 20)
+      setDashFormErrorMessage('Characters per name cannot exceed 20')
+    }
+    setUpdatedDash(newUpdatedDash)
+  }
+
+  async function getDash() {
+    const response = await fetch(`/api/Dashes/${id}`)
+    if (response.ok) {
+      const apiData = await response.json()
+      setDash(apiData)
     } else {
-      setDashFormErrorMessage('AUTH ERROR')
+      setDashFormErrorMessage('ERROR')
     }
   }
 
@@ -71,85 +122,12 @@ export function DashPreferences() {
         headers: { 'content-type': 'application/json', ...authHeader() },
         body: JSON.stringify(updatedDash),
       })
-      console.log(response.json())
-      console.log(updatedDash)
       if (response.ok) {
         getDash()
       }
     } else {
       setDashFormErrorMessage('AUTH ERROR')
     }
-  }
-
-  function formatDate(dateAsString) {
-    let date = Date.parse(dateAsString + '+04:00')
-    // let newOptions = {
-    //   weekday: 'long',
-    //   year: 'numeric',
-    //   month: 'long',
-    //   day: 'numeric',
-    // }
-    let formattedDate = Intl.DateTimeFormat('en-US', {
-      dateStyle: 'full',
-    }).format(date)
-    return formattedDate
-  }
-
-  function handleFieldChange(event) {
-    const value = event.target.value
-    const fieldName = event.target.name
-    setDashFormErrorMessage('')
-
-    const newUpdatedDash = { ...updatedDash, [fieldName]: value }
-    if (newUpdatedDash.linksPerPanel > 30) {
-      newUpdatedDash.linksPerPanel = 30
-      setDashFormErrorMessage('Results per panel cannot exceed 30')
-    }
-    if (newUpdatedDash.name.length > 20) {
-      newUpdatedDash.name = updatedDash.name.slice(0, 20)
-      setDashFormErrorMessage('Characters per name cannot exceed 20')
-    }
-    setUpdatedDash(newUpdatedDash)
-  }
-
-  async function deletePanelAssignment(dashPanelAssignment, event) {
-    if (isLoggedIn() && getUserId() === dash.userId) {
-      event.preventDefault()
-      const response = await fetch(
-        `/api/PanelAssignments/${dashPanelAssignment.id}`,
-        {
-          method: 'DELETE',
-          headers: { 'content-type': 'application/json', ...authHeader() },
-        }
-      )
-      if (response.ok) {
-        window.location.assign(`/preferences/${dash.id}`)
-        // event.target.className = 'inputContainerClicked'
-      }
-    } else {
-      setPanelFormErrorMessage('AUTH ERROR')
-    }
-  }
-
-  const [panelFormErrorMessage, setPanelFormErrorMessage] = useState('')
-
-  const [invalidFilterSite, setInvalidFilterSite] = useState(false)
-
-  const [newPanel, setNewPanel] = useState({
-    filterSite: '',
-    // creationDate: '',
-    filterSiteName: '',
-    // dashPanelAssignments: [],
-  })
-  function ifURL(string) {
-    let url
-    try {
-      url = new URL(string)
-    } catch (_) {
-      return false
-    }
-    // return url
-    return true
   }
 
   async function handlePanelFormSubmission(event) {
@@ -162,10 +140,8 @@ export function DashPreferences() {
       dash.dashPanelAssignments.length < 10
     ) {
       if (ifURL(newPanel.filterSite)) {
-        //
         let newPanelUrl = new URL(newPanel.filterSite)
         newPanel.filterSite = newPanelUrl.hostname.replace('www.', '')
-        //
         const panelResponse = await fetch('/api/Panels', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
@@ -177,7 +153,6 @@ export function DashPreferences() {
           )
         } else if (panelResponse.ok) {
           panelResponse.json().then((data) => {
-            console.log(data)
             postPanelAssignment(data, event)
           })
           setInvalidFilterSite(false)
@@ -211,9 +186,7 @@ export function DashPreferences() {
           headers: { 'content-type': 'application/json', ...authHeader() },
           body: JSON.stringify(newPanelAssignment),
         })
-        console.log(panelAssignmentResponse.json())
         window.location.assign(`/preferences/${dash.id}`)
-        // event.target.className
       }
     } else {
       setPanelFormErrorMessage('AUTH ERROR')
@@ -235,45 +208,50 @@ export function DashPreferences() {
     }
   }
 
-  function handleStringPanelFieldChange(event) {
-    const value = event.target.value
-    const fieldName = event.target.name
+  async function deletePanelAssignment(dashPanelAssignment, event) {
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      event.preventDefault()
+      const response = await fetch(
+        `/api/PanelAssignments/${dashPanelAssignment.id}`,
+        {
+          method: 'DELETE',
+          headers: { 'content-type': 'application/json', ...authHeader() },
+        }
+      )
+      if (response.ok) {
+        window.location.assign(`/preferences/${dash.id}`)
+      }
+    } else {
+      setPanelFormErrorMessage('AUTH ERROR')
+    }
+  }
 
-    const updatedPanel = { ...newPanel, [fieldName]: value }
+  async function deleteSavedLink(savedLinkId) {
+    if (isLoggedIn() && getUserId() === dash.userId) {
+      const response = await fetch(`/api/SavedLinks/${savedLinkId}`, {
+        method: 'DELETE',
+        headers: { 'content-type': 'application/json', ...authHeader() },
+      })
 
-    setNewPanel(updatedPanel)
+      if (response.ok) {
+        getDash()
+      }
+    } else {
+      setDashFormErrorMessage('AUTH ERROR')
+    }
   }
 
   useEffect(() => {
     async function getPanels() {
       const panelsResponse = await fetch('/api/Panels')
-      // console.log(panelsResponse.json())
-
       if (panelsResponse.ok) {
         const newPanels = await panelsResponse.json()
-        console.log(newPanels)
         setPanels(newPanels)
       }
-      // console.log(panels)
     }
     getPanels()
   }, [])
 
-  function handleLogout() {
-    logout()
-    window.location.assign('/')
-  }
-
-  async function getDash() {
-    const response = await fetch(`/api/Dashes/${id}`)
-    if (response.ok) {
-      const apiData = await response.json()
-      setDash(apiData)
-      console.log(apiData)
-    } else {
-      setDashFormErrorMessage('ERROR')
-    }
-  }
   useEffect(() => {
     getDash()
   }, [id])
@@ -322,12 +300,8 @@ export function DashPreferences() {
       </div>
       <main className="mainCreateAccount">
         <div className="containerForHeaderAndForm">
-          {/* <h5 className="header">Edit {dash.name}</h5> */}
-
           <div className="formContainerCreateAccount">
             <form onSubmit={updateDash} className="formCreateAccount">
-              {/* <h5 className="header2">Update {dash.name}</h5> */}
-
               <div className="inputContainer">
                 <label htmlFor="name">New Dash Name (0-20 Characters): </label>
                 <input

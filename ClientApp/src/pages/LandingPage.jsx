@@ -2,76 +2,10 @@ import { Link, useHistory } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { isLoggedIn, logout, getUserId, getUser, authHeader } from '../auth'
 
-// import { Footer } from './DashPage'
-// import './custom.scss'
-
-// ------------------------------------------------------------- //
-
-// function DashList(params) {
-
-// }
-
 export function LandingPage() {
   const user = getUser()
 
   const history = useHistory()
-
-  // const [newDash, setNewDash] = useState({
-  //   userId: 0,
-  //   creationDate: '',
-  //   dashPanelAssignments: [],
-  //   savedLinks: [],
-  //   : '',
-  //   linksPerPanel: 0,
-  // })
-
-  // async function postPanelAssignments(dashId, dashPanelAssignments) {
-  //   for (var i = 0; i < dashPanelAssignments.length; i++) {
-  //     let newPanelAssignment = {
-  //       panelId: dashPanelAssignments[i].panelId,
-  //       dashId: dashId,
-  //     }
-  //     let panelAssignmentResponse = await fetch('/api/PanelAssignments', {
-  //       method: 'POST',
-  //       headers: { 'content-type': 'application/json', ...authHeader() },
-  //       body: JSON.stringify(newPanelAssignment),
-  //     })
-  //     console.log(panelAssignmentResponse.json())
-  //   }
-  //   window.location.assign(`/dash/${dashId}`)
-  // }
-
-  // async function copyDash(dash, event) {
-  //   event.preventDefault()
-  //   let newDash = {}
-  //   newDash.userId = getUserId()
-  //   newDash.dashPanelAssignments = []
-  //   newDash.savedLinks = []
-  //   newDash.name = dash.name + ' (Copy)'
-  //   newDash.creationDate = ''
-  //   newDash.linksPerPanel = dash.linksPerPanel
-  //   const response = await fetch('/api/Dashes', {
-  //     method: 'POST',
-  //     headers: { 'content-type': 'application/json', ...authHeader() },
-  //     body: JSON.stringify(newDash),
-  //   })
-  //   if (response.status === 401) {
-  //     console.log('Not Authorized')
-  //   } else {
-  //     if (response.status === 400) {
-  //       console.log(Object.values(response.errors).join(' '))
-  //     } else if (response.ok) {
-  //       response.json().then((data) => {
-  //         postPanelAssignments(data.id, dash.dashPanelAssignments)
-  //       })
-  //     }
-  //   }
-  // }
-
-  function handleLogout() {
-    logout()
-    window.location.assign('/')
-  }
 
   const [newSearch, setNewSearch] = useState('')
 
@@ -84,6 +18,11 @@ export function LandingPage() {
   const [otherDashesNonUser, setOtherDashesNonUser] = useState([])
 
   const [presetDashesNonUser, setPresetDashesNonUser] = useState([])
+
+  function handleLogout() {
+    logout()
+    window.location.assign('/')
+  }
 
   // const [reverseActive, setReverseActive] = useState(false)
 
@@ -184,7 +123,6 @@ export function LandingPage() {
             </ul>
             <form className="filterDashes">
               {' '}
-              {/* onSubmit={runDashQuery} */}
               <input
                 className="filterDashes"
                 type="text"
@@ -194,12 +132,6 @@ export function LandingPage() {
                   setNewSearch(event.target.value)
                 }}
               />
-              {/* <button
-                className={reverseActive ? 'sortButton active' : 'sortButton'}
-                onClick={(event) => reverseOrder(event)}
-              >
-                Reverse Dashes
-              </button> */}
             </form>
             <span className="navLink" onClick={handleLogout}>
               Log Out

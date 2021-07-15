@@ -3,26 +3,6 @@ import { Footer } from './DashPage'
 import { Link } from 'react-router-dom'
 import { getUserId, authHeader, isLoggedIn, logout } from '../auth'
 
-// import './custom.scss'
-
-// ------------------------------------------------------------- //
-
-// export function aboutFooter(params) {
-//   return (
-//     <footer className="aboutPageFooter">
-//       <Link to="/create-account" className="aboutPageFooter">
-//         Sign Up
-//       </Link>
-//       <Link to="/" className="aboutPageFooter">
-//         Home{' '}
-//       </Link>
-//       {/* <a href="https://www.google.com/" className="footer">
-//         Contact
-//       </a> */}
-//     </footer>
-//   )
-// }
-
 export function AboutPage() {
   function handleLogout() {
     logout()
@@ -121,20 +101,6 @@ export function AboutPage() {
             page or your browse later page) so you can keep searching and come
             back to what you found later.
           </p>
-
-          {/*<a href="https://github.com/bradygrapentine/QueryDash">
-            <p>https://github.com/bradygrapentine/QueryDash</p>
-          </a>
-          <p>
-            My GitHub Page is also a work in progress as I just graduated, so
-            here's a link to my repositories.
-          </p>
-          <a href="https://github.com/bradygrapentine?tab=repositories">
-            <p>https://github.com/bradygrapentine?tab=repositories</p>
-          </a>
-          <a href="brady.grapentine@gmail.com">
-            <p>Email: brady.grapentine@gmail.com</p>
-          </a> */}
         </div>
       </main>
       <footer className="standardFooter2"></footer>

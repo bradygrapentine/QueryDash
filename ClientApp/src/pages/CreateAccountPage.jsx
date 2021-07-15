@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { getUserId, authHeader, isLoggedIn } from '../auth'
-// import './custom.scss'
 
 // ------------------------------------------------------------- //
 
@@ -59,14 +58,10 @@ export function CreateAccountPage() {
             </ul>
             <form className="filterLinks">
               {' '}
-              {/* onSubmit={runDashQuery} */}
               <input
                 className="filterDashes"
                 type="text"
                 placeholder="Filter Links"
-                // value={searchTerm}
-                // onChange={(event) => {
-                //   setSearchTerm(event.target.value)
               />
             </form>
           </>
@@ -126,9 +121,6 @@ export function CreateAccountPage() {
         <Link to="/" className="navLink">
           Home
         </Link>
-        {/* <a href="https://www.google.com/" className="footer">
-        Contact
-      </a> */}
       </footer>
     </>
   )
